@@ -1,0 +1,554 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "name": "KJ Product Kit",
+  "version": "0.1.0",
+  "description": "Personal product design system tokens for KJ apps, portfolio, dashboards and SaaS tools.",
+  "color": {
+    "primitive": {
+      "zinc": {
+        "50": {
+          "$type": "color",
+          "$value": "#fafafa"
+        },
+        "100": {
+          "$type": "color",
+          "$value": "#f4f4f5"
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#e4e4e7"
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#d4d4d8"
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#a1a1aa"
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#71717a"
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#52525b"
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#3f3f46"
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#27272a"
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#18181b"
+        },
+        "950": {
+          "$type": "color",
+          "$value": "#09090b"
+        }
+      },
+      "amber": {
+        "50": {
+          "$type": "color",
+          "$value": "#fffbeb"
+        },
+        "100": {
+          "$type": "color",
+          "$value": "#fef3c7"
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#fde68a"
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#fcd34d"
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#fbbf24"
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#f59e0b"
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#d97706"
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#b45309"
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#92400e"
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#78350f"
+        },
+        "950": {
+          "$type": "color",
+          "$value": "#451a03"
+        }
+      },
+      "teal": {
+        "50": {
+          "$type": "color",
+          "$value": "#f0fdfa"
+        },
+        "100": {
+          "$type": "color",
+          "$value": "#ccfbf1"
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#99f6e4"
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#5eead4"
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#2dd4bf"
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#14b8a6"
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#0d9488"
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#0f766e"
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#115e59"
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#134e4a"
+        },
+        "950": {
+          "$type": "color",
+          "$value": "#042f2e"
+        }
+      },
+      "emerald": {
+        "50": {
+          "$type": "color",
+          "$value": "#ecfdf5"
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#10b981"
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#059669"
+        },
+        "950": {
+          "$type": "color",
+          "$value": "#022c22"
+        }
+      },
+      "rose": {
+        "50": {
+          "$type": "color",
+          "$value": "#fff1f2"
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#f43f5e"
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#e11d48"
+        },
+        "950": {
+          "$type": "color",
+          "$value": "#4c0519"
+        }
+      },
+      "sky": {
+        "50": {
+          "$type": "color",
+          "$value": "#f0f9ff"
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#0ea5e9"
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#0284c7"
+        },
+        "950": {
+          "$type": "color",
+          "$value": "#082f49"
+        }
+      }
+    },
+    "semantic": {
+      "light": {
+        "background": {
+          "$type": "color",
+          "$value": "#fafafa"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "#09090b"
+        },
+        "surface": {
+          "$type": "color",
+          "$value": "#ffffff"
+        },
+        "card": {
+          "$type": "color",
+          "$value": "#ffffff"
+        },
+        "cardForeground": {
+          "$type": "color",
+          "$value": "#09090b"
+        },
+        "primary": {
+          "$type": "color",
+          "$value": "#f59e0b"
+        },
+        "primaryHover": {
+          "$type": "color",
+          "$value": "#d97706"
+        },
+        "primaryForeground": {
+          "$type": "color",
+          "$value": "#09090b"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "#14b8a6"
+        },
+        "secondaryHover": {
+          "$type": "color",
+          "$value": "#0d9488"
+        },
+        "secondaryForeground": {
+          "$type": "color",
+          "$value": "#ffffff"
+        },
+        "muted": {
+          "$type": "color",
+          "$value": "#f4f4f5"
+        },
+        "mutedForeground": {
+          "$type": "color",
+          "$value": "#71717a"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "#e4e4e7"
+        },
+        "input": {
+          "$type": "color",
+          "$value": "#e4e4e7"
+        },
+        "ring": {
+          "$type": "color",
+          "$value": "#f59e0b"
+        },
+        "success": {
+          "$type": "color",
+          "$value": "#059669"
+        },
+        "successSurface": {
+          "$type": "color",
+          "$value": "#ecfdf5"
+        },
+        "warning": {
+          "$type": "color",
+          "$value": "#d97706"
+        },
+        "warningSurface": {
+          "$type": "color",
+          "$value": "#fffbeb"
+        },
+        "danger": {
+          "$type": "color",
+          "$value": "#e11d48"
+        },
+        "dangerSurface": {
+          "$type": "color",
+          "$value": "#fff1f2"
+        },
+        "info": {
+          "$type": "color",
+          "$value": "#0284c7"
+        },
+        "infoSurface": {
+          "$type": "color",
+          "$value": "#f0f9ff"
+        }
+      },
+      "dark": {
+        "background": {
+          "$type": "color",
+          "$value": "#09090b"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "#fafafa"
+        },
+        "surface": {
+          "$type": "color",
+          "$value": "#18181b"
+        },
+        "card": {
+          "$type": "color",
+          "$value": "#18181b"
+        },
+        "cardForeground": {
+          "$type": "color",
+          "$value": "#fafafa"
+        },
+        "primary": {
+          "$type": "color",
+          "$value": "#fbbf24"
+        },
+        "primaryHover": {
+          "$type": "color",
+          "$value": "#f59e0b"
+        },
+        "primaryForeground": {
+          "$type": "color",
+          "$value": "#09090b"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "#2dd4bf"
+        },
+        "secondaryHover": {
+          "$type": "color",
+          "$value": "#14b8a6"
+        },
+        "secondaryForeground": {
+          "$type": "color",
+          "$value": "#042f2e"
+        },
+        "muted": {
+          "$type": "color",
+          "$value": "#27272a"
+        },
+        "mutedForeground": {
+          "$type": "color",
+          "$value": "#a1a1aa"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "#27272a"
+        },
+        "input": {
+          "$type": "color",
+          "$value": "#27272a"
+        },
+        "ring": {
+          "$type": "color",
+          "$value": "#fbbf24"
+        },
+        "success": {
+          "$type": "color",
+          "$value": "#10b981"
+        },
+        "successSurface": {
+          "$type": "color",
+          "$value": "#022c22"
+        },
+        "warning": {
+          "$type": "color",
+          "$value": "#fbbf24"
+        },
+        "warningSurface": {
+          "$type": "color",
+          "$value": "#451a03"
+        },
+        "danger": {
+          "$type": "color",
+          "$value": "#f43f5e"
+        },
+        "dangerSurface": {
+          "$type": "color",
+          "$value": "#4c0519"
+        },
+        "info": {
+          "$type": "color",
+          "$value": "#0ea5e9"
+        },
+        "infoSurface": {
+          "$type": "color",
+          "$value": "#082f49"
+        }
+      }
+    }
+  },
+  "typography": {
+    "font": {
+      "sans": {
+        "$type": "fontFamily",
+        "$value": "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+      },
+      "mono": {
+        "$type": "fontFamily",
+        "$value": "'JetBrains Mono', 'SFMono-Regular', Consolas, monospace"
+      }
+    },
+    "size": {
+      "xs": {
+        "$type": "dimension",
+        "$value": "0.75rem"
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": "0.875rem"
+      },
+      "base": {
+        "$type": "dimension",
+        "$value": "1rem"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "1.125rem"
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "1.25rem"
+      },
+      "2xl": {
+        "$type": "dimension",
+        "$value": "1.5rem"
+      },
+      "3xl": {
+        "$type": "dimension",
+        "$value": "1.875rem"
+      },
+      "4xl": {
+        "$type": "dimension",
+        "$value": "2.25rem"
+      },
+      "5xl": {
+        "$type": "dimension",
+        "$value": "3rem"
+      }
+    },
+    "weight": {
+      "regular": {
+        "$type": "fontWeight",
+        "$value": "400"
+      },
+      "medium": {
+        "$type": "fontWeight",
+        "$value": "500"
+      },
+      "semibold": {
+        "$type": "fontWeight",
+        "$value": "600"
+      },
+      "bold": {
+        "$type": "fontWeight",
+        "$value": "700"
+      }
+    }
+  },
+  "space": {
+    "1": {
+      "$type": "dimension",
+      "$value": "0.25rem"
+    },
+    "2": {
+      "$type": "dimension",
+      "$value": "0.5rem"
+    },
+    "3": {
+      "$type": "dimension",
+      "$value": "0.75rem"
+    },
+    "4": {
+      "$type": "dimension",
+      "$value": "1rem"
+    },
+    "6": {
+      "$type": "dimension",
+      "$value": "1.5rem"
+    },
+    "8": {
+      "$type": "dimension",
+      "$value": "2rem"
+    },
+    "12": {
+      "$type": "dimension",
+      "$value": "3rem"
+    },
+    "16": {
+      "$type": "dimension",
+      "$value": "4rem"
+    },
+    "24": {
+      "$type": "dimension",
+      "$value": "6rem"
+    }
+  },
+  "radius": {
+    "sm": {
+      "$type": "dimension",
+      "$value": "0.5rem"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "0.75rem"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "1rem"
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "1.25rem"
+    },
+    "2xl": {
+      "$type": "dimension",
+      "$value": "1.5rem"
+    },
+    "full": {
+      "$type": "dimension",
+      "$value": "9999px"
+    }
+  },
+  "shadow": {
+    "xs": {
+      "$type": "shadow",
+      "$value": "0 1px 2px rgb(15 23 42 / 0.05)"
+    },
+    "sm": {
+      "$type": "shadow",
+      "$value": "0 1px 3px rgb(15 23 42 / 0.08), 0 1px 2px rgb(15 23 42 / 0.04)"
+    },
+    "md": {
+      "$type": "shadow",
+      "$value": "0 8px 30px rgb(15 23 42 / 0.08)"
+    },
+    "lg": {
+      "$type": "shadow",
+      "$value": "0 20px 60px rgb(15 23 42 / 0.12)"
+    },
+    "glow": {
+      "$type": "shadow",
+      "$value": "0 0 0 1px rgb(245 158 11 / 0.16), 0 16px 48px rgb(245 158 11 / 0.18)"
+    }
+  }
+}

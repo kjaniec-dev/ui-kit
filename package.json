@@ -1,0 +1,9 @@
+{
+  "name": "kj-product-kit-starter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Starter tokens and theme for KJ Product Kit.",
+  "scripts": {
+    "tokens:check": "node -e \"JSON.parse(require('fs').readFileSync('./tokens/kj.tokens.json','utf8')); console.log('Tokens OK')\""
+  }
+}

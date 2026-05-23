@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@import "./theme.css";
+
+@theme {
+  --color-background: var(--kj-background);
+  --color-foreground: var(--kj-foreground);
+  --color-surface: var(--kj-surface);
+  --color-card: var(--kj-card);
+  --color-card-foreground: var(--kj-card-foreground);
+  --color-primary: var(--kj-primary);
+  --color-primary-hover: var(--kj-primary-hover);
+  --color-primary-foreground: var(--kj-primary-foreground);
+  --color-secondary: var(--kj-secondary);
+  --color-secondary-hover: var(--kj-secondary-hover);
+  --color-secondary-foreground: var(--kj-secondary-foreground);
+  --color-muted: var(--kj-muted);
+  --color-muted-foreground: var(--kj-muted-foreground);
+  --color-border: var(--kj-border);
+  --color-input: var(--kj-input);
+  --color-ring: var(--kj-ring);
+  --color-success: var(--kj-success);
+  --color-success-surface: var(--kj-success-surface);
+  --color-warning: var(--kj-warning);
+  --color-warning-surface: var(--kj-warning-surface);
+  --color-danger: var(--kj-danger);
+  --color-danger-surface: var(--kj-danger-surface);
+  --color-info: var(--kj-info);
+  --color-info-surface: var(--kj-info-surface);
+  --font-sans: var(--kj-font-sans);
+  --font-mono: var(--kj-font-mono);
+  --radius-kj-sm: var(--kj-radius-sm);
+  --radius-kj-md: var(--kj-radius-md);
+  --radius-kj-lg: var(--kj-radius-lg);
+  --radius-kj-xl: var(--kj-radius-xl);
+  --radius-kj-2xl: var(--kj-radius-2xl);
+  --shadow-kj-xs: var(--kj-shadow-xs);
+  --shadow-kj-sm: var(--kj-shadow-sm);
+  --shadow-kj-md: var(--kj-shadow-md);
+  --shadow-kj-lg: var(--kj-shadow-lg);
+  --shadow-kj-glow: var(--kj-shadow-glow);
+}
