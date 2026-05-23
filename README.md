@@ -1,6 +1,9 @@
-# KJ Product Kit Starter
+# KJ Product Kit
 
-Starter repo for KJ Product Kit.
+My product UI kit for building consistent KJ apps.
+
+This repository is the source of truth for design tokens, theme styles,
+Tailwind integration, reusable UI patterns, and documentation for agents.
 
 ## Structure
 
@@ -10,6 +13,14 @@ packages/design/src/theme.css
 packages/design/src/tailwind.css
 docs/DESIGN.md
 ```
+
+## What is included
+
+- design tokens in JSON
+- CSS variables for the theme
+- Tailwind v4 bridge
+- design guidelines in `docs/DESIGN.md`
+- a base for future React UI components and playground examples
 
 ## How to use
 
@@ -35,14 +46,3 @@ Example:
 </div>
 ```
 
-## Figma pages
-
-```txt
-01 Foundations
-02 Components
-03 Patterns
-04 Portfolio
-05 Dashboard
-06 Mobile
-07 Playground
-```
