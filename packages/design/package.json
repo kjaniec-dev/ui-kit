@@ -1,7 +1,6 @@
 {
 	"name": "@kj/design",
 	"version": "0.1.0",
-	"private": true,
 	"exports": {
 		"./theme.css": {
 			"style": "./theme.css",
@@ -10,11 +9,13 @@
 		"./tailwind.css": {
 			"style": "./tailwind.css",
 			"default": "./tailwind.css"
-		}
+		},
+		"./tokens.json": "./tokens.json"
 	},
 	"files": [
 		"theme.css",
 		"tailwind.css",
+		"tokens.json",
 		"src"
 	]
 }

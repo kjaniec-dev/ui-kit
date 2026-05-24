@@ -4,6 +4,6 @@
   "private": true,
   "description": "Starter tokens and theme for KJ Product Kit.",
   "scripts": {
-    "tokens:check": "node -e \"JSON.parse(require('fs').readFileSync('./tokens/kj.tokens.json','utf8')); console.log('Tokens OK')\""
+    "tokens:check": "node -e \"JSON.parse(require('fs').readFileSync('./packages/design/tokens.json','utf8')); console.log('Tokens OK')\""
   }
 }
