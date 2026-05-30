@@ -1,6 +1,6 @@
 {
   "name": "@kjaniec-dev/design",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Design tokens and Tailwind v4 theme for the KJ Product Kit",
   "license": "MIT",
   "author": "kjaniec-dev",
@@ -14,19 +14,17 @@
   },
   "exports": {
     "./theme.css": {
-      "style": "./theme.css",
-      "default": "./theme.css"
+      "style": "./src/theme.css",
+      "default": "./src/theme.css"
     },
     "./tailwind.css": {
-      "style": "./tailwind.css",
-      "default": "./tailwind.css"
+      "style": "./src/tailwind.css",
+      "default": "./src/tailwind.css"
     },
     "./tokens.json": "./tokens.json"
   },
   "files": [
-    "theme.css",
-    "tailwind.css",
-    "tokens.json",
-    "src"
+    "src",
+    "tokens.json"
   ]
 }
