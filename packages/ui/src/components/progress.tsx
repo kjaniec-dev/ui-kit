@@ -7,10 +7,12 @@ export interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   /** 0–100. */
   value?: number;
   tone?: "primary" | "secondary";
+  /** Extra classes applied to the inner bar span — use for animation, transform-origin, etc. */
+  barClassName?: string;
 }
 
 export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
-  ({ className, value = 0, tone = "primary", ...props }, ref) => {
+  ({ className, value = 0, tone = "primary", barClassName, ...props }, ref) => {
     const pct = Math.max(0, Math.min(100, value));
     return (
       <div
@@ -25,7 +27,8 @@ export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
         <span
           className={cn(
             "block h-full rounded-full transition-[width] duration-500 ease-out",
-            tone === "secondary" ? "bg-secondary" : "bg-primary"
+            tone === "secondary" ? "bg-secondary" : "bg-primary",
+            barClassName
           )}
           style={{ width: `${pct}%` }}
         />

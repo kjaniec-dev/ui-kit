@@ -34,6 +34,24 @@ export const ProgressTones: Story = {
   ),
 };
 
+export const WithBarClassName: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: 12, width: 360 }}>
+      <Progress
+        value={75}
+        barClassName="origin-left"
+        style={{ '--delay': '0s' } as React.CSSProperties}
+      />
+      <Progress
+        value={50}
+        tone="secondary"
+        barClassName="origin-left"
+        style={{ '--delay': '0.2s' } as React.CSSProperties}
+      />
+    </div>
+  ),
+};
+
 export const Animated: Story = {
   render: () => {
     const [v, setV] = React.useState(20);
