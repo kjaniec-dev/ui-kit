@@ -58,3 +58,4 @@ export {
   ToastProvider, useToast,
   type ToastOptions, type ToastTone,
 } from "./components/toast";
+export { PageHeader, type PageHeaderProps } from "./components/page-header";
