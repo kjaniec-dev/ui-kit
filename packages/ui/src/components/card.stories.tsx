@@ -60,6 +60,22 @@ export const AsArticle: Story = {
   ),
 };
 
+export const Interactive: Story = {
+  render: () => (
+    <Card interactive>
+      <CardHeader>
+        <CardTitle>Interactive Card</CardTitle>
+        <CardDescription>Hover to see the lift effect.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p style={{ fontSize: "0.85rem", color: "var(--kj-muted-foreground)" }}>
+          This card uses the interactive prop — hover:-translate-y-1 and hover:shadow-kj-md.
+        </p>
+      </CardContent>
+    </Card>
+  ),
+};
+
 export const Stats: StoryObj = {
   decorators: [(Story) => <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, maxWidth: 720 }}><Story /></div>],
   render: () => (

@@ -5,15 +5,18 @@ export interface CardProps extends Omit<React.AllHTMLAttributes<HTMLElement>, "a
   as?: React.ElementType;
   /** Drop the border + heavier shadow for a floating look. */
   elevated?: boolean;
+  /** Adds hover lift effect — translate-y + shadow. Use on clickable cards. */
+  interactive?: boolean;
 }
 
 export const Card = React.forwardRef<HTMLElement, CardProps>(
-  ({ as: Tag = "div", className, elevated, ...props }, ref) => (
+  ({ as: Tag = "div", className, elevated, interactive, ...props }, ref) => (
     <Tag
       ref={ref}
       className={cn(
         "bg-card text-card-foreground rounded-kj-xl overflow-hidden border",
         elevated ? "border-transparent shadow-kj-lg" : "border-border shadow-kj-sm",
+        interactive && "cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-kj-md",
         className
       )}
       {...props}
