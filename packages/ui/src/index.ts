@@ -1,3 +1,5 @@
+"use client";
+
 // @kjaniec-dev/ui — barrel export
 // React component library built on the @kjaniec-dev/design token system.
 

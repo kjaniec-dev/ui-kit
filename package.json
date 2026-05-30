@@ -11,6 +11,6 @@
     "storybook": "npm run storybook --workspace @kjaniec-dev/ui",
     "build-storybook": "npm run build-storybook --workspace @kjaniec-dev/ui",
     "build": "npm run build --workspace @kjaniec-dev/ui",
-    "chromatic": "npx chromatic --project-token=chpt_c890705fb0281d6"
+    "chromatic": "npx chromatic"
   }
 }

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cn } from "../lib/cn";
 
-export interface CardProps extends React.HTMLAttributes<HTMLElement> {
+export interface CardProps extends Omit<React.AllHTMLAttributes<HTMLElement>, "as"> {
   as?: React.ElementType;
   /** Drop the border + heavier shadow for a floating look. */
   elevated?: boolean;
