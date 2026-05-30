@@ -1,14 +1,15 @@
 import * as React from "react";
 import { cn } from "../lib/cn";
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CardProps extends React.HTMLAttributes<HTMLElement> {
+  as?: React.ElementType;
   /** Drop the border + heavier shadow for a floating look. */
   elevated?: boolean;
 }
 
-export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, elevated, ...props }, ref) => (
-    <div
+export const Card = React.forwardRef<HTMLElement, CardProps>(
+  ({ as: Tag = "div", className, elevated, ...props }, ref) => (
+    <Tag
       ref={ref}
       className={cn(
         "bg-card text-card-foreground rounded-kj-xl overflow-hidden border",

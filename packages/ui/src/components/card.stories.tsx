@@ -44,6 +44,22 @@ export const Elevated: Story = {
   ),
 };
 
+export const AsArticle: Story = {
+  render: () => (
+    <Card as="article">
+      <CardHeader>
+        <CardTitle>Semantic Article Card</CardTitle>
+        <CardDescription>This card renders as an &lt;article&gt; element.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p style={{ fontSize: "0.85rem", color: "var(--kj-muted-foreground)" }}>
+          Inspect the DOM — the root element is an article, not a div.
+        </p>
+      </CardContent>
+    </Card>
+  ),
+};
+
 export const Stats: StoryObj = {
   decorators: [(Story) => <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, maxWidth: 720 }}><Story /></div>],
   render: () => (
