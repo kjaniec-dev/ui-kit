@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { cn } from "../lib/cn";
 
@@ -87,7 +89,7 @@ export const AccordionContent = React.forwardRef<HTMLDivElement, React.HTMLAttri
     return (
       <div
         ref={ref}
-        className={cn("grid transition-[grid-template-rows] duration-200 ease-out", isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}
+        className={cn("grid transition-[grid-template-rows] duration-200 ease-out", isOpen ? "[grid-template-rows:1fr]" : "[grid-template-rows:0fr]")}
         {...props}
       >
         <div className="overflow-hidden">
