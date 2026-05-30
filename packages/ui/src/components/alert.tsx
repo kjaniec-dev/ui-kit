@@ -25,7 +25,7 @@ const iconColor = {
 } as const;
 
 export interface AlertProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "title">,
     VariantProps<typeof alertVariants> {
   /** Optional leading icon (e.g. an SVG). Inherits the variant color. */
   icon?: React.ReactNode;
