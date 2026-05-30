@@ -1600,14 +1600,14 @@ function Gallery(){
     <aside className="sticky top-0 self-start h-screen overflow-y-auto bg-surface border-r border-border p-6 max-[820px]:hidden">
       <div className="flex items-center gap-2.5 px-2 pb-5">
         <div className="grid place-items-center h-9 w-9 rounded-kj-md bg-primary text-primary-foreground font-bold font-mono shadow-kj-glow">KJ</div>
-        <div><div className="font-bold text-sm leading-tight">@kjaniec-dev/ui</div><div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.2.0</div></div>
+        <div><div className="font-bold text-sm leading-tight">@kjaniec-dev/ui</div><div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.4.0</div></div>
       </div>
       <div className="text-[0.68rem] uppercase tracking-[0.09em] font-semibold text-muted-foreground px-3 pt-3 pb-1.5">Components</div>
       <nav className="flex flex-col gap-0.5">
         {NAV.map(([id,label])=>{
           const active=activeSection===id;
           return (
-            <a key={id} href={"#"+id} className={cn("flex items-center gap-2.5 px-3 py-2 rounded-kj-sm text-sm font-medium no-underline transition-colors",active?"bg-primary/10 text-foreground":"text-muted-foreground hover:bg-muted hover:text-foreground")}>
+            <a key={id} href={"#"+id} onClick={()=>setActiveSection(id)} className={cn("flex items-center gap-2.5 px-3 py-2 rounded-kj-sm text-sm font-medium no-underline transition-colors",active?"bg-primary/10 text-foreground":"text-muted-foreground hover:bg-muted hover:text-foreground")}>
               <span className={cn("w-1.5 h-1.5 rounded-full transition-colors",active?"bg-primary":"bg-border")}/>{label}
             </a>
           );
@@ -1672,7 +1672,7 @@ function Gallery(){
           <Box>
             <Sub>Alerts</Sub>
             <div className="flex flex-col gap-4">
-              <Alert variant="info" icon={IcoInfo} title="New version available">Version 0.2.0 adds navigation components and charts.</Alert>
+              <Alert variant="info" icon={IcoInfo} title="New version available">Version 0.4.0 adds navigation components and charts.</Alert>
               <Alert variant="success" icon={IcoCheck} title="Deployment complete">All tests passed and the build is live in production.</Alert>
               <Alert variant="warning" icon={IcoWarn} title="Approaching your limit">You have used 86% of your file storage this month.</Alert>
               <Alert variant="danger" icon={IcoX} title="Payment declined">Update your payment method to avoid an interruption.</Alert>
@@ -1851,14 +1851,14 @@ function Gallery(){
         <aside className="w-[260px] h-full overflow-y-auto bg-surface border-r border-border p-6 shadow-kj-lg" onClick={e=>e.stopPropagation()}>
           <div className="flex items-center gap-2.5 px-2 pb-5">
             <div className="grid place-items-center h-9 w-9 rounded-kj-md bg-primary text-primary-foreground font-bold font-mono shadow-kj-glow">KJ</div>
-            <div><div className="font-bold text-sm leading-tight">@kjaniec-dev/ui</div><div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.2.0</div></div>
+            <div><div className="font-bold text-sm leading-tight">@kjaniec-dev/ui</div><div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.4.0</div></div>
           </div>
           <div className="text-[0.68rem] uppercase tracking-[0.09em] font-semibold text-muted-foreground px-3 pt-3 pb-1.5">Components</div>
           <nav className="flex flex-col gap-0.5">
             {NAV.map(([id,label])=>{
               const active=activeSection===id;
               return (
-                <a key={id} href={"#"+id} onClick={()=>setSidebarOpen(false)} className={cn("flex items-center gap-2.5 px-3 py-2 rounded-kj-sm text-sm font-medium no-underline transition-colors",active?"bg-primary/10 text-foreground":"text-muted-foreground hover:bg-muted hover:text-foreground")}>
+                <a key={id} href={"#"+id} onClick={()=>{setActiveSection(id);setSidebarOpen(false);}} className={cn("flex items-center gap-2.5 px-3 py-2 rounded-kj-sm text-sm font-medium no-underline transition-colors",active?"bg-primary/10 text-foreground":"text-muted-foreground hover:bg-muted hover:text-foreground")}>
                   <span className={cn("w-1.5 h-1.5 rounded-full transition-colors",active?"bg-primary":"bg-border")}/>{label}
                 </a>
               );
