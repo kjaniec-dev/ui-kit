@@ -8,7 +8,7 @@ const meta = {
   argTypes: {
     variant: {
       control: "inline-radio",
-      options: ["neutral", "primary", "success", "warning", "danger", "info", "solid"],
+      options: ["neutral", "primary", "secondary", "success", "warning", "danger", "info", "solid"],
     },
     dot: { control: "boolean" },
     children: { control: "text" },
@@ -26,6 +26,7 @@ export const AllVariants: Story = {
     <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
       <Badge variant="neutral">Neutral</Badge>
       <Badge variant="primary">Primary</Badge>
+      <Badge variant="secondary">Secondary</Badge>
       <Badge variant="success" dot>Active</Badge>
       <Badge variant="warning" dot>Pending</Badge>
       <Badge variant="danger" dot>Error</Badge>
