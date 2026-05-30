@@ -7,9 +7,33 @@
   --kj-card-foreground: #09090b;
   --kj-primary: #f59e0b;
   --kj-primary-hover: #d97706;
+  /* Primary (amber) scale */
+  --kj-primary-50:  #fffbeb;
+  --kj-primary-100: #fef3c7;
+  --kj-primary-200: #fde68a;
+  --kj-primary-300: #fcd34d;
+  --kj-primary-400: #fbbf24;
+  --kj-primary-500: #f59e0b;
+  --kj-primary-600: #d97706;
+  --kj-primary-700: #b45309;
+  --kj-primary-800: #92400e;
+  --kj-primary-900: #78350f;
+  --kj-primary-950: #451a03;
   --kj-primary-foreground: #09090b;
   --kj-secondary: #14b8a6;
   --kj-secondary-hover: #0d9488;
+  /* Secondary (teal) scale */
+  --kj-secondary-50:  #f0fdfa;
+  --kj-secondary-100: #ccfbf1;
+  --kj-secondary-200: #99f6e4;
+  --kj-secondary-300: #5eead4;
+  --kj-secondary-400: #2dd4bf;
+  --kj-secondary-500: #14b8a6;
+  --kj-secondary-600: #0d9488;
+  --kj-secondary-700: #0f766e;
+  --kj-secondary-800: #115e59;
+  --kj-secondary-900: #134e4a;
+  --kj-secondary-950: #042f2e;
   --kj-secondary-foreground: #ffffff;
   --kj-muted: #f4f4f5;
   --kj-muted-foreground: #71717a;
