@@ -1,0 +1,13 @@
+# Netlify config for the @kjaniec-dev/ui component gallery.
+# The site is a single self-contained HTML file (no build step) served from ./site.
+
+[build]
+  publish = "site"
+  command = ""
+
+# Long-cache the fonts/CDN-less static asset; the HTML itself stays revalidated.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

@@ -1,0 +1,26 @@
+/* Storybook global styles — wires Tailwind v4 to the @kjaniec-dev/design tokens.
+   Imported once from .storybook/preview.tsx. */
+
+@import "tailwindcss";
+
+/* Brings in theme.css (the raw --kj-* variables, incl. the .dark overrides)
+   plus the @theme mapping that turns them into Tailwind utilities. */
+@import "@kjaniec-dev/design/tailwind.css";
+
+/* Runtime keyframes + slider thumb that can't be expressed as utilities. */
+@import "../src/ui.css";
+
+/* Make the `dark:` variant respond to a `.dark` class (set by the toolbar
+   toggle) instead of the OS preference — matches how theme.css scopes tokens. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Tell Tailwind v4 where to look for class names. */
+@source "../src/components";
+
+html,
+body,
+#storybook-root {
+  background: var(--kj-background);
+  color: var(--kj-foreground);
+  font-family: var(--kj-font-sans);
+}

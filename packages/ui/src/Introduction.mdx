@@ -1,0 +1,35 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Docs/Introduction" />
+
+# @kjaniec-dev/ui
+
+A React component library built on the **@kjaniec-dev/design** token system.
+Every component styles itself through the token mapping in `@kjaniec-dev/design/tailwind.css`,
+so light/dark mode and any token change flow through automatically — with zero per-component overrides.
+
+## Light / dark theme
+
+Use the **Theme** toggle in the toolbar (the sun/moon icon at the top).
+Under the hood it adds the `.dark` class to the document, and `theme.css` remaps every `--kj-*` variable.
+
+## Accessibility
+
+Every page has an **Accessibility** tab (the a11y addon) — an automatic audit of contrast,
+ARIA roles and keyboard navigation for the component currently on screen.
+
+## Conventions
+
+- **Variants via CVA** — `variant` / `size` / `tone` as typed props.
+- **`className` always merges** — `cn()` (clsx + tailwind-merge), so caller classes win conflicts.
+- **`forwardRef`** everywhere a component wraps a single DOM node.
+- **Controlled where it matters** — `Tabs`, `Accordion`, `Segmented`, `Pagination`, `Modal`.
+- **Tokens, not hex** — classes like `bg-primary`, `rounded-kj-md`, `shadow-kj-sm` map to `--kj-*`.
+
+## Getting started
+
+```bash
+npm install
+npm run storybook       # dev mode on :6006
+npm run build-storybook # static build for publishing
+```

@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>@kjaniec-dev/ui — component demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={
+  darkMode:"class",
+  theme:{extend:{
+    colors:{
+      background:"var(--kj-background)",foreground:"var(--kj-foreground)",surface:"var(--kj-surface)",
+      card:{DEFAULT:"var(--kj-card)",foreground:"var(--kj-card-foreground)"},
+      primary:{DEFAULT:"var(--kj-primary)",hover:"var(--kj-primary-hover)",foreground:"var(--kj-primary-foreground)"},
+      secondary:{DEFAULT:"var(--kj-secondary)",hover:"var(--kj-secondary-hover)",foreground:"var(--kj-secondary-foreground)"},
+      muted:{DEFAULT:"var(--kj-muted)",foreground:"var(--kj-muted-foreground)"},
+      border:"var(--kj-border)",input:"var(--kj-input)",ring:"var(--kj-ring)",
+      success:{DEFAULT:"var(--kj-success)",surface:"var(--kj-success-surface)"},
+      warning:{DEFAULT:"var(--kj-warning)",surface:"var(--kj-warning-surface)"},
+      danger:{DEFAULT:"var(--kj-danger)",surface:"var(--kj-danger-surface)"},
+      info:{DEFAULT:"var(--kj-info)",surface:"var(--kj-info-surface)"},
+    },
+    borderRadius:{"kj-sm":"var(--kj-radius-sm)","kj-md":"var(--kj-radius-md)","kj-lg":"var(--kj-radius-lg)","kj-xl":"var(--kj-radius-xl)","kj-2xl":"var(--kj-radius-2xl)"},
+    boxShadow:{"kj-xs":"var(--kj-shadow-xs)","kj-sm":"var(--kj-shadow-sm)","kj-md":"var(--kj-shadow-md)","kj-lg":"var(--kj-shadow-lg)","kj-glow":"var(--kj-shadow-glow)"},
+    fontFamily:{sans:["Inter","ui-sans-serif","system-ui","sans-serif"],mono:["JetBrains Mono","ui-monospace","monospace"]},
+  }}
+};</script>
+<style>
+:root {
+  color-scheme: light;
+  --kj-background: #fafafa;
+  --kj-foreground: #09090b;
+  --kj-surface: #ffffff;
+  --kj-card: #ffffff;
+  --kj-card-foreground: #09090b;
+  --kj-primary: #f59e0b;
+  --kj-primary-hover: #d97706;
+  --kj-primary-foreground: #09090b;
+  --kj-secondary: #14b8a6;
+  --kj-secondary-hover: #0d9488;
+  --kj-secondary-foreground: #ffffff;
+  --kj-muted: #f4f4f5;
+  --kj-muted-foreground: #71717a;
+  --kj-border: #e4e4e7;
+  --kj-input: #e4e4e7;
+  --kj-ring: #f59e0b;
+  --kj-success: #059669;
+  --kj-success-surface: #ecfdf5;
+  --kj-warning: #d97706;
+  --kj-warning-surface: #fffbeb;
+  --kj-danger: #e11d48;
+  --kj-danger-surface: #fff1f2;
+  --kj-info: #0284c7;
+  --kj-info-surface: #f0f9ff;
+  --kj-font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --kj-font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  --kj-radius-sm: 0.5rem;
+  --kj-radius-md: 0.75rem;
+  --kj-radius-lg: 1rem;
+  --kj-radius-xl: 1.25rem;
+  --kj-radius-2xl: 1.5rem;
+  --kj-shadow-xs: 0 1px 2px rgb(15 23 42 / 0.05);
+  --kj-shadow-sm: 0 1px 3px rgb(15 23 42 / 0.08), 0 1px 2px rgb(15 23 42 / 0.04);
+  --kj-shadow-md: 0 8px 30px rgb(15 23 42 / 0.08);
+  --kj-shadow-lg: 0 20px 60px rgb(15 23 42 / 0.12);
+  --kj-shadow-glow: 0 0 0 1px rgb(245 158 11 / 0.16), 0 16px 48px rgb(245 158 11 / 0.18);
+}
+
+.dark {
+  color-scheme: dark;
+  --kj-background: #09090b;
+  --kj-foreground: #fafafa;
+  --kj-surface: #18181b;
+  --kj-card: #18181b;
+  --kj-card-foreground: #fafafa;
+  --kj-primary: #fbbf24;
+  --kj-primary-hover: #f59e0b;
+  --kj-primary-foreground: #09090b;
+  --kj-secondary: #2dd4bf;
+  --kj-secondary-hover: #14b8a6;
+  --kj-secondary-foreground: #042f2e;
+  --kj-muted: #27272a;
+  --kj-muted-foreground: #a1a1aa;
+  --kj-border: #27272a;
+  --kj-input: #27272a;
+  --kj-ring: #fbbf24;
+  --kj-success: #10b981;
+  --kj-success-surface: #022c22;
+  --kj-warning: #fbbf24;
+  --kj-warning-surface: #451a03;
+  --kj-danger: #f43f5e;
+  --kj-danger-surface: #4c0519;
+  --kj-info: #0ea5e9;
+  --kj-info-surface: #082f49;
+}
+
+html {
+  background: var(--kj-background);
+  color: var(--kj-foreground);
+  font-family: var(--kj-font-sans);
+}
+
+.kj-card {
+  background: var(--kj-card);
+  color: var(--kj-card-foreground);
+  border: 1px solid var(--kj-border);
+  border-radius: var(--kj-radius-2xl);
+  box-shadow: var(--kj-shadow-sm);
+}
+
+/* @kjaniec-dev/ui — runtime keyframes & pseudo-element styles
+   that can't be expressed as Tailwind utilities.
+   Import once at your app root:  import "@kjaniec-dev/ui/ui.css"; */
+
+@keyframes kjpop {
+  from { opacity: 0; transform: translateY(-4px); }
+}
+@keyframes kjtoastin {
+  from { opacity: 0; transform: translateX(20px); }
+}
+@keyframes kjtoastout {
+  to { opacity: 0; transform: translateX(20px); }
+}
+
+/* Range slider thumb (matches <Slider />) */
+.kj-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px; border-radius: 9999px;
+  background: var(--kj-primary); border: 3px solid var(--kj-surface);
+  box-shadow: var(--kj-shadow-sm); cursor: pointer;
+}
+.kj-slider::-moz-range-thumb {
+  width: 18px; height: 18px; border-radius: 9999px;
+  background: var(--kj-primary); border: 3px solid var(--kj-surface);
+  box-shadow: var(--kj-shadow-sm); cursor: pointer;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--kj-font-sans);background:var(--kj-background);color:var(--kj-foreground);-webkit-font-smoothing:antialiased}
+</style>
+<script src="https://unpkg.com/clsx@2.1.1/dist/clsx.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script>
+/* Register a TSX-aware preset so inline TypeScript components parse correctly. */
+Babel.registerPreset("kjtsx", {
+  presets: [
+    [Babel.availablePresets["typescript"], { isTSX: true, allExtensions: true, allowDeclareFields: true }],
+    Babel.availablePresets["react"],
+  ],
+});
+</script>
+</head>
+<body>
+<div id="root"></div>
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="16" fill="#f59e0b"/><text x="50" y="62" font-family="monospace" font-size="34" font-weight="700" text-anchor="middle" fill="#1c1410">KJ</text></svg>
+</template>
+
+<script type="module">
+import { twMerge } from "https://unpkg.com/tailwind-merge@2.5.4/dist/bundle-mjs.mjs";
+window.__twMerge = twMerge;
+</script>
+
+<script type="text/babel" data-presets="kjtsx">
+const cn = (...a) => (window.__twMerge ? window.__twMerge(clsx(a)) : clsx(a));
+function cva(base, config) {
+  const baseStr = Array.isArray(base) ? base.join(" ") : base;
+  return function (props) {
+    props = props || {};
+    const classes = [baseStr];
+    const variants = (config && config.variants) || {};
+    const defaults = (config && config.defaultVariants) || {};
+    for (const key in variants) {
+      const val = props[key] !== undefined && props[key] !== null ? props[key] : defaults[key];
+      if (val !== undefined && val !== null && variants[key][val]) classes.push(variants[key][val]);
+    }
+    return clsx(classes);
+  };
+}
+
+/* ===== real @kjaniec-dev/ui components (imports/exports stripped) ===== */
+
+/* ===== button.tsx ===== */
+
+const buttonVariants = cva(
+  [
+    "inline-flex items-center justify-center gap-2 whitespace-nowrap select-none",
+    "font-sans font-semibold leading-none",
+    "border border-transparent rounded-kj-md cursor-pointer",
+    "transition-[background-color,color,border-color,box-shadow,transform] duration-150",
+    "active:translate-y-px",
+    "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45",
+    "disabled:opacity-50 disabled:pointer-events-none",
+  ],
+  {
+    variants: {
+      variant: {
+        primary: "bg-primary text-primary-foreground hover:bg-primary-hover",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary-hover",
+        outline: "bg-transparent text-foreground border-border hover:bg-muted hover:border-muted-foreground",
+        ghost: "bg-transparent text-foreground hover:bg-muted",
+        danger: "bg-danger text-white hover:brightness-95",
+      },
+      size: {
+        sm: "h-8 px-3 text-[0.8rem] rounded-kj-sm",
+        md: "h-10 px-[1.1rem] text-sm",
+        lg: "h-12 px-6 text-base",
+        icon: "h-10 w-10 p-0",
+        "icon-sm": "h-8 w-8 p-0 rounded-kj-sm",
+      },
+    },
+    defaultVariants: { variant: "primary", size: "md" },
+  }
+);
+
+interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  /** Shows a spinner and disables interaction. */
+  loading?: boolean;
+  /** Icon rendered before the label. */
+  leadingIcon?: React.ReactNode;
+  /** Icon rendered after the label. */
+  trailingIcon?: React.ReactNode;
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, loading, leadingIcon, trailingIcon, children, disabled, ...props }, ref) => {
+    return (
+      <button
+        ref={ref}
+        className={cn(buttonVariants({ variant, size }), loading && "relative", className)}
+        disabled={disabled || loading}
+        aria-busy={loading || undefined}
+        {...props}
+      >
+        {loading && (
+          <span
+            aria-hidden
+            className="absolute h-[1em] w-[1em] rounded-full border-2 border-current border-t-transparent animate-spin"
+          />
+        )}
+        <span className={cn("contents", loading && "invisible")}>
+          {leadingIcon && <span className="[&_svg]:h-[1.05em] [&_svg]:w-[1.05em]">{leadingIcon}</span>}
+          {children}
+          {trailingIcon && <span className="[&_svg]:h-[1.05em] [&_svg]:w-[1.05em]">{trailingIcon}</span>}
+        </span>
+      </button>
+    );
+  }
+);
+Button.displayName = "Button";
+
+
+
+/* ===== badge.tsx ===== */
+
+const badgeVariants = cva(
+  "inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold leading-snug rounded-full border border-transparent",
+  {
+    variants: {
+      variant: {
+        neutral: "bg-muted text-muted-foreground",
+        primary: "bg-primary/15 text-primary-hover dark:text-primary",
+        success: "bg-success-surface text-success",
+        warning: "bg-warning-surface text-warning",
+        danger: "bg-danger-surface text-danger",
+        info: "bg-info-surface text-info",
+        solid: "bg-primary text-primary-foreground",
+      },
+    },
+    defaultVariants: { variant: "neutral" },
+  }
+);
+
+interface BadgeProps
+  extends React.HTMLAttributes<HTMLSpanElement>,
+    VariantProps<typeof badgeVariants> {
+  /** Render a leading status dot. */
+  dot?: boolean;
+}
+
+const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
+  ({ className, variant, dot, children, ...props }, ref) => (
+    <span ref={ref} className={cn(badgeVariants({ variant }), className)} {...props}>
+      {dot && <span className="h-1.5 w-1.5 rounded-full bg-current" aria-hidden />}
+      {children}
+    </span>
+  )
+);
+Badge.displayName = "Badge";
+
+
+
+/* ===== alert.tsx ===== */
+
+const alertVariants = cva(
+  "flex gap-3 items-start p-[0.9rem_1.1rem] rounded-kj-md border text-sm",
+  {
+    variants: {
+      variant: {
+        info: "bg-info-surface border-info/30",
+        success: "bg-success-surface border-success/30",
+        warning: "bg-warning-surface border-warning/30",
+        danger: "bg-danger-surface border-danger/30",
+      },
+    },
+    defaultVariants: { variant: "info" },
+  }
+);
+
+const iconColor = {
+  info: "text-info",
+  success: "text-success",
+  warning: "text-warning",
+  danger: "text-danger",
+} as const;
+
+interface AlertProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof alertVariants> {
+  /** Optional leading icon (e.g. an SVG). Inherits the variant color. */
+  icon?: React.ReactNode;
+  title?: React.ReactNode;
+}
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
+  ({ className, variant = "info", icon, title, children, ...props }, ref) => (
+    <div ref={ref} role="alert" className={cn(alertVariants({ variant }), className)} {...props}>
+      {icon && (
+        <span className={cn("shrink-0 mt-0.5 [&_svg]:h-[1.15rem] [&_svg]:w-[1.15rem]", iconColor[variant ?? "info"])}>
+          {icon}
+        </span>
+      )}
+      <div className="text-foreground">
+        {title && <p className="font-bold m-0 mb-0.5 text-sm">{title}</p>}
+        {children && <p className="m-0 opacity-85">{children}</p>}
+      </div>
+    </div>
+  )
+);
+Alert.displayName = "Alert";
+
+
+/* ===== spinner.tsx ===== */
+
+interface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {
+  /** Diameter in px. Default 24. */
+  size?: number;
+}
+
+const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
+  ({ className, size = 24, style, ...props }, ref) => (
+    <span
+      ref={ref}
+      role="status"
+      aria-label="Loading"
+      className={cn(
+        "inline-block rounded-full border-[2.5px] border-muted border-t-primary animate-spin align-middle",
+        className
+      )}
+      style={{ width: size, height: size, ...style }}
+      {...props}
+    />
+  )
+);
+Spinner.displayName = "Spinner";
+
+
+/* ===== progress.tsx ===== */
+
+interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** 0–100. */
+  value?: number;
+  tone?: "primary" | "secondary";
+}
+
+const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
+  ({ className, value = 0, tone = "primary", ...props }, ref) => {
+    const pct = Math.max(0, Math.min(100, value));
+    return (
+      <div
+        ref={ref}
+        role="progressbar"
+        aria-valuenow={pct}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        className={cn("h-2 w-full overflow-hidden rounded-full bg-muted", className)}
+        {...props}
+      >
+        <span
+          className={cn(
+            "block h-full rounded-full transition-[width] duration-500 ease-out",
+            tone === "secondary" ? "bg-secondary" : "bg-primary"
+          )}
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+    );
+  }
+);
+Progress.displayName = "Progress";
+
+
+/* ===== input.tsx ===== */
+
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  /** Visual error state (red border + ring). */
+  error?: boolean;
+  /** Icon shown inside the field, leading edge. */
+  leadingIcon?: React.ReactNode;
+}
+
+const baseField =
+  "w-full font-sans text-sm text-foreground bg-surface border rounded-kj-md px-[0.85rem] " +
+  "transition-[border-color,box-shadow] duration-150 placeholder:text-muted-foreground " +
+  "focus:outline-none focus:border-ring focus:ring-[3px] focus:ring-ring/30 " +
+  "disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed";
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, error, leadingIcon, style, ...props }, ref) => {
+    const field = (
+      <input
+        ref={ref}
+        aria-invalid={error || undefined}
+        className={cn(
+          baseField,
+          "py-[calc(0.6rem*var(--kj-density,1))]",
+          error
+            ? "border-danger focus:border-danger focus:ring-danger/25"
+            : "border-input",
+          leadingIcon && "pl-[2.3rem]",
+          className
+        )}
+        {...props}
+      />
+    );
+    if (!leadingIcon) return field;
+    return (
+      <span className="relative flex items-center">
+        <span className="absolute left-[0.8rem] text-muted-foreground [&_svg]:h-[1.05rem] [&_svg]:w-[1.05rem] pointer-events-none">
+          {leadingIcon}
+        </span>
+        {field}
+      </span>
+    );
+  }
+);
+Input.displayName = "Input";
+
+interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  error?: boolean;
+}
+
+const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ className, error, ...props }, ref) => (
+    <textarea
+      ref={ref}
+      aria-invalid={error || undefined}
+      className={cn(
+        baseField,
+        "py-[calc(0.6rem*var(--kj-density,1))] min-h-[84px] leading-relaxed resize-y",
+        error ? "border-danger focus:border-danger focus:ring-danger/25" : "border-input",
+        className
+      )}
+      {...props}
+    />
+  )
+);
+Textarea.displayName = "Textarea";
+
+
+/* ===== field.tsx ===== */
+
+interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
+  /** Append a red required marker. */
+  required?: boolean;
+}
+
+const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
+  ({ className, required, children, ...props }, ref) => (
+    <label ref={ref} className={cn("text-[0.8rem] font-semibold text-foreground", className)} {...props}>
+      {children}
+      {required && <span className="text-danger"> *</span>}
+    </label>
+  )
+);
+Label.displayName = "Label";
+
+interface HintProps extends React.HTMLAttributes<HTMLSpanElement> {
+  error?: boolean;
+}
+
+const Hint = React.forwardRef<HTMLSpanElement, HintProps>(
+  ({ className, error, ...props }, ref) => (
+    <span
+      ref={ref}
+      className={cn("text-[0.76rem]", error ? "text-danger" : "text-muted-foreground", className)}
+      {...props}
+    />
+  )
+);
+Hint.displayName = "Hint";
+
+/** Vertical label + control + hint group. */
+const Field = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex flex-col gap-1.5", className)} {...props} />
+  )
+);
+Field.displayName = "Field";
+
+
+/* ===== select.tsx ===== */
+
+interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  error?: boolean;
+}
+
+const chevron =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E";
+
+const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
+  ({ className, error, style, children, ...props }, ref) => (
+    <select
+      ref={ref}
+      aria-invalid={error || undefined}
+      className={cn(
+        "w-full appearance-none cursor-pointer font-sans text-sm text-foreground bg-surface",
+        "border rounded-kj-md py-[calc(0.6rem*var(--kj-density,1))] pl-[0.85rem] pr-9",
+        "transition-[border-color,box-shadow] duration-150",
+        "focus:outline-none focus:border-ring focus:ring-[3px] focus:ring-ring/30",
+        "disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed",
+        error ? "border-danger" : "border-input",
+        className
+      )}
+      style={{
+        backgroundImage: `url("${chevron}")`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "right 0.75rem center",
+        backgroundSize: "1rem",
+        ...style,
+      }}
+      {...props}
+    >
+      {children}
+    </select>
+  )
+);
+Select.displayName = "Select";
+
+
+/* ===== checkbox.tsx ===== */
+
+interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: React.ReactNode;
+}
+
+const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
+  ({ className, label, id, ...props }, ref) => {
+    const autoId = React.useId();
+    const inputId = id ?? autoId;
+    return (
+      <label htmlFor={inputId} className={cn("inline-flex items-center gap-2.5 cursor-pointer text-sm select-none", className)}>
+        <input ref={ref} id={inputId} type="checkbox" className="peer sr-only" {...props} />
+        <span className="grid place-items-center h-[1.15rem] w-[1.15rem] shrink-0 rounded-[0.4rem] border-[1.5px] border-input bg-surface transition-all duration-150 peer-checked:bg-primary peer-checked:border-primary peer-focus-visible:ring-[3px] peer-focus-visible:ring-ring/35 peer-checked:[&_svg]:opacity-100 peer-checked:[&_svg]:scale-100">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" className="h-3 w-3 text-primary-foreground opacity-0 scale-50 transition-all duration-150">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </span>
+        {label}
+      </label>
+    );
+  }
+);
+Checkbox.displayName = "Checkbox";
+
+interface RadioProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: React.ReactNode;
+}
+
+const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
+  ({ className, label, id, ...props }, ref) => {
+    const autoId = React.useId();
+    const inputId = id ?? autoId;
+    return (
+      <label htmlFor={inputId} className={cn("inline-flex items-center gap-2.5 cursor-pointer text-sm select-none", className)}>
+        <input ref={ref} id={inputId} type="radio" className="peer sr-only" {...props} />
+        <span className="grid place-items-center h-[1.15rem] w-[1.15rem] shrink-0 rounded-full border-[1.5px] border-input bg-surface transition-all duration-150 peer-checked:bg-primary peer-checked:border-primary peer-focus-visible:ring-[3px] peer-focus-visible:ring-ring/35 peer-checked:[&>span]:opacity-100 peer-checked:[&>span]:scale-100">
+          <span className="h-2 w-2 rounded-full bg-primary-foreground opacity-0 scale-[0.4] transition-all duration-150" />
+        </span>
+        {label}
+      </label>
+    );
+  }
+);
+Radio.displayName = "Radio";
+
+
+/* ===== switch.tsx ===== */
+
+interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: React.ReactNode;
+}
+
+const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
+  ({ className, label, id, ...props }, ref) => {
+    const autoId = React.useId();
+    const inputId = id ?? autoId;
+    return (
+      <label htmlFor={inputId} className={cn("inline-flex items-center gap-2.5 cursor-pointer text-sm select-none", className)}>
+        <input ref={ref} id={inputId} type="checkbox" role="switch" className="peer sr-only" {...props} />
+        <span className="relative h-[1.45rem] w-[2.6rem] shrink-0 rounded-full bg-input transition-colors duration-200 peer-checked:bg-primary peer-focus-visible:ring-[3px] peer-focus-visible:ring-ring/35 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:h-[calc(1.45rem-4px)] after:w-[calc(1.45rem-4px)] after:rounded-full after:bg-white after:shadow-kj-sm after:transition-transform after:duration-200 peer-checked:after:translate-x-[1.15rem]" />
+        {label}
+      </label>
+    );
+  }
+);
+Switch.displayName = "Switch";
+
+
+/* ===== slider.tsx ===== */
+
+type SliderProps = React.InputHTMLAttributes<HTMLInputElement>;
+
+/**
+ * Range slider styled with the kit's primary token. Thumb styling lives in a
+ * scoped <style> tag because pseudo-elements (::-webkit-slider-thumb) can't be
+ * expressed as Tailwind utilities.
+ */
+const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
+  ({ className, ...props }, ref) => (
+    <input
+      ref={ref}
+      type="range"
+      className={cn(
+        "kj-slider w-full h-1.5 rounded-full bg-input appearance-none cursor-pointer",
+        className
+      )}
+      {...props}
+    />
+  )
+);
+Slider.displayName = "Slider";
+
+/** Inject once near the app root (or rely on the package stylesheet). */
+const sliderThumbCSS = `
+.kj-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:9999px;background:var(--kj-primary);border:3px solid var(--kj-surface);box-shadow:var(--kj-shadow-sm);cursor:pointer}
+.kj-slider::-moz-range-thumb{width:18px;height:18px;border-radius:9999px;background:var(--kj-primary);border:3px solid var(--kj-surface);box-shadow:var(--kj-shadow-sm);cursor:pointer}
+`;
+
+
+/* ===== segmented.tsx ===== */
+
+interface SegmentedOption<T extends string> {
+  value: T;
+  label: React.ReactNode;
+}
+
+interface SegmentedProps<T extends string> {
+  options: SegmentedOption<T>[];
+  value: T;
+  onChange: (value: T) => void;
+  className?: string;
+  "aria-label"?: string;
+}
+
+/** Segmented control / single-select toggle group. Controlled. */
+function Segmented<T extends string>({
+  options,
+  value,
+  onChange,
+  className,
+  ...props
+}: SegmentedProps<T>) {
+  return (
+    <div
+      role="tablist"
+      className={cn("inline-flex gap-0.5 p-[3px] rounded-kj-md bg-muted", className)}
+      {...props}
+    >
+      {options.map((opt) => {
+        const active = opt.value === value;
+        return (
+          <button
+            key={opt.value}
+            type="button"
+            role="tab"
+            aria-selected={active}
+            onClick={() => onChange(opt.value)}
+            className={cn(
+              "px-3.5 py-1.5 text-[0.82rem] font-semibold rounded-[calc(var(--kj-radius-md)-3px)] cursor-pointer transition-all duration-150",
+              active
+                ? "bg-surface text-foreground shadow-kj-xs"
+                : "bg-transparent text-muted-foreground hover:text-foreground"
+            )}
+          >
+            {opt.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+
+/* ===== card.tsx ===== */
+
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Drop the border + heavier shadow for a floating look. */
+  elevated?: boolean;
+}
+
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, elevated, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn(
+        "bg-card text-card-foreground rounded-kj-xl overflow-hidden border",
+        elevated ? "border-transparent shadow-kj-lg" : "border-border shadow-kj-sm",
+        className
+      )}
+      {...props}
+    />
+  )
+);
+Card.displayName = "Card";
+
+const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("p-[1.35rem] flex flex-col gap-1", className)} {...props} />
+  )
+);
+CardHeader.displayName = "CardHeader";
+
+const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
+  ({ className, ...props }, ref) => (
+    <h3 ref={ref} className={cn("m-0 text-base font-bold tracking-[-0.01em]", className)} {...props} />
+  )
+);
+CardTitle.displayName = "CardTitle";
+
+const CardDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
+  ({ className, ...props }, ref) => (
+    <p ref={ref} className={cn("m-0 text-[0.85rem] text-muted-foreground", className)} {...props} />
+  )
+);
+CardDescription.displayName = "CardDescription";
+
+/** Body region with default padding. */
+const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("px-[1.35rem] pb-[1.35rem]", className)} {...props} />
+  )
+);
+CardContent.displayName = "CardContent";
+
+const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("flex gap-2.5 px-[1.35rem] py-[1.1rem] border-t border-border bg-muted/40", className)}
+      {...props}
+    />
+  )
+);
+CardFooter.displayName = "CardFooter";
+
+
+/* ===== stat.tsx ===== */
+
+interface StatProps extends React.HTMLAttributes<HTMLDivElement> {
+  label: React.ReactNode;
+  value: React.ReactNode;
+  /** e.g. "+12.3% mdm" */
+  delta?: React.ReactNode;
+  trend?: "up" | "down";
+}
+
+const Stat = React.forwardRef<HTMLDivElement, StatProps>(
+  ({ className, label, value, delta, trend, ...props }, ref) => (
+    <Card ref={ref} className={cn("p-[1.35rem] flex flex-col gap-2", className)} {...props}>
+      <span className="text-[0.78rem] font-semibold uppercase tracking-[0.05em] text-muted-foreground">
+        {label}
+      </span>
+      <span className="text-[2rem] font-bold tracking-[-0.03em] tabular-nums leading-none">
+        {value}
+      </span>
+      {delta && (
+        <span
+          className={cn(
+            "inline-flex items-center gap-1 text-[0.8rem] font-semibold",
+            trend === "down" ? "text-danger" : "text-success"
+          )}
+        >
+          {trend === "down" ? "▼" : "▲"} {delta}
+        </span>
+      )}
+    </Card>
+  )
+);
+Stat.displayName = "Stat";
+
+
+/* ===== avatar.tsx ===== */
+
+const avatarVariants = cva(
+  "grid place-items-center shrink-0 rounded-full font-semibold border-2 border-surface",
+  {
+    variants: {
+      size: {
+        sm: "h-7 w-7 text-[0.7rem]",
+        md: "h-9 w-9 text-[0.8rem]",
+        lg: "h-12 w-12 text-base",
+      },
+      tone: {
+        secondary: "bg-secondary text-secondary-foreground",
+        primary: "bg-primary text-primary-foreground",
+        info: "bg-info text-white",
+        muted: "bg-muted text-muted-foreground",
+      },
+    },
+    defaultVariants: { size: "md", tone: "secondary" },
+  }
+);
+
+interface AvatarProps
+  extends React.HTMLAttributes<HTMLSpanElement>,
+    VariantProps<typeof avatarVariants> {
+  /** Image URL; falls back to initials/children when absent. */
+  src?: string;
+  alt?: string;
+  /** Show an online status dot. */
+  status?: boolean;
+}
+
+const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
+  ({ className, size, tone, src, alt, status, children, ...props }, ref) => {
+    const node = (
+      <span ref={ref} className={cn(avatarVariants({ size, tone }), "overflow-hidden", className)} {...props}>
+        {src ? <img src={src} alt={alt} className="h-full w-full object-cover" /> : children}
+      </span>
+    );
+    if (!status) return node;
+    return (
+      <span className="relative inline-flex">
+        {node}
+        <span className="absolute -right-px -bottom-px h-[0.7rem] w-[0.7rem] rounded-full bg-success border-2 border-surface" />
+      </span>
+    );
+  }
+);
+Avatar.displayName = "Avatar";
+
+/** Overlapping cluster of avatars. */
+const AvatarGroup = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex [&>*:not(:first-child)]:-ml-2.5", className)} {...props} />
+  )
+);
+AvatarGroup.displayName = "AvatarGroup";
+
+
+/* ===== tabs.tsx ===== */
+
+interface TabsCtx {
+  value: string;
+  setValue: (v: string) => void;
+}
+const TabsContext = React.createContext<TabsCtx | null>(null);
+function useTabs() {
+  const ctx = React.useContext(TabsContext);
+  if (!ctx) throw new Error("Tabs.* must be used within <Tabs>");
+  return ctx;
+}
+
+interface TabsProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Controlled active value. */
+  value?: string;
+  /** Uncontrolled initial value. */
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+}
+
+function Tabs({ value, defaultValue, onValueChange, className, children, ...props }: TabsProps) {
+  const [internal, setInternal] = React.useState(defaultValue ?? "");
+  const current = value ?? internal;
+  const setValue = React.useCallback(
+    (v: string) => {
+      if (value === undefined) setInternal(v);
+      onValueChange?.(v);
+    },
+    [value, onValueChange]
+  );
+  return (
+    <TabsContext.Provider value={{ value: current, setValue }}>
+      <div className={className} {...props}>
+        {children}
+      </div>
+    </TabsContext.Provider>
+  );
+}
+
+const TabsList = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} role="tablist" className={cn("flex gap-1 border-b border-border", className)} {...props} />
+  )
+);
+TabsList.displayName = "TabsList";
+
+interface TabsTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  value: string;
+}
+
+const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
+  ({ className, value, children, ...props }, ref) => {
+    const { value: current, setValue } = useTabs();
+    const active = current === value;
+    return (
+      <button
+        ref={ref}
+        type="button"
+        role="tab"
+        aria-selected={active}
+        onClick={() => setValue(value)}
+        className={cn(
+          "relative px-[0.9rem] py-2.5 text-sm font-semibold cursor-pointer transition-colors duration-150",
+          "after:content-[''] after:absolute after:left-[0.9rem] after:right-[0.9rem] after:-bottom-px after:h-0.5 after:rounded-sm after:transition-colors",
+          active
+            ? "text-foreground after:bg-primary"
+            : "text-muted-foreground hover:text-foreground after:bg-transparent",
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  }
+);
+TabsTrigger.displayName = "TabsTrigger";
+
+interface TabsContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  value: string;
+}
+
+const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
+  ({ className, value, ...props }, ref) => {
+    const { value: current } = useTabs();
+    if (current !== value) return null;
+    return (
+      <div ref={ref} role="tabpanel" className={cn("pt-5 text-[0.9rem] text-muted-foreground", className)} {...props} />
+    );
+  }
+);
+TabsContent.displayName = "TabsContent";
+
+
+/* ===== accordion.tsx ===== */
+
+interface AccordionCtx {
+  open: string[];
+  toggle: (v: string) => void;
+}
+const AccordionContext = React.createContext<AccordionCtx | null>(null);
+
+interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** "single" closes others when one opens. */
+  type?: "single" | "multiple";
+  defaultValue?: string[];
+}
+
+function Accordion({ type = "single", defaultValue = [], className, children, ...props }: AccordionProps) {
+  const [open, setOpen] = React.useState<string[]>(defaultValue);
+  const toggle = React.useCallback(
+    (v: string) => {
+      setOpen((prev) => {
+        const isOpen = prev.includes(v);
+        if (type === "single") return isOpen ? [] : [v];
+        return isOpen ? prev.filter((x) => x !== v) : [...prev, v];
+      });
+    },
+    [type]
+  );
+  return (
+    <AccordionContext.Provider value={{ open, toggle }}>
+      <div className={cn("border border-border rounded-kj-lg overflow-hidden", className)} {...props}>
+        {children}
+      </div>
+    </AccordionContext.Provider>
+  );
+}
+
+const ItemContext = React.createContext<string>("");
+
+interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
+  value: string;
+}
+
+const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(
+  ({ className, value, ...props }, ref) => (
+    <ItemContext.Provider value={value}>
+      <div ref={ref} className={cn("border-t border-border first:border-t-0", className)} {...props} />
+    </ItemContext.Provider>
+  )
+);
+AccordionItem.displayName = "AccordionItem";
+
+const AccordionTrigger = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
+  ({ className, children, ...props }, ref) => {
+    const ctx = React.useContext(AccordionContext)!;
+    const value = React.useContext(ItemContext);
+    const isOpen = ctx.open.includes(value);
+    return (
+      <button
+        ref={ref}
+        type="button"
+        aria-expanded={isOpen}
+        onClick={() => ctx.toggle(value)}
+        className={cn(
+          "w-full flex justify-between items-center gap-4 text-left px-[1.2rem] py-4 bg-card text-foreground text-[0.9rem] font-semibold cursor-pointer hover:bg-muted transition-colors",
+          className
+        )}
+        {...props}
+      >
+        {children}
+        <svg
+          className={cn("shrink-0 text-muted-foreground transition-transform duration-200", isOpen && "rotate-180")}
+          width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+    );
+  }
+);
+AccordionTrigger.displayName = "AccordionTrigger";
+
+const AccordionContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => {
+    const ctx = React.useContext(AccordionContext)!;
+    const value = React.useContext(ItemContext);
+    const isOpen = ctx.open.includes(value);
+    return (
+      <div
+        ref={ref}
+        className={cn("grid transition-[grid-template-rows] duration-200 ease-out", isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}
+        {...props}
+      >
+        <div className="overflow-hidden">
+          <div className={cn("px-[1.2rem] pb-[1.1rem] text-[0.85rem] text-muted-foreground", className)}>{children}</div>
+        </div>
+      </div>
+    );
+  }
+);
+AccordionContent.displayName = "AccordionContent";
+
+
+/* ===== dropdown-menu.tsx ===== */
+
+interface MenuCtx {
+  open: boolean;
+  setOpen: (v: boolean) => void;
+}
+const MenuContext = React.createContext<MenuCtx | null>(null);
+
+function DropdownMenu({ children, className }: { children: React.ReactNode; className?: string }) {
+  const [open, setOpen] = React.useState(false);
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!open) return;
+    const onDoc = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onEsc = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    document.addEventListener("mousedown", onDoc);
+    document.addEventListener("keydown", onEsc);
+    return () => {
+      document.removeEventListener("mousedown", onDoc);
+      document.removeEventListener("keydown", onEsc);
+    };
+  }, [open]);
+
+  return (
+    <MenuContext.Provider value={{ open, setOpen }}>
+      <div ref={ref} className={cn("relative inline-block", className)}>
+        {children}
+      </div>
+    </MenuContext.Provider>
+  );
+}
+
+const DropdownMenuTrigger = React.forwardRef<
+  HTMLButtonElement,
+  React.ButtonHTMLAttributes<HTMLButtonElement> & { asChild?: boolean }
+>(({ onClick, ...props }, ref) => {
+  const ctx = React.useContext(MenuContext)!;
+  return (
+    <button
+      ref={ref}
+      type="button"
+      aria-haspopup="menu"
+      aria-expanded={ctx.open}
+      onClick={(e) => {
+        ctx.setOpen(!ctx.open);
+        onClick?.(e);
+      }}
+      {...props}
+    />
+  );
+});
+DropdownMenuTrigger.displayName = "DropdownMenuTrigger";
+
+interface DropdownMenuContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  align?: "start" | "end";
+}
+
+function DropdownMenuContent({ className, align = "start", children, ...props }: DropdownMenuContentProps) {
+  const ctx = React.useContext(MenuContext)!;
+  if (!ctx.open) return null;
+  return (
+    <div
+      role="menu"
+      className={cn(
+        "absolute top-[calc(100%+6px)] z-40 min-w-[200px] p-1.5 rounded-kj-md bg-surface border border-border shadow-kj-lg",
+        "animate-[kjpop_.12s_ease]",
+        align === "end" ? "right-0" : "left-0",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
+
+interface DropdownMenuItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  danger?: boolean;
+  icon?: React.ReactNode;
+}
+
+const DropdownMenuItem = React.forwardRef<HTMLButtonElement, DropdownMenuItemProps>(
+  ({ className, danger, icon, children, onClick, ...props }, ref) => {
+    const ctx = React.useContext(MenuContext)!;
+    return (
+      <button
+        ref={ref}
+        type="button"
+        role="menuitem"
+        onClick={(e) => {
+          onClick?.(e);
+          ctx.setOpen(false);
+        }}
+        className={cn(
+          "w-full flex items-center gap-2.5 text-left px-2.5 py-2 rounded-kj-sm text-[0.85rem] cursor-pointer transition-colors",
+          "[&_svg]:h-4 [&_svg]:w-4",
+          danger ? "text-danger hover:bg-danger-surface" : "text-foreground hover:bg-muted",
+          className
+        )}
+        {...props}
+      >
+        {icon}
+        {children}
+      </button>
+    );
+  }
+);
+DropdownMenuItem.displayName = "DropdownMenuItem";
+
+function DropdownMenuSeparator({ className }: { className?: string }) {
+  return <div className={cn("h-px bg-border my-1.5", className)} role="separator" />;
+}
+
+
+/* ===== breadcrumb.tsx ===== */
+
+const Breadcrumb = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
+  ({ className, children, ...props }, ref) => (
+    <nav ref={ref} aria-label="Breadcrumb" className={cn("flex items-center gap-1.5 text-[0.85rem] text-muted-foreground", className)} {...props}>
+      {children}
+    </nav>
+  )
+);
+Breadcrumb.displayName = "Breadcrumb";
+
+interface BreadcrumbItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  /** Marks the trailing current page (non-link, emphasized). */
+  current?: boolean;
+}
+
+const BreadcrumbItem = React.forwardRef<HTMLAnchorElement, BreadcrumbItemProps>(
+  ({ className, current, children, ...props }, ref) => {
+    if (current) {
+      return (
+        <span aria-current="page" className={cn("text-foreground font-semibold", className)}>
+          {children}
+        </span>
+      );
+    }
+    return (
+      <a ref={ref} className={cn("text-inherit no-underline hover:text-foreground transition-colors", className)} {...props}>
+        {children}
+      </a>
+    );
+  }
+);
+BreadcrumbItem.displayName = "BreadcrumbItem";
+
+function BreadcrumbSeparator() {
+  return <span aria-hidden className="text-muted-foreground/70">/</span>;
+}
+
+
+/* ===== pagination.tsx ===== */
+
+interface PaginationProps {
+  page: number;
+  pageCount: number;
+  onPageChange: (page: number) => void;
+  /** How many numbered buttons to show around the edges. Default 5. */
+  siblingCount?: number;
+  className?: string;
+}
+
+function range(start: number, end: number) {
+  return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+}
+
+/** Builds a compact page list with ellipses, e.g. [1,2,3,'…',9]. */
+function paginate(page: number, pageCount: number): (number | "…")[] {
+  if (pageCount <= 7) return range(1, pageCount);
+  const left = Math.max(2, page - 1);
+  const right = Math.min(pageCount - 1, page + 1);
+  const items: (number | "…")[] = [1];
+  if (left > 2) items.push("…");
+  items.push(...range(left, right));
+  if (right < pageCount - 1) items.push("…");
+  items.push(pageCount);
+  return items;
+}
+
+const Chevron = ({ dir }: { dir: "left" | "right" }) => (
+  <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+    <polyline points={dir === "left" ? "15 18 9 12 15 6" : "9 18 15 12 9 6"} />
+  </svg>
+);
+
+function Pagination({ page, pageCount, onPageChange, className }: PaginationProps) {
+  const items = paginate(page, pageCount);
+  return (
+    <nav aria-label="Paginacja" className={cn("flex items-center gap-1", className)}>
+      <Button variant="ghost" size="icon-sm" aria-label="Previous" disabled={page <= 1} onClick={() => onPageChange(page - 1)}>
+        <Chevron dir="left" />
+      </Button>
+      {items.map((it, i) =>
+        it === "…" ? (
+          <span key={`e${i}`} className="px-1 text-muted-foreground select-none">…</span>
+        ) : (
+          <Button
+            key={it}
+            variant={it === page ? "primary" : "ghost"}
+            size="icon-sm"
+            aria-current={it === page ? "page" : undefined}
+            onClick={() => onPageChange(it)}
+          >
+            {it}
+          </Button>
+        )
+      )}
+      <Button variant="ghost" size="icon-sm" aria-label="Next" disabled={page >= pageCount} onClick={() => onPageChange(page + 1)}>
+        <Chevron dir="right" />
+      </Button>
+    </nav>
+  );
+}
+
+
+/* ===== table.tsx ===== */
+
+/** Rounded, bordered wrapper around a <Table>. */
+const TableWrap = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("border border-border rounded-kj-lg overflow-hidden", className)} {...props} />
+  )
+);
+TableWrap.displayName = "TableWrap";
+
+const Table = React.forwardRef<HTMLTableElement, React.TableHTMLAttributes<HTMLTableElement>>(
+  ({ className, ...props }, ref) => (
+    <table ref={ref} className={cn("w-full border-collapse text-[0.85rem]", className)} {...props} />
+  )
+);
+Table.displayName = "Table";
+
+const TableHeader = React.forwardRef<HTMLTableSectionElement, React.HTMLAttributes<HTMLTableSectionElement>>(
+  ({ className, ...props }, ref) => <thead ref={ref} className={className} {...props} />
+);
+TableHeader.displayName = "TableHeader";
+
+const TableBody = React.forwardRef<HTMLTableSectionElement, React.HTMLAttributes<HTMLTableSectionElement>>(
+  ({ className, ...props }, ref) => <tbody ref={ref} className={className} {...props} />
+);
+TableBody.displayName = "TableBody";
+
+const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTMLTableRowElement>>(
+  ({ className, ...props }, ref) => (
+    <tr ref={ref} className={cn("transition-colors hover:bg-muted/50", className)} {...props} />
+  )
+);
+TableRow.displayName = "TableRow";
+
+interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
+  /** Right-align with tabular numerals. */
+  numeric?: boolean;
+}
+
+const TableHead = React.forwardRef<HTMLTableCellElement, TableCellProps>(
+  ({ className, numeric, ...props }, ref) => (
+    <th
+      ref={ref}
+      className={cn(
+        "px-4 py-3 bg-muted border-b border-border text-[0.72rem] font-semibold uppercase tracking-[0.05em] text-muted-foreground",
+        numeric ? "text-right" : "text-left",
+        className
+      )}
+      {...props}
+    />
+  )
+);
+TableHead.displayName = "TableHead";
+
+const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
+  ({ className, numeric, ...props }, ref) => (
+    <td
+      ref={ref}
+      className={cn(
+        "px-4 py-3 border-b border-border [tr:last-child_&]:border-b-0",
+        numeric && "text-right tabular-nums",
+        className
+      )}
+      {...props}
+    />
+  )
+);
+TableCell.displayName = "TableCell";
+
+
+/* ===== tooltip.tsx ===== */
+
+interface TooltipProps {
+  content: React.ReactNode;
+  children: React.ReactNode;
+  className?: string;
+}
+
+/** CSS-only hover/focus tooltip positioned above the trigger. */
+function Tooltip({ content, children, className }: TooltipProps) {
+  return (
+    <span className={cn("relative inline-flex group", className)} tabIndex={0}>
+      {children}
+      <span
+        role="tooltip"
+        className={cn(
+          "pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2 translate-y-1 whitespace-nowrap",
+          "rounded-kj-sm bg-foreground text-background text-xs font-medium px-2.5 py-1.5 shadow-kj-md",
+          "opacity-0 transition-all duration-150 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0",
+          "after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-[5px] after:border-transparent after:border-t-foreground"
+        )}
+      >
+        {content}
+      </span>
+    </span>
+  );
+}
+
+
+/* ===== modal.tsx ===== */
+
+interface ModalProps {
+  open: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  /** Max width of the panel. Default 440px. */
+  width?: number;
+  className?: string;
+}
+
+/** Centered overlay dialog. Closes on backdrop click and Escape. */
+function Modal({ open, onClose, children, width = 440, className }: ModalProps) {
+  React.useEffect(() => {
+    if (!open) return;
+    const onEsc = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    document.addEventListener("keydown", onEsc);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onEsc);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
+
+  return (
+    <div
+      onClick={(e) => e.target === e.currentTarget && onClose()}
+      className={cn(
+        "fixed inset-0 z-[100] grid place-items-center p-6 backdrop-blur-[3px] transition-opacity duration-200",
+        "bg-[color-mix(in_oklch,#09090b_55%,transparent)]",
+        open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+      )}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        style={{ maxWidth: width }}
+        className={cn(
+          "w-full p-7 rounded-kj-2xl bg-surface border border-border shadow-kj-lg transition-transform duration-200",
+          open ? "scale-100 translate-y-0" : "scale-95 translate-y-2",
+          className
+        )}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function ModalTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+  return <h3 className={cn("m-0 mb-2 text-[1.15rem] font-bold tracking-[-0.01em]", className)} {...props} />;
+}
+
+function ModalDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+  return <p className={cn("m-0 text-[0.9rem] text-muted-foreground", className)} {...props} />;
+}
+
+function ModalActions({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("flex gap-2.5 justify-end mt-6", className)} {...props} />;
+}
+
+
+/* ===== toast.tsx ===== */
+
+type ToastTone = "default" | "success" | "danger";
+interface ToastOptions {
+  message: React.ReactNode;
+  tone?: ToastTone;
+  /** Auto-dismiss after ms. Default 3200. Pass 0 to keep open. */
+  duration?: number;
+}
+interface ToastItem extends Required<Omit<ToastOptions, "duration">> {
+  id: number;
+  duration: number;
+  leaving?: boolean;
+}
+
+interface ToastCtx {
+  toast: (opts: ToastOptions) => void;
+}
+const ToastContext = React.createContext<ToastCtx | null>(null);
+
+function useToast() {
+  const ctx = React.useContext(ToastContext);
+  if (!ctx) throw new Error("useToast must be used within <ToastProvider>");
+  return ctx;
+}
+
+const icons: Record<ToastTone, React.ReactNode> = {
+  default: (
+    <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-primary"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg>
+  ),
+  success: (
+    <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-success"><path d="M20 6 9 17l-5-5" /></svg>
+  ),
+  danger: (
+    <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-danger"><circle cx="12" cy="12" r="10" /><path d="m15 9-6 6M9 9l6 6" /></svg>
+  ),
+};
+
+const toneBorder: Record<ToastTone, string> = {
+  default: "border-l-primary",
+  success: "border-l-success",
+  danger: "border-l-danger",
+};
+
+function ToastProvider({ children }: { children: React.ReactNode }) {
+  const [items, setItems] = React.useState<ToastItem[]>([]);
+  const idRef = React.useRef(0);
+
+  const remove = React.useCallback((id: number) => {
+    setItems((prev) => prev.map((t) => (t.id === id ? { ...t, leaving: true } : t)));
+    setTimeout(() => setItems((prev) => prev.filter((t) => t.id !== id)), 250);
+  }, []);
+
+  const toast = React.useCallback(
+    ({ message, tone = "default", duration = 3200 }: ToastOptions) => {
+      const id = ++idRef.current;
+      setItems((prev) => [...prev, { id, message, tone, duration }]);
+      if (duration > 0) setTimeout(() => remove(id), duration);
+    },
+    [remove]
+  );
+
+  return (
+    <ToastContext.Provider value={{ toast }}>
+      {children}
+      <div className="fixed bottom-6 right-6 z-[200] flex flex-col gap-2.5">
+        {items.map((t) => (
+          <div
+            key={t.id}
+            role="status"
+            onClick={() => remove(t.id)}
+            className={cn(
+              "flex items-center gap-2.5 min-w-[280px] px-4 py-3 cursor-pointer",
+              "bg-surface border border-border border-l-[3px] rounded-kj-md shadow-kj-lg text-[0.85rem] font-medium",
+              toneBorder[t.tone],
+              t.leaving ? "animate-[kjtoastout_.25s_ease_forwards]" : "animate-[kjtoastin_.25s_ease]"
+            )}
+          >
+            <span className="grid place-items-center">{icons[t.tone]}</span>
+            <span>{t.message}</span>
+          </div>
+        ))}
+      </div>
+    </ToastContext.Provider>
+  );
+}
+
+
+
+/* ===== demo gallery ===== */
+/* Demo gallery — rendered with the REAL @kjaniec-dev/ui components.
+   Assembled into a standalone HTML so anyone can open & run it. */
+
+function Ico(p){ return <svg viewBox="0 0 24 24" width={p.s||18} height={p.s||18} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{p.children}</svg>; }
+const IcoPlus    = <Ico><path d="M5 12h14M12 5v14"/></Ico>;
+const IcoSearch  = <Ico><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></Ico>;
+const IcoGear    = <Ico><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></Ico>;
+const IcoInfo    = <Ico><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></Ico>;
+const IcoCheck   = <Ico><path d="M20 6 9 17l-5-5"/></Ico>;
+const IcoWarn    = <Ico><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></Ico>;
+const IcoX       = <Ico><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></Ico>;
+const IcoChev    = <Ico s={16}><polyline points="6 9 12 15 18 9"/></Ico>;
+const IcoEdit    = <Ico s={16}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4Z"/></Ico>;
+const IcoCopy    = <Ico s={16}><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></Ico>;
+const IcoTrash   = <Ico s={16}><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></Ico>;
+const IcoSun     = <Ico><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></Ico>;
+const IcoMoon    = <Ico><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></Ico>;
+
+function Sec(p){
+  return <section id={p.id} className="mb-14 scroll-mt-24">
+    <div className="mb-5">
+      <h2 className="m-0 text-2xl font-bold tracking-[-0.02em]">{p.title}</h2>
+      {p.desc && <p className="mt-1 text-sm text-muted-foreground max-w-[60ch]">{p.desc}</p>}
+    </div>
+    {p.children}
+  </section>;
+}
+function Box(p){ return <div className={cn("bg-card border border-border rounded-kj-xl p-7 shadow-kj-xs mb-5", p.className)}>{p.children}</div>; }
+function Sub(p){ return <p className="text-[0.72rem] uppercase tracking-[0.08em] font-semibold text-muted-foreground mb-3.5 mt-0">{p.children}</p>; }
+function Grid(p){ return <div className="grid gap-5" style={{gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))"}}>{p.children}</div>; }
+
+const NAV = [["buttons","Buttons"],["badges","Badges"],["feedback","Feedback"],["forms","Forms"],["selection","Selection"],["cards","Cards"],["navigation","Navigation"],["data","Table"],["overlays","Overlays"]];
+
+function Gallery(){
+  const { toast } = useToast();
+  const [dark,setDark] = React.useState(false);
+  const [tab,setTab] = React.useState("overview");
+  const [seg,setSeg] = React.useState("day");
+  const [page,setPage] = React.useState(1);
+  const [open,setOpen] = React.useState(false);
+  const [email,setEmail] = React.useState("");
+  const [loading,setLoading] = React.useState(false);
+  const [prog,setProg] = React.useState(42);
+  const emailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+
+  React.useEffect(()=>{ document.documentElement.classList.toggle("dark", dark); }, [dark]);
+  React.useEffect(()=>{ const t=setInterval(()=>setProg(p=>p>=94?22:p+18),1400); return ()=>clearInterval(t); }, []);
+
+  return <div className="grid min-h-screen" style={{gridTemplateColumns:"260px 1fr"}}>
+    {/* sidebar */}
+    <aside className="sticky top-0 self-start h-screen overflow-y-auto bg-surface border-r border-border p-6 max-[820px]:hidden">
+      <div className="flex items-center gap-2.5 px-2 pb-5">
+        <div className="grid place-items-center h-9 w-9 rounded-kj-md bg-primary text-primary-foreground font-bold font-mono shadow-kj-glow">KJ</div>
+        <div><div className="font-bold text-sm leading-tight">@kjaniec-dev/ui</div><div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.1.0</div></div>
+      </div>
+      <div className="text-[0.68rem] uppercase tracking-[0.09em] font-semibold text-muted-foreground px-3 pt-3 pb-1.5">Components</div>
+      <nav className="flex flex-col gap-0.5">
+        {NAV.map(([id,label])=>(
+          <a key={id} href={"#"+id} className="flex items-center gap-2.5 px-3 py-2 rounded-kj-sm text-muted-foreground hover:bg-muted hover:text-foreground text-sm font-medium no-underline transition-colors">
+            <span className="w-1.5 h-1.5 rounded-full bg-border"/>{label}
+          </a>
+        ))}
+      </nav>
+    </aside>
+
+    <div className="min-w-0">
+      {/* topbar */}
+      <header className="sticky top-0 z-30 flex items-center justify-between gap-4 px-8 max-[820px]:px-5 py-4 border-b border-border" style={{background:"color-mix(in oklch, var(--kj-background) 82%, transparent)", backdropFilter:"blur(12px)"}}>
+        <div className="text-[0.95rem] font-semibold">Component demo <span className="text-muted-foreground font-normal">· interactive</span></div>
+        <div className="flex items-center gap-2.5">
+          <Badge variant="primary" dot>24 components</Badge>
+          <Button variant="outline" size="icon" aria-label="Theme" onClick={()=>setDark(d=>!d)}>{dark?IcoSun:IcoMoon}</Button>
+        </div>
+      </header>
+
+      <main className="px-8 max-[820px]:px-5 py-10 max-w-[1040px]">
+
+        <Sec id="buttons" title="Buttons" desc="Five variants, three sizes, a loading state and icon buttons.">
+          <Box>
+            <Sub>Variants</Sub>
+            <div className="flex flex-wrap gap-3 items-center">
+              <Button>Primary</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="outline">Outline</Button>
+              <Button variant="ghost">Ghost</Button>
+              <Button variant="danger">Danger</Button>
+            </div>
+            <div className="h-px bg-border my-5"/>
+            <Sub>Sizes, icon and states</Sub>
+            <div className="flex flex-wrap gap-3 items-center">
+              <Button size="sm">Small</Button>
+              <Button>Medium</Button>
+              <Button size="lg">Large</Button>
+              <Button leadingIcon={IcoPlus}>New project</Button>
+              <Button variant="outline" size="icon" aria-label="Settings">{IcoGear}</Button>
+              <Button variant="secondary" loading={loading} onClick={()=>{setLoading(true);setTimeout(()=>setLoading(false),1600);}}>Save</Button>
+              <Button disabled>Disabled</Button>
+            </div>
+          </Box>
+        </Sec>
+
+        <Sec id="badges" title="Badges" desc="Status labels in soft and solid variants.">
+          <Box>
+            <div className="flex flex-wrap gap-3 items-center">
+              <Badge>Neutral</Badge>
+              <Badge variant="primary">Primary</Badge>
+              <Badge variant="success" dot>Active</Badge>
+              <Badge variant="warning" dot>Pending</Badge>
+              <Badge variant="danger" dot>Error</Badge>
+              <Badge variant="info">Info</Badge>
+              <Badge variant="solid">Solid</Badge>
+            </div>
+          </Box>
+        </Sec>
+
+        <Sec id="feedback" title="Feedback & progress" desc="Inline alerts, toasts and progress indicators.">
+          <Box>
+            <Sub>Alerts</Sub>
+            <div className="flex flex-col gap-4">
+              <Alert variant="info" icon={IcoInfo} title="New version available">Version 0.2.0 adds navigation components and charts.</Alert>
+              <Alert variant="success" icon={IcoCheck} title="Deployment complete">All tests passed and the build is live in production.</Alert>
+              <Alert variant="warning" icon={IcoWarn} title="Approaching your limit">You have used 86% of your file storage this month.</Alert>
+              <Alert variant="danger" icon={IcoX} title="Payment declined">Update your payment method to avoid an interruption.</Alert>
+            </div>
+          </Box>
+          <Grid>
+            <Box className="mb-0">
+              <Sub>Toasts</Sub>
+              <div className="flex flex-wrap gap-3">
+                <Button variant="outline" size="sm" onClick={()=>toast({message:"Changes saved."})}>Info</Button>
+                <Button variant="outline" size="sm" onClick={()=>toast({message:"Profile updated.",tone:"success"})}>Success</Button>
+                <Button variant="outline" size="sm" onClick={()=>toast({message:"Could not delete.",tone:"danger"})}>Error</Button>
+              </div>
+            </Box>
+            <Box className="mb-0">
+              <Sub>Progress & spinner</Sub>
+              <div className="flex flex-col gap-4">
+                <Progress value={prog}/>
+                <Progress value={68} tone="secondary"/>
+                <div className="flex items-center gap-3"><Spinner/><span className="text-sm text-muted-foreground">Loading data…</span></div>
+              </div>
+            </Box>
+          </Grid>
+        </Sec>
+
+        <Sec id="forms" title="Forms" desc="Fields with labels, leading icons, selects, textareas and live validation.">
+          <Box>
+            <div className="grid gap-5" style={{gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))"}}>
+              <Field><Label required>Full name</Label><Input placeholder="Jane Doe"/><Hint>This is how your team will see you.</Hint></Field>
+              <Field>
+                <Label required>E-mail</Label>
+                <Input type="email" placeholder="jane@company.com" value={email} error={email.length>0 && !emailOk} onChange={e=>setEmail(e.target.value)}/>
+                <Hint error={email.length>0 && !emailOk}>{!email ? "We'll use it to sign you in." : emailOk ? "Looks good ✓" : "Enter a valid email address."}</Hint>
+              </Field>
+              <Field><Label>Search</Label><Input leadingIcon={IcoSearch} placeholder="Search projects…"/></Field>
+              <Field><Label>Role</Label><Select><option>Administrator</option><option>Editor</option><option>View only</option></Select></Field>
+              <Field style={{gridColumn:"1/-1"}}><Label>Project description</Label><Textarea placeholder="What is this project about?"/></Field>
+              <Field><Label>Disabled field</Label><Input value="workspace-id-8842" disabled readOnly/></Field>
+              <Field><Label>Field with error</Label><Input value="not-ok" error readOnly/><Hint error>Only lowercase letters and hyphens are allowed.</Hint></Field>
+            </div>
+          </Box>
+        </Sec>
+
+        <Sec id="selection" title="Selection controls" desc="Checkboxes, radios, switches, a slider and a segmented control.">
+          <Grid>
+            <Box className="mb-0">
+              <Sub>Checkbox & radio</Sub>
+              <div className="flex flex-col gap-3">
+                <Checkbox defaultChecked label="Email notifications"/>
+                <Checkbox label="Weekly report"/>
+                <div className="h-px bg-border my-1"/>
+                <Radio name="plan" defaultChecked label="Monthly plan"/>
+                <Radio name="plan" label="Annual plan"/>
+              </div>
+            </Box>
+            <Box className="mb-0">
+              <Sub>Switches, slider, segments</Sub>
+              <div className="flex flex-col gap-4">
+                <Switch defaultChecked label="Dark mode for new users"/>
+                <Switch label="Automatic backups"/>
+                <Field><Label>Volume</Label><Slider min={0} max={100} defaultValue={65}/></Field>
+                <Segmented value={seg} onChange={setSeg} options={[{value:"day",label:"Day"},{value:"week",label:"Week"},{value:"month",label:"Month"}]}/>
+              </div>
+            </Box>
+          </Grid>
+        </Sec>
+
+        <Sec id="cards" title="Cards & stats" desc="Cards with content and footer, with an image, and metric cards.">
+          <Grid>
+            <Card>
+              <CardHeader>
+                <div><Badge variant="primary">Pro</Badge></div>
+                <CardTitle>Team Workspace</CardTitle>
+                <CardDescription>Unlimited projects, roles and activity history for your whole team.</CardDescription>
+              </CardHeader>
+              <CardFooter><Button size="sm">Choose plan</Button><Button size="sm" variant="ghost">Details</Button></CardFooter>
+            </Card>
+            <Card elevated>
+              <div className="h-[140px] grid place-items-center text-muted-foreground font-mono text-[0.72rem] tracking-wide" style={{background:"var(--kj-muted)"}}>cover image · 16:9</div>
+              <CardContent className="pt-[1.35rem]">
+                <CardTitle>Q3 Quarterly Report</CardTitle>
+                <CardDescription>A summary of results and key product metrics.</CardDescription>
+                <div className="flex items-center gap-3 mt-4">
+                  <AvatarGroup><Avatar size="sm">AK</Avatar><Avatar size="sm" tone="primary">MR</Avatar><Avatar size="sm" tone="info">JN</Avatar></AvatarGroup>
+                  <span className="text-sm text-muted-foreground">+5 contributors</span>
+                </div>
+              </CardContent>
+            </Card>
+          </Grid>
+          <div className="grid gap-5 mt-1" style={{gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))"}}>
+            <Stat label="MRR" value="$128.4k" delta="12.3% MoM" trend="up"/>
+            <Stat label="Active users" value="8,942" delta="4.1% MoM" trend="up"/>
+            <Stat label="Churn" value="2.8%" delta="0.6% MoM" trend="down"/>
+          </div>
+        </Sec>
+
+        <Sec id="navigation" title="Navigation" desc="Tabs, dropdown menus, accordion, breadcrumbs and pagination.">
+          <Grid>
+            <Box className="mb-0">
+              <Sub>Tabs</Sub>
+              <Tabs value={tab} onValueChange={setTab}>
+                <TabsList><TabsTrigger value="overview">Overview</TabsTrigger><TabsTrigger value="activity">Activity</TabsTrigger><TabsTrigger value="settings">Settings</TabsTrigger></TabsList>
+                <TabsContent value="overview">A dashboard with key metrics and quick actions.</TabsContent>
+                <TabsContent value="activity">An event timeline: sign-ins, edits and team comments.</TabsContent>
+                <TabsContent value="settings">Workspace preferences, permissions and integrations.</TabsContent>
+              </Tabs>
+            </Box>
+            <Box className="mb-0">
+              <Sub>Dropdown menu</Sub>
+              <DropdownMenu>
+                <DropdownMenuTrigger className={cn(buttonVariants({variant:"outline"}))}>Actions {IcoChev}</DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem icon={IcoEdit}>Edit</DropdownMenuItem>
+                  <DropdownMenuItem icon={IcoCopy}>Duplicate</DropdownMenuItem>
+                  <DropdownMenuSeparator/>
+                  <DropdownMenuItem danger icon={IcoTrash}>Delete</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </Box>
+          </Grid>
+          <Sub>Accordion</Sub>
+          <Accordion type="single" defaultValue={["a"]} className="mb-5">
+            <AccordionItem value="a"><AccordionTrigger>How does billing work?</AccordionTrigger><AccordionContent>Billed monthly or annually. The annual plan includes two months free.</AccordionContent></AccordionItem>
+            <AccordionItem value="b"><AccordionTrigger>Can I change my plan later?</AccordionTrigger><AccordionContent>Yes, at any time. The difference is prorated.</AccordionContent></AccordionItem>
+            <AccordionItem value="c"><AccordionTrigger>What payment methods are supported?</AccordionTrigger><AccordionContent>Visa, Mastercard and Apple Pay.</AccordionContent></AccordionItem>
+          </Accordion>
+          <div className="flex items-center justify-between flex-wrap gap-3">
+            <Breadcrumb>
+              <BreadcrumbItem href="#">Workspace</BreadcrumbItem><BreadcrumbSeparator/>
+              <BreadcrumbItem href="#">Projects</BreadcrumbItem><BreadcrumbSeparator/>
+              <BreadcrumbItem current>Q3 Launch</BreadcrumbItem>
+            </Breadcrumb>
+            <Pagination page={page} pageCount={9} onPageChange={setPage}/>
+          </div>
+        </Sec>
+
+        <Sec id="data" title="Table & data" desc="A table with statuses, avatars and aligned numbers.">
+          <TableWrap>
+            <Table>
+              <TableHeader><TableRow><TableHead>User</TableHead><TableHead>Role</TableHead><TableHead>Status</TableHead><TableHead numeric>Projects</TableHead></TableRow></TableHeader>
+              <TableBody>
+                <TableRow><TableCell><div className="flex items-center gap-2.5"><Avatar size="sm" tone="primary">AK</Avatar>Anna Kowalski</div></TableCell><TableCell>Administrator</TableCell><TableCell><Badge variant="success" dot>Active</Badge></TableCell><TableCell numeric>24</TableCell></TableRow>
+                <TableRow><TableCell><div className="flex items-center gap-2.5"><Avatar size="sm">MR</Avatar>Michael Rutkowski</div></TableCell><TableCell>Editor</TableCell><TableCell><Badge variant="warning" dot>Invited</Badge></TableCell><TableCell numeric>12</TableCell></TableRow>
+                <TableRow><TableCell><div className="flex items-center gap-2.5"><Avatar size="sm" tone="info">JN</Avatar>Julia Nowak</div></TableCell><TableCell>Viewer</TableCell><TableCell><Badge>Inactive</Badge></TableCell><TableCell numeric>3</TableCell></TableRow>
+              </TableBody>
+            </Table>
+          </TableWrap>
+        </Sec>
+
+        <Sec id="overlays" title="Overlays" desc="Modal and tooltips.">
+          <Box>
+            <div className="flex flex-wrap gap-3 items-center">
+              <Button onClick={()=>setOpen(true)}>Open modal</Button>
+              <Tooltip content="Contextual tooltip"><Button variant="outline">Hover — top</Button></Tooltip>
+            </div>
+          </Box>
+        </Sec>
+
+        <footer className="text-[0.8rem] text-muted-foreground pt-8 mt-4 border-t border-border">
+          Real components from <span className="font-mono">@kjaniec-dev/ui</span>, styled with tokens from <span className="font-mono">@kjaniec-dev/design</span>. The same code ships in the repo.
+        </footer>
+      </main>
+    </div>
+
+    <Modal open={open} onClose={()=>setOpen(false)}>
+      <ModalTitle>Delete project “Q3 Launch”?</ModalTitle>
+      <ModalDescription>This action cannot be undone. All files and activity history will be permanently deleted.</ModalDescription>
+      <ModalActions>
+        <Button variant="ghost" onClick={()=>setOpen(false)}>Cancel</Button>
+        <Button variant="danger" onClick={()=>{setOpen(false);toast({message:"Project deleted.",tone:"danger"});}}>Delete project</Button>
+      </ModalActions>
+    </Modal>
+  </div>;
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <ToastProvider><Gallery/></ToastProvider>
+);
+
+</script>
+</body>
+</html>
