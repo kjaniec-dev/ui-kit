@@ -1,48 +1,110 @@
 # KJ Product Kit
 
-My product UI kit for building consistent KJ apps.
+Design tokens and React component library for building consistent KJ apps.
 
-This repository is the source of truth for design tokens, theme styles,
-Tailwind integration, reusable UI patterns, and documentation for agents.
+## Packages
 
-## Structure
+| Package | Description |
+|---|---|
+| [`@kjaniec-dev/design`](./packages/design) | Design tokens, CSS variables, Tailwind v4 theme |
+| [`@kjaniec-dev/ui`](./packages/ui) | React component library built on the token system |
 
-```txt
-tokens/kj.tokens.json
-packages/design/src/theme.css
-packages/design/src/tailwind.css
-docs/DESIGN.md
+## Repo structure
+
+```
+packages/
+  design/       ← tokens only, no build step
+    theme.css       CSS custom properties (--kj-*)
+    tailwind.css    Tailwind v4 @theme bridge
+    tokens.json     Raw token values
+  ui/           ← React components
+    src/components/ All components + Storybook stories
+    src/index.ts    Barrel export
+    tsup.config.ts  Builds ESM + CJS + .d.ts into dist/
+site/           ← Interactive component gallery (single HTML, no build)
+docs/           ← Design guidelines
 ```
 
-## What is included
+## Local development
 
-- design tokens in JSON
-- CSS variables for the theme
-- Tailwind v4 bridge
-- design guidelines in `docs/DESIGN.md`
-- a base for future React UI components and playground examples
-
-## How to use
-
-In a Next.js app:
-
-```tsx
-import "@kj/design/theme.css"
+```bash
+npm install
 ```
 
-Or with Tailwind v4:
+**Component gallery** (no build needed — just open):
+```bash
+npx serve site        # → http://localhost:3000
+```
 
+**Storybook** (live component dev):
+```bash
+npm run storybook     # → http://localhost:6006
+```
+
+## Using in a project
+
+```bash
+npm install @kjaniec-dev/ui @kjaniec-dev/design
+```
+
+Root CSS (import order matters):
 ```css
-@import "@kj/design/tailwind.css";
+@import "tailwindcss";
+@import "@kjaniec-dev/design/tailwind.css";
+@import "@kjaniec-dev/ui/ui.css";
 ```
 
-Example:
-
+Components:
 ```tsx
-<div className="rounded-kj-2xl border border-border bg-card p-6 text-card-foreground shadow-kj-sm">
-  <button className="rounded-kj-lg bg-primary px-4 py-2 text-primary-foreground">
-    Save
-  </button>
-</div>
+import { Button, Badge, Card, toast } from "@kjaniec-dev/ui";
+
+export default function App() {
+  return (
+    <Card>
+      <Button onClick={() => toast({ message: "Saved!", tone: "success" })}>
+        Save
+      </Button>
+    </Card>
+  );
+}
 ```
 
+Tailwind utilities (`bg-primary`, `text-muted-foreground`, `rounded-kj-md`, `shadow-kj-sm`, …) are registered automatically via the `@theme` block in `tailwind.css`.
+
+## Publishing to npm
+
+```bash
+npm login
+
+# design package (no build needed)
+cd packages/design && npm publish
+
+# ui package (auto-builds via prepublishOnly)
+cd packages/ui && npm publish
+```
+
+See [PUBLISHING.md](./PUBLISHING.md) for the full step-by-step guide.
+
+## Chromatic (Storybook hosting)
+
+Set your token in `.env.local` (gitignored):
+```
+CHROMATIC_PROJECT_TOKEN=chpt_xxxx
+```
+
+Publish:
+```bash
+source .env.local && npm run chromatic --workspace @kjaniec-dev/ui
+```
+
+## Deploy gallery to Netlify
+
+The `site/` folder is a self-contained HTML file — no build step needed.
+
+```bash
+npm install -g netlify-cli
+netlify login
+netlify deploy --prod     # netlify.toml points publish = "site"
+```
+
+Or drag the `site/` folder onto [app.netlify.com](https://app.netlify.com).
