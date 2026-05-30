@@ -1,6 +1,6 @@
 {
   "name": "kj-product-kit-starter",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "description": "Starter tokens and theme for KJ Product Kit.",
   "workspaces": [
@@ -10,6 +10,7 @@
     "tokens:check": "node -e \"JSON.parse(require('fs').readFileSync('./packages/design/tokens.json','utf8')); console.log('Tokens OK')\"",
     "storybook": "npm run storybook --workspace @kjaniec-dev/ui",
     "build-storybook": "npm run build-storybook --workspace @kjaniec-dev/ui",
-    "build": "npm run build --workspace @kjaniec-dev/ui"
+    "build": "npm run build --workspace @kjaniec-dev/ui",
+    "chromatic": "npx chromatic --project-token=chpt_c890705fb0281d6"
   }
 }
