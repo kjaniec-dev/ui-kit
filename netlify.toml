@@ -2,8 +2,8 @@
 # The site is a single self-contained HTML file (no build step) served from ./site.
 
 [build]
-  publish = "site"
-  command = ""
+  publish = "site/dist"
+  command = "npm run build"
 
 # Long-cache the fonts/CDN-less static asset; the HTML itself stays revalidated.
 [[headers]]

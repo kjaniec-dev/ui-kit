@@ -1,0 +1,72 @@
+
+> kj-product-kit-starter@0.2.0 build-storybook
+> npm run build-storybook --workspace @kjaniec-dev/ui --output-dir=/private/var/folders/qz/rhwwzdm93ng3c2cbbxjn52zr0000gn/T/chromatic--46672-HcWsoUOhnNfh
+
+
+> @kjaniec-dev/ui@0.2.0 build-storybook
+> storybook build
+
+[1m@storybook/core v8.6.18
+[22m
+info => Cleaning outputDir: [36mstorybook-static[39m
+info => Loading presets
+info => Building manager..
+info => Manager built ([38;2;181;126;229m136 ms[39m)
+info => Building preview..
+info Using tsconfig paths for react-docgen
+[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+[32m✓[39m 150 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mstorybook-static/[22m[32miframe.html                               [39m[1m[2m 17.72 kB[22m[1m[22m[2m │ gzip:   4.99 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[35mpreview-CnaqsF4A.css               [39m[1m[2m 40.03 kB[22m[1m[22m[2m │ gzip:   7.87 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mclient-C-JwFGHo.js                 [39m[1m[2m  0.09 kB[22m[1m[22m[2m │ gzip:   0.10 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mpreview-CvbIS5ZJ.js                [39m[1m[2m  0.18 kB[22m[1m[22m[2m │ gzip:   0.16 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36m_commonjsHelpers-Cpj98o6Y.js       [39m[1m[2m  0.24 kB[22m[1m[22m[2m │ gzip:   0.18 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mindex-DUy19JZU.js                  [39m[1m[2m  0.46 kB[22m[1m[22m[2m │ gzip:   0.30 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mchunk-XP5HYGXS-rhzvizV_.js         [39m[1m[2m  0.71 kB[22m[1m[22m[2m │ gzip:   0.40 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mpreview-DGUiP6tS.js                [39m[1m[2m  0.71 kB[22m[1m[22m[2m │ gzip:   0.50 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mindex-DrFu-skq.js                  [39m[1m[2m  0.77 kB[22m[1m[22m[2m │ gzip:   0.47 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mindex-B1xZ04RU.js                  [39m[1m[2m  0.79 kB[22m[1m[22m[2m │ gzip:   0.44 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mreact-18-2hQlJ01F.js               [39m[1m[2m  0.83 kB[22m[1m[22m[2m │ gzip:   0.49 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mpreview-BPfFgf-b.js                [39m[1m[2m  0.85 kB[22m[1m[22m[2m │ gzip:   0.56 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mjsx-runtime-BYYWji4R.js            [39m[1m[2m  0.92 kB[22m[1m[22m[2m │ gzip:   0.58 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mpreview-CwgXjtIp.js                [39m[1m[2m  0.94 kB[22m[1m[22m[2m │ gzip:   0.59 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mbadge-DTHUYoLH.js                  [39m[1m[2m  1.10 kB[22m[1m[22m[2m │ gzip:   0.61 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mavatar-CqNIZgmT.js                 [39m[1m[2m  1.68 kB[22m[1m[22m[2m │ gzip:   0.84 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mDocsRenderer-CFRXHY34-BAoVcfX4.js  [39m[1m[2m  1.98 kB[22m[1m[22m[2m │ gzip:   1.01 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mpreview-DXas8sea.js                [39m[1m[2m  2.22 kB[22m[1m[22m[2m │ gzip:   1.21 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mbadge.stories-B4spSc05.js          [39m[1m[2m  2.22 kB[22m[1m[22m[2m │ gzip:   0.87 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mbutton-CiAVWPYl.js                 [39m[1m[2m  2.27 kB[22m[1m[22m[2m │ gzip:   1.04 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mIntroduction-ik0fDH-8.js           [39m[1m[2m  3.26 kB[22m[1m[22m[2m │ gzip:   1.26 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mpreview-DD_OYowb.js                [39m[1m[2m  3.51 kB[22m[1m[22m[2m │ gzip:   1.69 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mbutton.stories-B5qIJeSI.js         [39m[1m[2m  3.62 kB[22m[1m[22m[2m │ gzip:   1.21 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36malert.stories-DLz_Rasz.js          [39m[1m[2m  3.62 kB[22m[1m[22m[2m │ gzip:   1.53 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mfeedback.stories-eb1Ok4MW.js       [39m[1m[2m  4.07 kB[22m[1m[22m[2m │ gzip:   1.57 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mpreview-B8lJiyuQ.js                [39m[1m[2m  5.06 kB[22m[1m[22m[2m │ gzip:   1.88 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mtable.stories-Ccwnb0GD.js          [39m[1m[2m  5.41 kB[22m[1m[22m[2m │ gzip:   1.52 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mcard.stories-DJcHhQZ0.js           [39m[1m[2m  7.14 kB[22m[1m[22m[2m │ gzip:   2.33 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mindex-ClcD9ViR.js                  [39m[1m[2m  7.18 kB[22m[1m[22m[2m │ gzip:   2.92 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mpreview-BWzBA1C2.js                [39m[1m[2m  7.62 kB[22m[1m[22m[2m │ gzip:   1.56 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mpreview-BBWR9nbA.js                [39m[1m[2m  8.12 kB[22m[1m[22m[2m │ gzip:   3.10 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36moverlays.stories-4d3QqQOT.js       [39m[1m[2m  8.31 kB[22m[1m[22m[2m │ gzip:   3.00 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36minput.stories-32o0DSSr.js          [39m[1m[2m  8.34 kB[22m[1m[22m[2m │ gzip:   2.80 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mselection.stories-QTpvOY5Q.js      [39m[1m[2m  8.56 kB[22m[1m[22m[2m │ gzip:   2.59 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mtest-utils-B7RDpIBK.js             [39m[1m[2m 12.99 kB[22m[1m[22m[2m │ gzip:   5.05 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mnavigation.stories-Cs1zncc6.js     [39m[1m[2m 15.75 kB[22m[1m[22m[2m │ gzip:   4.54 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mcn-BEhiKRD9.js                     [39m[1m[2m 20.33 kB[22m[1m[22m[2m │ gzip:   6.85 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mColor-YHDXOIA2-DYpTHO24.js         [39m[1m[2m 29.33 kB[22m[1m[22m[2m │ gzip:  11.04 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mmatchers-7Z3WT2CE-T3xScrR7.js      [39m[1m[2m 29.79 kB[22m[1m[22m[2m │ gzip:  10.30 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mentry-preview-CiQfGuaz.js          [39m[1m[2m 29.85 kB[22m[1m[22m[2m │ gzip:   9.56 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mindex-ClL5Gxbg.js                  [39m[1m[2m 57.15 kB[22m[1m[22m[2m │ gzip:  16.30 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mindex-Brl4xq4Y.js                  [39m[1m[2m134.00 kB[22m[1m[22m[2m │ gzip:  43.17 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36miframe-DmBC6to-.js                 [39m[1m[2m209.97 kB[22m[1m[22m[2m │ gzip:  72.21 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mentry-preview-docs-Bi-5Soem.js     [39m[1m[2m244.71 kB[22m[1m[22m[2m │ gzip:  73.44 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36maxe-D15F9W8j.js                    [39m[1m[33m583.86 kB[39m[22m[2m │ gzip: 160.85 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mpreview-CfRjIl94.js                [39m[1m[33m660.64 kB[39m[22m[2m │ gzip: 156.57 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mindex-DeN4tkzB.js                  [39m[1m[33m662.40 kB[39m[22m[2m │ gzip: 157.06 kB[22m
+[2mstorybook-static/[22m[2massets/[22m[36mindex-Bd48-fN3.js                  [39m[1m[33m882.54 kB[39m[22m[2m │ gzip: 275.22 kB[22m
+[32m✓ built in 3.53s[39m
+info => Preview built ([38;2;181;126;229m6.12 s[39m)
+info => Output directory: /Users/kjaniec-dev/dev/projects/kj-product-kit-starter/packages/ui/storybook-static

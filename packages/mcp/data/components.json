@@ -1,0 +1,1990 @@
+[
+  {
+    "name": "Button",
+    "importPath": "import { Button } from \"@kjaniec-dev/ui\";",
+    "description": "React component Button.",
+    "props": [
+      {
+        "name": "loading",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Shows a spinner and disables interaction."
+      },
+      {
+        "name": "leadingIcon",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Icon rendered before the label."
+      },
+      {
+        "name": "trailingIcon",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Icon rendered after the label."
+      },
+      {
+        "name": "variant",
+        "type": "\"primary\" | \"secondary\" | \"outline\" | \"ghost\" | \"danger\"",
+        "optional": true,
+        "defaultValue": "\"primary\"",
+        "description": "Style variant of the component: variant."
+      },
+      {
+        "name": "size",
+        "type": "\"sm\" | \"md\" | \"lg\" | \"icon\" | \"icon-sm\"",
+        "optional": true,
+        "defaultValue": "\"md\"",
+        "description": "Style variant of the component: size."
+      }
+    ],
+    "cva": {
+      "variants": {
+        "variant": [
+          "primary",
+          "secondary",
+          "outline",
+          "ghost",
+          "danger"
+        ],
+        "size": [
+          "sm",
+          "md",
+          "lg",
+          "icon",
+          "icon-sm"
+        ]
+      },
+      "defaultVariants": {
+        "variant": "primary",
+        "size": "md"
+      }
+    },
+    "usageSnippet": "<Button variant=\"primary\">Primary</Button>"
+  },
+  {
+    "name": "ButtonProps",
+    "importPath": "import { ButtonProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component ButtonProps.",
+    "props": [
+      {
+        "name": "loading",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Shows a spinner and disables interaction."
+      },
+      {
+        "name": "leadingIcon",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Icon rendered before the label."
+      },
+      {
+        "name": "trailingIcon",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Icon rendered after the label."
+      },
+      {
+        "name": "variant",
+        "type": "\"primary\" | \"secondary\" | \"outline\" | \"ghost\" | \"danger\"",
+        "optional": true,
+        "defaultValue": "\"primary\"",
+        "description": "Style variant of the component: variant."
+      },
+      {
+        "name": "size",
+        "type": "\"sm\" | \"md\" | \"lg\" | \"icon\" | \"icon-sm\"",
+        "optional": true,
+        "defaultValue": "\"md\"",
+        "description": "Style variant of the component: size."
+      }
+    ],
+    "cva": {
+      "variants": {
+        "variant": [
+          "primary",
+          "secondary",
+          "outline",
+          "ghost",
+          "danger"
+        ],
+        "size": [
+          "sm",
+          "md",
+          "lg",
+          "icon",
+          "icon-sm"
+        ]
+      },
+      "defaultVariants": {
+        "variant": "primary",
+        "size": "md"
+      }
+    },
+    "usageSnippet": "<ButtonProps>\n  <!-- Content -->\n</ButtonProps>"
+  },
+  {
+    "name": "Badge",
+    "importPath": "import { Badge } from \"@kjaniec-dev/ui\";",
+    "description": "React component Badge.",
+    "props": [
+      {
+        "name": "dot",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Render a leading status dot."
+      },
+      {
+        "name": "variant",
+        "type": "\"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\" | \"danger\" | \"info\" | \"solid\"",
+        "optional": true,
+        "defaultValue": "\"neutral\"",
+        "description": "Style variant of the component: variant."
+      }
+    ],
+    "cva": {
+      "variants": {
+        "variant": [
+          "neutral",
+          "primary",
+          "secondary",
+          "success",
+          "warning",
+          "danger",
+          "info",
+          "solid"
+        ]
+      },
+      "defaultVariants": {
+        "variant": "neutral"
+      }
+    },
+    "usageSnippet": "<Badge variant=\"neutral\">Neutral</Badge>"
+  },
+  {
+    "name": "BadgeProps",
+    "importPath": "import { BadgeProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component BadgeProps.",
+    "props": [
+      {
+        "name": "dot",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Render a leading status dot."
+      },
+      {
+        "name": "variant",
+        "type": "\"neutral\" | \"primary\" | \"secondary\" | \"success\" | \"warning\" | \"danger\" | \"info\" | \"solid\"",
+        "optional": true,
+        "defaultValue": "\"neutral\"",
+        "description": "Style variant of the component: variant."
+      }
+    ],
+    "cva": {
+      "variants": {
+        "variant": [
+          "neutral",
+          "primary",
+          "secondary",
+          "success",
+          "warning",
+          "danger",
+          "info",
+          "solid"
+        ]
+      },
+      "defaultVariants": {
+        "variant": "neutral"
+      }
+    },
+    "usageSnippet": "<BadgeProps>\n  <!-- Content -->\n</BadgeProps>"
+  },
+  {
+    "name": "Alert",
+    "importPath": "import { Alert } from \"@kjaniec-dev/ui\";",
+    "description": "React component Alert.",
+    "props": [
+      {
+        "name": "icon",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Optional leading icon (e.g. an SVG). Inherits the variant color."
+      },
+      {
+        "name": "title",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "variant",
+        "type": "\"info\" | \"success\" | \"warning\" | \"danger\"",
+        "optional": true,
+        "defaultValue": "\"info\"",
+        "description": "Style variant of the component: variant."
+      }
+    ],
+    "cva": {
+      "variants": {
+        "variant": [
+          "info",
+          "success",
+          "warning",
+          "danger"
+        ]
+      },
+      "defaultVariants": {
+        "variant": "info"
+      }
+    },
+    "usageSnippet": "<Alert variant=\"info\" icon={InfoIcon} title=\"Information\">A short informational message for the user.</Alert>"
+  },
+  {
+    "name": "AlertProps",
+    "importPath": "import { AlertProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component AlertProps.",
+    "props": [
+      {
+        "name": "icon",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Optional leading icon (e.g. an SVG). Inherits the variant color."
+      },
+      {
+        "name": "title",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "variant",
+        "type": "\"info\" | \"success\" | \"warning\" | \"danger\"",
+        "optional": true,
+        "defaultValue": "\"info\"",
+        "description": "Style variant of the component: variant."
+      }
+    ],
+    "cva": {
+      "variants": {
+        "variant": [
+          "info",
+          "success",
+          "warning",
+          "danger"
+        ]
+      },
+      "defaultVariants": {
+        "variant": "info"
+      }
+    },
+    "usageSnippet": "<AlertProps>\n  <!-- Content -->\n</AlertProps>"
+  },
+  {
+    "name": "Spinner",
+    "importPath": "import { Spinner } from \"@kjaniec-dev/ui\";",
+    "description": "React component Spinner.",
+    "props": [
+      {
+        "name": "size",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "24",
+        "description": "Diameter in px. Default 24."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Spinner size={18} />"
+  },
+  {
+    "name": "SpinnerProps",
+    "importPath": "import { SpinnerProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component SpinnerProps.",
+    "props": [
+      {
+        "name": "size",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "24",
+        "description": "Diameter in px. Default 24."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<SpinnerProps>\n  <!-- Content -->\n</SpinnerProps>"
+  },
+  {
+    "name": "Progress",
+    "importPath": "import { Progress } from \"@kjaniec-dev/ui\";",
+    "description": "React component Progress.",
+    "props": [
+      {
+        "name": "value",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "0",
+        "description": "0–100."
+      },
+      {
+        "name": "tone",
+        "type": "\"primary\" | \"secondary\"",
+        "optional": true,
+        "defaultValue": "\"primary\"",
+        "description": ""
+      },
+      {
+        "name": "barClassName",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Extra classes applied to the inner bar span — use for animation, transform-origin, etc."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Progress {...args} />"
+  },
+  {
+    "name": "ProgressProps",
+    "importPath": "import { ProgressProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component ProgressProps.",
+    "props": [
+      {
+        "name": "value",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "0",
+        "description": "0–100."
+      },
+      {
+        "name": "tone",
+        "type": "\"primary\" | \"secondary\"",
+        "optional": true,
+        "defaultValue": "\"primary\"",
+        "description": ""
+      },
+      {
+        "name": "barClassName",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Extra classes applied to the inner bar span — use for animation, transform-origin, etc."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ProgressProps>\n  <!-- Content -->\n</ProgressProps>"
+  },
+  {
+    "name": "Input",
+    "importPath": "import { Input } from \"@kjaniec-dev/ui\";",
+    "description": "React component Input.",
+    "props": [
+      {
+        "name": "error",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Visual error state (red border + ring)."
+      },
+      {
+        "name": "leadingIcon",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Icon shown inside the field, leading edge."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Input placeholder=\"Jane Doe\" />"
+  },
+  {
+    "name": "Textarea",
+    "importPath": "import { Textarea } from \"@kjaniec-dev/ui\";",
+    "description": "React component Textarea.",
+    "props": [
+      {
+        "name": "error",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Textarea placeholder=\"What is this project about?\" />"
+  },
+  {
+    "name": "InputProps",
+    "importPath": "import { InputProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component InputProps.",
+    "props": [
+      {
+        "name": "error",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Visual error state (red border + ring)."
+      },
+      {
+        "name": "leadingIcon",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Icon shown inside the field, leading edge."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<InputProps>\n  <!-- Content -->\n</InputProps>"
+  },
+  {
+    "name": "TextareaProps",
+    "importPath": "import { TextareaProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component TextareaProps.",
+    "props": [
+      {
+        "name": "error",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<TextareaProps>\n  <!-- Content -->\n</TextareaProps>"
+  },
+  {
+    "name": "Label",
+    "importPath": "import { Label } from \"@kjaniec-dev/ui\";",
+    "description": "React component Label.",
+    "props": [
+      {
+        "name": "required",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Append a red required marker."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Label required>Full name</Label>"
+  },
+  {
+    "name": "Hint",
+    "importPath": "import { Hint } from \"@kjaniec-dev/ui\";",
+    "description": "React component Hint.",
+    "props": [
+      {
+        "name": "error",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Hint>This is how your team will see you.</Hint>"
+  },
+  {
+    "name": "Field",
+    "importPath": "import { Field } from \"@kjaniec-dev/ui\";",
+    "description": "Vertical label + control + hint group.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<Field>\n      <Label required>Full name</Label>\n      <Input placeholder=\"Jane Doe\" />"
+  },
+  {
+    "name": "LabelProps",
+    "importPath": "import { LabelProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component LabelProps.",
+    "props": [
+      {
+        "name": "required",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Append a red required marker."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<LabelProps>\n  <!-- Content -->\n</LabelProps>"
+  },
+  {
+    "name": "HintProps",
+    "importPath": "import { HintProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component HintProps.",
+    "props": [
+      {
+        "name": "error",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<HintProps>\n  <!-- Content -->\n</HintProps>"
+  },
+  {
+    "name": "Select",
+    "importPath": "import { Select } from \"@kjaniec-dev/ui\";",
+    "description": "React component Select.",
+    "props": [
+      {
+        "name": "error",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Select>\n        <option>Administrator</option>\n        <option>Editor</option>\n        <option>View only</option>\n      </Select>"
+  },
+  {
+    "name": "SelectProps",
+    "importPath": "import { SelectProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component SelectProps.",
+    "props": [
+      {
+        "name": "error",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<SelectProps>\n  <!-- Content -->\n</SelectProps>"
+  },
+  {
+    "name": "Checkbox",
+    "importPath": "import { Checkbox } from \"@kjaniec-dev/ui\";",
+    "description": "React component Checkbox.",
+    "props": [
+      {
+        "name": "label",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Checkbox defaultChecked label=\"Email notifications\" />"
+  },
+  {
+    "name": "Radio",
+    "importPath": "import { Radio } from \"@kjaniec-dev/ui\";",
+    "description": "React component Radio.",
+    "props": [
+      {
+        "name": "label",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Radio name=\"plan\" defaultChecked label=\"Monthly plan\" />"
+  },
+  {
+    "name": "CheckboxProps",
+    "importPath": "import { CheckboxProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component CheckboxProps.",
+    "props": [
+      {
+        "name": "label",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<CheckboxProps>\n  <!-- Content -->\n</CheckboxProps>"
+  },
+  {
+    "name": "RadioProps",
+    "importPath": "import { RadioProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component RadioProps.",
+    "props": [
+      {
+        "name": "label",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<RadioProps>\n  <!-- Content -->\n</RadioProps>"
+  },
+  {
+    "name": "Switch",
+    "importPath": "import { Switch } from \"@kjaniec-dev/ui\";",
+    "description": "React component Switch.",
+    "props": [
+      {
+        "name": "label",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Switch defaultChecked label=\"Dark mode for new users\" />"
+  },
+  {
+    "name": "SwitchProps",
+    "importPath": "import { SwitchProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component SwitchProps.",
+    "props": [
+      {
+        "name": "label",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<SwitchProps>\n  <!-- Content -->\n</SwitchProps>"
+  },
+  {
+    "name": "Slider",
+    "importPath": "import { Slider } from \"@kjaniec-dev/ui\";",
+    "description": "Range slider styled with the kit's primary token. Thumb styling lives in a\nscoped <style> tag because pseudo-elements (::-webkit-slider-thumb) can't be\nexpressed as Tailwind utilities.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<Slider min={0} max={100} value={v} onChange={(e) => setV(Number(e.target.value))} />"
+  },
+  {
+    "name": "SliderProps",
+    "importPath": "import { SliderProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component SliderProps.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<SliderProps>\n  <!-- Content -->\n</SliderProps>"
+  },
+  {
+    "name": "Segmented",
+    "importPath": "import { Segmented } from \"@kjaniec-dev/ui\";",
+    "description": "Segmented control / single-select toggle group. Controlled.",
+    "props": [
+      {
+        "name": "options",
+        "type": "SegmentedOption<T>[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "value",
+        "type": "T",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onChange",
+        "type": "(value: T) => void",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "\"aria-label\"",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Segmented\n        value={v}\n        onChange={setV}\n        options={[\n          { value: \"day\", label: \"Day\" },\n          { value: \"week\", label: \"Week\" },\n          { value: \"month\", label: \"Month\" },\n        ]}\n      />"
+  },
+  {
+    "name": "SegmentedProps",
+    "importPath": "import { SegmentedProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component SegmentedProps.",
+    "props": [
+      {
+        "name": "options",
+        "type": "SegmentedOption<T>[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "value",
+        "type": "T",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onChange",
+        "type": "(value: T) => void",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "\"aria-label\"",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<SegmentedProps>\n  <!-- Content -->\n</SegmentedProps>"
+  },
+  {
+    "name": "SegmentedOption",
+    "importPath": "import { SegmentedOption } from \"@kjaniec-dev/ui\";",
+    "description": "React component SegmentedOption.",
+    "props": [
+      {
+        "name": "value",
+        "type": "T",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<SegmentedOption>\n  <!-- Content -->\n</SegmentedOption>"
+  },
+  {
+    "name": "Card",
+    "importPath": "import { Card } from \"@kjaniec-dev/ui\";",
+    "description": "React component Card.",
+    "props": [
+      {
+        "name": "as",
+        "type": "React.ElementType",
+        "optional": true,
+        "defaultValue": "\"div\"",
+        "description": ""
+      },
+      {
+        "name": "elevated",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Drop the border + heavier shadow for a floating look."
+      },
+      {
+        "name": "interactive",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Adds hover lift effect — translate-y + shadow. For keyboard accessibility pair with `as=\"a\"` or `as=\"button\"`."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Card elevated>\n      <CardContent style={{ paddingTop: \"1.35rem\" }}>\n        <CardTitle>Q3 Quarterly Report</CardTitle>\n        <CardDescription>A summary of results and key product metrics.</CardDescription>\n      </CardContent>\n    </Card>"
+  },
+  {
+    "name": "CardHeader",
+    "importPath": "import { CardHeader } from \"@kjaniec-dev/ui\";",
+    "description": "React component CardHeader.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<CardHeader>\n        <CardTitle>Semantic Article Card</CardTitle>\n        <CardDescription>This card renders as an &lt;article&gt; element.</CardDescription>\n      </CardHeader>"
+  },
+  {
+    "name": "CardTitle",
+    "importPath": "import { CardTitle } from \"@kjaniec-dev/ui\";",
+    "description": "React component CardTitle.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<CardTitle>Team Workspace</CardTitle>"
+  },
+  {
+    "name": "CardDescription",
+    "importPath": "import { CardDescription } from \"@kjaniec-dev/ui\";",
+    "description": "React component CardDescription.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<CardDescription>Unlimited projects, roles and activity history for your whole team.</CardDescription>"
+  },
+  {
+    "name": "CardContent",
+    "importPath": "import { CardContent } from \"@kjaniec-dev/ui\";",
+    "description": "Body region with default padding.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<CardContent style={{ paddingTop: \"1.35rem\" }}>\n        <CardTitle>Q3 Quarterly Report</CardTitle>\n        <CardDescription>A summary of results and key product metrics.</CardDescription>\n      </CardContent>"
+  },
+  {
+    "name": "CardFooter",
+    "importPath": "import { CardFooter } from \"@kjaniec-dev/ui\";",
+    "description": "React component CardFooter.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<CardFooter>\n        <Button size=\"sm\">Choose plan</Button>\n        <Button size=\"sm\" variant=\"ghost\">Details</Button>\n      </CardFooter>"
+  },
+  {
+    "name": "CardProps",
+    "importPath": "import { CardProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component CardProps.",
+    "props": [
+      {
+        "name": "as",
+        "type": "React.ElementType",
+        "optional": true,
+        "defaultValue": "\"div\"",
+        "description": ""
+      },
+      {
+        "name": "elevated",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Drop the border + heavier shadow for a floating look."
+      },
+      {
+        "name": "interactive",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Adds hover lift effect — translate-y + shadow. For keyboard accessibility pair with `as=\"a\"` or `as=\"button\"`."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<CardProps>\n  <!-- Content -->\n</CardProps>"
+  },
+  {
+    "name": "Stat",
+    "importPath": "import { Stat } from \"@kjaniec-dev/ui\";",
+    "description": "React component Stat.",
+    "props": [
+      {
+        "name": "label",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "value",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "delta",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": "e.g. \"+12.3% mdm\""
+      },
+      {
+        "name": "trend",
+        "type": "\"up\" | \"down\"",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Stat label=\"MRR\" value=\"$128.4k\" delta=\"12.3% MoM\" trend=\"up\" />"
+  },
+  {
+    "name": "StatProps",
+    "importPath": "import { StatProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component StatProps.",
+    "props": [
+      {
+        "name": "label",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "value",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "delta",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": "e.g. \"+12.3% mdm\""
+      },
+      {
+        "name": "trend",
+        "type": "\"up\" | \"down\"",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<StatProps>\n  <!-- Content -->\n</StatProps>"
+  },
+  {
+    "name": "Avatar",
+    "importPath": "import { Avatar } from \"@kjaniec-dev/ui\";",
+    "description": "React component Avatar.",
+    "props": [
+      {
+        "name": "src",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Image URL; falls back to initials/children when absent."
+      },
+      {
+        "name": "alt",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "status",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Show an online status dot."
+      },
+      {
+        "name": "size",
+        "type": "\"sm\" | \"md\" | \"lg\"",
+        "optional": true,
+        "defaultValue": "\"md\"",
+        "description": "Style variant of the component: size."
+      },
+      {
+        "name": "tone",
+        "type": "\"secondary\" | \"primary\" | \"info\" | \"muted\"",
+        "optional": true,
+        "defaultValue": "\"secondary\"",
+        "description": "Style variant of the component: tone."
+      }
+    ],
+    "cva": {
+      "variants": {
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "tone": [
+          "secondary",
+          "primary",
+          "info",
+          "muted"
+        ]
+      },
+      "defaultVariants": {
+        "size": "md",
+        "tone": "secondary"
+      }
+    },
+    "usageSnippet": "<Avatar size=\"sm\">SM</Avatar>"
+  },
+  {
+    "name": "AvatarGroup",
+    "importPath": "import { AvatarGroup } from \"@kjaniec-dev/ui\";",
+    "description": "Overlapping cluster of avatars.",
+    "props": [
+      {
+        "name": "size",
+        "type": "\"sm\" | \"md\" | \"lg\"",
+        "optional": true,
+        "defaultValue": "\"md\"",
+        "description": "Style variant of the component: size."
+      },
+      {
+        "name": "tone",
+        "type": "\"secondary\" | \"primary\" | \"info\" | \"muted\"",
+        "optional": true,
+        "defaultValue": "\"secondary\"",
+        "description": "Style variant of the component: tone."
+      }
+    ],
+    "cva": {
+      "variants": {
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "tone": [
+          "secondary",
+          "primary",
+          "info",
+          "muted"
+        ]
+      },
+      "defaultVariants": {
+        "size": "md",
+        "tone": "secondary"
+      }
+    },
+    "usageSnippet": "<AvatarGroup>\n        <Avatar>AK</Avatar>\n        <Avatar tone=\"primary\">MR</Avatar>\n        <Avatar tone=\"info\">JN</Avatar>\n        <Avatar tone=\"muted\">+9</Avatar>\n      </AvatarGroup>"
+  },
+  {
+    "name": "AvatarProps",
+    "importPath": "import { AvatarProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component AvatarProps.",
+    "props": [
+      {
+        "name": "src",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Image URL; falls back to initials/children when absent."
+      },
+      {
+        "name": "alt",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "status",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Show an online status dot."
+      },
+      {
+        "name": "size",
+        "type": "\"sm\" | \"md\" | \"lg\"",
+        "optional": true,
+        "defaultValue": "\"md\"",
+        "description": "Style variant of the component: size."
+      },
+      {
+        "name": "tone",
+        "type": "\"secondary\" | \"primary\" | \"info\" | \"muted\"",
+        "optional": true,
+        "defaultValue": "\"secondary\"",
+        "description": "Style variant of the component: tone."
+      }
+    ],
+    "cva": {
+      "variants": {
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "tone": [
+          "secondary",
+          "primary",
+          "info",
+          "muted"
+        ]
+      },
+      "defaultVariants": {
+        "size": "md",
+        "tone": "secondary"
+      }
+    },
+    "usageSnippet": "<AvatarProps>\n  <!-- Content -->\n</AvatarProps>"
+  },
+  {
+    "name": "Tabs",
+    "importPath": "import { Tabs } from \"@kjaniec-dev/ui\";",
+    "description": "React component Tabs.",
+    "props": [
+      {
+        "name": "value",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Controlled active value."
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Uncontrolled initial value."
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: string) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Tabs defaultValue=\"overview\">\n        <TabsList>\n          <TabsTrigger value=\"overview\">Overview</TabsTrigger>\n          <TabsTrigger value=\"activity\">Activity</TabsTrigger>\n          <TabsTrigger value=\"settings\">Settings</TabsTrigger>\n        </TabsList>\n        <TabsContent value=\"overview\">A dashboard with key metrics and quick actions.</TabsContent>\n        <TabsContent value=\"activity\">An event timeline: sign-ins, edits and comments.</TabsContent>\n        <TabsContent value=\"settings\">Workspace preferences, permissions and integrations.</TabsContent>\n      </Tabs>"
+  },
+  {
+    "name": "TabsList",
+    "importPath": "import { TabsList } from \"@kjaniec-dev/ui\";",
+    "description": "React component TabsList.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<TabsList>\n          <TabsTrigger value=\"overview\">Overview</TabsTrigger>\n          <TabsTrigger value=\"activity\">Activity</TabsTrigger>\n          <TabsTrigger value=\"settings\">Settings</TabsTrigger>\n        </TabsList>"
+  },
+  {
+    "name": "TabsTrigger",
+    "importPath": "import { TabsTrigger } from \"@kjaniec-dev/ui\";",
+    "description": "React component TabsTrigger.",
+    "props": [
+      {
+        "name": "value",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<TabsTrigger value=\"overview\">Overview</TabsTrigger>"
+  },
+  {
+    "name": "TabsContent",
+    "importPath": "import { TabsContent } from \"@kjaniec-dev/ui\";",
+    "description": "React component TabsContent.",
+    "props": [
+      {
+        "name": "value",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<TabsContent value=\"overview\">A dashboard with key metrics and quick actions.</TabsContent>"
+  },
+  {
+    "name": "TabsProps",
+    "importPath": "import { TabsProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component TabsProps.",
+    "props": [
+      {
+        "name": "value",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Controlled active value."
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Uncontrolled initial value."
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: string) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<TabsProps>\n  <!-- Content -->\n</TabsProps>"
+  },
+  {
+    "name": "TabsTriggerProps",
+    "importPath": "import { TabsTriggerProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component TabsTriggerProps.",
+    "props": [
+      {
+        "name": "value",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<TabsTriggerProps>\n  <!-- Content -->\n</TabsTriggerProps>"
+  },
+  {
+    "name": "TabsContentProps",
+    "importPath": "import { TabsContentProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component TabsContentProps.",
+    "props": [
+      {
+        "name": "value",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<TabsContentProps>\n  <!-- Content -->\n</TabsContentProps>"
+  },
+  {
+    "name": "Accordion",
+    "importPath": "import { Accordion } from \"@kjaniec-dev/ui\";",
+    "description": "React component Accordion.",
+    "props": [
+      {
+        "name": "type",
+        "type": "\"single\" | \"multiple\"",
+        "optional": true,
+        "defaultValue": "\"single\"",
+        "description": "\"single\" closes others when one opens."
+      },
+      {
+        "name": "defaultValue",
+        "type": "string[]",
+        "optional": true,
+        "defaultValue": "[]",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Accordion type=\"single\" defaultValue={[\"a\"]}>\n        <AccordionItem value=\"a\"><AccordionTrigger>How does billing work?</AccordionTrigger><AccordionContent>Monthly or annually — the annual plan includes two months free.</AccordionContent></AccordionItem>\n        <AccordionItem value=\"b\"><AccordionTrigger>Can I change my plan later?</AccordionTrigger><AccordionContent>Yes, at any time. The difference is prorated.</AccordionContent></AccordionItem>\n        <AccordionItem value=\"c\"><AccordionTrigger>What payment methods are supported?</AccordionTrigger><AccordionContent>Visa, Mastercard and Apple Pay.</AccordionContent></AccordionItem>\n      </Accordion>"
+  },
+  {
+    "name": "AccordionItem",
+    "importPath": "import { AccordionItem } from \"@kjaniec-dev/ui\";",
+    "description": "React component AccordionItem.",
+    "props": [
+      {
+        "name": "value",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<AccordionItem value=\"a\"><AccordionTrigger>How does billing work?</AccordionTrigger><AccordionContent>Monthly or annually — the annual plan includes two months free.</AccordionContent></AccordionItem>"
+  },
+  {
+    "name": "AccordionTrigger",
+    "importPath": "import { AccordionTrigger } from \"@kjaniec-dev/ui\";",
+    "description": "React component AccordionTrigger.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<AccordionTrigger>How does billing work?</AccordionTrigger>"
+  },
+  {
+    "name": "AccordionContent",
+    "importPath": "import { AccordionContent } from \"@kjaniec-dev/ui\";",
+    "description": "React component AccordionContent.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<AccordionContent>Monthly or annually — the annual plan includes two months free.</AccordionContent>"
+  },
+  {
+    "name": "AccordionProps",
+    "importPath": "import { AccordionProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component AccordionProps.",
+    "props": [
+      {
+        "name": "type",
+        "type": "\"single\" | \"multiple\"",
+        "optional": true,
+        "defaultValue": "\"single\"",
+        "description": "\"single\" closes others when one opens."
+      },
+      {
+        "name": "defaultValue",
+        "type": "string[]",
+        "optional": true,
+        "defaultValue": "[]",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<AccordionProps>\n  <!-- Content -->\n</AccordionProps>"
+  },
+  {
+    "name": "AccordionItemProps",
+    "importPath": "import { AccordionItemProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component AccordionItemProps.",
+    "props": [
+      {
+        "name": "value",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<AccordionItemProps>\n  <!-- Content -->\n</AccordionItemProps>"
+  },
+  {
+    "name": "DropdownMenu",
+    "importPath": "import { DropdownMenu } from \"@kjaniec-dev/ui\";",
+    "description": "React component DropdownMenu.",
+    "props": [
+      {
+        "name": "align",
+        "type": "\"start\" | \"end\"",
+        "optional": true,
+        "defaultValue": "\"start\"",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<DropdownMenu>\n      <DropdownMenuTrigger>\n        <Button variant=\"outline\">Actions</Button>\n      </DropdownMenuTrigger>\n      <DropdownMenuContent>\n        <DropdownMenuItem>Edit</DropdownMenuItem>\n        <DropdownMenuItem>Duplicate</DropdownMenuItem>\n        <DropdownMenuSeparator />"
+  },
+  {
+    "name": "DropdownMenuTrigger",
+    "importPath": "import { DropdownMenuTrigger } from \"@kjaniec-dev/ui\";",
+    "description": "React component DropdownMenuTrigger.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<DropdownMenuTrigger>\n        <Button variant=\"outline\">Actions</Button>\n      </DropdownMenuTrigger>"
+  },
+  {
+    "name": "DropdownMenuContent",
+    "importPath": "import { DropdownMenuContent } from \"@kjaniec-dev/ui\";",
+    "description": "React component DropdownMenuContent.",
+    "props": [
+      {
+        "name": "align",
+        "type": "\"start\" | \"end\"",
+        "optional": true,
+        "defaultValue": "\"start\"",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<DropdownMenuContent>\n        <DropdownMenuItem>Edit</DropdownMenuItem>\n        <DropdownMenuItem>Duplicate</DropdownMenuItem>\n        <DropdownMenuSeparator />"
+  },
+  {
+    "name": "DropdownMenuItem",
+    "importPath": "import { DropdownMenuItem } from \"@kjaniec-dev/ui\";",
+    "description": "React component DropdownMenuItem.",
+    "props": [
+      {
+        "name": "danger",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "icon",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<DropdownMenuItem>Edit</DropdownMenuItem>"
+  },
+  {
+    "name": "DropdownMenuSeparator",
+    "importPath": "import { DropdownMenuSeparator } from \"@kjaniec-dev/ui\";",
+    "description": "React component DropdownMenuSeparator.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<DropdownMenuSeparator />"
+  },
+  {
+    "name": "DropdownMenuContentProps",
+    "importPath": "import { DropdownMenuContentProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component DropdownMenuContentProps.",
+    "props": [
+      {
+        "name": "align",
+        "type": "\"start\" | \"end\"",
+        "optional": true,
+        "defaultValue": "\"start\"",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<DropdownMenuContentProps>\n  <!-- Content -->\n</DropdownMenuContentProps>"
+  },
+  {
+    "name": "DropdownMenuItemProps",
+    "importPath": "import { DropdownMenuItemProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component DropdownMenuItemProps.",
+    "props": [
+      {
+        "name": "danger",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "icon",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<DropdownMenuItemProps>\n  <!-- Content -->\n</DropdownMenuItemProps>"
+  },
+  {
+    "name": "Breadcrumb",
+    "importPath": "import { Breadcrumb } from \"@kjaniec-dev/ui\";",
+    "description": "React component Breadcrumb.",
+    "props": [
+      {
+        "name": "current",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Marks the trailing current page (non-link, emphasized)."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Breadcrumb>\n      <BreadcrumbItem href=\"#\">Workspace</BreadcrumbItem>\n      <BreadcrumbSeparator />"
+  },
+  {
+    "name": "BreadcrumbItem",
+    "importPath": "import { BreadcrumbItem } from \"@kjaniec-dev/ui\";",
+    "description": "React component BreadcrumbItem.",
+    "props": [
+      {
+        "name": "current",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Marks the trailing current page (non-link, emphasized)."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<BreadcrumbItem href=\"#\">Workspace</BreadcrumbItem>"
+  },
+  {
+    "name": "BreadcrumbSeparator",
+    "importPath": "import { BreadcrumbSeparator } from \"@kjaniec-dev/ui\";",
+    "description": "React component BreadcrumbSeparator.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<BreadcrumbSeparator />"
+  },
+  {
+    "name": "BreadcrumbItemProps",
+    "importPath": "import { BreadcrumbItemProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component BreadcrumbItemProps.",
+    "props": [
+      {
+        "name": "current",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Marks the trailing current page (non-link, emphasized)."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<BreadcrumbItemProps>\n  <!-- Content -->\n</BreadcrumbItemProps>"
+  },
+  {
+    "name": "Pagination",
+    "importPath": "import { Pagination } from \"@kjaniec-dev/ui\";",
+    "description": "React component Pagination.",
+    "props": [
+      {
+        "name": "page",
+        "type": "number",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "pageCount",
+        "type": "number",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onPageChange",
+        "type": "(page: number) => void",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "siblingCount",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": "How many numbered buttons to show around the edges. Default 5."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Pagination page={page} pageCount={9} onPageChange={setPage} />"
+  },
+  {
+    "name": "PaginationProps",
+    "importPath": "import { PaginationProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component PaginationProps.",
+    "props": [
+      {
+        "name": "page",
+        "type": "number",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "pageCount",
+        "type": "number",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onPageChange",
+        "type": "(page: number) => void",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "siblingCount",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": "How many numbered buttons to show around the edges. Default 5."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<PaginationProps>\n  <!-- Content -->\n</PaginationProps>"
+  },
+  {
+    "name": "Table",
+    "importPath": "import { Table } from \"@kjaniec-dev/ui\";",
+    "description": "React component Table.",
+    "props": [
+      {
+        "name": "numeric",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Right-align with tabular numerals."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Table>\n        <TableHeader>\n          <TableRow>\n            <TableHead>User</TableHead>\n            <TableHead>Role</TableHead>\n            <TableHead>Status</TableHead>\n            <TableHead numeric>Projects</TableHead>\n          </TableRow>\n        </TableHeader>\n        <TableBody>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"primary\">AK</Avatar>Anna Kowalski</div></TableCell>\n            <TableCell>Administrator</TableCell>\n            <TableCell><Badge variant=\"success\" dot>Active</Badge></TableCell>\n            <TableCell numeric>24</TableCell>\n          </TableRow>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\">MR</Avatar>Michael Rutkowski</div></TableCell>\n            <TableCell>Editor</TableCell>\n            <TableCell><Badge variant=\"warning\" dot>Invited</Badge></TableCell>\n            <TableCell numeric>12</TableCell>\n          </TableRow>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"info\">JN</Avatar>Julia Nowak</div></TableCell>\n            <TableCell>Viewer</TableCell>\n            <TableCell><Badge>Inactive</Badge></TableCell>\n            <TableCell numeric>3</TableCell>\n          </TableRow>\n        </TableBody>\n      </Table>"
+  },
+  {
+    "name": "TableWrap",
+    "importPath": "import { TableWrap } from \"@kjaniec-dev/ui\";",
+    "description": "Rounded, bordered wrapper around a <Table>.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<TableWrap>\n      <Table>\n        <TableHeader>\n          <TableRow>\n            <TableHead>User</TableHead>\n            <TableHead>Role</TableHead>\n            <TableHead>Status</TableHead>\n            <TableHead numeric>Projects</TableHead>\n          </TableRow>\n        </TableHeader>\n        <TableBody>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"primary\">AK</Avatar>Anna Kowalski</div></TableCell>\n            <TableCell>Administrator</TableCell>\n            <TableCell><Badge variant=\"success\" dot>Active</Badge></TableCell>\n            <TableCell numeric>24</TableCell>\n          </TableRow>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\">MR</Avatar>Michael Rutkowski</div></TableCell>\n            <TableCell>Editor</TableCell>\n            <TableCell><Badge variant=\"warning\" dot>Invited</Badge></TableCell>\n            <TableCell numeric>12</TableCell>\n          </TableRow>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"info\">JN</Avatar>Julia Nowak</div></TableCell>\n            <TableCell>Viewer</TableCell>\n            <TableCell><Badge>Inactive</Badge></TableCell>\n            <TableCell numeric>3</TableCell>\n          </TableRow>\n        </TableBody>\n      </Table>\n    </TableWrap>"
+  },
+  {
+    "name": "TableHeader",
+    "importPath": "import { TableHeader } from \"@kjaniec-dev/ui\";",
+    "description": "React component TableHeader.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<TableHeader>\n          <TableRow>\n            <TableHead>User</TableHead>\n            <TableHead>Role</TableHead>\n            <TableHead>Status</TableHead>\n            <TableHead numeric>Projects</TableHead>\n          </TableRow>\n        </TableHeader>"
+  },
+  {
+    "name": "TableBody",
+    "importPath": "import { TableBody } from \"@kjaniec-dev/ui\";",
+    "description": "React component TableBody.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<TableBody>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"primary\">AK</Avatar>Anna Kowalski</div></TableCell>\n            <TableCell>Administrator</TableCell>\n            <TableCell><Badge variant=\"success\" dot>Active</Badge></TableCell>\n            <TableCell numeric>24</TableCell>\n          </TableRow>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\">MR</Avatar>Michael Rutkowski</div></TableCell>\n            <TableCell>Editor</TableCell>\n            <TableCell><Badge variant=\"warning\" dot>Invited</Badge></TableCell>\n            <TableCell numeric>12</TableCell>\n          </TableRow>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"info\">JN</Avatar>Julia Nowak</div></TableCell>\n            <TableCell>Viewer</TableCell>\n            <TableCell><Badge>Inactive</Badge></TableCell>\n            <TableCell numeric>3</TableCell>\n          </TableRow>\n        </TableBody>"
+  },
+  {
+    "name": "TableRow",
+    "importPath": "import { TableRow } from \"@kjaniec-dev/ui\";",
+    "description": "React component TableRow.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<TableRow>\n            <TableHead>User</TableHead>\n            <TableHead>Role</TableHead>\n            <TableHead>Status</TableHead>\n            <TableHead numeric>Projects</TableHead>\n          </TableRow>"
+  },
+  {
+    "name": "TableHead",
+    "importPath": "import { TableHead } from \"@kjaniec-dev/ui\";",
+    "description": "React component TableHead.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<TableHead>User</TableHead>"
+  },
+  {
+    "name": "TableCell",
+    "importPath": "import { TableCell } from \"@kjaniec-dev/ui\";",
+    "description": "React component TableCell.",
+    "props": [
+      {
+        "name": "numeric",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Right-align with tabular numerals."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"primary\">AK</Avatar>Anna Kowalski</div></TableCell>"
+  },
+  {
+    "name": "TableCellProps",
+    "importPath": "import { TableCellProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component TableCellProps.",
+    "props": [
+      {
+        "name": "numeric",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Right-align with tabular numerals."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<TableCellProps>\n  <!-- Content -->\n</TableCellProps>"
+  },
+  {
+    "name": "Tooltip",
+    "importPath": "import { Tooltip } from \"@kjaniec-dev/ui\";",
+    "description": "CSS-only hover/focus tooltip positioned above the trigger.",
+    "props": [
+      {
+        "name": "content",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Tooltip content=\"Contextual tooltip\">\n      <Button variant=\"outline\">Hover over me</Button>\n    </Tooltip>"
+  },
+  {
+    "name": "TooltipProps",
+    "importPath": "import { TooltipProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component TooltipProps.",
+    "props": [
+      {
+        "name": "content",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<TooltipProps>\n  <!-- Content -->\n</TooltipProps>"
+  },
+  {
+    "name": "Modal",
+    "importPath": "import { Modal } from \"@kjaniec-dev/ui\";",
+    "description": "Centered overlay dialog. Closes on backdrop click and Escape.",
+    "props": [
+      {
+        "name": "open",
+        "type": "boolean",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "440",
+        "description": "Max width of the panel. Default 440px."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Modal open={open} onClose={() => setOpen(false)}>\n          <ModalTitle>Delete project “Q3 Launch”?</ModalTitle>\n          <ModalDescription>This action cannot be undone. All files and activity history will be permanently deleted.</ModalDescription>\n          <ModalActions>\n            <Button variant=\"ghost\" onClick={() => setOpen(false)}>Cancel</Button>\n            <Button variant=\"danger\" onClick={() => setOpen(false)}>Delete project</Button>\n          </ModalActions>\n        </Modal>"
+  },
+  {
+    "name": "ModalTitle",
+    "importPath": "import { ModalTitle } from \"@kjaniec-dev/ui\";",
+    "description": "React component ModalTitle.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<ModalTitle>Delete project “Q3 Launch”?</ModalTitle>"
+  },
+  {
+    "name": "ModalDescription",
+    "importPath": "import { ModalDescription } from \"@kjaniec-dev/ui\";",
+    "description": "React component ModalDescription.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<ModalDescription>This action cannot be undone. All files and activity history will be permanently deleted.</ModalDescription>"
+  },
+  {
+    "name": "ModalActions",
+    "importPath": "import { ModalActions } from \"@kjaniec-dev/ui\";",
+    "description": "React component ModalActions.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<ModalActions>\n            <Button variant=\"ghost\" onClick={() => setOpen(false)}>Cancel</Button>\n            <Button variant=\"danger\" onClick={() => setOpen(false)}>Delete project</Button>\n          </ModalActions>"
+  },
+  {
+    "name": "ModalProps",
+    "importPath": "import { ModalProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component ModalProps.",
+    "props": [
+      {
+        "name": "open",
+        "type": "boolean",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "440",
+        "description": "Max width of the panel. Default 440px."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ModalProps>\n  <!-- Content -->\n</ModalProps>"
+  },
+  {
+    "name": "ToastProvider",
+    "importPath": "import { ToastProvider } from \"@kjaniec-dev/ui\";",
+    "description": "React component ToastProvider.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<ToastProvider>\n      <ToastDemo />"
+  },
+  {
+    "name": "ToastOptions",
+    "importPath": "import { ToastOptions } from \"@kjaniec-dev/ui\";",
+    "description": "React component ToastOptions.",
+    "props": [
+      {
+        "name": "message",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "tone",
+        "type": "ToastTone",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "duration",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Auto-dismiss after ms. Default 3200. Pass 0 to keep open."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ToastOptions>\n  <!-- Content -->\n</ToastOptions>"
+  },
+  {
+    "name": "ToastTone",
+    "importPath": "import { ToastTone } from \"@kjaniec-dev/ui\";",
+    "description": "React component ToastTone.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<ToastTone>\n  <!-- Content -->\n</ToastTone>"
+  },
+  {
+    "name": "PageHeader",
+    "importPath": "import { PageHeader } from \"@kjaniec-dev/ui\";",
+    "description": "React component PageHeader.",
+    "props": [
+      {
+        "name": "eyebrow",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "actions",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<PageHeader\n      eyebrow=\"Open source\"\n      title=\"Projects\"\n      description=\"Things I've built and shipped.\"\n      actions={\n        <>\n          <Button size=\"sm\">View all</Button>\n          <Button size=\"sm\" variant=\"ghost\">GitHub</Button>\n        </>"
+  },
+  {
+    "name": "PageHeaderProps",
+    "importPath": "import { PageHeaderProps } from \"@kjaniec-dev/ui\";",
+    "description": "React component PageHeaderProps.",
+    "props": [
+      {
+        "name": "eyebrow",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "actions",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<PageHeaderProps>\n  <!-- Content -->\n</PageHeaderProps>"
+  }
+]

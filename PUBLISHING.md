@@ -101,7 +101,23 @@ npm publish
 
 ---
 
-## 7. Using the packages in an app
+## 7. Publish @kjaniec-dev/mcp
+
+```bash
+cd packages/mcp
+npm publish
+# prepublishOnly hook runs automatically:
+#   1. rm -rf dist
+#   2. tsup  → dist/index.js (copies tokens and component sources into dist/embedded)
+# → Published @kjaniec-dev/mcp@0.4.0
+```
+
+> **Note:** If you get a 403, run `npm publish --access public` once to set the
+> scope visibility, then future publishes won't need the flag.
+
+---
+
+## 8. Using the packages in an app
 
 ```bash
 npm install @kjaniec-dev/ui @kjaniec-dev/design
@@ -134,7 +150,7 @@ export default function App() {
 
 ---
 
-## 8. Deploy the gallery to Netlify
+## 9. Deploy the gallery to Netlify
 
 The `site/` folder is a single self-contained `index.html` — no build needed.
 
@@ -164,14 +180,15 @@ Every push to `main` auto-deploys the gallery.
 
 ---
 
-## 9. Bumping versions
+## 10. Bumping versions
 
-Both packages start at `0.1.0`. For future releases:
+The packages start at `0.1.0` or `0.4.0`. For future releases:
 
 ```bash
-# In packages/design or packages/ui:
-npm version patch   # 0.1.0 → 0.1.1
-npm version minor   # 0.1.0 → 0.2.0
-npm version major   # 0.1.0 → 1.0.0
+# In packages/design, packages/ui, or packages/mcp:
+npm version patch   # e.g., 0.4.0 → 0.4.1
+npm version minor   # e.g., 0.4.0 → 0.5.0
+npm version major   # e.g., 0.4.0 → 1.0.0
 npm publish
 ```
+

@@ -1,0 +1,42 @@
+{
+  "name": "@kjaniec-dev/ui-mcp",
+  "version": "0.4.0",
+  "description": "MCP (Model Context Protocol) server for KJ Product Kit design system and UI components",
+  "license": "MIT",
+  "author": "kjaniec-dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kjaniec-dev/ui-kit.git",
+    "directory": "packages/mcp"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "ui-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "data",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist",
+    "test": "tsx src/run-test.ts",
+    "prepublishOnly": "npm run clean && npm run build && npm run test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "tsup": "^8.3.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.5.0"
+  }
+}

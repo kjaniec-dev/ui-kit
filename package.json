@@ -4,13 +4,20 @@
   "private": true,
   "description": "Starter tokens and theme for KJ Product Kit.",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "site"
   ],
   "scripts": {
     "tokens:check": "node -e \"JSON.parse(require('fs').readFileSync('./packages/design/tokens.json','utf8')); console.log('Tokens OK')\"",
     "storybook": "npm run storybook --workspace @kjaniec-dev/ui",
     "build-storybook": "npm run build-storybook --workspace @kjaniec-dev/ui",
-    "build": "npm run build --workspace @kjaniec-dev/ui",
-    "chromatic": "npx chromatic"
+    "build": "npm run build --workspace @kjaniec-dev/ui && npm run build --workspace @kjaniec-dev/site",
+    "site:dev": "npm run dev --workspace @kjaniec-dev/site",
+    "site:preview": "npm run preview --workspace @kjaniec-dev/site",
+    "chromatic": "npx chromatic",
+    "mcp:build": "npm run build --workspace @kjaniec-dev/ui-mcp",
+    "mcp:dev": "npm run dev --workspace @kjaniec-dev/ui-mcp",
+    "mcp:start": "node ./packages/mcp/dist/index.js",
+    "mcp:test": "npm run test --workspace @kjaniec-dev/ui-mcp"
   }
 }

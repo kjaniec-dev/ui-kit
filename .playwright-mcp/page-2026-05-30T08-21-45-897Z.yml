@@ -1,0 +1,343 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: KJ
+      - generic [ref=e7]:
+        - generic [ref=e8]: "@kjaniec-dev/ui"
+        - generic [ref=e9]: React · v0.1.0
+    - generic [ref=e10]: Components
+    - navigation [ref=e11]:
+      - link "Buttons" [ref=e12] [cursor=pointer]:
+        - /url: "#buttons"
+        - text: Buttons
+      - link "Badges" [ref=e14] [cursor=pointer]:
+        - /url: "#badges"
+        - text: Badges
+      - link "Feedback" [ref=e16] [cursor=pointer]:
+        - /url: "#feedback"
+        - text: Feedback
+      - link "Forms" [ref=e18] [cursor=pointer]:
+        - /url: "#forms"
+        - text: Forms
+      - link "Selection" [ref=e20] [cursor=pointer]:
+        - /url: "#selection"
+        - text: Selection
+      - link "Cards" [ref=e22] [cursor=pointer]:
+        - /url: "#cards"
+        - text: Cards
+      - link "Navigation" [ref=e24] [cursor=pointer]:
+        - /url: "#navigation"
+        - text: Navigation
+      - link "Table" [ref=e26] [cursor=pointer]:
+        - /url: "#data"
+        - text: Table
+      - link "Overlays" [ref=e28] [cursor=pointer]:
+        - /url: "#overlays"
+        - text: Overlays
+  - generic [ref=e30]:
+    - banner [ref=e31]:
+      - generic [ref=e33]: Component demo · interactive
+      - generic [ref=e34]:
+        - generic [ref=e35]: 24 components
+        - button "Theme" [ref=e37] [cursor=pointer]:
+          - img [ref=e39]
+    - main [ref=e41]:
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - heading "Buttons" [level=2] [ref=e44]
+          - paragraph [ref=e45]: Five variants, three sizes, a loading state and icon buttons.
+        - generic [ref=e46]:
+          - paragraph [ref=e47]: Variants
+          - generic [ref=e48]:
+            - button "Primary" [ref=e49] [cursor=pointer]
+            - button "Secondary" [ref=e50] [cursor=pointer]
+            - button "Outline" [ref=e51] [cursor=pointer]
+            - button "Ghost" [ref=e52] [cursor=pointer]
+            - button "Danger" [ref=e53] [cursor=pointer]
+          - paragraph [ref=e55]: Sizes, icon and states
+          - generic [ref=e56]:
+            - button "Small" [ref=e57] [cursor=pointer]
+            - button "Medium" [ref=e58] [cursor=pointer]
+            - button "Large" [ref=e59] [cursor=pointer]
+            - button "New project" [ref=e60] [cursor=pointer]:
+              - generic [ref=e61]:
+                - img [ref=e63]
+                - text: New project
+            - button "Settings" [ref=e65] [cursor=pointer]:
+              - img [ref=e67]
+            - button "Save" [ref=e70] [cursor=pointer]
+            - button "Disabled" [disabled]
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - heading "Badges" [level=2] [ref=e73]
+          - paragraph [ref=e74]: Status labels in soft and solid variants.
+        - generic [ref=e76]:
+          - generic [ref=e77]: Neutral
+          - generic [ref=e78]: Primary
+          - generic [ref=e79]: Active
+          - generic [ref=e81]: Pending
+          - generic [ref=e83]: Error
+          - generic [ref=e85]: Info
+          - generic [ref=e86]: Solid
+      - generic [ref=e87]:
+        - generic [ref=e88]:
+          - heading "Feedback & progress" [level=2] [ref=e89]
+          - paragraph [ref=e90]: Inline alerts, toasts and progress indicators.
+        - generic [ref=e91]:
+          - paragraph [ref=e92]: Alerts
+          - generic [ref=e93]:
+            - alert [ref=e94]:
+              - img [ref=e96]
+              - generic [ref=e99]:
+                - paragraph [ref=e100]: New version available
+                - paragraph [ref=e101]: Version 0.2.0 adds navigation components and charts.
+            - alert [ref=e102]:
+              - img [ref=e104]
+              - generic [ref=e106]:
+                - paragraph [ref=e107]: Deployment complete
+                - paragraph [ref=e108]: All tests passed and the build is live in production.
+            - alert [ref=e109]:
+              - img [ref=e111]
+              - generic [ref=e114]:
+                - paragraph [ref=e115]: Approaching your limit
+                - paragraph [ref=e116]: You have used 86% of your file storage this month.
+            - alert [ref=e117]:
+              - img [ref=e119]
+              - generic [ref=e122]:
+                - paragraph [ref=e123]: Payment declined
+                - paragraph [ref=e124]: Update your payment method to avoid an interruption.
+        - generic [ref=e125]:
+          - generic [ref=e126]:
+            - paragraph [ref=e127]: Toasts
+            - generic [ref=e128]:
+              - button "Info" [ref=e129] [cursor=pointer]
+              - button "Success" [ref=e130] [cursor=pointer]
+              - button "Error" [ref=e131] [cursor=pointer]
+          - generic [ref=e132]:
+            - paragraph [ref=e133]: Progress & spinner
+            - generic [ref=e134]:
+              - progressbar [ref=e135]
+              - progressbar [ref=e137]
+              - generic [ref=e139]:
+                - status "Loading" [ref=e140]
+                - generic [ref=e141]: Loading data…
+      - generic [ref=e142]:
+        - generic [ref=e143]:
+          - heading "Forms" [level=2] [ref=e144]
+          - paragraph [ref=e145]: Fields with labels, leading icons, selects, textareas and live validation.
+        - generic [ref=e147]:
+          - generic [ref=e148]:
+            - generic [ref=e149]: Full name *
+            - textbox "Jane Doe" [ref=e150]
+            - generic [ref=e151]: This is how your team will see you.
+          - generic [ref=e152]:
+            - generic [ref=e153]: E-mail *
+            - textbox "jane@company.com" [ref=e154]
+            - generic [ref=e155]: We'll use it to sign you in.
+          - generic [ref=e156]:
+            - generic [ref=e157]: Search
+            - generic [ref=e158]:
+              - generic:
+                - img
+              - textbox "Search projects…" [ref=e159]
+          - generic [ref=e160]:
+            - generic [ref=e161]: Role
+            - combobox [ref=e162] [cursor=pointer]:
+              - option "Administrator" [selected]
+              - option "Editor"
+              - option "View only"
+          - generic [ref=e163]:
+            - generic [ref=e164]: Project description
+            - textbox "What is this project about?" [ref=e165]
+          - generic [ref=e166]:
+            - generic [ref=e167]: Disabled field
+            - textbox [disabled] [ref=e168]: workspace-id-8842
+          - generic [ref=e169]:
+            - generic [ref=e170]: Field with error
+            - textbox [ref=e171]: not-ok
+            - generic [ref=e172]: Only lowercase letters and hyphens are allowed.
+      - generic [ref=e173]:
+        - generic [ref=e174]:
+          - heading "Selection controls" [level=2] [ref=e175]
+          - paragraph [ref=e176]: Checkboxes, radios, switches, a slider and a segmented control.
+        - generic [ref=e177]:
+          - generic [ref=e178]:
+            - paragraph [ref=e179]: Checkbox & radio
+            - generic [ref=e180]:
+              - generic [ref=e181] [cursor=pointer]:
+                - checkbox "Email notifications" [checked] [ref=e182]
+                - img [ref=e184]
+                - text: Email notifications
+              - generic [ref=e186] [cursor=pointer]:
+                - checkbox "Weekly report" [ref=e187]
+                - img [ref=e189]
+                - text: Weekly report
+              - generic [ref=e192] [cursor=pointer]:
+                - radio "Monthly plan" [checked] [ref=e193]
+                - text: Monthly plan
+              - generic [ref=e196] [cursor=pointer]:
+                - radio "Annual plan" [ref=e197]
+                - text: Annual plan
+          - generic [ref=e200]:
+            - paragraph [ref=e201]: Switches, slider, segments
+            - generic [ref=e202]:
+              - generic [ref=e203] [cursor=pointer]:
+                - switch "Dark mode for new users" [checked] [ref=e204]
+                - text: Dark mode for new users
+              - generic [ref=e206] [cursor=pointer]:
+                - switch "Automatic backups" [ref=e207]
+                - text: Automatic backups
+              - generic [ref=e209]:
+                - generic [ref=e210]: Volume
+                - slider [ref=e211] [cursor=pointer]: "65"
+              - tablist [ref=e212]:
+                - tab "Day" [selected] [ref=e213] [cursor=pointer]
+                - tab "Week" [ref=e214] [cursor=pointer]
+                - tab "Month" [ref=e215] [cursor=pointer]
+      - generic [ref=e216]:
+        - generic [ref=e217]:
+          - heading "Cards & stats" [level=2] [ref=e218]
+          - paragraph [ref=e219]: Cards with content and footer, with an image, and metric cards.
+        - generic [ref=e220]:
+          - generic [ref=e221]:
+            - generic [ref=e222]:
+              - generic [ref=e224]: Pro
+              - heading "Team Workspace" [level=3] [ref=e225]
+              - paragraph [ref=e226]: Unlimited projects, roles and activity history for your whole team.
+            - generic [ref=e227]:
+              - button "Choose plan" [ref=e228] [cursor=pointer]
+              - button "Details" [ref=e229] [cursor=pointer]
+          - generic [ref=e230]:
+            - generic [ref=e231]: cover image · 16:9
+            - generic [ref=e232]:
+              - heading "Q3 Quarterly Report" [level=3] [ref=e233]
+              - paragraph [ref=e234]: A summary of results and key product metrics.
+              - generic [ref=e235]:
+                - generic [ref=e236]:
+                  - generic [ref=e237]: AK
+                  - generic [ref=e238]: MR
+                  - generic [ref=e239]: JN
+                - generic [ref=e240]: +5 contributors
+        - generic [ref=e241]:
+          - generic [ref=e242]:
+            - generic [ref=e243]: MRR
+            - generic [ref=e244]: $128.4k
+            - generic [ref=e245]: ▲ 12.3% MoM
+          - generic [ref=e246]:
+            - generic [ref=e247]: Active users
+            - generic [ref=e248]: 8,942
+            - generic [ref=e249]: ▲ 4.1% MoM
+          - generic [ref=e250]:
+            - generic [ref=e251]: Churn
+            - generic [ref=e252]: 2.8%
+            - generic [ref=e253]: ▼ 0.6% MoM
+      - generic [ref=e254]:
+        - generic [ref=e255]:
+          - heading "Navigation" [level=2] [ref=e256]
+          - paragraph [ref=e257]: Tabs, dropdown menus, accordion, breadcrumbs and pagination.
+        - generic [ref=e258]:
+          - generic [ref=e259]:
+            - paragraph [ref=e260]: Tabs
+            - generic [ref=e261]:
+              - tablist [ref=e262]:
+                - tab "Overview" [selected] [ref=e263] [cursor=pointer]
+                - tab "Activity" [ref=e264] [cursor=pointer]
+                - tab "Settings" [ref=e265] [cursor=pointer]
+              - tabpanel [ref=e266]: A dashboard with key metrics and quick actions.
+          - generic [ref=e267]:
+            - paragraph [ref=e268]: Dropdown menu
+            - button "Actions" [ref=e270] [cursor=pointer]:
+              - text: Actions
+              - img [ref=e271]
+        - paragraph [ref=e273]: Accordion
+        - generic [ref=e274]:
+          - generic [ref=e275]:
+            - button "How does billing work?" [expanded] [ref=e276] [cursor=pointer]:
+              - text: How does billing work?
+              - img [ref=e277]
+            - generic [ref=e281]: Billed monthly or annually. The annual plan includes two months free.
+          - generic [ref=e282]:
+            - button "Can I change my plan later?" [ref=e283] [cursor=pointer]:
+              - text: Can I change my plan later?
+              - img [ref=e284]
+            - generic [ref=e286]: Yes, at any time. The difference is prorated.
+          - generic [ref=e287]:
+            - button "What payment methods are supported?" [ref=e288] [cursor=pointer]:
+              - text: What payment methods are supported?
+              - img [ref=e289]
+            - generic [ref=e291]: Visa, Mastercard and Apple Pay.
+        - generic [ref=e292]:
+          - navigation "Breadcrumb" [ref=e293]:
+            - link "Workspace" [ref=e294] [cursor=pointer]:
+              - /url: "#"
+            - generic [ref=e295]: /
+            - link "Projects" [ref=e296] [cursor=pointer]:
+              - /url: "#"
+            - generic [ref=e297]: /
+            - generic [ref=e298]: Q3 Launch
+          - navigation "Paginacja" [ref=e299]:
+            - button "Previous" [disabled]:
+              - generic:
+                - img
+            - button "1" [ref=e300] [cursor=pointer]
+            - button "2" [ref=e301] [cursor=pointer]
+            - generic [ref=e302]: …
+            - button "9" [ref=e303] [cursor=pointer]
+            - button "Next" [ref=e304] [cursor=pointer]:
+              - img [ref=e306]
+      - generic [ref=e308]:
+        - generic [ref=e309]:
+          - heading "Table & data" [level=2] [ref=e310]
+          - paragraph [ref=e311]: A table with statuses, avatars and aligned numbers.
+        - table [ref=e313]:
+          - rowgroup [ref=e314]:
+            - row "User Role Status Projects" [ref=e315]:
+              - columnheader "User" [ref=e316]
+              - columnheader "Role" [ref=e317]
+              - columnheader "Status" [ref=e318]
+              - columnheader "Projects" [ref=e319]
+          - rowgroup [ref=e320]:
+            - row "AK Anna Kowalski Administrator Active 24" [ref=e321]:
+              - cell "AK Anna Kowalski" [ref=e322]:
+                - generic [ref=e323]:
+                  - generic [ref=e324]: AK
+                  - text: Anna Kowalski
+              - cell "Administrator" [ref=e325]
+              - cell "Active" [ref=e326]:
+                - generic [ref=e327]: Active
+              - cell "24" [ref=e329]
+            - row "MR Michael Rutkowski Editor Invited 12" [ref=e330]:
+              - cell "MR Michael Rutkowski" [ref=e331]:
+                - generic [ref=e332]:
+                  - generic [ref=e333]: MR
+                  - text: Michael Rutkowski
+              - cell "Editor" [ref=e334]
+              - cell "Invited" [ref=e335]:
+                - generic [ref=e336]: Invited
+              - cell "12" [ref=e338]
+            - row "JN Julia Nowak Viewer Inactive 3" [ref=e339]:
+              - cell "JN Julia Nowak" [ref=e340]:
+                - generic [ref=e341]:
+                  - generic [ref=e342]: JN
+                  - text: Julia Nowak
+              - cell "Viewer" [ref=e343]
+              - cell "Inactive" [ref=e344]:
+                - generic [ref=e345]: Inactive
+              - cell "3" [ref=e346]
+      - generic [ref=e347]:
+        - generic [ref=e348]:
+          - heading "Overlays" [level=2] [ref=e349]
+          - paragraph [ref=e350]: Modal and tooltips.
+        - generic [ref=e352]:
+          - button "Open modal" [ref=e353] [cursor=pointer]
+          - generic [ref=e354]:
+            - button "Hover — top" [ref=e355] [cursor=pointer]
+            - tooltip "Contextual tooltip"
+      - generic [ref=e356]: Real components from @kjaniec-dev/ui, styled with tokens from @kjaniec-dev/design. The same code ships in the repo.
+  - generic:
+    - dialog:
+      - heading "Delete project \"Q3 Launch\"?" [level=3]
+      - paragraph: This action cannot be undone. All files and activity history will be permanently deleted.
+      - generic:
+        - button "Cancel"
+        - button "Delete project"

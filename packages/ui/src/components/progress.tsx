@@ -18,6 +18,7 @@ export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
       <div
         ref={ref}
         role="progressbar"
+        aria-label={props["aria-label"] ?? "Progress"}
         aria-valuenow={pct}
         aria-valuemin={0}
         aria-valuemax={100}
