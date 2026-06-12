@@ -93,7 +93,7 @@ export const AccordionContent = React.forwardRef<HTMLDivElement, React.HTMLAttri
         {...props}
       >
         <div className="overflow-hidden">
-          <div className={cn("px-[1.2rem] pt-2 pb-[1.1rem] text-[0.85rem] text-muted-foreground", className)}>{children}</div>
+          <div className={cn("px-[1.2rem] pt-3 pb-4 text-[0.85rem] text-muted-foreground", className)}>{children}</div>
         </div>
       </div>
     );
