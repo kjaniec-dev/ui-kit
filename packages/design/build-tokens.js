@@ -63,6 +63,15 @@ Object.entries(density).forEach(([key, val]) => {
 });
 themeLines.push(`  --kj-density: var(--kj-density-default);`);
 
+// 8. Motion tokens
+const motion = tokens.motion;
+Object.entries(motion.duration).forEach(([key, val]) => {
+  themeLines.push(`  --kj-duration-${key}: ${val.$value};`);
+});
+Object.entries(motion.ease).forEach(([key, val]) => {
+  themeLines.push(`  --kj-ease-${key}: ${val.$value};`);
+});
+
 themeLines.push('}');
 themeLines.push('');
 
@@ -112,8 +121,11 @@ tailwindLines.push('@theme {');
 // Map tailwind variables
 // Semantic colors
 Object.keys(lightColors).forEach((key) => {
-  const kebab = toKebabCase(key);
-  tailwindLines.push(`  --color-${kebab}: var(--kj-${kebab});`);
+  let kebab = toKebabCase(key);
+  if (kebab.startsWith("bg-")) {
+    kebab = kebab.substring(3);
+  }
+  tailwindLines.push(`  --color-${kebab}: var(--kj-${toKebabCase(key)});`);
 });
 
 // Primary scale
@@ -142,6 +154,16 @@ Object.keys(radius).forEach((key) => {
 Object.keys(shadow).forEach((key) => {
   const kebab = toKebabCase(key);
   tailwindLines.push(`  --shadow-kj-${kebab}: var(--kj-shadow-${kebab});`);
+});
+
+// Motion Durations
+Object.keys(motion.duration).forEach((key) => {
+  tailwindLines.push(`  --animate-duration-${key}: var(--kj-duration-${key});`);
+});
+
+// Motion Easing
+Object.keys(motion.ease).forEach((key) => {
+  tailwindLines.push(`  --animate-ease-${key}: var(--kj-ease-${key});`);
 });
 
 tailwindLines.push('}');

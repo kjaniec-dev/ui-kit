@@ -212,7 +212,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Input placeholder=\"Jane Doe\" />"
+    "usageSnippet": "<Input placeholder=\"Kamil Janiec\" />"
   },
   {
     "name": "Textarea",
@@ -284,7 +284,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Select>\n        <option>Administrator</option>\n        <option>Editor</option>\n        <option>View only</option>\n      </Select>"
+    "usageSnippet": "<Select>\n        <option>Personal Portfolio</option>\n        <option>B2B Landlord SaaS</option>\n        <option>Accounting App</option>\n      </Select>"
   },
   {
     "name": "Checkbox",
@@ -1096,7 +1096,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<PageHeader\n      eyebrow=\"Open source\"\n      title=\"Projects\"\n      description=\"Things I've built and shipped.\"\n      actions={\n        <>\n          <Button size=\"sm\">View all</Button>\n          <Button size=\"sm\" variant=\"ghost\">GitHub</Button>\n        </>"
+    "usageSnippet": "<PageHeader\n        eyebrow=\"B2B SaaS\"\n        title=\"Dashboard Shell\"\n        description=\"The shell structure renders a responsive frame container with a sticky sidebar, topbar, and main canvas.\"\n        actions={<Button size=\"sm\">New Project</Button>}\n      />"
   },
   {
     "name": "EmptyState",
@@ -1273,5 +1273,146 @@
     ],
     "cva": null,
     "usageSnippet": "<DataTableColumn>\n  <!-- Content -->\n</DataTableColumn>"
+  },
+  {
+    "name": "FormField",
+    "importPath": "import { FormField } from \"@kjaniec-dev/ui\";",
+    "description": "React component FormField.",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<FormField label=\"Full Name\">\n      <Input placeholder=\"Kamil Janiec\" />"
+  },
+  {
+    "name": "ErrorState",
+    "importPath": "import { ErrorState } from \"@kjaniec-dev/ui\";",
+    "description": "React component ErrorState.",
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"Wystąpił błąd\"",
+        "description": ""
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onRetry",
+        "type": "() => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "retryLabel",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"Spróbuj ponownie\"",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ErrorState\n      title=\"Failed to Load Invoices\"\n      message=\"We encountered a temporary database error while retrieving your billing records.\"\n      onRetry={() => alert(\"Retrying...\")}\n      retryLabel=\"Reload Invoices\"\n    />"
+  },
+  {
+    "name": "Skeleton",
+    "importPath": "import { Skeleton } from \"@kjaniec-dev/ui\";",
+    "description": "React component Skeleton.",
+    "props": [
+      {
+        "name": "variant",
+        "type": "\"text\" | \"circular\" | \"rectangular\"",
+        "optional": true,
+        "defaultValue": "\"rectangular\"",
+        "description": ""
+      },
+      {
+        "name": "width",
+        "type": "string | number",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "height",
+        "type": "string | number",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Skeleton variant=\"text\" width=\"60%\" />"
+  },
+  {
+    "name": "DashboardShell",
+    "importPath": "import { DashboardShell } from \"@kjaniec-dev/ui\";",
+    "description": "React component DashboardShell.",
+    "props": [
+      {
+        "name": "sidebar",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "topbar",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<DashboardShell\n      sidebar={\n        <div className=\"p-6 flex flex-col gap-6 h-full bg-subtle\">\n          <div className=\"font-bold text-lg tracking-tight text-primary\">KJ Product Kit</div>\n          <nav className=\"flex flex-col gap-2\">\n            <a href=\"#\" className=\"text-sm font-medium text-foreground hover:text-primary transition-colors\">Dashboard</a>\n            <a href=\"#\" className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\">Projects</a>\n            <a href=\"#\" className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\">Invoices</a>\n            <a href=\"#\" className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\">Settings</a>\n          </nav>\n        </div>\n      }\n      topbar={\n        <div className=\"w-full flex items-center justify-between\">\n          <span className=\"text-sm font-medium text-muted-foreground\">Workspace / Personal</span>\n          <Button size=\"sm\" variant=\"ghost\">Profile</Button>\n        </div>\n      }\n    >\n      <PageHeader\n        eyebrow=\"B2B SaaS\"\n        title=\"Dashboard Shell\"\n        description=\"The shell structure renders a responsive frame container with a sticky sidebar, topbar, and main canvas.\"\n        actions={<Button size=\"sm\">New Project</Button>}\n      />"
   }
 ]

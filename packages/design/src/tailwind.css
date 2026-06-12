@@ -25,6 +25,16 @@
   --color-danger-surface: var(--kj-danger-surface);
   --color-info: var(--kj-info);
   --color-info-surface: var(--kj-info-surface);
+  --color-canvas: var(--kj-bg-canvas);
+  --color-subtle: var(--kj-bg-subtle);
+  --color-surface: var(--kj-bg-surface);
+  --color-elevated: var(--kj-bg-elevated);
+  --color-overlay: var(--kj-bg-overlay);
+  --color-border-subtle: var(--kj-border-subtle);
+  --color-border-strong: var(--kj-border-strong);
+  --color-chart1: var(--kj-chart1);
+  --color-chart2: var(--kj-chart2);
+  --color-chart3: var(--kj-chart3);
   --color-primary-50: var(--kj-primary-50);
   --color-primary-100: var(--kj-primary-100);
   --color-primary-200: var(--kj-primary-200);
@@ -60,4 +70,10 @@
   --shadow-kj-md: var(--kj-shadow-md);
   --shadow-kj-lg: var(--kj-shadow-lg);
   --shadow-kj-glow: var(--kj-shadow-glow);
+  --animate-duration-fast: var(--kj-duration-fast);
+  --animate-duration-normal: var(--kj-duration-normal);
+  --animate-duration-slow: var(--kj-duration-slow);
+  --animate-ease-standard: var(--kj-ease-standard);
+  --animate-ease-out: var(--kj-ease-out);
+  --animate-ease-spring: var(--kj-ease-spring);
 }
