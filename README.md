@@ -21,7 +21,7 @@ packages/
     src/components/ All components + Storybook stories
     src/index.ts    Barrel export
     tsup.config.ts  Builds ESM + CJS + .d.ts into dist/
-site/           ← Interactive component gallery (single HTML, no build)
+site/           ← Interactive component gallery (Vite React app)
 docs/           ← Design guidelines
 ```
 
@@ -31,9 +31,9 @@ docs/           ← Design guidelines
 npm install
 ```
 
-**Component gallery** (no build needed — just open):
+**Component gallery** (Vite dev server):
 ```bash
-npx serve site        # → http://localhost:3000
+npm run site:dev      # → http://localhost:5173
 ```
 
 **Storybook** (live component dev):
@@ -56,15 +56,24 @@ Root CSS (import order matters):
 
 Components:
 ```tsx
-import { Button, Badge, Card, toast } from "@kjaniec-dev/ui";
+import { Button, Card, ToastProvider, useToast } from "@kjaniec-dev/ui";
+
+function SaveButton() {
+  const { toast } = useToast();
+  return (
+    <Button onClick={() => toast({ message: "Saved!", tone: "success" })}>
+      Save
+    </Button>
+  );
+}
 
 export default function App() {
   return (
-    <Card>
-      <Button onClick={() => toast({ message: "Saved!", tone: "success" })}>
-        Save
-      </Button>
-    </Card>
+    <ToastProvider>
+      <Card className="p-6">
+        <SaveButton />
+      </Card>
+    </ToastProvider>
   );
 }
 ```

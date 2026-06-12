@@ -1,4 +1,4 @@
-import { parseComponents, parseTokens } from "./extractor";
+import { parseComponents, parseTokens } from "./extractor.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -53,8 +53,8 @@ function runTest() {
       if (node.exportClause && ts.isNamedExports(node.exportClause)) {
         for (const element of node.exportClause.elements) {
           const exportName = element.name.getText();
-          // Filter only capitalized exports (React components)
-          if (/^[A-Z]/.test(exportName)) {
+          // Filter only capitalized exports (React components) and ignore Props/Variants/Options/Tone/Option
+          if (/^[A-Z]/.test(exportName) && !/(Props|Variants|Options|Tone|Option)$/.test(exportName)) {
             expectedExports.push(exportName);
           }
         }

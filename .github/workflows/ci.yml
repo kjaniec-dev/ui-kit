@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    name: Verify & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify tokens structure
+        run: npm run tokens:check
+
+      - name: Run typecheck
+        run: npm run typecheck
+
+      - name: Run unit & integration tests
+        run: npm run test
+
+      - name: Build workspaces
+        run: npm run build
+
+      - name: Build Storybook assets
+        run: npm run build-storybook

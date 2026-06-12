@@ -118,7 +118,9 @@ function parseCvaCall(node: ts.CallExpression): CvaInfo | null {
 
         if (ts.isObjectLiteralExpression(variantGroup.initializer)) {
           for (const opt of variantGroup.initializer.properties) {
-            options.push(opt.name.getText().replace(/['"]/g, ""));
+            if (opt.name) {
+              options.push(opt.name.getText().replace(/['"]/g, ""));
+            }
           }
         }
         result.variants[groupName] = options;
@@ -163,8 +165,8 @@ export function parseComponents(): ComponentInfo[] {
       if (node.exportClause && ts.isNamedExports(node.exportClause)) {
         for (const element of node.exportClause.elements) {
           const exportName = element.name.getText();
-          // Filter only capitalized exports (React components)
-          if (/^[A-Z]/.test(exportName)) {
+          // Filter only capitalized exports (React components) and ignore Props/Variants/Options/Tone/Option
+          if (/^[A-Z]/.test(exportName) && !/(Props|Variants|Options|Tone|Option)$/.test(exportName)) {
             exports.push({
               name: exportName,
               fileRelativePath: relPath
@@ -370,13 +372,12 @@ export function parseComponents(): ComponentInfo[] {
       }
 
       // If this file has CVA variants, add them as props if not already defined
-      let finalCva: CvaInfo | null = null;
-      if (fileCva) {
-        finalCva = fileCva;
-        for (const variantGroup of Object.keys(fileCva.variants)) {
+      const finalCva = fileCva as any;
+      if (finalCva) {
+        for (const variantGroup of Object.keys(finalCva.variants)) {
           const existingProp = componentProps.find(p => p.name === variantGroup);
-          const typeStr = fileCva.variants[variantGroup].map(v => `"${v}"`).join(" | ");
-          const defaultVal = fileCva.defaultVariants[variantGroup] || null;
+          const typeStr = (finalCva.variants[variantGroup] as string[]).map((v: string) => `"${v}"`).join(" | ");
+          const defaultVal = finalCva.defaultVariants[variantGroup] || null;
 
           if (existingProp) {
             existingProp.type = typeStr;

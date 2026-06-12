@@ -1,5 +1,3 @@
-"use client";
-
 // @kjaniec-dev/ui — barrel export
 // React component library built on the @kjaniec-dev/design token system.
 
@@ -59,3 +57,6 @@ export {
   type ToastOptions, type ToastTone,
 } from "./components/toast";
 export { PageHeader, type PageHeaderProps } from "./components/page-header";
+export { EmptyState, type EmptyStateProps } from "./components/empty-state";
+export { MetricCard, type MetricCardProps } from "./components/metric-card";
+export { DataTable, type DataTableProps, type DataTableColumn } from "./components/data-table";

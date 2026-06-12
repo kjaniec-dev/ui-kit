@@ -1,149 +1,137 @@
-# Publishing @kjaniec-dev/design and @kjaniec-dev/ui
+# Publishing @kjaniec-dev/design, @kjaniec-dev/ui, and @kjaniec-dev/ui-mcp
 
-A step-by-step guide for publishing both packages and deploying the gallery to Netlify.
+A step-by-step guide for publishing the design system packages to npm and deploying the interactive gallery to Netlify.
 
 ---
 
-## 1. Repo structure
+## 1. Repo Structure
 
-The monorepo at `github.com/kjaniec-dev/ui-kit` should look like this once the UI
-package is added:
+The monorepo structure is as follows:
 
 ```
-ui-kit/
+kj-product-kit/
 ├── packages/
-│   ├── design/          ← already in repo — tokens only, no build step
-│   └── ui/              ← copy kj-ui/ here from this project
-├── site/                ← copy site/ here for Netlify gallery
-├── netlify.toml         ← copy from this project
-└── package.json         ← root workspace manifest (see below)
-```
-
-### Root package.json (add if missing)
-
-```json
-{
-  "name": "kj-product-kit",
-  "private": true,
-  "workspaces": ["packages/*"]
-}
+│   ├── design/          ← Design tokens, CSS custom properties, and Tailwind theme
+│   ├── ui/              ← React component library
+│   └── mcp/             ← Model Context Protocol server for AI context
+├── site/                ← Vite React interactive component gallery
+├── netlify.toml         ← Netlify deployment configuration
+└── package.json         ← Root workspace manifest
 ```
 
 ---
 
-## 2. Fix packages/design/package.json
+## 2. The Design Package
 
-The existing file is missing `publishConfig`. Replace it with the version in
-`repo-snippets/packages/design/package.json` (in this project):
+The design package at `packages/design` parses the source-of-truth `tokens.json` to generate the CSS custom properties in `src/theme.css` and the Tailwind CSS `@theme` bridge in `src/tailwind.css`.
 
-```json
-{
-  "publishConfig": { "access": "public" }
-}
+To compile design tokens before publishing:
+```bash
+cd packages/design
+npm run build
 ```
 
-This is the only change needed — the design package has no build step (it ships
-its CSS and JSON source files directly).
+This runs the `build-tokens.js` script to ensure all CSS styles are synchronized.
 
 ---
 
-## 3. Add packages/ui
+## 3. The UI Package
 
-Copy the `kj-ui/` folder from this project into `packages/ui/` in the repo.
-It already contains:
+The React components package at `packages/ui` contains:
 
-| File | Purpose |
-|---|---|
-| `package.json` | Correct exports, peerDeps, `publishConfig` |
-| `tsup.config.ts` | Builds ESM + CJS + `.d.ts` into `dist/` |
-| `src/index.ts` | Barrel export of every component |
-| `src/components/*.tsx` | All components + Storybook stories |
-| `.storybook/` | Storybook 8 config with a11y + Tailwind v4 |
+- `tsup.config.ts`: Builds ESM, CommonJS, and TypeScript declaration files into `dist/`.
+- `src/index.ts`: Barrel export of all components (excluding `"use client"` so that static components can be imported in React Server Components without overhead).
+- `src/components/`: All components and Storybook stories.
+- `.storybook/`: Storybook 8 config equipped with a11y tests, interaction tests, and Tailwind v4.
 
 ---
 
 ## 4. Authenticate with npm
 
+Before publishing, ensure you are logged in to the registry with appropriate permissions:
+
 ```bash
-npm login        # log in to npmjs.com with the @kjaniec-dev org account
-npm whoami       # should print your username
+npm login        # log in to npmjs.com
+npm whoami       # verify your logged-in username
 ```
 
 ---
 
 ## 5. Publish @kjaniec-dev/design
 
+To publish the design tokens package:
+
 ```bash
 cd packages/design
+npm run build      # ensure tokens are generated
 npm publish
-# → Published @kjaniec-dev/design@0.1.0
 ```
-
-No build step. The `files` array in `package.json` controls exactly what ships:
-`theme.css`, `tailwind.css`, `tokens.json`, and `src/`.
 
 ---
 
 ## 6. Publish @kjaniec-dev/ui
 
+To publish the React UI components library:
+
 ```bash
 cd packages/ui
 npm publish
-# prepublishOnly hook runs automatically:
-#   1. rm -rf dist
-#   2. tsup  → dist/index.js, dist/index.cjs, dist/index.d.ts
-#   3. cp src/ui.css dist/ui.css
-# → Published @kjaniec-dev/ui@0.1.0
 ```
 
-> **Note:** If you get a 403, run `npm publish --access public` once to set the
-> scope visibility, then future publishes won't need the flag.
+The `prepublishOnly` hook runs automatically:
+1. Cleans the `dist` folder.
+2. Compiles TypeScript source files into ESM, CJS, and `.d.ts` definitions.
+3. Copies component stylesheet assets.
 
 ---
 
-## 7. Publish @kjaniec-dev/mcp
+## 7. Publish @kjaniec-dev/ui-mcp
+
+To publish the MCP server package:
 
 ```bash
 cd packages/mcp
 npm publish
-# prepublishOnly hook runs automatically:
-#   1. rm -rf dist
-#   2. tsup  → dist/index.js (copies tokens and component sources into dist/embedded)
-# → Published @kjaniec-dev/mcp@0.4.0
 ```
 
-> **Note:** If you get a 403, run `npm publish --access public` once to set the
-> scope visibility, then future publishes won't need the flag.
+The `prepublishOnly` hook compiles the MCP server executable into `dist/index.js` and packs metadata.
 
 ---
 
 ## 8. Using the packages in an app
 
+Install the packages:
 ```bash
 npm install @kjaniec-dev/ui @kjaniec-dev/design
 ```
 
-In your root CSS (import order matters):
-
+In your root CSS stylesheet (import order matters):
 ```css
-@import "@kjaniec-dev/design/tailwind.css"; /* tokens → Tailwind theme */
-@import "@kjaniec-dev/ui/ui.css";           /* component-specific styles (if any) */
+@import "tailwindcss";
+@import "@kjaniec-dev/design/tailwind.css";
+@import "@kjaniec-dev/ui/ui.css";
 ```
 
-In `tailwind.config.ts` (Tailwind v4, CSS-first — nothing extra needed):
-the `@theme` block in `tailwind.css` registers all `--kj-*` tokens as utilities
-(`bg-primary`, `text-muted-foreground`, `rounded-kj-md`, `shadow-kj-sm`, …).
-
-In your component:
-
+In your component files:
 ```tsx
-import { Button, Badge, Card, toast } from "@kjaniec-dev/ui";
+import { Button, Card, ToastProvider, useToast } from "@kjaniec-dev/ui";
 
-export default function App() {
+function SaveButton() {
+  const { toast } = useToast();
   return (
     <Button onClick={() => toast({ message: "Saved!", tone: "success" })}>
       Save
     </Button>
+  );
+}
+
+export default function App() {
+  return (
+    <ToastProvider>
+      <Card className="p-6">
+        <SaveButton />
+      </Card>
+    </ToastProvider>
   );
 }
 ```
@@ -152,43 +140,36 @@ export default function App() {
 
 ## 9. Deploy the gallery to Netlify
 
-The `site/` folder is a single self-contained `index.html` — no build needed.
+The component gallery (`site/`) is built using Vite and deployed automatically.
 
-### Option A — Netlify CLI
-
-```bash
-npm install -g netlify-cli   # once
-netlify login
-netlify deploy --prod        # netlify.toml points publish = "site"
-```
-
-### Option B — Drag & drop
-
-1. Open [app.netlify.com](https://app.netlify.com)
-2. Drag the `site/` folder onto the deploy area
-3. Done — you get a `*.netlify.app` URL instantly
-
-### Option C — Connect the GitHub repo
+### Option A — Connected GitHub Repo (Recommended)
 
 In Netlify → **Add new site → Import from Git**:
-- Repository: `kjaniec-dev/ui-kit`
-- Branch: `main`
-- Build command: *(leave empty)*
-- Publish directory: `site`
+- **Repository**: `kjaniec-dev/ui-kit`
+- **Branch**: `main`
+- **Build command**: `npm run build`
+- **Publish directory**: `site/dist`
 
-Every push to `main` auto-deploys the gallery.
+Every push to `main` will build the site and deploy it automatically.
+
+### Option B — Netlify CLI
+
+Run the following commands in the root of the project:
+
+```bash
+npm install -g netlify-cli   # install CLI once
+netlify login
+netlify deploy --prod        # reads netlify.toml and deploys site/dist
+```
 
 ---
 
 ## 10. Bumping versions
 
-The packages start at `0.1.0` or `0.4.0`. For future releases:
+For future releases, bump package versions inside their respective directories or using Workspace commands:
 
 ```bash
-# In packages/design, packages/ui, or packages/mcp:
-npm version patch   # e.g., 0.4.0 → 0.4.1
-npm version minor   # e.g., 0.4.0 → 0.5.0
-npm version major   # e.g., 0.4.0 → 1.0.0
+# Example patch release (0.4.0 -> 0.4.1)
+npm version patch
 npm publish
 ```
-

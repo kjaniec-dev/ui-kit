@@ -39,8 +39,23 @@ export function DropdownMenu({ children, className }: { children: React.ReactNod
 export const DropdownMenuTrigger = React.forwardRef<
   HTMLButtonElement,
   React.ButtonHTMLAttributes<HTMLButtonElement> & { asChild?: boolean }
->(({ onClick, ...props }, ref) => {
+>(({ onClick, asChild, ...props }, ref) => {
   const ctx = React.useContext(MenuContext)!;
+  if (asChild) {
+    const child = React.Children.only(props.children) as React.ReactElement;
+    return React.cloneElement(child, {
+      ref,
+      ...props,
+      ...child.props,
+      onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
+        ctx.setOpen(!ctx.open);
+        onClick?.(e);
+        child.props.onClick?.(e);
+      },
+      "aria-haspopup": "menu",
+      "aria-expanded": ctx.open,
+    });
+  }
   return (
     <button
       ref={ref}
@@ -63,12 +78,50 @@ export interface DropdownMenuContentProps extends React.HTMLAttributes<HTMLDivEl
 
 export function DropdownMenuContent({ className, align = "start", children, ...props }: DropdownMenuContentProps) {
   const ctx = React.useContext(MenuContext)!;
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!ctx.open) return;
+    const container = ref.current;
+    if (container) {
+      const items = Array.from(container.querySelectorAll<HTMLButtonElement | HTMLAnchorElement>('[role="menuitem"]'));
+      if (items.length > 0) {
+        setTimeout(() => items[0].focus(), 50);
+      }
+    }
+  }, [ctx.open]);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const container = ref.current;
+    if (!container) return;
+
+    const items = Array.from(container.querySelectorAll<HTMLElement>('[role="menuitem"]'));
+    if (items.length === 0) return;
+
+    const currentIndex = items.indexOf(document.activeElement as HTMLElement);
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const nextIndex = (currentIndex + 1) % items.length;
+      items[nextIndex].focus();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const prevIndex = (currentIndex - 1 + items.length) % items.length;
+      items[prevIndex].focus();
+    } else if (e.key === "Tab" || e.key === "Escape") {
+      ctx.setOpen(false);
+    }
+  };
+
   if (!ctx.open) return null;
   return (
     <div
+      ref={ref}
       role="menu"
+      tabIndex={-1}
+      onKeyDown={handleKeyDown}
       className={cn(
-        "absolute top-[calc(100%+6px)] z-40 min-w-[200px] p-1.5 rounded-kj-md bg-surface border border-border shadow-kj-lg",
+        "absolute top-[calc(100%+6px)] z-40 min-w-[200px] p-1.5 rounded-kj-md bg-surface border border-border shadow-kj-lg outline-none",
         "animate-[kjpop_.12s_ease]",
         align === "end" ? "right-0" : "left-0",
         className
