@@ -58,6 +58,12 @@ import {
   ToastProvider,
   useToast,
   buttonVariants,
+  MetricCard,
+  DataTable,
+  FormField,
+  ErrorState,
+  Skeleton,
+  DashboardShell,
   cn
 } from "@kjaniec-dev/ui";
 import "./index.css";
@@ -215,6 +221,48 @@ function Grid(p: GridProps) {
   );
 }
 
+interface ProjectRow {
+  name: string;
+  status: "success" | "warning" | "danger" | "info";
+  owner: string;
+  budget: string;
+}
+
+const projectColumns = [
+  {
+    header: "Project Name",
+    accessor: (row: ProjectRow) => <span className="font-semibold">{row.name}</span>,
+  },
+  {
+    header: "Owner",
+    accessor: (row: ProjectRow) => row.owner,
+  },
+  {
+    header: "Status",
+    accessor: (row: ProjectRow) => {
+      const badgeVariant = {
+        success: "success" as const,
+        warning: "warning" as const,
+        danger: "danger" as const,
+        info: "info" as const,
+      }[row.status];
+      return <Badge variant={badgeVariant} dot>{row.status}</Badge>;
+    },
+  },
+  {
+    header: "Budget",
+    accessor: (row: ProjectRow) => <span className="font-mono">{row.budget}</span>,
+    className: "text-right",
+  },
+];
+
+const sampleProjects: ProjectRow[] = [
+  { name: "KJ UI Kit v0.6.0", status: "success", owner: "K. Janiec", budget: "$15,400" },
+  { name: "SaaS Dashboard Phase 2", status: "warning", owner: "M. Kowalski", budget: "$8,200" },
+  { name: "Database Integration", status: "danger", owner: "J. Nowak", budget: "$22,000" },
+  { name: "Marketing Landing Page", status: "info", owner: "A. Zielinski", budget: "$4,500" },
+];
+
 const NAV = [
   ["buttons", "Buttons"],
   ["badges", "Badges"],
@@ -225,6 +273,7 @@ const NAV = [
   ["navigation", "Navigation"],
   ["data", "Table"],
   ["overlays", "Overlays"],
+  ["layouts", "Layouts"],
 ];
 
 function Gallery() {
@@ -239,6 +288,7 @@ function Gallery() {
   const [prog, setProg] = React.useState(42);
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
   const [activeSection, setActiveSection] = React.useState("buttons");
+  const [tableState, setTableState] = React.useState<"default" | "loading" | "empty" | "error">("default");
   const emailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
 
   React.useEffect(() => {
@@ -280,7 +330,7 @@ function Gallery() {
           </div>
           <div>
             <div className="font-bold text-sm leading-tight">@kjaniec-dev/ui</div>
-            <div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.4.0</div>
+            <div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.6.0</div>
           </div>
         </div>
         <div className="text-[0.68rem] uppercase tracking-[0.09em] font-semibold text-muted-foreground px-3 pt-3 pb-1.5">
@@ -452,6 +502,32 @@ function Gallery() {
                 </div>
               </Box>
             </Grid>
+            <Box className="mt-5">
+              <Sub>ErrorState & Skeletons</Sub>
+              <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))" }}>
+                <ErrorState
+                  title="Database Sync Failed"
+                  message="We could not sync the latest database tables because of an authentication error."
+                  onRetry={() => alert("Retrying sync...")}
+                  retryLabel="Retry Sync"
+                  className="min-h-[220px] p-5"
+                />
+                <div className="p-5 border border-border rounded-kj-xl space-y-4 bg-surface flex flex-col justify-between">
+                  <div className="flex items-center gap-3">
+                    <Skeleton variant="circular" width={40} height={40} />
+                    <div className="space-y-1.5 flex-1">
+                      <Skeleton variant="text" width="40%" height={10} />
+                      <Skeleton variant="text" width="25%" height={8} />
+                    </div>
+                  </div>
+                  <div className="space-y-2 pt-2">
+                    <Skeleton variant="text" width="100%" />
+                    <Skeleton variant="text" width="90%" />
+                  </div>
+                  <Skeleton variant="rectangular" width="100%" height={60} />
+                </div>
+              </div>
+            </Box>
           </Sec>
 
           <Sec id="forms" title="Forms" desc="Fields with labels, leading icons, selects, textareas and live validation.">
@@ -501,6 +577,31 @@ function Gallery() {
                   <Input id="error-field" value="not-ok" error readOnly />
                   <Hint error>Only lowercase letters and hyphens are allowed.</Hint>
                 </Field>
+              </div>
+            </Box>
+            <Box>
+              <Sub>FormField (Unified wrapper)</Sub>
+              <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
+                <FormField
+                  label="Email address"
+                  required
+                  hint="We'll use it to sign you in."
+                  error={email.length > 0 && !emailOk ? "Enter a valid email address." : undefined}
+                >
+                  <Input
+                    type="email"
+                    placeholder="jane@company.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </FormField>
+                <FormField label="Target Workspace">
+                  <Select>
+                    <option>B2B SaaS Portal</option>
+                    <option>Developer Dashboard</option>
+                    <option>Portfolio Site</option>
+                  </Select>
+                </FormField>
               </div>
             </Box>
           </Sec>
@@ -586,6 +687,33 @@ function Gallery() {
               <Stat label="MRR" value="$128.4k" delta="12.3% MoM" trend="up" />
               <Stat label="Active users" value="8,942" delta="4.1% MoM" trend="up" />
               <Stat label="Churn" value="2.8%" delta="0.6% MoM" trend="down" />
+            </div>
+            <Sub className="mt-5">Metric Cards (v0.6.0)</Sub>
+            <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
+              <MetricCard
+                title="Active Subscriptions"
+                value="1,429"
+                trend="+8.2%"
+                trendDirection="up"
+                description="Compared to last month"
+                icon={IcoPlus}
+              />
+              <MetricCard
+                title="Failed Payments"
+                value="23"
+                trend="-4.1%"
+                trendDirection="down"
+                description="Action required for 12 accounts"
+                icon={IcoWarn}
+              />
+              <MetricCard
+                title="Server Response Time"
+                value="142ms"
+                trend="Stable"
+                trendDirection="neutral"
+                description="Avg latency across all zones"
+                icon={IcoGear}
+              />
             </div>
           </Sec>
 
@@ -710,6 +838,48 @@ function Gallery() {
                 </TableBody>
               </Table>
             </TableWrap>
+            <Sub className="mt-5">DataTable (v0.6.0 with built-in loading/empty/error states)</Sub>
+            <Box>
+              <div className="flex flex-wrap gap-3 mb-4">
+                <Button
+                  variant={tableState === "default" ? "primary" : "outline"}
+                  size="sm"
+                  onClick={() => setTableState("default")}
+                >
+                  Default
+                </Button>
+                <Button
+                  variant={tableState === "loading" ? "primary" : "outline"}
+                  size="sm"
+                  onClick={() => setTableState("loading")}
+                >
+                  Loading
+                </Button>
+                <Button
+                  variant={tableState === "empty" ? "primary" : "outline"}
+                  size="sm"
+                  onClick={() => setTableState("empty")}
+                >
+                  Empty
+                </Button>
+                <Button
+                  variant={tableState === "error" ? "primary" : "outline"}
+                  size="sm"
+                  onClick={() => setTableState("error")}
+                >
+                  Error
+                </Button>
+              </div>
+              <DataTable
+                columns={projectColumns}
+                data={tableState === "empty" ? [] : sampleProjects}
+                loading={tableState === "loading"}
+                error={tableState === "error" ? "Could not retrieve project records. Please try again." : undefined}
+                emptyTitle="No projects found"
+                emptyDescription="Get started by creating a new SaaS project."
+                emptyAction={<Button size="sm">Create Project</Button>}
+              />
+            </Box>
           </Sec>
 
           <Sec id="overlays" title="Overlays" desc="Modal and tooltips.">
@@ -721,6 +891,53 @@ function Gallery() {
                 </Tooltip>
               </div>
             </Box>
+          </Sec>
+
+          <Sec id="layouts" title="Layouts" desc="Full-page shell structures for dashboard interfaces.">
+            <Sub>DashboardShell Preview (v0.6.0)</Sub>
+            <div className="border border-border rounded-kj-xl overflow-hidden bg-canvas h-[350px] relative">
+              <DashboardShell
+                className="h-full min-h-0 [&_aside]:md:h-full [&_aside>div]:md:h-full"
+                sidebar={
+                  <div className="p-4 space-y-4 h-full flex flex-col justify-between">
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 rounded bg-primary text-primary-foreground flex items-center justify-center font-bold text-xs">KJ</div>
+                        <span className="text-xs font-bold font-mono">Starter</span>
+                      </div>
+                      <div className="h-px bg-border" />
+                      <div className="space-y-1">
+                        <div className="h-6 rounded bg-primary/10 text-xs px-2 flex items-center text-foreground font-medium">Dashboard</div>
+                        <div className="h-6 rounded text-xs px-2 flex items-center text-muted-foreground hover:bg-muted/50 cursor-pointer">Analytics</div>
+                        <div className="h-6 rounded text-xs px-2 flex items-center text-muted-foreground hover:bg-muted/50 cursor-pointer">Settings</div>
+                      </div>
+                    </div>
+                    <div className="text-[10px] text-muted-foreground font-mono">v0.6.0</div>
+                  </div>
+                }
+                topbar={
+                  <div className="flex items-center justify-between w-full h-full">
+                    <div className="text-xs font-semibold">Overview</div>
+                    <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center text-[10px]">US</div>
+                  </div>
+                }
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-1">
+                      <h3 className="text-sm font-bold m-0">Welcome back, Admin</h3>
+                      <p className="text-[10px] text-muted-foreground m-0">Here's what is happening today.</p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    <Card className="p-3"><div className="text-[10px] text-muted-foreground">MRR</div><div className="text-sm font-bold">$12.4k</div></Card>
+                    <Card className="p-3"><div className="text-[10px] text-muted-foreground">Sales</div><div className="text-sm font-bold">142</div></Card>
+                    <Card className="p-3"><div className="text-[10px] text-muted-foreground">Active</div><div className="text-sm font-bold">98%</div></Card>
+                  </div>
+                  <Card className="p-3 h-20 flex items-center justify-center text-xs text-muted-foreground">Main Content Workspace</Card>
+                </div>
+              </DashboardShell>
+            </div>
           </Sec>
 
           <footer className="text-[0.8rem] text-muted-foreground pt-8 mt-4 border-t border-border">
@@ -763,7 +980,7 @@ function Gallery() {
               </div>
               <div>
                 <div className="font-bold text-sm leading-tight">@kjaniec-dev/ui</div>
-                <div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.4.0</div>
+                <div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.6.0</div>
               </div>
             </div>
             <div className="text-[0.68rem] uppercase tracking-[0.09em] font-semibold text-muted-foreground px-3 pt-3 pb-1.5">
