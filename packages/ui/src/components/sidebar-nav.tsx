@@ -56,7 +56,7 @@ export function SidebarNav({ className, groups, currentHref, ...props }: Sidebar
               );
 
               const itemClass = cn(
-                "group flex items-center justify-between px-3 py-2 rounded-kj-md text-[0.85rem] font-semibold select-none cursor-pointer transition-all duration-150",
+                "group flex items-center justify-between gap-3 px-3 py-2 rounded-kj-md text-[0.85rem] font-semibold select-none cursor-pointer transition-all duration-150",
                 isActive
                   ? "bg-primary/10 text-primary border-l-2 border-primary rounded-l-none pl-2.5"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground border-l-2 border-transparent"
