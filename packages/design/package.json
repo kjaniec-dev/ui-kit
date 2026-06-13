@@ -1,6 +1,6 @@
 {
   "name": "@kjaniec-dev/design",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Design tokens and Tailwind v4 theme for the KJ Product Kit",
   "license": "MIT",
   "author": "kjaniec-dev",
