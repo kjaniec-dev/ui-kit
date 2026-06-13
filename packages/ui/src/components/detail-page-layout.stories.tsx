@@ -41,7 +41,7 @@ export const Default = {
       <Card className="p-6">
         <h3 className="text-base font-bold mb-3">Billing Address</h3>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Krzysztof Janiec<br />
+          John Doe<br />
           ul. Marszałkowska 10/24<br />
           00-001 Warszawa, Poland
         </p>

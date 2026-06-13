@@ -212,7 +212,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Input placeholder=\"Krzysztof Janiec\" />"
+    "usageSnippet": "<Input placeholder=\"John Doe\" />"
   },
   {
     "name": "Textarea",
@@ -1592,7 +1592,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<FormField label=\"Full Name\">\n      <Input placeholder=\"Krzysztof Janiec\" />"
+    "usageSnippet": "<FormField label=\"Full Name\">\n      <Input placeholder=\"John Doe\" />"
   },
   {
     "name": "ErrorState",
@@ -1754,7 +1754,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<SettingsLayout\n      title=\"Profile Settings\"\n      description=\"Customize how your profile appears to other members.\"\n      sidebar={\n        <div className=\"flex flex-row lg:flex-col gap-1 w-full\">\n          <Button variant=\"ghost\" size=\"sm\" className=\"justify-start bg-primary/10 text-primary\">General</Button>\n          <Button variant=\"ghost\" size=\"sm\" className=\"justify-start text-muted-foreground\">Team</Button>\n          <Button variant=\"ghost\" size=\"sm\" className=\"justify-start text-muted-foreground\">Billing</Button>\n        </div>\n      }\n    >\n      <Card className=\"p-6 space-y-4\">\n        <div className=\"grid grid-cols-2 gap-4\">\n          <TextField label=\"First Name\" defaultValue=\"Krzysztof\" />"
+    "usageSnippet": "<SettingsLayout\n      title=\"Profile Settings\"\n      description=\"Customize how your profile appears to other members.\"\n      sidebar={\n        <div className=\"flex flex-row lg:flex-col gap-1 w-full\">\n          <Button variant=\"ghost\" size=\"sm\" className=\"justify-start bg-primary/10 text-primary\">General</Button>\n          <Button variant=\"ghost\" size=\"sm\" className=\"justify-start text-muted-foreground\">Team</Button>\n          <Button variant=\"ghost\" size=\"sm\" className=\"justify-start text-muted-foreground\">Billing</Button>\n        </div>\n      }\n    >\n      <Card className=\"p-6 space-y-4\">\n        <div className=\"grid grid-cols-2 gap-4\">\n          <TextField label=\"First Name\" defaultValue=\"John\" />"
   },
   {
     "name": "DetailPageLayout",

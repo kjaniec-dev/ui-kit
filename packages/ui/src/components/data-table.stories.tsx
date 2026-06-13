@@ -12,7 +12,7 @@ interface UserRow {
 }
 
 const sampleData: UserRow[] = [
-  { id: "1", name: "Krzysztof Janiec", email: "contact@kjaniec.dev", role: "Owner", status: "active" },
+  { id: "1", name: "John Doe", email: "john.doe@gmail.com", role: "Owner", status: "active" },
   { id: "2", name: "Alice Kovalsky", email: "alice@example.com", role: "Administrator", status: "active" },
   { id: "3", name: "Bob Peterson", email: "bob@example.com", role: "Member", status: "pending" },
   { id: "4", name: "Charlie Adams", email: "charlie@example.com", role: "Member", status: "suspended" },
