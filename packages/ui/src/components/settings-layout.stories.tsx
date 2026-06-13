@@ -26,10 +26,10 @@ export const Default = {
     >
       <Card className="p-6 space-y-4">
         <div className="grid grid-cols-2 gap-4">
-          <TextField label="First Name" defaultValue="Kamil" />
+          <TextField label="First Name" defaultValue="Krzysztof" />
           <TextField label="Last Name" defaultValue="Janiec" />
         </div>
-        <TextField label="Email Address" defaultValue="kamil@kjaniec.dev" />
+        <TextField label="Email Address" defaultValue="contact@kjaniec.dev" />
         <div className="flex justify-end pt-2">
           <Button size="sm">Save profile</Button>
         </div>

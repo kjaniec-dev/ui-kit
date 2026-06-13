@@ -14,7 +14,7 @@ export default meta;
 export const Basic = {
   render: () => (
     <FormField label="Full Name">
-      <Input placeholder="Kamil Janiec" />
+      <Input placeholder="Krzysztof Janiec" />
     </FormField>
   ),
 };
@@ -22,7 +22,7 @@ export const Basic = {
 export const Required = {
   render: () => (
     <FormField label="Email address" required>
-      <Input type="email" placeholder="kamil@janiec.dev" />
+      <Input type="email" placeholder="contact@kjaniec.dev" />
     </FormField>
   ),
 };

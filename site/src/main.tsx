@@ -1197,10 +1197,10 @@ function Gallery() {
                     <Card className="p-6 space-y-4">
                       <h3 className="text-base font-bold m-0">Personal Profile</h3>
                       <div className="grid grid-cols-2 gap-4">
-                        <TextField label="First Name" defaultValue="Kamil" />
+                        <TextField label="First Name" defaultValue="Krzysztof" />
                         <TextField label="Last Name" defaultValue="Janiec" />
                       </div>
-                      <TextField label="Contact Email" defaultValue="kamil@kjaniec.dev" hint="We will use this to contact you for billing." />
+                      <TextField label="Contact Email" defaultValue="contact@kjaniec.dev" hint="We will use this to contact you for billing." />
                       <div className="pt-2 flex justify-end">
                         <Button size="sm" onClick={() => toast({ message: "Profile saved successfully", tone: "success" })}>Save Profile</Button>
                       </div>
