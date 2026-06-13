@@ -122,7 +122,9 @@ tailwindLines.push('@theme {');
 // Semantic colors
 Object.keys(lightColors).forEach((key) => {
   let kebab = toKebabCase(key);
-  if (kebab.startsWith("bg-")) {
+  if (kebab === "bg-surface") {
+    // Keep bg-surface as-is to avoid duplicate/conflict with color-surface
+  } else if (kebab.startsWith("bg-")) {
     kebab = kebab.substring(3);
   }
   tailwindLines.push(`  --color-${kebab}: var(--kj-${toKebabCase(key)});`);

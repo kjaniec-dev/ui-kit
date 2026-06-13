@@ -1,5 +1,5 @@
 # Netlify config for the @kjaniec-dev/ui component gallery.
-# The site is a single self-contained HTML file (no build step) served from ./site.
+# The site is a Vite React app served from site/dist after being built.
 
 [build]
   publish = "site/dist"

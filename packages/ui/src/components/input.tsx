@@ -45,6 +45,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 );
 Input.displayName = "Input";
 
+import { FormField } from "./form-field";
+
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: boolean;
 }
@@ -65,3 +67,21 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   )
 );
 Textarea.displayName = "Textarea";
+
+export interface TextFieldProps extends Omit<React.ComponentPropsWithoutRef<typeof Input>, "error"> {
+  label: string;
+  hint?: string;
+  error?: string;
+  required?: boolean;
+}
+
+export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
+  ({ label, hint, error, required, className, ...props }, ref) => {
+    return (
+      <FormField label={label} hint={hint} error={error} required={required} className={className}>
+        <Input ref={ref} error={!!error} {...props} />
+      </FormField>
+    );
+  }
+);
+TextField.displayName = "TextField";

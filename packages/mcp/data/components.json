@@ -231,6 +231,43 @@
     "usageSnippet": "<Textarea placeholder=\"What is this project about?\" />"
   },
   {
+    "name": "TextField",
+    "importPath": "import { TextField } from \"@kjaniec-dev/ui\";",
+    "description": "React component TextField.",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<TextField label=\"Connection String\" defaultValue=\"postgresql://db.kjaniec.dev:5432\" />"
+  },
+  {
     "name": "Label",
     "importPath": "import { Label } from \"@kjaniec-dev/ui\";",
     "description": "React component Label.",
@@ -287,6 +324,43 @@
     "usageSnippet": "<Select>\n        <option>Personal Portfolio</option>\n        <option>B2B Landlord SaaS</option>\n        <option>Accounting App</option>\n      </Select>"
   },
   {
+    "name": "SelectField",
+    "importPath": "import { SelectField } from \"@kjaniec-dev/ui\";",
+    "description": "React component SelectField.",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<SelectField>\n  <!-- Content -->\n</SelectField>"
+  },
+  {
     "name": "Checkbox",
     "importPath": "import { Checkbox } from \"@kjaniec-dev/ui\";",
     "description": "React component Checkbox.",
@@ -301,6 +375,36 @@
     ],
     "cva": null,
     "usageSnippet": "<Checkbox defaultChecked label=\"Email notifications\" />"
+  },
+  {
+    "name": "CheckboxField",
+    "importPath": "import { CheckboxField } from \"@kjaniec-dev/ui\";",
+    "description": "React component CheckboxField.",
+    "props": [
+      {
+        "name": "label",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<CheckboxField label=\"Enable auto-backups daily\" defaultChecked />"
   },
   {
     "name": "Radio",
@@ -1239,6 +1343,69 @@
         "optional": true,
         "defaultValue": null,
         "description": ""
+      },
+      {
+        "name": "getRowKey",
+        "type": "(row: T, index: number) => React.Key",
+        "optional": true,
+        "defaultValue": null,
+        "description": "// Production-grade features"
+      },
+      {
+        "name": "onRowClick",
+        "type": "(row: T) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "toolbar",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "pagination",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "selectedRows",
+        "type": "Set<React.Key>",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onSelectionChange",
+        "type": "(selectedKeys: Set<React.Key>) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "sortBy",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "// Sorting props"
+      },
+      {
+        "name": "sortDirection",
+        "type": "\"asc\" | \"desc\"",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onSort",
+        "type": "(sortKey: string, direction: \"asc\" | \"desc\") => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
       }
     ],
     "cva": null,
@@ -1265,6 +1432,27 @@
       },
       {
         "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "align",
+        "type": "\"left\" | \"center\" | \"right\"",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "sortable",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "sortKey",
         "type": "string",
         "optional": true,
         "defaultValue": null,
@@ -1410,9 +1598,512 @@
         "optional": false,
         "defaultValue": null,
         "description": ""
+      },
+      {
+        "name": "sidebarWidth",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"md:w-64\"",
+        "description": ""
+      },
+      {
+        "name": "contentWidth",
+        "type": "\"default\" | \"wide\" | \"full\"",
+        "optional": true,
+        "defaultValue": "\"default\"",
+        "description": ""
+      },
+      {
+        "name": "stickyTopbar",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": ""
+      },
+      {
+        "name": "mobileSidebar",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
       }
     ],
     "cva": null,
     "usageSnippet": "<DashboardShell\n      sidebar={\n        <div className=\"p-6 flex flex-col gap-6 h-full bg-subtle\">\n          <div className=\"font-bold text-lg tracking-tight text-primary\">KJ Product Kit</div>\n          <nav className=\"flex flex-col gap-2\">\n            <a href=\"#\" className=\"text-sm font-medium text-foreground hover:text-primary transition-colors\">Dashboard</a>\n            <a href=\"#\" className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\">Projects</a>\n            <a href=\"#\" className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\">Invoices</a>\n            <a href=\"#\" className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\">Settings</a>\n          </nav>\n        </div>\n      }\n      topbar={\n        <div className=\"w-full flex items-center justify-between\">\n          <span className=\"text-sm font-medium text-muted-foreground\">Workspace / Personal</span>\n          <Button size=\"sm\" variant=\"ghost\">Profile</Button>\n        </div>\n      }\n    >\n      <PageHeader\n        eyebrow=\"B2B SaaS\"\n        title=\"Dashboard Shell\"\n        description=\"The shell structure renders a responsive frame container with a sticky sidebar, topbar, and main canvas.\"\n        actions={<Button size=\"sm\">New Project</Button>}\n      />"
+  },
+  {
+    "name": "SettingsLayout",
+    "importPath": "import { SettingsLayout } from \"@kjaniec-dev/ui\";",
+    "description": "React component SettingsLayout.",
+    "props": [
+      {
+        "name": "sidebar",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<SettingsLayout\n      title=\"Profile Settings\"\n      description=\"Customize how your profile appears to other members.\"\n      sidebar={\n        <div className=\"flex flex-row lg:flex-col gap-1 w-full\">\n          <Button variant=\"ghost\" size=\"sm\" className=\"justify-start bg-primary/10 text-primary\">General</Button>\n          <Button variant=\"ghost\" size=\"sm\" className=\"justify-start text-muted-foreground\">Team</Button>\n          <Button variant=\"ghost\" size=\"sm\" className=\"justify-start text-muted-foreground\">Billing</Button>\n        </div>\n      }\n    >\n      <Card className=\"p-6 space-y-4\">\n        <div className=\"grid grid-cols-2 gap-4\">\n          <TextField label=\"First Name\" defaultValue=\"Kamil\" />"
+  },
+  {
+    "name": "DetailPageLayout",
+    "importPath": "import { DetailPageLayout } from \"@kjaniec-dev/ui\";",
+    "description": "React component DetailPageLayout.",
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "backHref",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "backLabel",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"Back\"",
+        "description": ""
+      },
+      {
+        "name": "onBackClick",
+        "type": "() => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "actions",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "aside",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<DetailPageLayout\n      title=\"Transaction #TRN-9022\"\n      description=\"Captured via Stripe checkout flow.\"\n      backLabel=\"Back to payments\"\n      onBackClick={() => alert(\"Back\")}\n      actions={\n        <>\n          <Button variant=\"outline\" size=\"sm\">Refund</Button>\n          <Button size=\"sm\">Receipt</Button>\n        </>"
+  },
+  {
+    "name": "TableToolbar",
+    "importPath": "import { TableToolbar } from \"@kjaniec-dev/ui\";",
+    "description": "React component TableToolbar.",
+    "props": [
+      {
+        "name": "searchQuery",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onSearchChange",
+        "type": "(query: string) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "searchPlaceholder",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"Search...\"",
+        "description": ""
+      },
+      {
+        "name": "actions",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "filters",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<TableToolbar>\n  <!-- Content -->\n</TableToolbar>"
+  },
+  {
+    "name": "ConfirmDialog",
+    "importPath": "import { ConfirmDialog } from \"@kjaniec-dev/ui\";",
+    "description": "React component ConfirmDialog.",
+    "props": [
+      {
+        "name": "open",
+        "type": "boolean",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onConfirm",
+        "type": "() => void",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "confirmLabel",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"Confirm\"",
+        "description": ""
+      },
+      {
+        "name": "cancelLabel",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"Cancel\"",
+        "description": ""
+      },
+      {
+        "name": "tone",
+        "type": "\"danger\" | \"primary\" | \"success\"",
+        "optional": true,
+        "defaultValue": "\"primary\"",
+        "description": ""
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ConfirmDialog\n          open={open}\n          onClose={() => setOpen(false)}\n          title=\"Delete Workspace?\"\n          description=\"This action cannot be undone. All database records and configs will be deleted.\"\n          confirmLabel=\"Delete Workspace\"\n          tone=\"danger\"\n          loading={loading}\n          onConfirm={() => {\n            setLoading(true);\n            setTimeout(() => {\n              setLoading(false);\n              setOpen(false);\n            }, 1000);\n          }}\n        />"
+  },
+  {
+    "name": "Drawer",
+    "importPath": "import { Drawer } from \"@kjaniec-dev/ui\";",
+    "description": "React component Drawer.",
+    "props": [
+      {
+        "name": "open",
+        "type": "boolean",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "width",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"max-w-md\"",
+        "description": ""
+      },
+      {
+        "name": "side",
+        "type": "\"right\" | \"left\"",
+        "optional": true,
+        "defaultValue": "\"right\"",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Drawer\n          open={open}\n          onClose={() => setOpen(false)}\n          title=\"Edit Configuration\"\n          description=\"Manage property options and backup intervals.\"\n        >\n          <div className=\"space-y-6\">\n            <TextField label=\"Connection String\" defaultValue=\"postgresql://db.kjaniec.dev:5432\" />"
+  },
+  {
+    "name": "CommandPalette",
+    "importPath": "import { CommandPalette } from \"@kjaniec-dev/ui\";",
+    "description": "React component CommandPalette.",
+    "props": [
+      {
+        "name": "open",
+        "type": "boolean",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "items",
+        "type": "CommandPaletteItem[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"Type a command or search...\"",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<CommandPalette open={open} onClose={() => setOpen(false)} items={items} />"
+  },
+  {
+    "name": "CommandPaletteItem",
+    "importPath": "import { CommandPaletteItem } from \"@kjaniec-dev/ui\";",
+    "description": "React component CommandPaletteItem.",
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "subtitle",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "category",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "shortcut",
+        "type": "string[]",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "action",
+        "type": "() => void",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "icon",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<CommandPaletteItem>\n  <!-- Content -->\n</CommandPaletteItem>"
+  },
+  {
+    "name": "SidebarNav",
+    "importPath": "import { SidebarNav } from \"@kjaniec-dev/ui\";",
+    "description": "React component SidebarNav.",
+    "props": [
+      {
+        "name": "groups",
+        "type": "SidebarNavGroup[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "currentHref",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<SidebarNav>\n  <!-- Content -->\n</SidebarNav>"
+  },
+  {
+    "name": "SidebarNavItem",
+    "importPath": "import { SidebarNavItem } from \"@kjaniec-dev/ui\";",
+    "description": "React component SidebarNavItem.",
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onClick",
+        "type": "() => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "icon",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "badge",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<SidebarNavItem>\n  <!-- Content -->\n</SidebarNavItem>"
+  },
+  {
+    "name": "SidebarNavGroup",
+    "importPath": "import { SidebarNavGroup } from \"@kjaniec-dev/ui\";",
+    "description": "React component SidebarNavGroup.",
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "items",
+        "type": "SidebarNavItem[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<SidebarNavGroup>\n  <!-- Content -->\n</SidebarNavGroup>"
   }
 ]

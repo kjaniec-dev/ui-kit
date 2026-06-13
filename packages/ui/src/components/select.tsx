@@ -38,3 +38,25 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   )
 );
 Select.displayName = "Select";
+
+import { FormField } from "./form-field";
+
+export interface SelectFieldProps extends Omit<React.ComponentPropsWithoutRef<typeof Select>, "error"> {
+  label: string;
+  hint?: string;
+  error?: string;
+  required?: boolean;
+}
+
+export const SelectField = React.forwardRef<HTMLSelectElement, SelectFieldProps>(
+  ({ label, hint, error, required, className, children, ...props }, ref) => {
+    return (
+      <FormField label={label} hint={hint} error={error} required={required} className={className}>
+        <Select ref={ref} error={!!error} {...props}>
+          {children}
+        </Select>
+      </FormField>
+    );
+  }
+);
+SelectField.displayName = "SelectField";

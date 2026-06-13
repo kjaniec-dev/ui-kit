@@ -46,3 +46,38 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
   }
 );
 Radio.displayName = "Radio";
+
+import { Hint } from "./field";
+
+export interface CheckboxFieldProps extends React.ComponentPropsWithoutRef<typeof Checkbox> {
+  label: React.ReactNode;
+  hint?: string;
+  error?: string;
+}
+
+export const CheckboxField = React.forwardRef<HTMLInputElement, CheckboxFieldProps>(
+  ({ label, hint, error, className, ...props }, ref) => {
+    const id = React.useId();
+    const hintId = `${id}-hint`;
+    const errorId = `${id}-error`;
+    return (
+      <div className={cn("flex flex-col gap-1 w-full", className)}>
+        <Checkbox
+          ref={ref}
+          id={id}
+          label={label}
+          aria-describedby={cn(hint && hintId, error && errorId) || undefined}
+          aria-invalid={error ? "true" : undefined}
+          {...props}
+        />
+        {hint && !error && (
+          <Hint id={hintId} className="pl-[1.8rem]">{hint}</Hint>
+        )}
+        {error && (
+          <Hint id={errorId} error className="pl-[1.8rem]">{error}</Hint>
+        )}
+      </div>
+    );
+  }
+);
+CheckboxField.displayName = "CheckboxField";

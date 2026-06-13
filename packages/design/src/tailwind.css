@@ -27,7 +27,7 @@
   --color-info-surface: var(--kj-info-surface);
   --color-canvas: var(--kj-bg-canvas);
   --color-subtle: var(--kj-bg-subtle);
-  --color-surface: var(--kj-bg-surface);
+  --color-bg-surface: var(--kj-bg-surface);
   --color-elevated: var(--kj-bg-elevated);
   --color-overlay: var(--kj-bg-overlay);
   --color-border-subtle: var(--kj-border-subtle);

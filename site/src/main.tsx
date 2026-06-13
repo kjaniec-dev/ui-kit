@@ -64,6 +64,16 @@ import {
   ErrorState,
   Skeleton,
   DashboardShell,
+  TextField,
+  SelectField,
+  CheckboxField,
+  SettingsLayout,
+  DetailPageLayout,
+  TableToolbar,
+  ConfirmDialog,
+  Drawer,
+  CommandPalette,
+  SidebarNav,
   cn
 } from "@kjaniec-dev/ui";
 import "./index.css";
@@ -232,10 +242,16 @@ const projectColumns = [
   {
     header: "Project Name",
     accessor: (row: ProjectRow) => <span className="font-semibold">{row.name}</span>,
+    align: "left" as const,
+    sortable: true,
+    sortKey: "name",
   },
   {
     header: "Owner",
     accessor: (row: ProjectRow) => row.owner,
+    align: "left" as const,
+    sortable: true,
+    sortKey: "owner",
   },
   {
     header: "Status",
@@ -248,16 +264,19 @@ const projectColumns = [
       }[row.status];
       return <Badge variant={badgeVariant} dot>{row.status}</Badge>;
     },
+    align: "left" as const,
   },
   {
     header: "Budget",
     accessor: (row: ProjectRow) => <span className="font-mono">{row.budget}</span>,
-    className: "text-right",
+    align: "right" as const,
+    sortable: true,
+    sortKey: "budget",
   },
 ];
 
 const sampleProjects: ProjectRow[] = [
-  { name: "KJ UI Kit v0.6.0", status: "success", owner: "K. Janiec", budget: "$15,400" },
+  { name: "KJ UI Kit v0.7.0", status: "success", owner: "K. Janiec", budget: "$15,400" },
   { name: "SaaS Dashboard Phase 2", status: "warning", owner: "M. Kowalski", budget: "$8,200" },
   { name: "Database Integration", status: "danger", owner: "J. Nowak", budget: "$22,000" },
   { name: "Marketing Landing Page", status: "info", owner: "A. Zielinski", budget: "$4,500" },
@@ -282,6 +301,7 @@ function Gallery() {
   const [tab, setTab] = React.useState("overview");
   const [seg, setSeg] = React.useState("day");
   const [page, setPage] = React.useState(1);
+  const [tablePage, setTablePage] = React.useState(1);
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [loading, setLoading] = React.useState(false);
@@ -290,6 +310,98 @@ function Gallery() {
   const [activeSection, setActiveSection] = React.useState("buttons");
   const [tableState, setTableState] = React.useState<"default" | "loading" | "empty" | "error">("default");
   const emailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+
+  // New States for v0.7.0 features
+  const [selectedRows, setSelectedRows] = React.useState<Set<React.Key>>(new Set());
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [confirmOpen, setConfirmOpen] = React.useState(false);
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [cmdOpen, setCmdOpen] = React.useState(false);
+  const [confirmLoading, setConfirmLoading] = React.useState(false);
+  const [sortBy, setSortBy] = React.useState<string | undefined>("name");
+  const [sortDirection, setSortDirection] = React.useState<"asc" | "desc" | undefined>("asc");
+
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setCmdOpen((o) => !o);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  const filteredProjects = React.useMemo(() => {
+    let result = sampleProjects;
+    if (searchQuery) {
+      const cleanSearch = searchQuery.toLowerCase();
+      result = sampleProjects.filter(
+        (p) =>
+          p.name.toLowerCase().includes(cleanSearch) ||
+          p.owner.toLowerCase().includes(cleanSearch)
+      );
+    }
+
+    if (sortBy && sortDirection) {
+      result = [...result].sort((a, b) => {
+        let valA = a[sortBy as keyof ProjectRow];
+        let valB = b[sortBy as keyof ProjectRow];
+
+        if (sortBy === "budget") {
+          valA = parseFloat((valA as string).replace(/[^0-9.-]+/g, ""));
+          valB = parseFloat((valB as string).replace(/[^0-9.-]+/g, ""));
+        }
+
+        if (valA < valB) return sortDirection === "asc" ? -1 : 1;
+        if (valA > valB) return sortDirection === "asc" ? 1 : -1;
+        return 0;
+      });
+    }
+
+    return result;
+  }, [searchQuery, sortBy, sortDirection]);
+
+  const itemsPerPage = 2;
+  const tablePageCount = React.useMemo(() => {
+    return Math.max(1, Math.ceil(filteredProjects.length / itemsPerPage));
+  }, [filteredProjects]);
+
+  const activeTablePage = Math.min(tablePage, tablePageCount);
+
+  const paginatedProjects = React.useMemo(() => {
+    const start = (activeTablePage - 1) * itemsPerPage;
+    return filteredProjects.slice(start, start + itemsPerPage);
+  }, [filteredProjects, activeTablePage]);
+
+  const cmdItems = [
+    {
+      id: "create-project",
+      title: "Create new project",
+      subtitle: "Add a new workspace to your dashboard",
+      category: "Projects",
+      shortcut: ["⌘", "N"],
+      icon: IcoPlus,
+      action: () => toast({ message: "Command: Create project selected", tone: "success" }),
+    },
+    {
+      id: "toggle-theme",
+      title: "Toggle dark mode",
+      subtitle: "Switch between light and dark theme",
+      category: "Settings",
+      shortcut: ["⌘", "D"],
+      icon: dark ? IcoSun : IcoMoon,
+      action: () => setDark((d) => !d),
+    },
+    {
+      id: "view-docs",
+      title: "View documentation",
+      subtitle: "Open the product kit documentation",
+      category: "System",
+      icon: IcoInfo,
+      action: () => window.open("./docs/DESIGN.md", "_blank"),
+    },
+  ];
 
   React.useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
@@ -330,7 +442,7 @@ function Gallery() {
           </div>
           <div>
             <div className="font-bold text-sm leading-tight">@kjaniec-dev/ui</div>
-            <div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.6.0</div>
+            <div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.7.0</div>
           </div>
         </div>
         <div className="text-[0.68rem] uppercase tracking-[0.09em] font-semibold text-muted-foreground px-3 pt-3 pb-1.5">
@@ -393,7 +505,7 @@ function Gallery() {
           </div>
           <div className="flex items-center gap-2.5">
             <Badge variant="primary" dot>
-              24 components
+              46 components
             </Badge>
             <Button variant="outline" size="icon" aria-label="Theme" onClick={() => setDark((d) => !d)}>
               {dark ? IcoSun : IcoMoon}
@@ -604,6 +716,32 @@ function Gallery() {
                 </FormField>
               </div>
             </Box>
+            <Box>
+              <Sub>Convenient Field Components (v0.7.0)</Sub>
+              <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
+                <TextField
+                  label="E-mail"
+                  required
+                  placeholder="jane@company.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  error={email.length > 0 && !emailOk ? "Enter a valid email address." : undefined}
+                  hint="We'll use it to sign you in."
+                />
+                <SelectField label="Subscription Status" defaultValue="active">
+                  <option value="active">Active</option>
+                  <option value="trial">Trial</option>
+                  <option value="past_due">Past Due</option>
+                </SelectField>
+                <div className="flex items-center pt-5">
+                  <CheckboxField
+                    label="Accept terms & conditions"
+                    hint="You must agree to continue."
+                    defaultChecked
+                  />
+                </div>
+              </div>
+            </Box>
           </Sec>
 
           <Sec id="selection" title="Selection controls" desc="Checkboxes, radios, switches, a slider and a segmented control.">
@@ -688,7 +826,7 @@ function Gallery() {
               <Stat label="Active users" value="8,942" delta="4.1% MoM" trend="up" />
               <Stat label="Churn" value="2.8%" delta="0.6% MoM" trend="down" />
             </div>
-            <Sub className="mt-5">Metric Cards (v0.6.0)</Sub>
+            <Sub className="mt-5">Metric Cards (v0.7.0)</Sub>
             <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
               <MetricCard
                 title="Active Subscriptions"
@@ -838,7 +976,7 @@ function Gallery() {
                 </TableBody>
               </Table>
             </TableWrap>
-            <Sub className="mt-5">DataTable (v0.6.0 with built-in loading/empty/error states)</Sub>
+            <Sub className="mt-5">DataTable (v0.7.0 with built-in selection, custom toolbar and pagination)</Sub>
             <Box>
               <div className="flex flex-wrap gap-3 mb-4">
                 <Button
@@ -872,72 +1010,221 @@ function Gallery() {
               </div>
               <DataTable
                 columns={projectColumns}
-                data={tableState === "empty" ? [] : sampleProjects}
+                data={tableState === "empty" ? [] : paginatedProjects}
                 loading={tableState === "loading"}
                 error={tableState === "error" ? "Could not retrieve project records. Please try again." : undefined}
                 emptyTitle="No projects found"
                 emptyDescription="Get started by creating a new SaaS project."
                 emptyAction={<Button size="sm">Create Project</Button>}
+                getRowKey={(row) => row.name}
+                onRowClick={(row) => toast({ message: `Opened project: ${row.name}`, tone: "info" })}
+                selectedRows={selectedRows}
+                onSelectionChange={setSelectedRows}
+                sortBy={sortBy}
+                sortDirection={sortDirection}
+                onSort={(key, dir) => {
+                  setSortBy(key);
+                  setSortDirection(dir);
+                  toast({ message: `Sorted by ${key} (${dir})`, tone: "info" });
+                }}
+                toolbar={
+                  <TableToolbar
+                    searchQuery={searchQuery}
+                    onSearchChange={setSearchQuery}
+                    searchPlaceholder="Search projects by name or owner..."
+                    actions={
+                      <>
+                        {selectedRows.size > 0 && (
+                          <Button
+                            variant="danger"
+                            size="sm"
+                            onClick={() => setConfirmOpen(true)}
+                          >
+                            Delete ({selectedRows.size})
+                          </Button>
+                        )}
+                        <Button
+                          variant="primary"
+                          size="sm"
+                          leadingIcon={IcoPlus}
+                          onClick={() => toast({ message: "Action: Create New Project", tone: "success" })}
+                        >
+                          New Project
+                        </Button>
+                      </>
+                    }
+                  />
+                }
+                pagination={
+                  <Pagination
+                    page={activeTablePage}
+                    pageCount={tablePageCount}
+                    onPageChange={setTablePage}
+                  />
+                }
               />
             </Box>
           </Sec>
 
-          <Sec id="overlays" title="Overlays" desc="Modal and tooltips.">
+          <Sec id="overlays" title="Overlays & Dialogs" desc="Modals, confirm dialogs, side drawers, command palettes and tooltips.">
             <Box>
               <div className="flex flex-wrap gap-3 items-center">
-                <Button onClick={() => setOpen(true)}>Open modal</Button>
+                <Button onClick={() => setOpen(true)}>Open custom modal</Button>
+                <Button variant="outline" onClick={() => setConfirmOpen(true)}>Open Confirm Dialog</Button>
+                <Button variant="outline" onClick={() => setDrawerOpen(true)}>Open Side Drawer</Button>
+                <Button
+                  variant="outline"
+                  onClick={() => setCmdOpen(true)}
+                  leadingIcon={
+                    <span className="font-mono text-xs border border-border px-1.5 py-0.5 rounded bg-subtle">⌘K</span>
+                  }
+                >
+                  Open Command Palette
+                </Button>
                 <Tooltip content="Contextual tooltip">
-                  <Button variant="outline">Hover — top</Button>
+                  <Button variant="ghost">Hover for Tooltip</Button>
                 </Tooltip>
               </div>
             </Box>
           </Sec>
 
-          <Sec id="layouts" title="Layouts" desc="Full-page shell structures for dashboard interfaces.">
-            <Sub>DashboardShell Preview (v0.6.0)</Sub>
-            <div className="border border-border rounded-kj-xl overflow-hidden bg-canvas h-[350px] relative">
-              <DashboardShell
-                className="h-full min-h-0 [&_aside]:md:h-full [&_aside>div]:md:h-full"
-                sidebar={
-                  <div className="p-4 space-y-4 h-full flex flex-col justify-between">
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded bg-primary text-primary-foreground flex items-center justify-center font-bold text-xs">KJ</div>
-                        <span className="text-xs font-bold font-mono">Starter</span>
+          <Sec id="layouts" title="Layouts" desc="Full-page shell and page templates for SaaS/B2B products.">
+            <Tabs defaultValue="dashboard">
+              <TabsList className="mb-4">
+                <TabsTrigger value="dashboard">DashboardShell</TabsTrigger>
+                <TabsTrigger value="settings">SettingsLayout</TabsTrigger>
+                <TabsTrigger value="detail">DetailPageLayout</TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="dashboard">
+                <div className="border border-border rounded-kj-xl overflow-hidden bg-canvas h-[380px] relative">
+                  {(() => {
+                    const demoSidebar = (
+                      <SidebarNav
+                        groups={[
+                          {
+                            title: "Overview",
+                            items: [
+                              { id: "dash", label: "Dashboard", active: true, icon: IcoInfo },
+                              { id: "anal", label: "Analytics", icon: IcoSearch },
+                            ],
+                          },
+                          {
+                            title: "Management",
+                            items: [
+                              { id: "proj", label: "Projects", icon: IcoPlus, badge: <Badge variant="primary" size="sm">4</Badge> },
+                              { id: "sett", label: "Settings", icon: IcoGear },
+                            ],
+                          },
+                        ]}
+                      />
+                    );
+                    return (
+                      <DashboardShell
+                        className="h-full min-h-0 [&_aside]:md:h-full [&_aside>div]:md:h-full"
+                        sidebarWidth="md:w-56"
+                        sidebar={demoSidebar}
+                        mobileSidebar={demoSidebar}
+                        topbar={
+                          <div className="flex items-center justify-between w-full h-full">
+                            <div className="text-xs font-semibold">Overview</div>
+                            <div className="flex items-center gap-3">
+                              <span className="text-xs text-muted-foreground">Admin Portal</span>
+                              <Avatar size="sm" tone="primary">KJ</Avatar>
+                            </div>
+                          </div>
+                        }
+                      >
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div className="space-y-1">
+                          <h3 className="text-sm font-bold m-0">Welcome back, Admin</h3>
+                          <p className="text-[10px] text-muted-foreground m-0">Here's what is happening today.</p>
+                        </div>
                       </div>
-                      <div className="h-px bg-border" />
-                      <div className="space-y-1">
-                        <div className="h-6 rounded bg-primary/10 text-xs px-2 flex items-center text-foreground font-medium">Dashboard</div>
-                        <div className="h-6 rounded text-xs px-2 flex items-center text-muted-foreground hover:bg-muted/50 cursor-pointer">Analytics</div>
-                        <div className="h-6 rounded text-xs px-2 flex items-center text-muted-foreground hover:bg-muted/50 cursor-pointer">Settings</div>
+                      <div className="grid grid-cols-3 gap-3">
+                        <Card className="p-3"><div className="text-[10px] text-muted-foreground">MRR</div><div className="text-sm font-bold">$12.4k</div></Card>
+                        <Card className="p-3"><div className="text-[10px] text-muted-foreground">Sales</div><div className="text-sm font-bold">142</div></Card>
+                        <Card className="p-3"><div className="text-[10px] text-muted-foreground">Active</div><div className="text-sm font-bold">98%</div></Card>
                       </div>
+                      <Card className="p-3 h-20 flex items-center justify-center text-xs text-muted-foreground">Main Content Workspace</Card>
                     </div>
-                    <div className="text-[10px] text-muted-foreground font-mono">v0.6.0</div>
-                  </div>
-                }
-                topbar={
-                  <div className="flex items-center justify-between w-full h-full">
-                    <div className="text-xs font-semibold">Overview</div>
-                    <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center text-[10px]">US</div>
-                  </div>
-                }
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="space-y-1">
-                      <h3 className="text-sm font-bold m-0">Welcome back, Admin</h3>
-                      <p className="text-[10px] text-muted-foreground m-0">Here's what is happening today.</p>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-3 gap-3">
-                    <Card className="p-3"><div className="text-[10px] text-muted-foreground">MRR</div><div className="text-sm font-bold">$12.4k</div></Card>
-                    <Card className="p-3"><div className="text-[10px] text-muted-foreground">Sales</div><div className="text-sm font-bold">142</div></Card>
-                    <Card className="p-3"><div className="text-[10px] text-muted-foreground">Active</div><div className="text-sm font-bold">98%</div></Card>
-                  </div>
-                  <Card className="p-3 h-20 flex items-center justify-center text-xs text-muted-foreground">Main Content Workspace</Card>
+                  </DashboardShell>
+                    );
+                  })()}
                 </div>
-              </DashboardShell>
-            </div>
+              </TabsContent>
+
+              <TabsContent value="settings">
+                <Box className="bg-canvas border-border">
+                  <SettingsLayout
+                    title="Account Settings"
+                    description="Configure your workspace details and notification preferences."
+                    sidebar={
+                      <div className="flex flex-row lg:flex-col gap-1 w-full">
+                        <Button variant="ghost" size="sm" className="justify-start text-primary bg-primary/10">Profile</Button>
+                        <Button variant="ghost" size="sm" className="justify-start text-muted-foreground">Billing</Button>
+                        <Button variant="ghost" size="sm" className="justify-start text-muted-foreground">Team</Button>
+                        <Button variant="ghost" size="sm" className="justify-start text-muted-foreground">Security</Button>
+                      </div>
+                    }
+                  >
+                    <Card className="p-6 space-y-4">
+                      <h3 className="text-base font-bold m-0">Personal Profile</h3>
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="First Name" defaultValue="Kamil" />
+                        <TextField label="Last Name" defaultValue="Janiec" />
+                      </div>
+                      <TextField label="Contact Email" defaultValue="kamil@kjaniec.dev" hint="We will use this to contact you for billing." />
+                      <div className="pt-2 flex justify-end">
+                        <Button size="sm" onClick={() => toast({ message: "Profile saved successfully", tone: "success" })}>Save Profile</Button>
+                      </div>
+                    </Card>
+                  </SettingsLayout>
+                </Box>
+              </TabsContent>
+
+              <TabsContent value="detail">
+                <Box className="bg-canvas border-border">
+                  <DetailPageLayout
+                    title="Database Backup Job #8842"
+                    description="Triggered by cron schedule, uploaded to AWS S3 bucket."
+                    backLabel="Back to Backups"
+                    onBackClick={() => toast({ message: "Back clicked", tone: "info" })}
+                    actions={
+                      <>
+                        <Button variant="outline" size="sm">Download Logs</Button>
+                        <Button variant="secondary" size="sm">Run Again</Button>
+                      </>
+                    }
+                    aside={
+                      <div className="space-y-4">
+                        <h3 className="text-sm font-bold m-0">Run Details</h3>
+                        <div className="space-y-2 text-xs">
+                          <div className="flex justify-between"><span className="text-muted-foreground">Status</span><Badge variant="success" size="sm">Completed</Badge></div>
+                          <div className="flex justify-between"><span className="text-muted-foreground">Started</span><span className="font-semibold">2026-06-13 02:18</span></div>
+                          <div className="flex justify-between"><span className="text-muted-foreground">Duration</span><span className="font-semibold">4.2 seconds</span></div>
+                          <div className="flex justify-between"><span className="text-muted-foreground">Data size</span><span className="font-mono">142.6 MB</span></div>
+                        </div>
+                      </div>
+                    }
+                  >
+                    <Card className="p-6 space-y-3">
+                      <h3 className="text-base font-bold m-0">Execution Log Output</h3>
+                      <pre className="text-xs font-mono bg-subtle border border-border p-4 rounded-kj-md overflow-x-auto leading-relaxed text-muted-foreground">
+                        {`[02:18:00] Initializing database dump connection...
+[02:18:01] Connected to PG instance kj-main-prod.
+[02:18:02] Exporting schemas: public, auth, cron...
+[02:18:03] Schema export completed. Total tables: 42.
+[02:18:04] Uploading gzip archive to s3://kj-backups/prod-8842.tar.gz...
+[02:18:04] Upload successful. MD5: 9a38a7c28c8928bc
+[02:18:04] Backup job finished successfully.`}
+                      </pre>
+                    </Card>
+                  </DetailPageLayout>
+                </Box>
+              </TabsContent>
+            </Tabs>
           </Sec>
 
           <footer className="text-[0.8rem] text-muted-foreground pt-8 mt-4 border-t border-border">
@@ -968,6 +1255,79 @@ function Gallery() {
         </ModalActions>
       </Modal>
 
+      <ConfirmDialog
+        open={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
+        title={selectedRows.size > 0 ? `Delete ${selectedRows.size} projects?` : "Delete selection?"}
+        description="Are you sure you want to delete the selected projects? This action is permanent and cannot be undone."
+        confirmLabel="Delete selected"
+        tone="danger"
+        loading={confirmLoading}
+        onConfirm={() => {
+          setConfirmLoading(true);
+          setTimeout(() => {
+            setConfirmLoading(false);
+            setConfirmOpen(false);
+            setSelectedRows(new Set());
+            toast({ message: "Deleted projects successfully", tone: "danger" });
+          }, 1500);
+        }}
+      />
+
+      <Drawer
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        title="Project Specifications"
+        description="Detailed B2B system configurations for the selected workspace."
+      >
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">System Health</h4>
+            <div className="grid grid-cols-2 gap-3">
+              <Card className="p-3">
+                <div className="text-[10px] text-muted-foreground">Uptime</div>
+                <div className="text-sm font-bold text-success">99.98%</div>
+              </Card>
+              <Card className="p-3">
+                <div className="text-[10px] text-muted-foreground">API Latency</div>
+                <div className="text-sm font-bold">42ms</div>
+              </Card>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">General Settings</h4>
+            <TextField label="Database URL" defaultValue="postgresql://db.kjaniec.dev:5432/main" readOnly />
+            <SelectField label="Backup Frequency" defaultValue="daily">
+              <option value="hourly">Hourly</option>
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+            </SelectField>
+            <CheckboxField label="Enable audit logs mirroring" defaultChecked />
+          </div>
+
+          <div className="pt-4 border-t border-border flex justify-end gap-3">
+            <Button variant="outline" size="sm" onClick={() => setDrawerOpen(false)}>Close</Button>
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => {
+                setDrawerOpen(false);
+                toast({ message: "Settings saved", tone: "success" });
+              }}
+            >
+              Save Changes
+            </Button>
+          </div>
+        </div>
+      </Drawer>
+
+      <CommandPalette
+        open={cmdOpen}
+        onClose={() => setCmdOpen(false)}
+        items={cmdItems}
+      />
+
       {sidebarOpen && (
         <div className="fixed inset-0 z-50 flex" onClick={() => setSidebarOpen(false)}>
           <aside
@@ -980,7 +1340,7 @@ function Gallery() {
               </div>
               <div>
                 <div className="font-bold text-sm leading-tight">@kjaniec-dev/ui</div>
-                <div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.6.0</div>
+                <div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.7.0</div>
               </div>
             </div>
             <div className="text-[0.68rem] uppercase tracking-[0.09em] font-semibold text-muted-foreground px-3 pt-3 pb-1.5">

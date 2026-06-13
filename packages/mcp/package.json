@@ -1,6 +1,6 @@
 {
   "name": "@kjaniec-dev/ui-mcp",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "MCP (Model Context Protocol) server for KJ Product Kit design system and UI components",
   "license": "MIT",
   "author": "kjaniec-dev",

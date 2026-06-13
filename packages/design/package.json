@@ -1,6 +1,6 @@
 {
   "name": "@kjaniec-dev/design",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Design tokens and Tailwind v4 theme for the KJ Product Kit",
   "license": "MIT",
   "author": "kjaniec-dev",
@@ -10,7 +10,8 @@
     "directory": "packages/design"
   },
   "scripts": {
-    "build": "node build-tokens.js"
+    "build": "node build-tokens.js",
+    "prepublishOnly": "npm run build"
   },
   "publishConfig": {
     "access": "public"

@@ -9,11 +9,11 @@ export { Alert, type AlertProps } from "./components/alert";
 export { Spinner, type SpinnerProps } from "./components/spinner";
 export { Progress, type ProgressProps } from "./components/progress";
 
-export { Input, Textarea, type InputProps, type TextareaProps } from "./components/input";
+export { Input, Textarea, TextField, type InputProps, type TextareaProps, type TextFieldProps } from "./components/input";
 export { Label, Hint, Field, type LabelProps, type HintProps } from "./components/field";
-export { Select, type SelectProps } from "./components/select";
+export { Select, SelectField, type SelectProps, type SelectFieldProps } from "./components/select";
 
-export { Checkbox, Radio, type CheckboxProps, type RadioProps } from "./components/checkbox";
+export { Checkbox, CheckboxField, Radio, type CheckboxProps, type CheckboxFieldProps, type RadioProps } from "./components/checkbox";
 export { Switch, type SwitchProps } from "./components/switch";
 export { Slider, sliderThumbCSS, type SliderProps } from "./components/slider";
 export { Segmented, type SegmentedProps, type SegmentedOption } from "./components/segmented";
@@ -64,3 +64,11 @@ export { FormField, type FormFieldProps } from "./components/form-field";
 export { ErrorState, type ErrorStateProps } from "./components/error-state";
 export { Skeleton, type SkeletonProps } from "./components/skeleton";
 export { DashboardShell, type DashboardShellProps } from "./components/dashboard-shell";
+
+export { SettingsLayout, type SettingsLayoutProps } from "./components/settings-layout";
+export { DetailPageLayout, type DetailPageLayoutProps } from "./components/detail-page-layout";
+export { TableToolbar, type TableToolbarProps } from "./components/table-toolbar";
+export { ConfirmDialog, type ConfirmDialogProps } from "./components/confirm-dialog";
+export { Drawer, type DrawerProps } from "./components/drawer";
+export { CommandPalette, type CommandPaletteItem, type CommandPaletteProps } from "./components/command-palette";
+export { SidebarNav, type SidebarNavItem, type SidebarNavGroup, type SidebarNavProps } from "./components/sidebar-nav";
