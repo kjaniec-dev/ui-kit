@@ -347,8 +347,8 @@ function Gallery() {
 
     if (sortBy && sortDirection) {
       result = [...result].sort((a, b) => {
-        let valA = a[sortBy as keyof ProjectRow];
-        let valB = b[sortBy as keyof ProjectRow];
+        let valA: string | number = a[sortBy as keyof ProjectRow];
+        let valB: string | number = b[sortBy as keyof ProjectRow];
 
         if (sortBy === "budget") {
           valA = parseFloat((valA as string).replace(/[^0-9.-]+/g, ""));
@@ -1042,7 +1042,7 @@ function Gallery() {
                 emptyDescription="Get started by creating a new SaaS project."
                 emptyAction={<Button size="sm">Create Project</Button>}
                 getRowKey={(row) => row.name}
-                onRowClick={(row) => toast({ message: `Opened project: ${row.name}`, tone: "info" })}
+                onRowClick={(row) => toast({ message: `Opened project: ${row.name}`, tone: "default" })}
                 selectedRows={selectedRows}
                 onSelectionChange={setSelectedRows}
                 sortBy={sortBy}
@@ -1050,7 +1050,7 @@ function Gallery() {
                 onSort={(key, dir) => {
                   setSortBy(key);
                   setSortDirection(dir);
-                  toast({ message: `Sorted by ${key} (${dir})`, tone: "info" });
+                  toast({ message: `Sorted by ${key} (${dir})`, tone: "default" });
                 }}
                 toolbar={
                   <TableToolbar
@@ -1137,7 +1137,7 @@ function Gallery() {
                           {
                             title: "Management",
                             items: [
-                              { id: "proj", label: "Projects", icon: IcoPlus, badge: <Badge variant="primary" size="sm">4</Badge> },
+                              { id: "proj", label: "Projects", icon: IcoPlus, badge: <Badge variant="primary">4</Badge> },
                               { id: "sett", label: "Settings", icon: IcoGear },
                             ],
                           },
@@ -1215,7 +1215,7 @@ function Gallery() {
                     title="Database Backup Job #8842"
                     description="Triggered by cron schedule, uploaded to AWS S3 bucket."
                     backLabel="Back to Backups"
-                    onBackClick={() => toast({ message: "Back clicked", tone: "info" })}
+                    onBackClick={() => toast({ message: "Back clicked", tone: "default" })}
                     actions={
                       <>
                         <Button variant="outline" size="sm">Download Logs</Button>
@@ -1226,7 +1226,7 @@ function Gallery() {
                       <div className="space-y-4">
                         <h3 className="text-sm font-bold m-0">Run Details</h3>
                         <div className="space-y-2 text-xs">
-                          <div className="flex justify-between"><span className="text-muted-foreground">Status</span><Badge variant="success" size="sm">Completed</Badge></div>
+                          <div className="flex justify-between"><span className="text-muted-foreground">Status</span><Badge variant="success">Completed</Badge></div>
                           <div className="flex justify-between"><span className="text-muted-foreground">Started</span><span className="font-semibold">2026-06-13 02:18</span></div>
                           <div className="flex justify-between"><span className="text-muted-foreground">Duration</span><span className="font-semibold">4.2 seconds</span></div>
                           <div className="flex justify-between"><span className="text-muted-foreground">Data size</span><span className="font-mono">142.6 MB</span></div>

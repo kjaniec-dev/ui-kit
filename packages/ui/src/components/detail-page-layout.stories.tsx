@@ -29,7 +29,7 @@ export const Default = {
           <h4 className="font-bold">Payment Details</h4>
           <div className="flex justify-between">
             <span className="text-muted-foreground">Status</span>
-            <Badge variant="success" size="sm">Paid</Badge>
+            <Badge variant="success">Paid</Badge>
           </div>
           <div className="flex justify-between">
             <span className="text-muted-foreground">Amount</span>
