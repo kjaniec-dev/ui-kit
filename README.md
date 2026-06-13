@@ -2,7 +2,7 @@
 
 Design tokens and React component library for building consistent KJ apps.
 
-**[⚡ Live Demo Component Gallery](https://kj-product-kit.netlify.app)**
+**[⚡ Live Demo Component Gallery](https://ui.kjaniec.dev)**
 
 ---
 

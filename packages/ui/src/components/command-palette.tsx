@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { cn } from "../lib/cn";
 
@@ -84,7 +86,7 @@ export function CommandPalette({ open, onClose, items, placeholder = "Type a com
   // Scroll active item into view
   React.useEffect(() => {
     if (listRef.current) {
-      const activeEl = listRef.current.children[activeIndex] as HTMLElement;
+      const activeEl = listRef.current.querySelector('[aria-selected="true"]') as HTMLElement;
       if (activeEl) {
         activeEl.scrollIntoView({ block: "nearest" });
       }
@@ -111,6 +113,9 @@ export function CommandPalette({ open, onClose, items, placeholder = "Type a com
     >
       <div
         ref={containerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Command palette"
         className="w-[95vw] max-w-lg bg-surface border border-border rounded-kj-xl shadow-kj-lg flex flex-col overflow-hidden max-h-[500px]"
       >
         {/* Search Input */}
@@ -120,6 +125,11 @@ export function CommandPalette({ open, onClose, items, placeholder = "Type a com
           </svg>
           <input
             type="text"
+            role="combobox"
+            aria-expanded={open}
+            aria-autocomplete="list"
+            aria-controls="command-palette-listbox"
+            aria-activedescendant={filteredItems.length > 0 ? `cmd-item-${activeIndex}` : undefined}
             placeholder={placeholder}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -135,10 +145,19 @@ export function CommandPalette({ open, onClose, items, placeholder = "Type a com
               No results found for "{search}"
             </div>
           ) : (
-            <div ref={listRef} className="space-y-4">
+            <div
+              ref={listRef}
+              id="command-palette-listbox"
+              role="listbox"
+              aria-label="Commands"
+              className="space-y-4"
+            >
               {Object.entries(groups).map(([cat, itemsInCat]) => (
-                <div key={cat} className="space-y-1">
-                  <div className="px-3 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-muted-foreground">
+                <div key={cat} role="group" aria-labelledby={`cmd-cat-${cat}`} className="space-y-1">
+                  <div
+                    id={`cmd-cat-${cat}`}
+                    className="px-3 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-muted-foreground"
+                  >
                     {cat}
                   </div>
                   {itemsInCat.map((item) => {
@@ -147,6 +166,9 @@ export function CommandPalette({ open, onClose, items, placeholder = "Type a com
                     return (
                       <div
                         key={item.id}
+                        id={`cmd-item-${currentIdx}`}
+                        role="option"
+                        aria-selected={isActive}
                         onClick={() => {
                           item.action();
                           onClose();

@@ -38,5 +38,12 @@ jobs:
       - name: Build workspaces
         run: npm run build
 
+      - name: Build MCP metadata
+        run: npm run mcp:build
+
+      - name: Verify components.json is up-to-date
+        run: |
+          git diff --exit-code packages/mcp/data/components.json || (echo "Error: packages/mcp/data/components.json is out of date. Please run 'npm run mcp:build' locally and commit the changes." && exit 1)
+
       - name: Build Storybook assets
         run: npm run build-storybook

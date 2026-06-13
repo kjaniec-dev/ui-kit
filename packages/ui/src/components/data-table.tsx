@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { cn } from "../lib/cn";
 import { Table, TableWrap, TableHeader, TableBody, TableRow, TableHead, TableCell } from "./table";
@@ -145,25 +147,41 @@ export function DataTable<T>({
                 }[col.align || "left"];
                 const isSortable = col.sortable && onSort && col.sortKey;
                 const isSortedActive = sortBy && col.sortKey === sortBy;
+                const ariaSort = isSortable
+                  ? (isSortedActive
+                    ? (sortDirection === "asc" ? "ascending" : "descending")
+                    : "none")
+                  : undefined;
 
                 return (
                   <TableHead
                     key={idx}
                     className={cn(
                       alignClass,
-                      isSortable && "cursor-pointer select-none hover:bg-muted/30 transition-colors",
+                      isSortable && "p-0 hover:bg-muted/30 transition-colors",
                       col.className
                     )}
-                    onClick={() => {
-                      if (!isSortable || !col.sortKey) return;
-                      const nextDirection =
-                        isSortedActive && sortDirection === "asc" ? "desc" : "asc";
-                      onSort(col.sortKey, nextDirection);
-                    }}
+                    aria-sort={ariaSort}
                   >
-                    <div className={cn("inline-flex items-center gap-1.5", alignClass === "text-right" && "justify-end w-full")}>
-                      <span>{col.header}</span>
-                      {isSortable && (
+                    {isSortable ? (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (!col.sortKey) return;
+                          const nextDirection =
+                            isSortedActive && sortDirection === "asc" ? "desc" : "asc";
+                          onSort(col.sortKey, nextDirection);
+                        }}
+                        className={cn(
+                          "w-full px-4 py-3 flex items-center gap-1.5 font-semibold text-[0.72rem] uppercase tracking-[0.05em] text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 transition-colors cursor-pointer",
+                          {
+                            "justify-start text-left": col.align === "left" || !col.align,
+                            "justify-center text-center": col.align === "center",
+                            "justify-end text-right": col.align === "right",
+                          }
+                        )}
+                      >
+                        <span>{col.header}</span>
                         <span className="text-[10px] text-muted-foreground shrink-0 select-none">
                           {isSortedActive ? (
                             sortDirection === "asc" ? "▲" : "▼"
@@ -171,8 +189,12 @@ export function DataTable<T>({
                             "⇅"
                           )}
                         </span>
-                      )}
-                    </div>
+                      </button>
+                    ) : (
+                      <div className={cn("inline-flex items-center gap-1.5", alignClass === "text-right" && "justify-end w-full")}>
+                        {col.header}
+                      </div>
+                    )}
                   </TableHead>
                 );
               })}
