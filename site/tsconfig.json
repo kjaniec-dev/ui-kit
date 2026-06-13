@@ -9,7 +9,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@kjaniec-dev/ui": ["../packages/ui/src/index.ts"]
+    }
   },
   "include": ["src"]
 }
