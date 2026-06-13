@@ -81,7 +81,10 @@ export const TabsList = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HT
         ref={ref}
         role="tablist"
         onKeyDown={handleKeyDown}
-        className={cn("flex gap-1 border-b border-border", className)}
+        className={cn(
+          "flex gap-1 border-b border-border overflow-x-auto whitespace-nowrap [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+          className
+        )}
         {...props}
       />
     );
@@ -108,7 +111,7 @@ export const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>
         tabIndex={active ? 0 : -1}
         onClick={() => setValue(value)}
         className={cn(
-          "relative px-[0.9rem] py-2.5 text-sm font-semibold cursor-pointer transition-colors duration-150 outline-none",
+          "relative px-[0.9rem] py-2.5 text-sm font-semibold cursor-pointer transition-colors duration-150 outline-none shrink-0 whitespace-nowrap",
           "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-sm",
           "after:content-[''] after:absolute after:left-[0.9rem] after:right-[0.9rem] after:-bottom-px after:h-0.5 after:rounded-sm after:transition-colors",
           active
