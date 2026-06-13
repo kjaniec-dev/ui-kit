@@ -981,6 +981,94 @@
     "usageSnippet": "<Pagination page={page} pageCount={9} onPageChange={setPage} />"
   },
   {
+    "name": "BottomNavigation",
+    "importPath": "import { BottomNavigation } from \"@kjaniec-dev/ui\";",
+    "description": "React component BottomNavigation.",
+    "props": [
+      {
+        "name": "items",
+        "type": "BottomNavigationItem[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "showLabels",
+        "type": "\"always\" | \"active\" | \"never\"",
+        "optional": true,
+        "defaultValue": "\"always\"",
+        "description": "Mode for displaying labels:\n- 'always': Always show labels for all items.\n- 'active': Only show label for the active item, hiding others.\n- 'never': Hide all labels (only show icons)."
+      },
+      {
+        "name": "fixed",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "If true, uses fixed positioning at the bottom of the viewport with backdrop-blur."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<BottomNavigation items={navItems} fixed={false} showLabels=\"always\" />"
+  },
+  {
+    "name": "BottomNavigationItem",
+    "importPath": "import { BottomNavigationItem } from \"@kjaniec-dev/ui\";",
+    "description": "React component BottomNavigationItem.",
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onClick",
+        "type": "() => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "icon",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "badge",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<BottomNavigationItem>\n  <!-- Content -->\n</BottomNavigationItem>"
+  },
+  {
     "name": "Table",
     "importPath": "import { Table } from \"@kjaniec-dev/ui\";",
     "description": "React component Table.",

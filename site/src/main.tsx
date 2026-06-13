@@ -43,6 +43,7 @@ import {
   BreadcrumbItem,
   BreadcrumbSeparator,
   Pagination,
+  BottomNavigation,
   Table,
   TableWrap,
   TableHeader,
@@ -302,6 +303,7 @@ function Gallery() {
   const [seg, setSeg] = React.useState("day");
   const [page, setPage] = React.useState(1);
   const [tablePage, setTablePage] = React.useState(1);
+  const [bottomNavActive, setBottomNavActive] = React.useState("home");
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [loading, setLoading] = React.useState(false);
@@ -505,7 +507,7 @@ function Gallery() {
           </div>
           <div className="flex items-center gap-2.5">
             <Badge variant="primary" dot>
-              46 components
+              47 components
             </Badge>
             <Button variant="outline" size="icon" aria-label="Theme" onClick={() => setDark((d) => !d)}>
               {dark ? IcoSun : IcoMoon}
@@ -911,6 +913,29 @@ function Gallery() {
                 <BreadcrumbItem current>Q3 Launch</BreadcrumbItem>
               </Breadcrumb>
               <Pagination page={page} pageCount={9} onPageChange={setPage} />
+            </div>
+
+            <div className="mt-8 border-t border-border/60 pt-6">
+              <Sub className="mb-2">Bottom Navigation (Mobile-first)</Sub>
+              <p className="text-xs text-muted-foreground mb-4">
+                A responsive bottom navigation bar designed for mobile apps, featuring active styling indicators, badge notifications, and glassmorphic styling.
+              </p>
+              <div className="max-w-[360px] mx-auto border border-border rounded-kj-xl overflow-hidden bg-canvas relative h-[140px] flex flex-col justify-end shadow-kj-sm">
+                <div className="flex-1 p-4 flex flex-col justify-center items-center text-center">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">Mobile App Simulator</span>
+                   <span className="text-xs font-semibold text-foreground mt-1.5">Active tab: {bottomNavActive.toUpperCase()}</span>
+                </div>
+                <BottomNavigation
+                  fixed={false}
+                  showLabels="always"
+                  items={[
+                    { id: "home", label: "Home", icon: <IcoInfo />, active: bottomNavActive === "home", onClick: () => setBottomNavActive("home") },
+                    { id: "search", label: "Search", icon: <IcoSearch />, active: bottomNavActive === "search", onClick: () => setBottomNavActive("search") },
+                    { id: "alerts", label: "Alerts", icon: <IcoSun />, active: bottomNavActive === "alerts", badge: "3", onClick: () => setBottomNavActive("alerts") },
+                    { id: "settings", label: "Settings", icon: <IcoGear />, active: bottomNavActive === "settings", onClick: () => setBottomNavActive("settings") },
+                  ]}
+                />
+              </div>
             </div>
           </Sec>
 

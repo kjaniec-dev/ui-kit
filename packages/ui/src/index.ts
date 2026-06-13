@@ -42,6 +42,7 @@ export {
   type BreadcrumbItemProps,
 } from "./components/breadcrumb";
 export { Pagination, type PaginationProps } from "./components/pagination";
+export { BottomNavigation, type BottomNavigationItem, type BottomNavigationProps } from "./components/bottom-navigation";
 
 export {
   Table, TableWrap, TableHeader, TableBody, TableRow, TableHead, TableCell,
