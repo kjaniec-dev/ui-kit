@@ -929,10 +929,10 @@ function Gallery() {
                   fixed={false}
                   showLabels="always"
                   items={[
-                    { id: "home", label: "Home", icon: <IcoInfo />, active: bottomNavActive === "home", onClick: () => setBottomNavActive("home") },
-                    { id: "search", label: "Search", icon: <IcoSearch />, active: bottomNavActive === "search", onClick: () => setBottomNavActive("search") },
-                    { id: "alerts", label: "Alerts", icon: <IcoSun />, active: bottomNavActive === "alerts", badge: "3", onClick: () => setBottomNavActive("alerts") },
-                    { id: "settings", label: "Settings", icon: <IcoGear />, active: bottomNavActive === "settings", onClick: () => setBottomNavActive("settings") },
+                    { id: "home", label: "Home", icon: IcoInfo, active: bottomNavActive === "home", onClick: () => setBottomNavActive("home") },
+                    { id: "search", label: "Search", icon: IcoSearch, active: bottomNavActive === "search", onClick: () => setBottomNavActive("search") },
+                    { id: "alerts", label: "Alerts", icon: IcoSun, active: bottomNavActive === "alerts", badge: "3", onClick: () => setBottomNavActive("alerts") },
+                    { id: "settings", label: "Settings", icon: IcoGear, active: bottomNavActive === "settings", onClick: () => setBottomNavActive("settings") },
                   ]}
                 />
               </div>
