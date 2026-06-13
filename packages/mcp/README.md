@@ -46,7 +46,7 @@ To test your local changes, point your client configuration to the built index f
     "kj-ui-local": {
       "type": "stdio",
       "command": "node",
-      "args": ["/Users/kjaniec-dev/dev/projects/kj-product-kit-starter/packages/mcp/dist/index.js"]
+      "args": ["~/ui-kit/packages/mcp/dist/index.js"]
     }
   }
 }
