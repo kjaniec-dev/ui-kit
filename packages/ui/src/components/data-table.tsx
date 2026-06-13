@@ -131,6 +131,7 @@ export function DataTable<T>({
                       ref={headerCheckboxRef}
                       checked={allSelected}
                       onChange={handleSelectAll}
+                      aria-label="Select all rows"
                       className="h-4 w-4 rounded border-input text-primary focus:ring-ring"
                     />
                   </div>
@@ -232,6 +233,7 @@ export function DataTable<T>({
                             type="checkbox"
                             checked={isSelected}
                             onChange={(e) => handleSelectRow(row, rowIdx, e.target.checked)}
+                            aria-label={`Select row ${rowIdx + 1}`}
                             className="h-4 w-4 rounded border-input text-primary focus:ring-ring"
                           />
                         </div>

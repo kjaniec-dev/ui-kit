@@ -116,6 +116,9 @@ export function Drawer({
         ref={containerRef}
         role="dialog"
         aria-modal="true"
+        aria-label={!title ? "Drawer" : undefined}
+        aria-labelledby={title ? "drawer-title" : undefined}
+        aria-describedby={description ? "drawer-description" : undefined}
         tabIndex={-1}
         className={cn(
           "fixed top-0 bottom-0 bg-surface border-border flex flex-col w-full shadow-kj-lg transition-transform duration-300 ease-spring outline-none",
@@ -127,8 +130,8 @@ export function Drawer({
         {(title || description) && (
           <div className="flex items-center justify-between p-6 border-b border-border">
             <div className="space-y-1">
-              {title && <h2 className="text-lg font-bold tracking-tight text-foreground">{title}</h2>}
-              {description && <p className="text-xs text-muted-foreground">{description}</p>}
+              {title && <h2 id="drawer-title" className="text-lg font-bold tracking-tight text-foreground">{title}</h2>}
+              {description && <p id="drawer-description" className="text-xs text-muted-foreground">{description}</p>}
             </div>
             <button
               type="button"
