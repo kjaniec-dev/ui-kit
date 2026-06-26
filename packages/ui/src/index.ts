@@ -73,3 +73,5 @@ export { ConfirmDialog, type ConfirmDialogProps } from "./components/confirm-dia
 export { Drawer, type DrawerProps } from "./components/drawer";
 export { CommandPalette, type CommandPaletteItem, type CommandPaletteProps } from "./components/command-palette";
 export { SidebarNav, type SidebarNavItem, type SidebarNavGroup, type SidebarNavProps } from "./components/sidebar-nav";
+export { Fab, type FabProps } from "./components/fab";
+
