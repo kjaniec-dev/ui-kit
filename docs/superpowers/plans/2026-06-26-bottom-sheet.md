@@ -1,541 +1,535 @@
-# BottomSheet Component Implementation Plan
+# BottomSheet Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Implement a responsive, accessible `BottomSheet` component in the `@kjaniec-dev/ui` library that behaves as an overlay bottom sheet on mobile and transforms into a centered dialog (modal) on desktop, using pure CSS responsivity.
+**Goal:** Implement a responsive, accessible BottomSheet component with compound components and thorough tests using TDD.
 
-**Architecture:** Use React compound components (`BottomSheet`, `BottomSheetHeader`, `BottomSheetTitle`, `BottomSheetDescription`, `BottomSheetContent`, `BottomSheetFooter`). Logically, manage state (open/close, ESC key, scroll lock, focus trap) in the parent component. Style using Tailwind CSS media queries (`md:` prefixes) to handle layout transitions seamlessly without SSR issues.
+**Architecture:** Use React Context API to manage accessible IDs (`titleId`, `descId`) dynamically via `useId()`. Apply responsive Tailwind classes to render a sliding sheet on mobile and a centered modal on desktop.
 
-**Tech Stack:** React, Tailwind CSS, Vitest, React Testing Library, Storybook.
-
----
-
-### Task 1: Setup Testing Environment in UI Package
-
-**Files:**
-- Modify: `packages/ui/package.json`
-- Create: `packages/ui/vitest.config.ts`
-- Create: `packages/ui/src/components/sanity.test.tsx`
-
-- [ ] **Step 1: Install Vitest and testing dependencies in UI package**
-  Run: `npm install -w @kjaniec-dev/ui -D vitest @testing-library/react @testing-library/jest-dom jsdom`
-  Expected: Dependencies are added to `packages/ui/package.json`.
-
-- [ ] **Step 2: Add test script to packages/ui/package.json**
-  Modify `packages/ui/package.json` to add the `"test"` script.
-  ```json
-  "scripts": {
-    "test": "vitest run",
-    ...
-  }
-  ```
-
-- [ ] **Step 3: Create vitest.config.ts for UI package**
-  Create `packages/ui/vitest.config.ts` with the following content:
-  ```typescript
-  import { defineConfig } from "vitest/config";
-  import react from "@vitejs/plugin-react";
-
-  export default defineConfig({
-    plugins: [react()],
-    test: {
-      environment: "jsdom",
-      globals: true,
-      setupFiles: [],
-    },
-  });
-  ```
-
-- [ ] **Step 4: Create a sanity test file**
-  Create `packages/ui/src/components/sanity.test.tsx` to verify Vitest works:
-  ```typescript
-  import { describe, it, expect } from "vitest";
-
-  describe("Sanity Check", () => {
-    it("should pass", () => {
-      expect(true).toBe(true);
-    });
-  });
-  ```
-
-- [ ] **Step 5: Run tests to verify setup**
-  Run: `npm run test --workspace=@kjaniec-dev/ui`
-  Expected: Sanity Check passes.
-
-- [ ] **Step 6: Commit testing setup**
-  Run:
-  ```bash
-  git add packages/ui/package.json packages/ui/vitest.config.ts packages/ui/src/components/sanity.test.tsx
-  git commit -m "chore: setup vitest testing environment for ui package"
-  ```
+**Tech Stack:** React 18, Tailwind CSS v4, Vitest, React Testing Library.
 
 ---
 
-### Task 2: Implement BottomSheet Component (TDD)
+### Task 1: Basic Rendering
 
 **Files:**
 - Create: `packages/ui/src/components/bottom-sheet.test.tsx`
 - Create: `packages/ui/src/components/bottom-sheet.tsx`
 
 - [ ] **Step 1: Write first failing test for BottomSheet rendering**
-  Create `packages/ui/src/components/bottom-sheet.test.tsx`:
-  ```typescript
-  import * as React from "react";
-  import { describe, it, expect, vi } from "vitest";
-  import { render, screen } from "@testing-library/react";
-  import { BottomSheet } from "./bottom-sheet";
 
-  describe("BottomSheet", () => {
-    it("renders children when open", () => {
-      render(
-        <BottomSheet open={true} onClose={() => {}}>
-          <div>Sheet Content</div>
-        </BottomSheet>
-      );
-      expect(screen.getByText("Sheet Content")).toBeDefined();
-    });
+Create `packages/ui/src/components/bottom-sheet.test.tsx`:
+```typescript
+import * as React from "react";
+import { describe, it, expect } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { BottomSheet } from "./bottom-sheet";
 
-    it("does not render when closed", () => {
-      render(
-        <BottomSheet open={false} onClose={() => {}}>
-          <div>Sheet Content</div>
-        </BottomSheet>
-      );
-      expect(screen.queryByText("Sheet Content")).toBeNull();
-    });
+describe("BottomSheet", () => {
+  it("renders children when open", () => {
+    render(
+      <BottomSheet open={true} onClose={() => {}}>
+        <div>Sheet Content</div>
+      </BottomSheet>
+    );
+    expect(screen.getByText("Sheet Content")).toBeInTheDocument();
   });
-  ```
+
+  it("does not render when closed", () => {
+    render(
+      <BottomSheet open={false} onClose={() => {}}>
+        <div>Sheet Content</div>
+      </BottomSheet>
+    );
+    expect(screen.queryByText("Sheet Content")).toBeNull();
+  });
+});
+```
 
 - [ ] **Step 2: Run test and watch it fail**
-  Run: `npm run test --workspace=@kjaniec-dev/ui`
-  Expected: FAIL (cannot find module `./bottom-sheet`).
+
+Run: `npm run test --workspace=@kjaniec-dev/ui`
+Expected: FAIL (cannot find module `./bottom-sheet`)
 
 - [ ] **Step 3: Create minimal implementation of BottomSheet**
-  Create `packages/ui/src/components/bottom-sheet.tsx` to export `BottomSheet` rendering simple content when `open` is true:
-  ```typescript
-  import * as React from "react";
 
-  export interface BottomSheetProps {
-    open: boolean;
-    onClose: () => void;
-    children: React.ReactNode;
-    maxWidth?: "max-w-sm" | "max-w-md" | "max-w-lg" | "max-w-xl";
-  }
+Create `packages/ui/src/components/bottom-sheet.tsx`:
+```typescript
+import * as React from "react";
 
-  export function BottomSheet({ open, onClose, children }: BottomSheetProps) {
-    if (!open) return null;
-    return <div>{children}</div>;
-  }
-  ```
+export interface BottomSheetProps {
+  open: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  maxWidth?: "max-w-sm" | "max-w-md" | "max-w-lg" | "max-w-xl";
+}
+
+export function BottomSheet({ open, onClose, children }: BottomSheetProps) {
+  if (!open) return null;
+  return <div>{children}</div>;
+}
+```
 
 - [ ] **Step 4: Run test and watch it pass**
-  Run: `npm run test --workspace=@kjaniec-dev/ui`
-  Expected: PASS.
 
-- [ ] **Step 5: Write failing tests for key behavioral features (ESC close, Body scroll-lock, Compound components)**
-  Add the following tests to `packages/ui/src/components/bottom-sheet.test.tsx`:
-  ```typescript
-  import { fireEvent } from "@testing-library/react";
-  import {
-    BottomSheetHeader,
-    BottomSheetTitle,
-    BottomSheetDescription,
-    BottomSheetContent,
-    BottomSheetFooter
-  } from "./bottom-sheet";
+Run: `npm run test --workspace=@kjaniec-dev/ui`
+Expected: PASS
 
+- [ ] **Step 5: Commit minimal implementation**
+
+Run:
+```bash
+git add packages/ui/src/components/bottom-sheet.test.tsx packages/ui/src/components/bottom-sheet.tsx
+git commit -m "feat(bottom-sheet): add minimal bottom-sheet implementation with basic tests"
+```
+
+---
+
+### Task 2: Dismissal and Scroll Lock Behaviors
+
+**Files:**
+- Modify: `packages/ui/src/components/bottom-sheet.test.tsx`
+- Modify: `packages/ui/src/components/bottom-sheet.tsx`
+
+- [ ] **Step 1: Write failing tests for ESC keypress and scroll lock**
+
+Add the following tests to `packages/ui/src/components/bottom-sheet.test.tsx`:
+```typescript
   it("calls onClose when Escape key is pressed", () => {
     const handleClose = vi.fn();
     render(
       <BottomSheet open={true} onClose={handleClose}>
-        <div>Content</div>
+        <div>Sheet Content</div>
       </BottomSheet>
     );
-    fireEvent.keyDown(window, { key: "Escape" });
-    expect(handleClose).toHaveBeenCalled();
+    
+    const event = new KeyboardEvent("keydown", { key: "Escape" });
+    window.dispatchEvent(event);
+    expect(handleClose).toHaveBeenCalledTimes(1);
   });
 
-  it("applies overflow hidden to body when open", () => {
+  it("locks body scrolling when open, and restores it when closed/unmounted", () => {
     const { unmount } = render(
       <BottomSheet open={true} onClose={() => {}}>
-        <div>Content</div>
+        <div>Sheet Content</div>
       </BottomSheet>
     );
     expect(document.body.style.overflow).toBe("hidden");
+
     unmount();
     expect(document.body.style.overflow).toBe("");
   });
+```
 
-  it("renders header, title, and description with correct a11y IDs", () => {
+- [ ] **Step 2: Run test and watch them fail**
+
+Run: `npm run test --workspace=@kjaniec-dev/ui`
+Expected: FAIL (Escape test: call count is 0; overflow test: overflow is not "hidden")
+
+- [ ] **Step 3: Implement ESC close and body scroll lock**
+
+Modify `packages/ui/src/components/bottom-sheet.tsx` to handle these side effects:
+```typescript
+import * as React from "react";
+
+export interface BottomSheetProps {
+  open: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  maxWidth?: "max-w-sm" | "max-w-md" | "max-w-lg" | "max-w-xl";
+}
+
+export function BottomSheet({ open, onClose, children }: BottomSheetProps) {
+  React.useEffect(() => {
+    if (!open) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+  return <div>{children}</div>;
+}
+```
+
+- [ ] **Step 4: Run test and watch them pass**
+
+Run: `npm run test --workspace=@kjaniec-dev/ui`
+Expected: PASS
+
+- [ ] **Step 5: Commit changes**
+
+Run:
+```bash
+git add packages/ui/src/components/bottom-sheet.test.tsx packages/ui/src/components/bottom-sheet.tsx
+git commit -m "feat(bottom-sheet): support ESC close and body scroll lock behaviors"
+```
+
+---
+
+### Task 3: Compound Components and Accessibility
+
+**Files:**
+- Modify: `packages/ui/src/components/bottom-sheet.test.tsx`
+- Modify: `packages/ui/src/components/bottom-sheet.tsx`
+
+- [ ] **Step 1: Write failing tests for accessibility role, modal state, and compound components**
+
+Add these tests to `packages/ui/src/components/bottom-sheet.test.tsx`:
+```typescript
+  it("has correct accessibility attributes and matches title/description IDs", () => {
     render(
       <BottomSheet open={true} onClose={() => {}}>
         <BottomSheetHeader>
           <BottomSheetTitle>Test Title</BottomSheetTitle>
-          <BottomSheetDescription>Test Desc</BottomSheetDescription>
+          <BottomSheetDescription>Test Description</BottomSheetDescription>
         </BottomSheetHeader>
-        <BottomSheetContent>Main Content</BottomSheetContent>
+        <BottomSheetContent>Test Content</BottomSheetContent>
+        <BottomSheetFooter>Test Footer</BottomSheetFooter>
       </BottomSheet>
     );
-    
+
     const dialog = screen.getByRole("dialog");
+    expect(dialog).toBeInTheDocument();
+    expect(dialog).toHaveAttribute("aria-modal", "true");
+
     const title = screen.getByText("Test Title");
-    const desc = screen.getByText("Test Desc");
+    const description = screen.getByText("Test Description");
 
-    expect(dialog.getAttribute("aria-labelledby")).toBe(title.id);
-    expect(dialog.getAttribute("aria-describedby")).toBe(desc.id);
+    expect(dialog).toHaveAttribute("aria-labelledby", title.id);
+    expect(dialog).toHaveAttribute("aria-describedby", description.id);
+
+    expect(screen.getByText("Test Content")).toBeInTheDocument();
+    expect(screen.getByText("Test Footer")).toBeInTheDocument();
   });
-  ```
+```
 
-- [ ] **Step 6: Run tests and watch them fail**
-  Run: `npm run test --workspace=@kjaniec-dev/ui`
-  Expected: FAIL (missing compound exports and scroll-lock/ESC listener logic).
+- [ ] **Step 2: Run test and watch it fail**
 
-- [ ] **Step 7: Implement full responsive, accessible BottomSheet structure**
-  Rewrite `packages/ui/src/components/bottom-sheet.tsx` to add full dialog logic, Backdrop, Panel positioning, and all sub-components:
-  ```typescript
-  "use client";
+Run: `npm run test --workspace=@kjaniec-dev/ui`
+Expected: FAIL (cannot find BottomSheetHeader/Title/etc. or elements have no roles/attributes)
 
-  import * as React from "react";
-  import { cn } from "../lib/cn";
+- [ ] **Step 3: Implement Compound Components and Context Linkage**
 
-  export interface BottomSheetProps {
-    open: boolean;
-    onClose: () => void;
-    children: React.ReactNode;
-    maxWidth?: "max-w-sm" | "max-w-md" | "max-w-lg" | "max-w-xl";
-  }
+Modify `packages/ui/src/components/bottom-sheet.tsx`:
+```typescript
+import * as React from "react";
+import { cn } from "../lib/cn";
 
-  const BottomSheetContext = React.createContext<{ titleId: string; descId: string; onClose: () => void } | null>(null);
+export interface BottomSheetProps {
+  open: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  maxWidth?: "max-w-sm" | "max-w-md" | "max-w-lg" | "max-w-xl";
+}
 
-  export function BottomSheet({
-    open,
-    onClose,
-    children,
-    maxWidth = "max-w-md",
-  }: BottomSheetProps) {
-    const titleId = React.useId();
-    const descId = React.useId();
-    const containerRef = React.useRef<HTMLDivElement>(null);
-    const lastActiveElement = React.useRef<HTMLElement | null>(null);
+const BottomSheetContext = React.createContext<{ titleId: string; descId: string } | null>(null);
 
-    React.useEffect(() => {
-      if (!open) {
-        if (lastActiveElement.current) {
-          lastActiveElement.current.focus();
-          lastActiveElement.current = null;
-        }
-        return;
+export function BottomSheet({ open, onClose, children, maxWidth = "max-w-lg" }: BottomSheetProps) {
+  const titleId = React.useId();
+  const descId = React.useId();
+
+  React.useEffect(() => {
+    if (!open) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
       }
+    };
 
-      lastActiveElement.current = document.activeElement as HTMLElement;
+    window.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
 
-      const container = containerRef.current;
-      if (container) {
-        const focusables = container.querySelectorAll<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
-        if (focusables.length > 0) {
-          setTimeout(() => focusables[0].focus(), 50);
-        } else {
-          container.focus();
-        }
-      }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
 
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          onClose();
-          return;
-        }
+  if (!open) return null;
 
-        if (e.key === "Tab") {
-          const container = containerRef.current;
-          if (!container) return;
-
-          const focusables = Array.from(
-            container.querySelectorAll<HTMLElement>(
-              'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-            )
-          );
-          if (focusables.length === 0) {
-            e.preventDefault();
-            return;
-          }
-
-          const first = focusables[0];
-          const last = focusables[focusables.length - 1];
-
-          if (e.shiftKey) {
-            if (document.activeElement === first || document.activeElement === container) {
-              last.focus();
-              e.preventDefault();
-            }
-          } else {
-            if (document.activeElement === last) {
-              first.focus();
-              e.preventDefault();
-            }
-          }
-        }
-      };
-
-      document.addEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "hidden";
-
-      return () => {
-        document.removeEventListener("keydown", handleKeyDown);
-        document.body.style.overflow = "";
-      };
-    }, [open, onClose]);
-
-    return (
+  return (
+    <BottomSheetContext.Provider value={{ titleId, descId }}>
       <div
-        onClick={(e) => e.target === e.currentTarget && onClose()}
-        className={cn(
-          "fixed inset-0 z-[100] flex flex-col justify-end backdrop-blur-[2px] transition-opacity duration-300",
-          "bg-[color-mix(in_oklch,#09090b_45%,transparent)]",
-          "md:grid md:place-items-center md:p-6",
-          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        )}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={descId}
       >
-        <BottomSheetContext.Provider value={{ titleId, descId, onClose }}>
-          <div
-            ref={containerRef}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={titleId}
-            aria-describedby={descId}
-            tabIndex={-1}
-            className={cn(
-              "relative bg-surface border-border shadow-kj-lg outline-none transition-all duration-300 ease-in-out flex flex-col",
-              // Mobile styles (Default)
-              "w-full max-h-[90vh] rounded-t-kj-2xl border-t",
-              open ? "translate-y-0" : "translate-y-full",
-              // Desktop styles (md and above)
-              "md:relative md:translate-y-0 md:rounded-kj-2xl md:border md:my-8 md:w-full",
-              open ? "md:scale-100 md:opacity-100" : "md:scale-95 md:opacity-0",
-              maxWidth
-            )}
-          >
-            {children}
-          </div>
-        </BottomSheetContext.Provider>
-      </div>
-    );
-  }
-  BottomSheet.displayName = "BottomSheet";
-
-  export function BottomSheetHeader({ className, children }: React.HTMLAttributes<HTMLDivElement>) {
-    const ctx = React.useContext(BottomSheetContext);
-    return (
-      <div className={cn("relative p-6 pb-4 border-b border-border flex flex-col gap-1", className)}>
-        {/* Mobile-only Drag Handle */}
-        <div className="w-10 h-1 rounded-full bg-muted-foreground/30 mx-auto mb-4 md:hidden" />
-        
         {children}
-
-        {ctx && (
-          <button
-            type="button"
-            onClick={ctx.onClose}
-            aria-label="Close"
-            className="absolute top-4 right-4 p-1.5 rounded-kj-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
-          >
-            <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-              <path d="M18 6 6 18M6 6l12 12" />
-            </svg>
-          </button>
-        )}
       </div>
-    );
-  }
-  BottomSheetHeader.displayName = "BottomSheetHeader";
+    </BottomSheetContext.Provider>
+  );
+}
 
-  export function BottomSheetTitle({ className, id, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
-    const ctx = React.useContext(BottomSheetContext);
-    return <h2 id={id ?? ctx?.titleId} className={cn("text-lg font-bold tracking-tight text-foreground", className)} {...props} />;
-  }
-  BottomSheetTitle.displayName = "BottomSheetTitle";
+export function BottomSheetHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("p-4", className)} {...props} />;
+}
 
-  export function BottomSheetDescription({ className, id, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-    const ctx = React.useContext(BottomSheetContext);
-    return <p id={id ?? ctx?.descId} className={cn("text-xs text-muted-foreground", className)} {...props} />;
-  }
-  BottomSheetDescription.displayName = "BottomSheetDescription";
+export function BottomSheetTitle({ className, id, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+  const ctx = React.useContext(BottomSheetContext);
+  return <h2 id={id ?? ctx?.titleId} className={cn("text-lg font-semibold", className)} {...props} />;
+}
 
-  export function BottomSheetContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-    return <div className={cn("flex-1 overflow-y-auto p-6", className)} {...props} />;
-  }
-  BottomSheetContent.displayName = "BottomSheetContent";
+export function BottomSheetDescription({ className, id, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+  const ctx = React.useContext(BottomSheetContext);
+  return <p id={id ?? ctx?.descId} className={cn("text-sm text-muted-foreground", className)} {...props} />;
+}
 
-  export function BottomSheetFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-    return <div className={cn("p-6 pt-4 border-t border-border flex gap-3 justify-end", className)} {...props} />;
-  }
-  BottomSheetFooter.displayName = "BottomSheetFooter";
-  ```
+export function BottomSheetContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("p-4 overflow-y-auto", className)} {...props} />;
+}
 
-- [ ] **Step 8: Run tests and watch them pass**
-  Run: `npm run test --workspace=@kjaniec-dev/ui`
-  Expected: All tests pass.
+export function BottomSheetFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("p-4 border-t border-border", className)} {...props} />;
+}
+```
 
-- [ ] **Step 9: Clean up sanity tests**
-  Run: `rm packages/ui/src/components/sanity.test.tsx`
-  Expected: Cleaned up.
+- [ ] **Step 4: Run test and watch it pass**
 
-- [ ] **Step 10: Commit BottomSheet implementation**
-  Run:
-  ```bash
-  git add packages/ui/src/components/bottom-sheet.tsx packages/ui/src/components/bottom-sheet.test.tsx
-  git commit -m "feat: add BottomSheet component implementation with full tests"
-  ```
+Run: `npm run test --workspace=@kjaniec-dev/ui`
+Expected: PASS
+
+- [ ] **Step 5: Commit changes**
+
+Run:
+```bash
+git add packages/ui/src/components/bottom-sheet.test.tsx packages/ui/src/components/bottom-sheet.tsx
+git commit -m "feat(bottom-sheet): add compound components and accessibility context"
+```
 
 ---
 
-### Task 3: Export Component & Add Storybook Stories
+### Task 4: Responsive Styles, Overlay and Drag Handle
+
+**Files:**
+- Modify: `packages/ui/src/components/bottom-sheet.test.tsx`
+- Modify: `packages/ui/src/components/bottom-sheet.tsx`
+
+- [ ] **Step 1: Write tests for layout styling, backdrop clicks, and close button**
+
+Add testing for visual elements, backdrop dismiss, and close button in `packages/ui/src/components/bottom-sheet.test.tsx`:
+```typescript
+  it("closes when the backdrop overlay is clicked", () => {
+    const handleClose = vi.fn();
+    render(
+      <BottomSheet open={true} onClose={handleClose}>
+        <div>Sheet Content</div>
+      </BottomSheet>
+    );
+
+    const backdrop = screen.getByRole("presentation");
+    backdrop.click();
+    expect(handleClose).toHaveBeenCalledTimes(1);
+  });
+
+  it("renders a close button and triggers onClose when clicked", () => {
+    const handleClose = vi.fn();
+    render(
+      <BottomSheet open={true} onClose={handleClose}>
+        <div>Sheet Content</div>
+      </BottomSheet>
+    );
+
+    const closeBtn = screen.getByRole("button", { name: /close/i });
+    expect(closeBtn).toBeInTheDocument();
+    closeBtn.click();
+    expect(handleClose).toHaveBeenCalledTimes(1);
+  });
+```
+
+- [ ] **Step 2: Run test and watch them fail**
+
+Run: `npm run test --workspace=@kjaniec-dev/ui`
+Expected: FAIL (cannot find close button or backdrop elements)
+
+- [ ] **Step 3: Implement full responsive style, backdrop, drag handle, and close button**
+
+Modify `packages/ui/src/components/bottom-sheet.tsx`:
+```typescript
+import * as React from "react";
+import { cn } from "../lib/cn";
+
+export interface BottomSheetProps {
+  open: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  maxWidth?: "max-w-sm" | "max-w-md" | "max-w-lg" | "max-w-xl" | "max-w-2xl";
+  className?: string;
+  showClose?: boolean;
+}
+
+const BottomSheetContext = React.createContext<{ titleId: string; descId: string } | null>(null);
+
+export function BottomSheet({
+  open,
+  onClose,
+  children,
+  maxWidth = "max-w-lg",
+  className,
+  showClose = true,
+}: BottomSheetProps) {
+  const titleId = React.useId();
+  const descId = React.useId();
+
+  React.useEffect(() => {
+    if (!open) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <BottomSheetContext.Provider value={{ titleId, descId }}>
+      {/* Backdrop overlay */}
+      <div
+        role="presentation"
+        onClick={(e) => e.target === e.currentTarget && onClose()}
+        className={cn(
+          "fixed inset-0 z-[100] grid items-end sm:place-items-center p-0 sm:p-6 backdrop-blur-[3px] transition-opacity duration-200",
+          "bg-[color-mix(in_oklch,#09090b_55%,transparent)]"
+        )}
+      >
+        {/* Panel wrapper */}
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={titleId}
+          aria-describedby={descId}
+          tabIndex={-1}
+          className={cn(
+            "relative w-full bg-surface border-t sm:border border-border shadow-kj-lg transition-all outline-none",
+            "rounded-t-kj-2xl sm:rounded-kj-2xl flex flex-col max-h-[85vh] sm:max-h-[90vh]",
+            // Mobile styling vs Desktop styling
+            "bottom-0 sm:bottom-auto",
+            maxWidth,
+            className
+          )}
+        >
+          {/* Mobile Drag Handle */}
+          <div className="flex justify-center py-2 sm:hidden cursor-grab">
+            <div className="w-12 h-1.5 rounded-full bg-muted-foreground/20" />
+          </div>
+
+          {/* Close button (rendered on top right for desktop modal look) */}
+          {showClose && (
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close"
+              className="absolute top-4 right-4 p-1.5 rounded-kj-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer z-10"
+            >
+              <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
+          )}
+
+          {children}
+        </div>
+      </div>
+    </BottomSheetContext.Provider>
+  );
+}
+
+export function BottomSheetHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("p-6 flex flex-col gap-1.5 border-b border-border", className)} {...props} />;
+}
+
+export function BottomSheetTitle({ className, id, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+  const ctx = React.useContext(BottomSheetContext);
+  return <h2 id={id ?? ctx?.titleId} className={cn("m-0 text-[1.15rem] font-bold tracking-[-0.01em]", className)} {...props} />;
+}
+
+export function BottomSheetDescription({ className, id, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+  const ctx = React.useContext(BottomSheetContext);
+  return <p id={id ?? ctx?.descId} className={cn("m-0 text-[0.9rem] text-muted-foreground", className)} {...props} />;
+}
+
+export function BottomSheetContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("p-6 overflow-y-auto flex-1", className)} {...props} />;
+}
+
+export function BottomSheetFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("p-6 border-t border-border flex gap-2.5 justify-end mt-auto", className)} {...props} />;
+}
+```
+
+- [ ] **Step 4: Run test and watch them pass**
+
+Run: `npm run test --workspace=@kjaniec-dev/ui`
+Expected: PASS
+
+- [ ] **Step 5: Commit changes**
+
+Run:
+```bash
+git add packages/ui/src/components/bottom-sheet.test.tsx packages/ui/src/components/bottom-sheet.tsx
+git commit -m "feat(bottom-sheet): implement responsive styles, overlay, drag handle, close button"
+```
+
+---
+
+### Task 5: Exports and Cleanup
 
 **Files:**
 - Modify: `packages/ui/src/index.ts`
-- Create: `packages/ui/src/components/bottom-sheet.stories.tsx`
+- Delete: `packages/ui/src/components/sanity.test.tsx`
 
-- [ ] **Step 1: Export BottomSheet in ui packages index.ts**
-  Add exports to `packages/ui/src/index.ts`:
-  ```typescript
-  export * from "./components/bottom-sheet";
-  ```
+- [ ] **Step 1: Export BottomSheet from the ui library**
 
-- [ ] **Step 2: Create Storybook stories for BottomSheet**
-  Create `packages/ui/src/components/bottom-sheet.stories.tsx`:
-  ```typescript
-  import * as React from "react";
-  import type { Meta, StoryObj } from "@storybook/react";
-  import {
-    BottomSheet,
-    BottomSheetHeader,
-    BottomSheetTitle,
-    BottomSheetDescription,
-    BottomSheetContent,
-    BottomSheetFooter
-  } from "./bottom-sheet";
-  import { Button } from "./button";
+Modify `packages/ui/src/index.ts` by appending to line 78 or appropriate export section:
+```typescript
+export {
+  BottomSheet, BottomSheetHeader, BottomSheetTitle, BottomSheetDescription, BottomSheetContent, BottomSheetFooter,
+  type BottomSheetProps
+} from "./components/bottom-sheet";
+```
 
-  const meta: Meta<typeof BottomSheet> = {
-    title: "Overlays/BottomSheet",
-    component: BottomSheet,
-    parameters: {
-      layout: "centered",
-    },
-  };
+- [ ] **Step 2: Run workspace build to verify typescript compile and build output**
 
-  export default meta;
-  type Story = StoryObj<typeof BottomSheet>;
+Run: `npm run build --workspace=@kjaniec-dev/ui`
+Expected: Successful compile and output files in `dist`
 
-  function BottomSheetDemo(props: any) {
-    const [open, setOpen] = React.useState(false);
-    return (
-      <div className="p-4">
-        <Button onClick={() => setOpen(true)}>Open BottomSheet</Button>
-        <BottomSheet open={open} onClose={() => setOpen(false)} {...props}>
-          <BottomSheetHeader>
-            <BottomSheetTitle>Choose an option</BottomSheetTitle>
-            <BottomSheetDescription>Please select one of the financial categories below.</BottomSheetDescription>
-          </BottomSheetHeader>
-          <BottomSheetContent>
-            <div className="space-y-2">
-              <button className="w-full text-left p-3 rounded-lg hover:bg-muted border border-border transition-colors">
-                💰 Income
-              </button>
-              <button className="w-full text-left p-3 rounded-lg hover:bg-muted border border-border transition-colors">
-                🛒 Shopping
-              </button>
-              <button className="w-full text-left p-3 rounded-lg hover:bg-muted border border-border transition-colors">
-                🚗 Car & Transport
-              </button>
-            </div>
-          </BottomSheetContent>
-          <BottomSheetFooter>
-            <Button variant="outline" onClick={() => setOpen(false)}>
-              Cancel
-            </Button>
-            <Button onClick={() => setOpen(false)}>
-              Confirm
-            </Button>
-          </BottomSheetFooter>
-        </BottomSheet>
-      </div>
-    );
-  }
+- [ ] **Step 3: Remove sanity test**
 
-  export const Default: Story = {
-    render: () => <BottomSheetDemo />,
-  };
-  ```
+Run: `rm packages/ui/src/components/sanity.test.tsx`
 
-- [ ] **Step 3: Verify packages typescript compilation and build**
-  Run: `npm run build --workspace=@kjaniec-dev/ui`
-  Expected: tsup builds the project successfully.
+- [ ] **Step 4: Run all tests to verify everything passes without the sanity test**
 
-- [ ] **Step 4: Commit story and exports**
-  Run:
-  ```bash
-  git add packages/ui/src/index.ts packages/ui/src/components/bottom-sheet.stories.tsx
-  git commit -m "feat: export BottomSheet component and add storybook stories"
-  ```
+Run: `npm run test --workspace=@kjaniec-dev/ui`
+Expected: PASS
 
----
+- [ ] **Step 5: Commit final exports and cleanup**
 
-### Task 4: Add Live Gallery Showcase in Site App
-
-**Files:**
-- Modify: `site/src/main.tsx`
-
-- [ ] **Step 1: Check main.tsx imports**
-  Import `BottomSheet`, `BottomSheetHeader`, `BottomSheetTitle`, `BottomSheetDescription`, `BottomSheetContent`, `BottomSheetFooter` in `site/src/main.tsx`.
-
-- [ ] **Step 2: Add demo state in main.tsx gallery**
-  Define react state `const [showBottomSheet, setShowBottomSheet] = useState(false);` inside the main layout component in `site/src/main.tsx`.
-
-- [ ] **Step 3: Add click triggers in Overlay/Dialog section**
-  Find the Modals / Overlays section in `site/src/main.tsx` (usually contains Modal and Drawer buttons) and add a Button to trigger the BottomSheet.
-  ```tsx
-  <Button onClick={() => setShowBottomSheet(true)}>Open Responsive BottomSheet</Button>
-  ```
-
-- [ ] **Step 4: Render BottomSheet component at the page root level**
-  Render the `<BottomSheet>` structure at the page level in `site/src/main.tsx`:
-  ```tsx
-  <BottomSheet open={showBottomSheet} onClose={() => setShowBottomSheet(false)}>
-    <BottomSheetHeader>
-      <BottomSheetTitle>Demo BottomSheet</BottomSheetTitle>
-      <BottomSheetDescription>Responsive dialog: bottom sheet on mobile, modal on desktop.</BottomSheetDescription>
-    </BottomSheetHeader>
-    <BottomSheetContent>
-      <div className="space-y-3">
-        <p className="text-sm text-foreground">
-          This overlay component automatically adapts to the screen size. Change the viewport size in your browser to observe the transition.
-        </p>
-        <div className="p-3 bg-muted rounded-kj-md text-xs font-mono text-muted-foreground">
-          Mobile: sliding sheet<br/>
-          Desktop: centered card dialog
-        </div>
-      </div>
-    </BottomSheetContent>
-    <BottomSheetFooter>
-      <Button variant="outline" onClick={() => setShowBottomSheet(false)}>
-        Close
-      </Button>
-      <Button onClick={() => setShowBottomSheet(false)}>
-        Agree
-      </Button>
-    </BottomSheetFooter>
-  </BottomSheet>
-  ```
-
-- [ ] **Step 5: Run site and verify the build**
-  Run: `npm run build` at root.
-  Expected: Build succeeds.
-
-- [ ] **Step 6: Commit site integration**
-  Run:
-  ```bash
-  git add site/src/main.tsx
-  git commit -m "feat: add BottomSheet showcase page demo to site gallery"
-  ```
+Run:
+```bash
+git add packages/ui/src/index.ts
+git rm packages/ui/src/components/sanity.test.tsx
+git commit -m "feat(bottom-sheet): export bottom-sheet components and clean up sanity tests"
+```
