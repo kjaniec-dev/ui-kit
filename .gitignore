@@ -5,3 +5,4 @@ dist
 *.local
 .junie
 storybook-static
+.worktrees/
