@@ -2193,5 +2193,88 @@
     ],
     "cva": null,
     "usageSnippet": "<SidebarNavGroup>\n  <!-- Content -->\n</SidebarNavGroup>"
+  },
+  {
+    "name": "Fab",
+    "importPath": "import { Fab } from \"@kjaniec-dev/ui\";",
+    "description": "React component Fab.",
+    "props": [
+      {
+        "name": "icon",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": "Icon rendered inside the button."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": "Text label for accessibility (aria-label)."
+      },
+      {
+        "name": "mobileOnly",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "If true, the FAB will only be visible on mobile screens (< 768px)."
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Shows a spinner and disables interaction."
+      },
+      {
+        "name": "variant",
+        "type": "\"primary\" | \"secondary\" | \"outline\" | \"danger\"",
+        "optional": true,
+        "defaultValue": "\"primary\"",
+        "description": "Style variant of the component: variant."
+      },
+      {
+        "name": "size",
+        "type": "\"sm\" | \"md\" | \"lg\"",
+        "optional": true,
+        "defaultValue": "\"md\"",
+        "description": "Style variant of the component: size."
+      },
+      {
+        "name": "position",
+        "type": "\"bottom-right\" | \"bottom-left\" | \"bottom-center\" | \"none\"",
+        "optional": true,
+        "defaultValue": "\"bottom-right\"",
+        "description": "Style variant of the component: position."
+      }
+    ],
+    "cva": {
+      "variants": {
+        "variant": [
+          "primary",
+          "secondary",
+          "outline",
+          "danger"
+        ],
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "position": [
+          "bottom-right",
+          "bottom-left",
+          "bottom-center",
+          "none"
+        ]
+      },
+      "defaultVariants": {
+        "variant": "primary",
+        "size": "md",
+        "position": "bottom-right"
+      }
+    },
+    "usageSnippet": "<Fab {...args} variant=\"primary\" label=\"Primary variant\" />"
   }
 ]
