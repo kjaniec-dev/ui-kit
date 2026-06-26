@@ -60,13 +60,12 @@ export const Fab = React.forwardRef<HTMLButtonElement, FabProps>(
         className={cn(
           fabVariants({ variant, size, position }),
           mobileOnly && "md:hidden",
-          loading && "relative",
           className
         )}
+        {...props}
         disabled={disabled || loading}
         aria-label={label}
         aria-busy={loading || undefined}
-        {...props}
       >
         {loading ? (
           <span
