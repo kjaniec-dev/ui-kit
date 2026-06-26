@@ -74,4 +74,12 @@ export { Drawer, type DrawerProps } from "./components/drawer";
 export { CommandPalette, type CommandPaletteItem, type CommandPaletteProps } from "./components/command-palette";
 export { SidebarNav, type SidebarNavItem, type SidebarNavGroup, type SidebarNavProps } from "./components/sidebar-nav";
 export { Fab, type FabProps } from "./components/fab";
-
+export {
+  BottomSheet,
+  BottomSheetHeader,
+  BottomSheetTitle,
+  BottomSheetDescription,
+  BottomSheetContent,
+  BottomSheetFooter,
+  type BottomSheetProps,
+} from "./components/bottom-sheet";
