@@ -76,6 +76,12 @@ import {
   CommandPalette,
   SidebarNav,
   Fab,
+  BottomSheet,
+  BottomSheetHeader,
+  BottomSheetTitle,
+  BottomSheetDescription,
+  BottomSheetContent,
+  BottomSheetFooter,
   cn
 } from "@kjaniec-dev/ui";
 import "./index.css";
@@ -319,6 +325,7 @@ function Gallery() {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [confirmOpen, setConfirmOpen] = React.useState(false);
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [bottomSheetOpen, setBottomSheetOpen] = React.useState(false);
   const [cmdOpen, setCmdOpen] = React.useState(false);
   const [confirmLoading, setConfirmLoading] = React.useState(false);
   const [sortBy, setSortBy] = React.useState<string | undefined>("name");
@@ -1108,6 +1115,7 @@ function Gallery() {
                 <Button onClick={() => setOpen(true)}>Open custom modal</Button>
                 <Button variant="outline" onClick={() => setConfirmOpen(true)}>Open Confirm Dialog</Button>
                 <Button variant="outline" onClick={() => setDrawerOpen(true)}>Open Side Drawer</Button>
+                <Button variant="outline" onClick={() => setBottomSheetOpen(true)}>Open Bottom Sheet</Button>
                 <Button
                   variant="outline"
                   onClick={() => setCmdOpen(true)}
@@ -1357,6 +1365,41 @@ function Gallery() {
           </div>
         </div>
       </Drawer>
+
+      <BottomSheet
+        open={bottomSheetOpen}
+        onClose={() => setBottomSheetOpen(false)}
+      >
+        <BottomSheetHeader>
+          <BottomSheetTitle>Share this project</BottomSheetTitle>
+          <BottomSheetDescription>
+            Invite collaborators or copy a shareable link to this workspace.
+          </BottomSheetDescription>
+        </BottomSheetHeader>
+        <BottomSheetContent>
+          <div className="space-y-4">
+            <TextField label="Share link" defaultValue="https://app.kjaniec.dev/share/proj-8f3a" readOnly />
+            <SelectField label="Access level" defaultValue="view">
+              <option value="view">View only</option>
+              <option value="comment">Can comment</option>
+              <option value="edit">Can edit</option>
+            </SelectField>
+            <CheckboxField label="Notify collaborators by email" defaultChecked />
+          </div>
+        </BottomSheetContent>
+        <BottomSheetFooter>
+          <Button variant="outline" onClick={() => setBottomSheetOpen(false)}>Cancel</Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              setBottomSheetOpen(false);
+              toast({ message: "Invite link copied!", tone: "success" });
+            }}
+          >
+            Copy &amp; Share
+          </Button>
+        </BottomSheetFooter>
+      </BottomSheet>
 
       <CommandPalette
         open={cmdOpen}
