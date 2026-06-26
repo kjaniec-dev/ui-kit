@@ -78,4 +78,31 @@ describe("BottomSheet", () => {
     expect(screen.getByText("Test Content")).toBeInTheDocument();
     expect(screen.getByText("Test Footer")).toBeInTheDocument();
   });
+
+  it("closes when the backdrop overlay is clicked", () => {
+    const handleClose = vi.fn();
+    render(
+      <BottomSheet open={true} onClose={handleClose}>
+        <div>Sheet Content</div>
+      </BottomSheet>
+    );
+
+    const backdrop = screen.getByRole("presentation");
+    backdrop.click();
+    expect(handleClose).toHaveBeenCalledTimes(1);
+  });
+
+  it("renders a close button and triggers onClose when clicked", () => {
+    const handleClose = vi.fn();
+    render(
+      <BottomSheet open={true} onClose={handleClose}>
+        <div>Sheet Content</div>
+      </BottomSheet>
+    );
+
+    const closeBtn = screen.getByRole("button", { name: /close/i });
+    expect(closeBtn).toBeInTheDocument();
+    closeBtn.click();
+    expect(handleClose).toHaveBeenCalledTimes(1);
+  });
 });
