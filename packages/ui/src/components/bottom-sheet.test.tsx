@@ -32,6 +32,7 @@ describe("BottomSheet", () => {
     // Open states
     expect(backdrop).toHaveClass("opacity-100");
     expect(backdrop).toHaveClass("pointer-events-auto");
+    expect(backdrop).toHaveClass("visible");
     expect(dialog).toHaveClass("translate-y-0");
     expect(dialog).toHaveClass("sm:scale-100");
 
@@ -44,6 +45,7 @@ describe("BottomSheet", () => {
 
     expect(backdrop).toHaveClass("opacity-0");
     expect(backdrop).toHaveClass("pointer-events-none");
+    expect(backdrop).toHaveClass("invisible");
     expect(dialog).toHaveClass("translate-y-full");
     expect(dialog).toHaveClass("sm:scale-95");
   });
@@ -194,5 +196,67 @@ describe("BottomSheet", () => {
     expect(document.activeElement).toBe(trigger);
 
     document.body.removeChild(trigger);
+  });
+
+  it("restores focus to the last active element when unmounted while open", async () => {
+    const trigger = document.createElement("button");
+    document.body.appendChild(trigger);
+    trigger.focus();
+    expect(document.activeElement).toBe(trigger);
+
+    const { unmount } = render(
+      <BottomSheet open={true} onClose={() => {}} showClose={false}>
+        <BottomSheetContent>
+          <button id="first-btn">First</button>
+        </BottomSheetContent>
+      </BottomSheet>
+    );
+
+    await new Promise((resolve) => setTimeout(resolve, 60));
+    const firstBtn = document.getElementById("first-btn");
+    expect(document.activeElement).toBe(firstBtn);
+
+    unmount();
+
+    expect(document.activeElement).toBe(trigger);
+
+    document.body.removeChild(trigger);
+  });
+
+  it("redirects focus back inside the BottomSheet if focus somehow escapes outside", async () => {
+    const trigger = document.createElement("button");
+    document.body.appendChild(trigger);
+    
+    const externalBtn = document.createElement("button");
+    externalBtn.id = "external-btn";
+    document.body.appendChild(externalBtn);
+
+    const { getByRole } = render(
+      <BottomSheet open={true} onClose={() => {}} showClose={false}>
+        <BottomSheetContent>
+          <button id="first-btn">First</button>
+        </BottomSheetContent>
+      </BottomSheet>
+    );
+
+    const dialog = getByRole("dialog");
+    const firstBtn = document.getElementById("first-btn") as HTMLButtonElement;
+
+    await new Promise((resolve) => setTimeout(resolve, 60));
+    expect(document.activeElement).toBe(firstBtn);
+
+    // Escape focus manually
+    externalBtn.focus();
+    expect(document.activeElement).toBe(externalBtn);
+
+    // Trigger tab press on dialog
+    const tabEvent = new KeyboardEvent("keydown", { key: "Tab", bubbles: true });
+    dialog.dispatchEvent(tabEvent);
+
+    // It should redirect focus back inside
+    expect(document.activeElement).toBe(firstBtn);
+
+    document.body.removeChild(trigger);
+    document.body.removeChild(externalBtn);
   });
 });

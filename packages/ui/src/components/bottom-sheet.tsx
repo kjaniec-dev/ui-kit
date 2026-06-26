@@ -26,13 +26,7 @@ export function BottomSheet({
   const lastActiveElement = React.useRef<HTMLElement | null>(null);
 
   React.useEffect(() => {
-    if (!open) {
-      if (lastActiveElement.current) {
-        lastActiveElement.current.focus();
-        lastActiveElement.current = null;
-      }
-      return;
-    }
+    if (!open) return;
 
     lastActiveElement.current = document.activeElement as HTMLElement;
 
@@ -42,7 +36,11 @@ export function BottomSheet({
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       );
       if (focusables.length > 0) {
-        setTimeout(() => focusables[0].focus(), 50);
+        focusables[0].focus();
+        setTimeout(() => {
+          if (container.contains(document.activeElement)) return;
+          focusables[0].focus();
+        }, 50);
       } else {
         container.focus();
       }
@@ -71,6 +69,16 @@ export function BottomSheet({
         const first = focusables[0];
         const last = focusables[focusables.length - 1];
 
+        if (!container.contains(document.activeElement)) {
+          e.preventDefault();
+          if (e.shiftKey) {
+            last.focus();
+          } else {
+            first.focus();
+          }
+          return;
+        }
+
         if (e.shiftKey) {
           if (document.activeElement === first || document.activeElement === container) {
             last.focus();
@@ -91,6 +99,10 @@ export function BottomSheet({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
+      if (lastActiveElement.current) {
+        lastActiveElement.current.focus();
+        lastActiveElement.current = null;
+      }
     };
   }, [open, onClose]);
 
@@ -103,7 +115,7 @@ export function BottomSheet({
         className={cn(
           "fixed inset-0 z-[100] grid items-end sm:place-items-center p-0 sm:p-6 backdrop-blur-[3px] transition-all duration-200",
           "bg-[color-mix(in_oklch,#09090b_55%,transparent)]",
-          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          open ? "opacity-100 pointer-events-auto visible" : "opacity-0 pointer-events-none invisible"
         )}
       >
         {/* Panel wrapper */}
