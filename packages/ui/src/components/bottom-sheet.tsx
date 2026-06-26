@@ -24,6 +24,16 @@ export function BottomSheet({
   const descId = React.useId();
   const containerRef = React.useRef<HTMLDivElement>(null);
   const lastActiveElement = React.useRef<HTMLElement | null>(null);
+  const [mounted, setMounted] = React.useState(open);
+
+  React.useEffect(() => {
+    if (open) {
+      setMounted(true);
+    } else {
+      const timer = setTimeout(() => setMounted(false), 200);
+      return () => clearTimeout(timer);
+    }
+  }, [open]);
 
   React.useEffect(() => {
     if (!open) return;
@@ -105,6 +115,8 @@ export function BottomSheet({
       }
     };
   }, [open, onClose]);
+
+  if (!open && !mounted) return null;
 
   return (
     <BottomSheetContext.Provider value={{ titleId, descId }}>

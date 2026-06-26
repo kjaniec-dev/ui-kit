@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import {
   BottomSheet,
   BottomSheetHeader,
@@ -258,5 +258,27 @@ describe("BottomSheet", () => {
 
     document.body.removeChild(trigger);
     document.body.removeChild(externalBtn);
+  });
+
+  it("unmounts from the DOM completely after transition timeout when closed", async () => {
+    const { queryByRole, rerender } = render(
+      <BottomSheet open={true} onClose={() => {}}>
+        <div>Sheet Content</div>
+      </BottomSheet>
+    );
+    expect(queryByRole("dialog")).toBeInTheDocument();
+
+    rerender(
+      <BottomSheet open={false} onClose={() => {}}>
+        <div>Sheet Content</div>
+      </BottomSheet>
+    );
+    // Still in DOM immediately
+    expect(queryByRole("dialog")).toBeInTheDocument();
+
+    // Wait for transition timeout (200ms) and verify it unmounts
+    await waitFor(() => {
+      expect(queryByRole("dialog")).toBeNull();
+    });
   });
 });
