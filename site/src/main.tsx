@@ -75,6 +75,7 @@ import {
   Drawer,
   CommandPalette,
   SidebarNav,
+  Fab,
   cn
 } from "@kjaniec-dev/ui";
 import "./index.css";
@@ -547,6 +548,16 @@ function Gallery() {
                   Save
                 </Button>
                 <Button disabled>Disabled</Button>
+              </div>
+            </Box>
+            <Box>
+              <Sub>Floating Action Buttons (FAB)</Sub>
+              <div className="flex flex-wrap gap-4 items-center">
+                <Fab variant="primary" size="sm" position="none" icon={IcoPlus} label="Primary Small" />
+                <Fab variant="secondary" size="md" position="none" icon={IcoGear} label="Secondary Medium" />
+                <Fab variant="outline" size="lg" position="none" icon={IcoSearch} label="Outline Large" />
+                <Fab variant="danger" size="md" position="none" icon={IcoTrash} label="Danger Medium" />
+                <Fab variant="primary" size="md" position="none" loading icon={IcoPlus} label="Loading Medium" />
               </div>
             </Box>
           </Sec>
@@ -1397,6 +1408,13 @@ function Gallery() {
           <div className="flex-1" style={{ background: "rgba(0,0,0,0.5)" }} />
         </div>
       )}
+      <Fab
+        mobileOnly
+        position="bottom-right"
+        icon={IcoPlus}
+        label="Floating action"
+        onClick={() => toast({ message: "Mobile FAB clicked", tone: "success" })}
+      />
     </div>
   );
 }
