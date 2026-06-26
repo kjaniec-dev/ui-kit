@@ -80,7 +80,7 @@ export const Sizes: Story = {
 export const Floating: Story = {
   render: (args) => (
     <div className="w-[500px] h-[300px] border border-dashed border-gray-300 relative overflow-hidden bg-gray-50 p-4 rounded-lg">
-      <p className="text-sm text-gray-500">Przewijalna lub duża treść widoku mobilnego...</p>
+      <p className="text-sm text-gray-500">Scrollable or long content in mobile view preview...</p>
       <div className="h-[400px]"></div>
       <Fab {...args} position="bottom-right" className="absolute" />
     </div>
@@ -104,9 +104,14 @@ export const Disabled: Story = {
 };
 
 export const MobileOnly: Story = {
+  parameters: {
+    viewport: {
+      defaultViewport: "mobile1",
+    },
+  },
   render: (args) => (
     <div className="flex flex-col gap-2 items-center">
-      <p className="text-sm text-gray-500">This FAB is visible only on screens smaller than 768px.</p>
+      <p className="text-sm text-gray-500">This FAB is visible only on screens smaller than 768px (viewport &lt; md).</p>
       <Fab {...args} mobileOnly />
     </div>
   ),
