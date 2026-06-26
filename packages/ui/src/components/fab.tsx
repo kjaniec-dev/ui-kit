@@ -6,19 +6,19 @@ const fabVariants = cva(
   [
     "inline-flex items-center justify-center gap-2 whitespace-nowrap select-none",
     "font-sans font-semibold leading-none",
-    "rounded-full cursor-pointer shadow-lg",
+    "border border-transparent rounded-full cursor-pointer shadow-lg",
     "transition-[background-color,color,border-color,box-shadow,transform] duration-150",
     "active:translate-y-px active:shadow-md",
     "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45",
-    "disabled:opacity-50 disabled:pointer-events-none z-50",
+    "disabled:opacity-50 disabled:pointer-events-none",
   ],
   {
     variants: {
       variant: {
-        primary: "bg-primary text-primary-foreground hover:bg-primary-hover border border-transparent",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary-hover border border-transparent",
-        outline: "bg-transparent text-foreground border border-border hover:bg-muted hover:border-muted-foreground",
-        danger: "bg-danger text-white hover:brightness-95 border border-transparent",
+        primary: "bg-primary text-primary-foreground hover:bg-primary-hover",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary-hover",
+        outline: "bg-transparent text-foreground border-border hover:bg-muted hover:border-muted-foreground",
+        danger: "bg-danger text-white hover:brightness-95",
       },
       size: {
         sm: "h-10 w-10 p-0 text-sm",
@@ -26,9 +26,9 @@ const fabVariants = cva(
         lg: "h-16 w-16 p-0 text-lg",
       },
       position: {
-        "bottom-right": "fixed bottom-6 right-6",
-        "bottom-left": "fixed bottom-6 left-6",
-        "bottom-center": "fixed bottom-6 left-1/2 -translate-x-1/2",
+        "bottom-right": "fixed bottom-6 right-6 z-50",
+        "bottom-left": "fixed bottom-6 left-6 z-50",
+        "bottom-center": "fixed bottom-6 left-1/2 -translate-x-1/2 z-50",
         none: "relative",
       },
     },
@@ -37,7 +37,7 @@ const fabVariants = cva(
 );
 
 export interface FabProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children">,
     VariantProps<typeof fabVariants> {
   /** Icon rendered inside the button. */
   icon: React.ReactNode;
