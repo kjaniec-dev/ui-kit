@@ -22,13 +22,66 @@ export function BottomSheet({
 }: BottomSheetProps) {
   const titleId = React.useId();
   const descId = React.useId();
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const lastActiveElement = React.useRef<HTMLElement | null>(null);
 
   React.useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      if (lastActiveElement.current) {
+        lastActiveElement.current.focus();
+        lastActiveElement.current = null;
+      }
+      return;
+    }
+
+    lastActiveElement.current = document.activeElement as HTMLElement;
+
+    const container = containerRef.current;
+    if (container) {
+      const focusables = container.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusables.length > 0) {
+        setTimeout(() => focusables[0].focus(), 50);
+      } else {
+        container.focus();
+      }
+    }
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         onClose();
+        return;
+      }
+
+      if (e.key === "Tab") {
+        const container = containerRef.current;
+        if (!container) return;
+
+        const focusables = Array.from(
+          container.querySelectorAll<HTMLElement>(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          )
+        );
+        if (focusables.length === 0) {
+          e.preventDefault();
+          return;
+        }
+
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === first || document.activeElement === container) {
+            last.focus();
+            e.preventDefault();
+          }
+        } else {
+          if (document.activeElement === last) {
+            first.focus();
+            e.preventDefault();
+          }
+        }
       }
     };
 
@@ -41,8 +94,6 @@ export function BottomSheet({
     };
   }, [open, onClose]);
 
-  if (!open) return null;
-
   return (
     <BottomSheetContext.Provider value={{ titleId, descId }}>
       {/* Backdrop overlay */}
@@ -50,20 +101,26 @@ export function BottomSheet({
         role="presentation"
         onClick={(e) => e.target === e.currentTarget && onClose()}
         className={cn(
-          "fixed inset-0 z-[100] grid items-end sm:place-items-center p-0 sm:p-6 backdrop-blur-[3px] transition-opacity duration-200",
-          "bg-[color-mix(in_oklch,#09090b_55%,transparent)]"
+          "fixed inset-0 z-[100] grid items-end sm:place-items-center p-0 sm:p-6 backdrop-blur-[3px] transition-all duration-200",
+          "bg-[color-mix(in_oklch,#09090b_55%,transparent)]",
+          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         )}
       >
         {/* Panel wrapper */}
         <div
+          ref={containerRef}
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}
           aria-describedby={descId}
           tabIndex={-1}
           className={cn(
-            "relative w-full bg-surface border-t sm:border border-border shadow-kj-lg transition-all outline-none",
+            "relative w-full bg-surface border-t sm:border border-border shadow-kj-lg transition-all duration-200 outline-none",
             "rounded-t-kj-2xl sm:rounded-kj-2xl flex flex-col max-h-[85vh] sm:max-h-[90vh]",
+            // Mobile sliding & Desktop scale/opacity transitions
+            open
+              ? "translate-y-0 sm:scale-100 sm:opacity-100"
+              : "translate-y-full sm:scale-95 sm:opacity-0",
             // Mobile styling vs Desktop styling
             "bottom-0 sm:bottom-auto",
             maxWidth,

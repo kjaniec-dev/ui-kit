@@ -19,13 +19,33 @@ describe("BottomSheet", () => {
     expect(screen.getByText("Sheet Content")).toBeInTheDocument();
   });
 
-  it("does not render when closed", () => {
-    render(
+  it("applies correct visibility classes when open vs closed", () => {
+    const { rerender } = render(
+      <BottomSheet open={true} onClose={() => {}}>
+        <div>Sheet Content</div>
+      </BottomSheet>
+    );
+
+    const backdrop = screen.getByRole("presentation");
+    const dialog = screen.getByRole("dialog");
+
+    // Open states
+    expect(backdrop).toHaveClass("opacity-100");
+    expect(backdrop).toHaveClass("pointer-events-auto");
+    expect(dialog).toHaveClass("translate-y-0");
+    expect(dialog).toHaveClass("sm:scale-100");
+
+    // Closed states
+    rerender(
       <BottomSheet open={false} onClose={() => {}}>
         <div>Sheet Content</div>
       </BottomSheet>
     );
-    expect(screen.queryByText("Sheet Content")).toBeNull();
+
+    expect(backdrop).toHaveClass("opacity-0");
+    expect(backdrop).toHaveClass("pointer-events-none");
+    expect(dialog).toHaveClass("translate-y-full");
+    expect(dialog).toHaveClass("sm:scale-95");
   });
 
   it("calls onClose when Escape key is pressed", () => {
@@ -104,5 +124,75 @@ describe("BottomSheet", () => {
     expect(closeBtn).toBeInTheDocument();
     closeBtn.click();
     expect(handleClose).toHaveBeenCalledTimes(1);
+  });
+
+  it("traps focus within the BottomSheet when open", async () => {
+    const trigger = document.createElement("button");
+    trigger.id = "trigger-id";
+    document.body.appendChild(trigger);
+    trigger.focus();
+
+    const { getByRole } = render(
+      <BottomSheet open={true} onClose={() => {}} showClose={false}>
+        <BottomSheetContent>
+          <button id="first-btn">First</button>
+          <button id="second-btn">Second</button>
+        </BottomSheetContent>
+      </BottomSheet>
+    );
+
+    const dialog = getByRole("dialog");
+    const firstBtn = document.getElementById("first-btn") as HTMLButtonElement;
+    const secondBtn = document.getElementById("second-btn") as HTMLButtonElement;
+
+    // Wait for the initial focus to settle inside the bottom sheet
+    await new Promise((resolve) => setTimeout(resolve, 60));
+
+    expect(document.activeElement).toBe(firstBtn);
+
+    secondBtn.focus();
+    expect(document.activeElement).toBe(secondBtn);
+
+    const tabEvent = new KeyboardEvent("keydown", { key: "Tab", bubbles: true });
+    dialog.dispatchEvent(tabEvent);
+    expect(document.activeElement).toBe(firstBtn);
+
+    firstBtn.focus();
+    const shiftTabEvent = new KeyboardEvent("keydown", { key: "Tab", shiftKey: true, bubbles: true });
+    dialog.dispatchEvent(shiftTabEvent);
+    expect(document.activeElement).toBe(secondBtn);
+
+    document.body.removeChild(trigger);
+  });
+
+  it("restores focus to the last active element when closed", async () => {
+    const trigger = document.createElement("button");
+    document.body.appendChild(trigger);
+    trigger.focus();
+    expect(document.activeElement).toBe(trigger);
+
+    const { rerender } = render(
+      <BottomSheet open={true} onClose={() => {}} showClose={false}>
+        <BottomSheetContent>
+          <button id="first-btn">First</button>
+        </BottomSheetContent>
+      </BottomSheet>
+    );
+
+    await new Promise((resolve) => setTimeout(resolve, 60));
+    const firstBtn = document.getElementById("first-btn");
+    expect(document.activeElement).toBe(firstBtn);
+
+    rerender(
+      <BottomSheet open={false} onClose={() => {}} showClose={false}>
+        <BottomSheetContent>
+          <button id="first-btn">First</button>
+        </BottomSheetContent>
+      </BottomSheet>
+    );
+
+    expect(document.activeElement).toBe(trigger);
+
+    document.body.removeChild(trigger);
   });
 });
