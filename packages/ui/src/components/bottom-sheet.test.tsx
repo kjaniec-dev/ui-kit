@@ -1,6 +1,13 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { BottomSheet } from "./bottom-sheet";
+import {
+  BottomSheet,
+  BottomSheetHeader,
+  BottomSheetTitle,
+  BottomSheetDescription,
+  BottomSheetContent,
+  BottomSheetFooter,
+} from "./bottom-sheet";
 
 describe("BottomSheet", () => {
   it("renders children when open", () => {
@@ -44,5 +51,31 @@ describe("BottomSheet", () => {
 
     unmount();
     expect(document.body.style.overflow).toBe("");
+  });
+
+  it("has correct accessibility attributes and matches title/description IDs", () => {
+    render(
+      <BottomSheet open={true} onClose={() => {}}>
+        <BottomSheetHeader>
+          <BottomSheetTitle>Test Title</BottomSheetTitle>
+          <BottomSheetDescription>Test Description</BottomSheetDescription>
+        </BottomSheetHeader>
+        <BottomSheetContent>Test Content</BottomSheetContent>
+        <BottomSheetFooter>Test Footer</BottomSheetFooter>
+      </BottomSheet>
+    );
+
+    const dialog = screen.getByRole("dialog");
+    expect(dialog).toBeInTheDocument();
+    expect(dialog).toHaveAttribute("aria-modal", "true");
+
+    const title = screen.getByText("Test Title");
+    const description = screen.getByText("Test Description");
+
+    expect(dialog).toHaveAttribute("aria-labelledby", title.id);
+    expect(dialog).toHaveAttribute("aria-describedby", description.id);
+
+    expect(screen.getByText("Test Content")).toBeInTheDocument();
+    expect(screen.getByText("Test Footer")).toBeInTheDocument();
   });
 });
