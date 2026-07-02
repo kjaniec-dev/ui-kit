@@ -85,3 +85,4 @@ export {
 } from "./components/bottom-sheet";
 
 export { Kbd, type KbdProps } from "./components/kbd";
+export { CodeBlock, type CodeBlockProps } from "./components/code-block";
