@@ -83,3 +83,5 @@ export {
   BottomSheetFooter,
   type BottomSheetProps,
 } from "./components/bottom-sheet";
+
+export { Kbd, type KbdProps } from "./components/kbd";
