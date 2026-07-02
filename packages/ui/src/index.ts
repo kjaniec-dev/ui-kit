@@ -86,3 +86,10 @@ export {
 
 export { Kbd, type KbdProps } from "./components/kbd";
 export { CodeBlock, type CodeBlockProps } from "./components/code-block";
+export {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  type PopoverProps,
+  type PopoverContentProps,
+} from "./components/popover";
