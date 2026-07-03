@@ -99,13 +99,13 @@ export const PopoverTrigger = React.forwardRef<
     <button
       ref={setRefs}
       type="button"
+      {...props}
       aria-haspopup="dialog"
       aria-expanded={ctx.open}
       onClick={(e) => {
         ctx.setOpen(!ctx.open);
         onClick?.(e);
       }}
-      {...props}
     />
   );
 });
