@@ -82,9 +82,15 @@ import {
   BottomSheetDescription,
   BottomSheetContent,
   BottomSheetFooter,
-  cn
+  cn,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Kbd,
+  CodeBlock
 } from "@kjaniec-dev/ui";
 import "./index.css";
+import { ExampleTabs } from "./example-tabs";
 
 interface IcoProps {
   s?: number;
@@ -186,6 +192,10 @@ interface SecProps {
   id: string;
   title: string;
   desc?: string;
+  /** Component names documented in the Props/Code tabs; omit to render children without tabs. */
+  components?: string[];
+  /** Explicit code snippet override passed through to ExampleTabs. */
+  code?: string;
   children: React.ReactNode;
 }
 
@@ -196,7 +206,13 @@ function Sec(p: SecProps) {
         <h2 className="m-0 text-2xl font-bold tracking-[-0.02em]">{p.title}</h2>
         {p.desc && <p className="mt-1 text-sm text-muted-foreground max-w-[60ch]">{p.desc}</p>}
       </div>
-      {p.children}
+      {p.components ? (
+        <ExampleTabs components={p.components} code={p.code}>
+          {p.children}
+        </ExampleTabs>
+      ) : (
+        p.children
+      )}
     </section>
   );
 }
@@ -300,6 +316,7 @@ const NAV = [
   ["navigation", "Navigation"],
   ["data", "Table"],
   ["overlays", "Overlays"],
+  ["primitives", "Primitives"],
   ["layouts", "Layouts"],
 ];
 
@@ -515,7 +532,7 @@ function Gallery() {
           </div>
           <div className="flex items-center gap-2.5">
             <Badge variant="primary" dot>
-              47 components
+              50 components
             </Badge>
             <Button variant="outline" size="icon" aria-label="Theme" onClick={() => setDark((d) => !d)}>
               {dark ? IcoSun : IcoMoon}
@@ -524,7 +541,7 @@ function Gallery() {
         </header>
 
         <main className="px-8 max-[820px]:px-5 py-10 max-w-[1040px]">
-          <Sec id="buttons" title="Buttons" desc="Five variants, three sizes, a loading state and icon buttons.">
+          <Sec id="buttons" title="Buttons" desc="Five variants, three sizes, a loading state and icon buttons." components={["Button"]}>
             <Box>
               <Sub>Variants</Sub>
               <div className="flex flex-wrap gap-3 items-center">
@@ -569,7 +586,7 @@ function Gallery() {
             </Box>
           </Sec>
 
-          <Sec id="badges" title="Badges" desc="Status labels in soft and solid variants.">
+          <Sec id="badges" title="Badges" desc="Status labels in soft and solid variants." components={["Badge"]}>
             <Box>
               <div className="flex flex-wrap gap-3 items-center">
                 <Badge>Neutral</Badge>
@@ -589,7 +606,7 @@ function Gallery() {
             </Box>
           </Sec>
 
-          <Sec id="feedback" title="Feedback & progress" desc="Inline alerts, toasts and progress indicators.">
+          <Sec id="feedback" title="Feedback & progress" desc="Inline alerts, toasts and progress indicators." components={["Alert", "ToastProvider", "Progress", "Spinner", "Skeleton"]}>
             <Box>
               <Sub>Alerts</Sub>
               <div className="flex flex-col gap-4">
@@ -662,7 +679,7 @@ function Gallery() {
             </Box>
           </Sec>
 
-          <Sec id="forms" title="Forms" desc="Fields with labels, leading icons, selects, textareas and live validation.">
+          <Sec id="forms" title="Forms" desc="Fields with labels, leading icons, selects, textareas and live validation." components={["Input", "TextField", "Textarea", "Select", "SelectField", "FormField"]}>
             <Box>
               <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
                 <Field>
@@ -764,7 +781,7 @@ function Gallery() {
             </Box>
           </Sec>
 
-          <Sec id="selection" title="Selection controls" desc="Checkboxes, radios, switches, a slider and a segmented control.">
+          <Sec id="selection" title="Selection controls" desc="Checkboxes, radios, switches, a slider and a segmented control." components={["Checkbox", "CheckboxField", "Radio", "Switch", "Slider", "Segmented"]}>
             <Grid>
               <Box className="mb-0">
                 <Sub>Checkbox & radio</Sub>
@@ -799,7 +816,7 @@ function Gallery() {
             </Grid>
           </Sec>
 
-          <Sec id="cards" title="Cards & stats" desc="Cards with content and footer, with an image, and metric cards.">
+          <Sec id="cards" title="Cards & stats" desc="Cards with content and footer, with an image, and metric cards." components={["Card", "CardHeader", "CardTitle", "CardDescription", "CardContent", "CardFooter", "Stat", "MetricCard", "Avatar"]}>
             <Grid>
               <Card>
                 <CardHeader>
@@ -875,7 +892,7 @@ function Gallery() {
             </div>
           </Sec>
 
-          <Sec id="navigation" title="Navigation" desc="Tabs, dropdown menus, accordion, breadcrumbs and pagination.">
+          <Sec id="navigation" title="Navigation" desc="Tabs, dropdown menus, accordion, breadcrumbs and pagination." components={["Tabs", "DropdownMenu", "Accordion", "Breadcrumb", "Pagination", "BottomNavigation"]}>
             <Grid>
               <Box className="mb-0">
                 <Sub>Tabs</Sub>
@@ -957,7 +974,7 @@ function Gallery() {
             </div>
           </Sec>
 
-          <Sec id="data" title="Table & data" desc="A table with statuses, avatars and aligned numbers.">
+          <Sec id="data" title="Table & data" desc="A table with statuses, avatars and aligned numbers." components={["DataTable", "DataTableColumn", "Table", "TableToolbar", "EmptyState", "ErrorState"]}>
             <TableWrap>
               <Table>
                 <TableHeader>
@@ -1109,7 +1126,7 @@ function Gallery() {
             </Box>
           </Sec>
 
-          <Sec id="overlays" title="Overlays & Dialogs" desc="Modals, confirm dialogs, side drawers, command palettes and tooltips.">
+          <Sec id="overlays" title="Overlays & Dialogs" desc="Modals, confirm dialogs, side drawers, command palettes and tooltips." components={["Modal", "ConfirmDialog", "Drawer", "CommandPalette", "Tooltip", "BottomSheet", "Fab"]}>
             <Box>
               <div className="flex flex-wrap gap-3 items-center">
                 <Button onClick={() => setOpen(true)}>Open custom modal</Button>
@@ -1132,7 +1149,62 @@ function Gallery() {
             </Box>
           </Sec>
 
-          <Sec id="layouts" title="Layouts" desc="Full-page shell and page templates for SaaS/B2B products.">
+          <Sec
+            id="primitives"
+            title="Primitives"
+            desc="Popover panels, keyboard hints and code blocks."
+            components={["Popover", "PopoverContent", "Kbd", "CodeBlock"]}
+            code={`<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="outline">Filters</Button>
+  </PopoverTrigger>
+  <PopoverContent side="bottom" align="start" className="w-64">
+    Any content here.
+  </PopoverContent>
+</Popover>`}
+          >
+            <Box>
+              <Sub>Popover</Sub>
+              <div className="flex flex-wrap gap-3">
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button variant="outline">Open popover</Button>
+                  </PopoverTrigger>
+                  <PopoverContent side="bottom" align="start" className="w-64">
+                    <p className="m-0 mb-1 text-sm font-semibold">Quick help</p>
+                    <p className="m-0 text-sm text-muted-foreground">
+                      Popovers hold arbitrary content — filters, hints, pickers.
+                    </p>
+                  </PopoverContent>
+                </Popover>
+              </div>
+            </Box>
+            <Box>
+              <Sub>Keyboard hints</Sub>
+              <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
+                <span className="inline-flex items-center gap-2">
+                  Command palette <Kbd keys={["⌘", "K"]} />
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  Save <Kbd>⌘S</Kbd>
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  Close <Kbd>Esc</Kbd>
+                </span>
+              </div>
+            </Box>
+            <Box>
+              <Sub>Code block</Sub>
+              <CodeBlock
+                filename="save-button.tsx"
+                code={`import { Button } from "@kjaniec-dev/ui";
+
+<Button variant="primary">Save</Button>`}
+              />
+            </Box>
+          </Sec>
+
+          <Sec id="layouts" title="Layouts" desc="Full-page shell and page templates for SaaS/B2B products." components={["DashboardShell", "SettingsLayout", "DetailPageLayout", "PageHeader", "SidebarNav"]}>
             <Tabs defaultValue="dashboard">
               <TabsList className="mb-4">
                 <TabsTrigger value="dashboard">DashboardShell</TabsTrigger>
