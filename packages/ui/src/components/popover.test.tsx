@@ -66,4 +66,31 @@ describe("Popover", () => {
     );
     spy.mockRestore();
   });
+
+  it("forces type=button and aria attributes, rejecting caller overrides", () => {
+    render(
+      <Popover>
+        <PopoverTrigger
+          type={"submit" as any}
+          aria-haspopup={"menu" as any}
+          aria-expanded={"true" as any}
+        >
+          Open
+        </PopoverTrigger>
+        <PopoverContent>Panel body</PopoverContent>
+      </Popover>
+    );
+    const trigger = screen.getByRole("button", { name: "Open" });
+
+    // Before click: computed attributes must override caller props
+    expect(trigger).toHaveAttribute("type", "button");
+    expect(trigger).toHaveAttribute("aria-haspopup", "dialog");
+    expect(trigger).toHaveAttribute("aria-expanded", "false");
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+
+    // After click: aria-expanded updates, panel appears
+    fireEvent.click(trigger);
+    expect(trigger).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByRole("dialog")).toHaveTextContent("Panel body");
+  });
 });
