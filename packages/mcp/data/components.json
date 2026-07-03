@@ -2276,5 +2276,241 @@
       }
     },
     "usageSnippet": "<Fab {...args} variant=\"primary\" label=\"Primary variant\" />"
+  },
+  {
+    "name": "BottomSheet",
+    "importPath": "import { BottomSheet } from \"@kjaniec-dev/ui\";",
+    "description": "React component BottomSheet.",
+    "props": [
+      {
+        "name": "open",
+        "type": "boolean",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "maxWidth",
+        "type": "\"max-w-sm\" | \"max-w-md\" | \"max-w-lg\" | \"max-w-xl\" | \"max-w-2xl\"",
+        "optional": true,
+        "defaultValue": "\"max-w-lg\"",
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "showClose",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<BottomSheet>\n  <!-- Content -->\n</BottomSheet>"
+  },
+  {
+    "name": "BottomSheetHeader",
+    "importPath": "import { BottomSheetHeader } from \"@kjaniec-dev/ui\";",
+    "description": "React component BottomSheetHeader.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<BottomSheetHeader>\n  <!-- Content -->\n</BottomSheetHeader>"
+  },
+  {
+    "name": "BottomSheetTitle",
+    "importPath": "import { BottomSheetTitle } from \"@kjaniec-dev/ui\";",
+    "description": "React component BottomSheetTitle.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<BottomSheetTitle>\n  <!-- Content -->\n</BottomSheetTitle>"
+  },
+  {
+    "name": "BottomSheetDescription",
+    "importPath": "import { BottomSheetDescription } from \"@kjaniec-dev/ui\";",
+    "description": "React component BottomSheetDescription.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<BottomSheetDescription>\n  <!-- Content -->\n</BottomSheetDescription>"
+  },
+  {
+    "name": "BottomSheetContent",
+    "importPath": "import { BottomSheetContent } from \"@kjaniec-dev/ui\";",
+    "description": "React component BottomSheetContent.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<BottomSheetContent>\n  <!-- Content -->\n</BottomSheetContent>"
+  },
+  {
+    "name": "BottomSheetFooter",
+    "importPath": "import { BottomSheetFooter } from \"@kjaniec-dev/ui\";",
+    "description": "React component BottomSheetFooter.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<BottomSheetFooter>\n  <!-- Content -->\n</BottomSheetFooter>"
+  },
+  {
+    "name": "Kbd",
+    "importPath": "import { Kbd } from \"@kjaniec-dev/ui\";",
+    "description": "React component Kbd.",
+    "props": [
+      {
+        "name": "keys",
+        "type": "string[]",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Render one <kbd> chip per key (separated by a small gap); children are ignored."
+      },
+      {
+        "name": "size",
+        "type": "\"sm\" | \"md\"",
+        "optional": true,
+        "defaultValue": "\"sm\"",
+        "description": "Style variant of the component: size."
+      }
+    ],
+    "cva": {
+      "variants": {
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "defaultVariants": {
+        "size": "sm"
+      }
+    },
+    "usageSnippet": "<Kbd keys={[\"⌘\", \"K\"]} />"
+  },
+  {
+    "name": "CodeBlock",
+    "importPath": "import { CodeBlock } from \"@kjaniec-dev/ui\";",
+    "description": "React component CodeBlock.",
+    "props": [
+      {
+        "name": "code",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": "The snippet text to display."
+      },
+      {
+        "name": "language",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Language label shown in the header when no filename is set (e.g. \"tsx\")."
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Optional filename label shown in the header; takes precedence over language."
+      },
+      {
+        "name": "copyable",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Show the copy-to-clipboard button."
+      },
+      {
+        "name": "maxHeight",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Max height in pixels; content scrolls vertically beyond it."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<CodeBlock>\n  <!-- Content -->\n</CodeBlock>"
+  },
+  {
+    "name": "Popover",
+    "importPath": "import { Popover } from \"@kjaniec-dev/ui\";",
+    "description": "React component Popover.",
+    "props": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": "Trigger and content elements."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Additional classes for the positioning wrapper."
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Controlled open state. Omit for uncontrolled behavior."
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Called whenever the open state should change."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Popover>\n        <PopoverTrigger asChild>\n          <Button variant=\"outline\">Open popover</Button>\n        </PopoverTrigger>\n        <PopoverContent side=\"bottom\" align=\"start\" className=\"w-64\">\n          <p className=\"m-0 mb-1 text-sm font-semibold\">Quick help</p>\n          <p className=\"m-0 text-sm text-muted-foreground\">\n            Popovers hold arbitrary content — filters, hints, pickers.\n          </p>\n        </PopoverContent>\n      </Popover>"
+  },
+  {
+    "name": "PopoverTrigger",
+    "importPath": "import { PopoverTrigger } from \"@kjaniec-dev/ui\";",
+    "description": "React component PopoverTrigger.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<PopoverTrigger asChild>\n          <Button variant=\"outline\">Open popover</Button>\n        </PopoverTrigger>"
+  },
+  {
+    "name": "PopoverContent",
+    "importPath": "import { PopoverContent } from \"@kjaniec-dev/ui\";",
+    "description": "React component PopoverContent.",
+    "props": [
+      {
+        "name": "side",
+        "type": "\"top\" | \"bottom\" | \"left\" | \"right\"",
+        "optional": true,
+        "defaultValue": "\"bottom\"",
+        "description": "Which side of the trigger the panel opens on."
+      },
+      {
+        "name": "align",
+        "type": "\"start\" | \"center\" | \"end\"",
+        "optional": true,
+        "defaultValue": "\"center\"",
+        "description": "Alignment along the chosen side."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<PopoverContent side={side} align=\"center\" className=\"w-40\">\n            <p className=\"m-0 text-sm\">side=\"{side}\"</p>\n          </PopoverContent>"
   }
 ]
