@@ -10,6 +10,7 @@
     "noUnusedParameters": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "resolveJsonModule": true,
     "paths": {
       "@kjaniec-dev/ui": ["../packages/ui/src/index.ts"]
     }
