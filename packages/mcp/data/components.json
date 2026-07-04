@@ -305,7 +305,7 @@
     "description": "Vertical label + control + hint group.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<Field>\n      <Label required>Full name</Label>\n      <Input placeholder=\"Jane Doe\" />"
+    "usageSnippet": "<Field>\n<Label required>Full name</Label>\n<Input placeholder=\"Jane Doe\" />"
   },
   {
     "name": "Select",
@@ -321,7 +321,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Select>\n        <option>Personal Portfolio</option>\n        <option>B2B Landlord SaaS</option>\n        <option>Accounting App</option>\n      </Select>"
+    "usageSnippet": "<Select>\n  <option>Personal Portfolio</option>\n  <option>B2B Landlord SaaS</option>\n  <option>Accounting App</option>\n</Select>"
   },
   {
     "name": "SelectField",
@@ -488,7 +488,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Segmented\n        value={v}\n        onChange={setV}\n        options={[\n          { value: \"day\", label: \"Day\" },\n          { value: \"week\", label: \"Week\" },\n          { value: \"month\", label: \"Month\" },\n        ]}\n      />"
+    "usageSnippet": "<Segmented\n  value={v}\n  onChange={setV}\n  options={[\n    { value: \"day\", label: \"Day\" },\n    { value: \"week\", label: \"Week\" },\n    { value: \"month\", label: \"Month\" },\n  ]}\n/>"
   },
   {
     "name": "Card",
@@ -518,7 +518,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Card elevated>\n      <CardContent style={{ paddingTop: \"1.35rem\" }}>\n        <CardTitle>Q3 Quarterly Report</CardTitle>\n        <CardDescription>A summary of results and key product metrics.</CardDescription>\n      </CardContent>\n    </Card>"
+    "usageSnippet": "<Card elevated>\n  <CardContent style={{ paddingTop: \"1.35rem\" }}>\n    <CardTitle>Q3 Quarterly Report</CardTitle>\n    <CardDescription>A summary of results and key product metrics.</CardDescription>\n  </CardContent>\n</Card>"
   },
   {
     "name": "CardHeader",
@@ -526,7 +526,7 @@
     "description": "React component CardHeader.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<CardHeader>\n        <CardTitle>Semantic Article Card</CardTitle>\n        <CardDescription>This card renders as an &lt;article&gt; element.</CardDescription>\n      </CardHeader>"
+    "usageSnippet": "<CardHeader>\n  <CardTitle>Semantic Article Card</CardTitle>\n  <CardDescription>This card renders as an &lt;article&gt; element.</CardDescription>\n</CardHeader>"
   },
   {
     "name": "CardTitle",
@@ -550,7 +550,7 @@
     "description": "Body region with default padding.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<CardContent style={{ paddingTop: \"1.35rem\" }}>\n        <CardTitle>Q3 Quarterly Report</CardTitle>\n        <CardDescription>A summary of results and key product metrics.</CardDescription>\n      </CardContent>"
+    "usageSnippet": "<CardContent style={{ paddingTop: \"1.35rem\" }}>\n  <CardTitle>Q3 Quarterly Report</CardTitle>\n  <CardDescription>A summary of results and key product metrics.</CardDescription>\n</CardContent>"
   },
   {
     "name": "CardFooter",
@@ -558,7 +558,7 @@
     "description": "React component CardFooter.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<CardFooter>\n        <Button size=\"sm\">Choose plan</Button>\n        <Button size=\"sm\" variant=\"ghost\">Details</Button>\n      </CardFooter>"
+    "usageSnippet": "<CardFooter>\n  <Button size=\"sm\">Choose plan</Button>\n  <Button size=\"sm\" variant=\"ghost\">Details</Button>\n</CardFooter>"
   },
   {
     "name": "Stat",
@@ -698,7 +698,7 @@
         "tone": "secondary"
       }
     },
-    "usageSnippet": "<AvatarGroup>\n        <Avatar>AK</Avatar>\n        <Avatar tone=\"primary\">MR</Avatar>\n        <Avatar tone=\"info\">JN</Avatar>\n        <Avatar tone=\"muted\">+9</Avatar>\n      </AvatarGroup>"
+    "usageSnippet": "<AvatarGroup>\n  <Avatar>AK</Avatar>\n  <Avatar tone=\"primary\">MR</Avatar>\n  <Avatar tone=\"info\">JN</Avatar>\n  <Avatar tone=\"muted\">+9</Avatar>\n</AvatarGroup>"
   },
   {
     "name": "Tabs",
@@ -728,7 +728,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Tabs defaultValue=\"overview\">\n        <TabsList>\n          <TabsTrigger value=\"overview\">Overview</TabsTrigger>\n          <TabsTrigger value=\"activity\">Activity</TabsTrigger>\n          <TabsTrigger value=\"settings\">Settings</TabsTrigger>\n        </TabsList>\n        <TabsContent value=\"overview\">A dashboard with key metrics and quick actions.</TabsContent>\n        <TabsContent value=\"activity\">An event timeline: sign-ins, edits and comments.</TabsContent>\n        <TabsContent value=\"settings\">Workspace preferences, permissions and integrations.</TabsContent>\n      </Tabs>"
+    "usageSnippet": "<Tabs defaultValue=\"overview\">\n  <TabsList>\n    <TabsTrigger value=\"overview\">Overview</TabsTrigger>\n    <TabsTrigger value=\"activity\">Activity</TabsTrigger>\n    <TabsTrigger value=\"settings\">Settings</TabsTrigger>\n  </TabsList>\n  <TabsContent value=\"overview\">A dashboard with key metrics and quick actions.</TabsContent>\n  <TabsContent value=\"activity\">An event timeline: sign-ins, edits and comments.</TabsContent>\n  <TabsContent value=\"settings\">Workspace preferences, permissions and integrations.</TabsContent>\n</Tabs>"
   },
   {
     "name": "TabsList",
@@ -736,7 +736,7 @@
     "description": "React component TabsList.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<TabsList>\n          <TabsTrigger value=\"overview\">Overview</TabsTrigger>\n          <TabsTrigger value=\"activity\">Activity</TabsTrigger>\n          <TabsTrigger value=\"settings\">Settings</TabsTrigger>\n        </TabsList>"
+    "usageSnippet": "<TabsList>\n  <TabsTrigger value=\"overview\">Overview</TabsTrigger>\n  <TabsTrigger value=\"activity\">Activity</TabsTrigger>\n  <TabsTrigger value=\"settings\">Settings</TabsTrigger>\n</TabsList>"
   },
   {
     "name": "TabsTrigger",
@@ -791,7 +791,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Accordion type=\"single\" defaultValue={[\"a\"]}>\n        <AccordionItem value=\"a\"><AccordionTrigger>How does billing work?</AccordionTrigger><AccordionContent>Monthly or annually — the annual plan includes two months free.</AccordionContent></AccordionItem>\n        <AccordionItem value=\"b\"><AccordionTrigger>Can I change my plan later?</AccordionTrigger><AccordionContent>Yes, at any time. The difference is prorated.</AccordionContent></AccordionItem>\n        <AccordionItem value=\"c\"><AccordionTrigger>What payment methods are supported?</AccordionTrigger><AccordionContent>Visa, Mastercard and Apple Pay.</AccordionContent></AccordionItem>\n      </Accordion>"
+    "usageSnippet": "<Accordion type=\"single\" defaultValue={[\"a\"]}>\n  <AccordionItem value=\"a\"><AccordionTrigger>How does billing work?</AccordionTrigger><AccordionContent>Monthly or annually — the annual plan includes two months free.</AccordionContent></AccordionItem>\n  <AccordionItem value=\"b\"><AccordionTrigger>Can I change my plan later?</AccordionTrigger><AccordionContent>Yes, at any time. The difference is prorated.</AccordionContent></AccordionItem>\n  <AccordionItem value=\"c\"><AccordionTrigger>What payment methods are supported?</AccordionTrigger><AccordionContent>Visa, Mastercard and Apple Pay.</AccordionContent></AccordionItem>\n</Accordion>"
   },
   {
     "name": "AccordionItem",
@@ -839,7 +839,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<DropdownMenu>\n      <DropdownMenuTrigger>\n        <Button variant=\"outline\">Actions</Button>\n      </DropdownMenuTrigger>\n      <DropdownMenuContent>\n        <DropdownMenuItem>Edit</DropdownMenuItem>\n        <DropdownMenuItem>Duplicate</DropdownMenuItem>\n        <DropdownMenuSeparator />"
+    "usageSnippet": "<DropdownMenu>\n<DropdownMenuTrigger>\n  <Button variant=\"outline\">Actions</Button>\n</DropdownMenuTrigger>\n<DropdownMenuContent>\n  <DropdownMenuItem>Edit</DropdownMenuItem>\n  <DropdownMenuItem>Duplicate</DropdownMenuItem>\n  <DropdownMenuSeparator />"
   },
   {
     "name": "DropdownMenuTrigger",
@@ -847,7 +847,7 @@
     "description": "React component DropdownMenuTrigger.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<DropdownMenuTrigger>\n        <Button variant=\"outline\">Actions</Button>\n      </DropdownMenuTrigger>"
+    "usageSnippet": "<DropdownMenuTrigger>\n  <Button variant=\"outline\">Actions</Button>\n</DropdownMenuTrigger>"
   },
   {
     "name": "DropdownMenuContent",
@@ -863,7 +863,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<DropdownMenuContent>\n        <DropdownMenuItem>Edit</DropdownMenuItem>\n        <DropdownMenuItem>Duplicate</DropdownMenuItem>\n        <DropdownMenuSeparator />"
+    "usageSnippet": "<DropdownMenuContent>\n<DropdownMenuItem>Edit</DropdownMenuItem>\n<DropdownMenuItem>Duplicate</DropdownMenuItem>\n<DropdownMenuSeparator />"
   },
   {
     "name": "DropdownMenuItem",
@@ -910,7 +910,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Breadcrumb>\n      <BreadcrumbItem href=\"#\">Workspace</BreadcrumbItem>\n      <BreadcrumbSeparator />"
+    "usageSnippet": "<Breadcrumb>\n<BreadcrumbItem href=\"#\">Workspace</BreadcrumbItem>\n<BreadcrumbSeparator />"
   },
   {
     "name": "BreadcrumbItem",
@@ -1082,7 +1082,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Table>\n        <TableHeader>\n          <TableRow>\n            <TableHead>User</TableHead>\n            <TableHead>Role</TableHead>\n            <TableHead>Status</TableHead>\n            <TableHead numeric>Projects</TableHead>\n          </TableRow>\n        </TableHeader>\n        <TableBody>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"primary\">AK</Avatar>Anna Kowalski</div></TableCell>\n            <TableCell>Administrator</TableCell>\n            <TableCell><Badge variant=\"success\" dot>Active</Badge></TableCell>\n            <TableCell numeric>24</TableCell>\n          </TableRow>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\">MR</Avatar>Michael Rutkowski</div></TableCell>\n            <TableCell>Editor</TableCell>\n            <TableCell><Badge variant=\"warning\" dot>Invited</Badge></TableCell>\n            <TableCell numeric>12</TableCell>\n          </TableRow>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"info\">JN</Avatar>Julia Nowak</div></TableCell>\n            <TableCell>Viewer</TableCell>\n            <TableCell><Badge>Inactive</Badge></TableCell>\n            <TableCell numeric>3</TableCell>\n          </TableRow>\n        </TableBody>\n      </Table>"
+    "usageSnippet": "<Table>\n  <TableHeader>\n    <TableRow>\n      <TableHead>User</TableHead>\n      <TableHead>Role</TableHead>\n      <TableHead>Status</TableHead>\n      <TableHead numeric>Projects</TableHead>\n    </TableRow>\n  </TableHeader>\n  <TableBody>\n    <TableRow>\n      <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"primary\">AK</Avatar>Anna Kowalski</div></TableCell>\n      <TableCell>Administrator</TableCell>\n      <TableCell><Badge variant=\"success\" dot>Active</Badge></TableCell>\n      <TableCell numeric>24</TableCell>\n    </TableRow>\n    <TableRow>\n      <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\">MR</Avatar>Michael Rutkowski</div></TableCell>\n      <TableCell>Editor</TableCell>\n      <TableCell><Badge variant=\"warning\" dot>Invited</Badge></TableCell>\n      <TableCell numeric>12</TableCell>\n    </TableRow>\n    <TableRow>\n      <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"info\">JN</Avatar>Julia Nowak</div></TableCell>\n      <TableCell>Viewer</TableCell>\n      <TableCell><Badge>Inactive</Badge></TableCell>\n      <TableCell numeric>3</TableCell>\n    </TableRow>\n  </TableBody>\n</Table>"
   },
   {
     "name": "TableWrap",
@@ -1090,7 +1090,7 @@
     "description": "Rounded, bordered wrapper around a <Table>.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<TableWrap>\n      <Table>\n        <TableHeader>\n          <TableRow>\n            <TableHead>User</TableHead>\n            <TableHead>Role</TableHead>\n            <TableHead>Status</TableHead>\n            <TableHead numeric>Projects</TableHead>\n          </TableRow>\n        </TableHeader>\n        <TableBody>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"primary\">AK</Avatar>Anna Kowalski</div></TableCell>\n            <TableCell>Administrator</TableCell>\n            <TableCell><Badge variant=\"success\" dot>Active</Badge></TableCell>\n            <TableCell numeric>24</TableCell>\n          </TableRow>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\">MR</Avatar>Michael Rutkowski</div></TableCell>\n            <TableCell>Editor</TableCell>\n            <TableCell><Badge variant=\"warning\" dot>Invited</Badge></TableCell>\n            <TableCell numeric>12</TableCell>\n          </TableRow>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"info\">JN</Avatar>Julia Nowak</div></TableCell>\n            <TableCell>Viewer</TableCell>\n            <TableCell><Badge>Inactive</Badge></TableCell>\n            <TableCell numeric>3</TableCell>\n          </TableRow>\n        </TableBody>\n      </Table>\n    </TableWrap>"
+    "usageSnippet": "<TableWrap>\n  <Table>\n    <TableHeader>\n      <TableRow>\n        <TableHead>User</TableHead>\n        <TableHead>Role</TableHead>\n        <TableHead>Status</TableHead>\n        <TableHead numeric>Projects</TableHead>\n      </TableRow>\n    </TableHeader>\n    <TableBody>\n      <TableRow>\n        <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"primary\">AK</Avatar>Anna Kowalski</div></TableCell>\n        <TableCell>Administrator</TableCell>\n        <TableCell><Badge variant=\"success\" dot>Active</Badge></TableCell>\n        <TableCell numeric>24</TableCell>\n      </TableRow>\n      <TableRow>\n        <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\">MR</Avatar>Michael Rutkowski</div></TableCell>\n        <TableCell>Editor</TableCell>\n        <TableCell><Badge variant=\"warning\" dot>Invited</Badge></TableCell>\n        <TableCell numeric>12</TableCell>\n      </TableRow>\n      <TableRow>\n        <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"info\">JN</Avatar>Julia Nowak</div></TableCell>\n        <TableCell>Viewer</TableCell>\n        <TableCell><Badge>Inactive</Badge></TableCell>\n        <TableCell numeric>3</TableCell>\n      </TableRow>\n    </TableBody>\n  </Table>\n</TableWrap>"
   },
   {
     "name": "TableHeader",
@@ -1098,7 +1098,7 @@
     "description": "React component TableHeader.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<TableHeader>\n          <TableRow>\n            <TableHead>User</TableHead>\n            <TableHead>Role</TableHead>\n            <TableHead>Status</TableHead>\n            <TableHead numeric>Projects</TableHead>\n          </TableRow>\n        </TableHeader>"
+    "usageSnippet": "<TableHeader>\n  <TableRow>\n    <TableHead>User</TableHead>\n    <TableHead>Role</TableHead>\n    <TableHead>Status</TableHead>\n    <TableHead numeric>Projects</TableHead>\n  </TableRow>\n</TableHeader>"
   },
   {
     "name": "TableBody",
@@ -1106,7 +1106,7 @@
     "description": "React component TableBody.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<TableBody>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"primary\">AK</Avatar>Anna Kowalski</div></TableCell>\n            <TableCell>Administrator</TableCell>\n            <TableCell><Badge variant=\"success\" dot>Active</Badge></TableCell>\n            <TableCell numeric>24</TableCell>\n          </TableRow>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\">MR</Avatar>Michael Rutkowski</div></TableCell>\n            <TableCell>Editor</TableCell>\n            <TableCell><Badge variant=\"warning\" dot>Invited</Badge></TableCell>\n            <TableCell numeric>12</TableCell>\n          </TableRow>\n          <TableRow>\n            <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"info\">JN</Avatar>Julia Nowak</div></TableCell>\n            <TableCell>Viewer</TableCell>\n            <TableCell><Badge>Inactive</Badge></TableCell>\n            <TableCell numeric>3</TableCell>\n          </TableRow>\n        </TableBody>"
+    "usageSnippet": "<TableBody>\n  <TableRow>\n    <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"primary\">AK</Avatar>Anna Kowalski</div></TableCell>\n    <TableCell>Administrator</TableCell>\n    <TableCell><Badge variant=\"success\" dot>Active</Badge></TableCell>\n    <TableCell numeric>24</TableCell>\n  </TableRow>\n  <TableRow>\n    <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\">MR</Avatar>Michael Rutkowski</div></TableCell>\n    <TableCell>Editor</TableCell>\n    <TableCell><Badge variant=\"warning\" dot>Invited</Badge></TableCell>\n    <TableCell numeric>12</TableCell>\n  </TableRow>\n  <TableRow>\n    <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"info\">JN</Avatar>Julia Nowak</div></TableCell>\n    <TableCell>Viewer</TableCell>\n    <TableCell><Badge>Inactive</Badge></TableCell>\n    <TableCell numeric>3</TableCell>\n  </TableRow>\n</TableBody>"
   },
   {
     "name": "TableRow",
@@ -1114,7 +1114,7 @@
     "description": "React component TableRow.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<TableRow>\n            <TableHead>User</TableHead>\n            <TableHead>Role</TableHead>\n            <TableHead>Status</TableHead>\n            <TableHead numeric>Projects</TableHead>\n          </TableRow>"
+    "usageSnippet": "<TableRow>\n  <TableHead>User</TableHead>\n  <TableHead>Role</TableHead>\n  <TableHead>Status</TableHead>\n  <TableHead numeric>Projects</TableHead>\n</TableRow>"
   },
   {
     "name": "TableHead",
@@ -1168,7 +1168,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Tooltip content=\"Contextual tooltip\">\n      <Button variant=\"outline\">Hover over me</Button>\n    </Tooltip>"
+    "usageSnippet": "<Tooltip content=\"Contextual tooltip\">\n  <Button variant=\"outline\">Hover over me</Button>\n</Tooltip>"
   },
   {
     "name": "Modal",
@@ -1219,7 +1219,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Modal open={open} onClose={() => setOpen(false)}>\n          <ModalTitle>Delete project “Q3 Launch”?</ModalTitle>\n          <ModalDescription>This action cannot be undone. All files and activity history will be permanently deleted.</ModalDescription>\n          <ModalActions>\n            <Button variant=\"ghost\" onClick={() => setOpen(false)}>Cancel</Button>\n            <Button variant=\"danger\" onClick={() => setOpen(false)}>Delete project</Button>\n          </ModalActions>\n        </Modal>"
+    "usageSnippet": "<Modal open={open} onClose={() => setOpen(false)}>\n  <ModalTitle>Delete project “Q3 Launch”?</ModalTitle>\n  <ModalDescription>This action cannot be undone. All files and activity history will be permanently deleted.</ModalDescription>\n  <ModalActions>\n    <Button variant=\"ghost\" onClick={() => setOpen(false)}>Cancel</Button>\n    <Button variant=\"danger\" onClick={() => setOpen(false)}>Delete project</Button>\n  </ModalActions>\n</Modal>"
   },
   {
     "name": "ModalTitle",
@@ -1243,7 +1243,7 @@
     "description": "React component ModalActions.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<ModalActions>\n            <Button variant=\"ghost\" onClick={() => setOpen(false)}>Cancel</Button>\n            <Button variant=\"danger\" onClick={() => setOpen(false)}>Delete project</Button>\n          </ModalActions>"
+    "usageSnippet": "<ModalActions>\n  <Button variant=\"ghost\" onClick={() => setOpen(false)}>Cancel</Button>\n  <Button variant=\"danger\" onClick={() => setOpen(false)}>Delete project</Button>\n</ModalActions>"
   },
   {
     "name": "ToastProvider",
@@ -1251,7 +1251,7 @@
     "description": "React component ToastProvider.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<ToastProvider>\n      <ToastDemo />"
+    "usageSnippet": "<ToastProvider>\n<ToastDemo />"
   },
   {
     "name": "PageHeader",
@@ -1288,7 +1288,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<PageHeader\n        eyebrow=\"B2B SaaS\"\n        title=\"Dashboard Shell\"\n        description=\"The shell structure renders a responsive frame container with a sticky sidebar, topbar, and main canvas.\"\n        actions={<Button size=\"sm\">New Project</Button>}\n      />"
+    "usageSnippet": "<PageHeader\n  eyebrow=\"B2B SaaS\"\n  title=\"Dashboard Shell\"\n  description=\"The shell structure renders a responsive frame container with a sticky sidebar, topbar, and main canvas.\"\n  actions={<Button size=\"sm\">New Project</Button>}\n/>"
   },
   {
     "name": "EmptyState",
@@ -1325,7 +1325,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<EmptyState\n      title=\"No integrations active\"\n      description=\"Connect your Slack, GitHub, or Discord channel to start receiving automated notifications.\"\n      icon={\n        <svg fill=\"none\" stroke=\"currentColor\" strokeWidth={2} viewBox=\"0 0 24 24\">\n          <path strokeLinecap=\"round\" strokeLinejoin=\"round\" d=\"M12 4.5v15m7.5-7.5h-15\" />"
+    "usageSnippet": "<EmptyState\ntitle=\"No integrations active\"\ndescription=\"Connect your Slack, GitHub, or Discord channel to start receiving automated notifications.\"\nicon={\n  <svg fill=\"none\" stroke=\"currentColor\" strokeWidth={2} viewBox=\"0 0 24 24\">\n    <path strokeLinecap=\"round\" strokeLinejoin=\"round\" d=\"M12 4.5v15m7.5-7.5h-15\" />"
   },
   {
     "name": "MetricCard",
@@ -1376,7 +1376,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<MetricCard\n        title=\"Revenue\"\n        value=\"$48,259.00\"\n        trend=\"+8.2%\"\n        trendDirection=\"up\"\n        description=\"Total sales this quarter\"\n      />"
+    "usageSnippet": "<MetricCard\n  title=\"Revenue\"\n  value=\"$48,259.00\"\n  trend=\"+8.2%\"\n  trendDirection=\"up\"\n  description=\"Total sales this quarter\"\n/>"
   },
   {
     "name": "DataTable",
@@ -1592,7 +1592,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<FormField label=\"Full Name\">\n      <Input placeholder=\"John Doe\" />"
+    "usageSnippet": "<FormField label=\"Full Name\">\n<Input placeholder=\"John Doe\" />"
   },
   {
     "name": "ErrorState",
@@ -1629,7 +1629,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<ErrorState\n      title=\"Failed to Load Invoices\"\n      message=\"We encountered a temporary database error while retrieving your billing records.\"\n      onRetry={() => alert(\"Retrying...\")}\n      retryLabel=\"Reload Invoices\"\n    />"
+    "usageSnippet": "<ErrorState\n  title=\"Failed to Load Invoices\"\n  message=\"We encountered a temporary database error while retrieving your billing records.\"\n  onRetry={() => alert(\"Retrying...\")}\n  retryLabel=\"Reload Invoices\"\n/>"
   },
   {
     "name": "Skeleton",
@@ -1717,7 +1717,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<DashboardShell\n      sidebar={\n        <div className=\"p-6 flex flex-col gap-6 h-full bg-subtle\">\n          <div className=\"font-bold text-lg tracking-tight text-primary\">KJ Product Kit</div>\n          <nav className=\"flex flex-col gap-2\">\n            <a href=\"#\" className=\"text-sm font-medium text-foreground hover:text-primary transition-colors\">Dashboard</a>\n            <a href=\"#\" className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\">Projects</a>\n            <a href=\"#\" className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\">Invoices</a>\n            <a href=\"#\" className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\">Settings</a>\n          </nav>\n        </div>\n      }\n      topbar={\n        <div className=\"w-full flex items-center justify-between\">\n          <span className=\"text-sm font-medium text-muted-foreground\">Workspace / Personal</span>\n          <Button size=\"sm\" variant=\"ghost\">Profile</Button>\n        </div>\n      }\n    >\n      <PageHeader\n        eyebrow=\"B2B SaaS\"\n        title=\"Dashboard Shell\"\n        description=\"The shell structure renders a responsive frame container with a sticky sidebar, topbar, and main canvas.\"\n        actions={<Button size=\"sm\">New Project</Button>}\n      />"
+    "usageSnippet": "<DashboardShell\n  sidebar={\n    <div className=\"p-6 flex flex-col gap-6 h-full bg-subtle\">\n      <div className=\"font-bold text-lg tracking-tight text-primary\">KJ Product Kit</div>\n      <nav className=\"flex flex-col gap-2\">\n        <a href=\"#\" className=\"text-sm font-medium text-foreground hover:text-primary transition-colors\">Dashboard</a>\n        <a href=\"#\" className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\">Projects</a>\n        <a href=\"#\" className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\">Invoices</a>\n        <a href=\"#\" className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\">Settings</a>\n      </nav>\n    </div>\n  }\n  topbar={\n    <div className=\"w-full flex items-center justify-between\">\n      <span className=\"text-sm font-medium text-muted-foreground\">Workspace / Personal</span>\n      <Button size=\"sm\" variant=\"ghost\">Profile</Button>\n    </div>\n  }\n>\n  <PageHeader\n    eyebrow=\"B2B SaaS\"\n    title=\"Dashboard Shell\"\n    description=\"The shell structure renders a responsive frame container with a sticky sidebar, topbar, and main canvas.\"\n    actions={<Button size=\"sm\">New Project</Button>}\n  />"
   },
   {
     "name": "SettingsLayout",
@@ -1754,7 +1754,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<SettingsLayout\n      title=\"Profile Settings\"\n      description=\"Customize how your profile appears to other members.\"\n      sidebar={\n        <div className=\"flex flex-row lg:flex-col gap-1 w-full\">\n          <Button variant=\"ghost\" size=\"sm\" className=\"justify-start bg-primary/10 text-primary\">General</Button>\n          <Button variant=\"ghost\" size=\"sm\" className=\"justify-start text-muted-foreground\">Team</Button>\n          <Button variant=\"ghost\" size=\"sm\" className=\"justify-start text-muted-foreground\">Billing</Button>\n        </div>\n      }\n    >\n      <Card className=\"p-6 space-y-4\">\n        <div className=\"grid grid-cols-2 gap-4\">\n          <TextField label=\"First Name\" defaultValue=\"John\" />"
+    "usageSnippet": "<SettingsLayout\n  title=\"Profile Settings\"\n  description=\"Customize how your profile appears to other members.\"\n  sidebar={\n    <div className=\"flex flex-row lg:flex-col gap-1 w-full\">\n      <Button variant=\"ghost\" size=\"sm\" className=\"justify-start bg-primary/10 text-primary\">General</Button>\n      <Button variant=\"ghost\" size=\"sm\" className=\"justify-start text-muted-foreground\">Team</Button>\n      <Button variant=\"ghost\" size=\"sm\" className=\"justify-start text-muted-foreground\">Billing</Button>\n    </div>\n  }\n>\n  <Card className=\"p-6 space-y-4\">\n    <div className=\"grid grid-cols-2 gap-4\">\n      <TextField label=\"First Name\" defaultValue=\"John\" />"
   },
   {
     "name": "DetailPageLayout",
@@ -1819,7 +1819,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<DetailPageLayout\n      title=\"Transaction #TRN-9022\"\n      description=\"Captured via Stripe checkout flow.\"\n      backLabel=\"Back to payments\"\n      onBackClick={() => alert(\"Back\")}\n      actions={\n        <>\n          <Button variant=\"outline\" size=\"sm\">Refund</Button>\n          <Button size=\"sm\">Receipt</Button>\n        </>"
+    "usageSnippet": "<DetailPageLayout\ntitle=\"Transaction #TRN-9022\"\ndescription=\"Captured via Stripe checkout flow.\"\nbackLabel=\"Back to payments\"\nonBackClick={() => alert(\"Back\")}\nactions={\n  <>\n    <Button variant=\"outline\" size=\"sm\">Refund</Button>\n    <Button size=\"sm\">Receipt</Button>\n  </>"
   },
   {
     "name": "TableToolbar",
@@ -1935,7 +1935,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<ConfirmDialog\n          open={open}\n          onClose={() => setOpen(false)}\n          title=\"Delete Workspace?\"\n          description=\"This action cannot be undone. All database records and configs will be deleted.\"\n          confirmLabel=\"Delete Workspace\"\n          tone=\"danger\"\n          loading={loading}\n          onConfirm={() => {\n            setLoading(true);\n            setTimeout(() => {\n              setLoading(false);\n              setOpen(false);\n            }, 1000);\n          }}\n        />"
+    "usageSnippet": "<ConfirmDialog\n  open={open}\n  onClose={() => setOpen(false)}\n  title=\"Delete Workspace?\"\n  description=\"This action cannot be undone. All database records and configs will be deleted.\"\n  confirmLabel=\"Delete Workspace\"\n  tone=\"danger\"\n  loading={loading}\n  onConfirm={() => {\n    setLoading(true);\n    setTimeout(() => {\n      setLoading(false);\n      setOpen(false);\n    }, 1000);\n  }}\n/>"
   },
   {
     "name": "Drawer",
@@ -1993,7 +1993,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Drawer\n          open={open}\n          onClose={() => setOpen(false)}\n          title=\"Edit Configuration\"\n          description=\"Manage property options and backup intervals.\"\n        >\n          <div className=\"space-y-6\">\n            <TextField label=\"Connection String\" defaultValue=\"postgresql://db.kjaniec.dev:5432\" />"
+    "usageSnippet": "<Drawer\n  open={open}\n  onClose={() => setOpen(false)}\n  title=\"Edit Configuration\"\n  description=\"Manage property options and backup intervals.\"\n>\n  <div className=\"space-y-6\">\n    <TextField label=\"Connection String\" defaultValue=\"postgresql://db.kjaniec.dev:5432\" />"
   },
   {
     "name": "CommandPalette",
@@ -2480,7 +2480,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Popover>\n        <PopoverTrigger asChild>\n          <Button variant=\"outline\">Open popover</Button>\n        </PopoverTrigger>\n        <PopoverContent side=\"bottom\" align=\"start\" className=\"w-64\">\n          <p className=\"m-0 mb-1 text-sm font-semibold\">Quick help</p>\n          <p className=\"m-0 text-sm text-muted-foreground\">\n            Popovers hold arbitrary content — filters, hints, pickers.\n          </p>\n        </PopoverContent>\n      </Popover>"
+    "usageSnippet": "<Popover>\n  <PopoverTrigger asChild>\n    <Button variant=\"outline\">Open popover</Button>\n  </PopoverTrigger>\n  <PopoverContent side=\"bottom\" align=\"start\" className=\"w-64\">\n    <p className=\"m-0 mb-1 text-sm font-semibold\">Quick help</p>\n    <p className=\"m-0 text-sm text-muted-foreground\">\n      Popovers hold arbitrary content — filters, hints, pickers.\n    </p>\n  </PopoverContent>\n</Popover>"
   },
   {
     "name": "PopoverTrigger",
@@ -2488,7 +2488,7 @@
     "description": "React component PopoverTrigger.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<PopoverTrigger asChild>\n          <Button variant=\"outline\">Open popover</Button>\n        </PopoverTrigger>"
+    "usageSnippet": "<PopoverTrigger asChild>\n  <Button variant=\"outline\">Open popover</Button>\n</PopoverTrigger>"
   },
   {
     "name": "PopoverContent",
@@ -2511,6 +2511,6 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<PopoverContent side={side} align=\"center\" className=\"w-40\">\n            <p className=\"m-0 text-sm\">side=\"{side}\"</p>\n          </PopoverContent>"
+    "usageSnippet": "<PopoverContent side={side} align=\"center\" className=\"w-40\">\n  <p className=\"m-0 text-sm\">side=\"{side}\"</p>\n</PopoverContent>"
   }
 ]

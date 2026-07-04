@@ -194,6 +194,21 @@ export function parseComponents(): ComponentInfo[] {
     }
   }
 
+  // Snippets are lifted verbatim from story source, so lines after the first
+  // keep the story file's indentation; re-baseline them to column 0.
+  function dedentSnippet(snippet: string): string {
+    const lines = snippet.split("\n");
+    if (lines.length < 2) return snippet;
+    const indents = lines
+      .slice(1)
+      .filter((l) => l.trim().length > 0)
+      .map((l) => (l.match(/^[ \t]*/) as RegExpMatchArray)[0].length);
+    if (indents.length === 0) return snippet;
+    const indent = Math.min(...indents);
+    if (indent === 0) return snippet;
+    return [lines[0], ...lines.slice(1).map((l) => (l.trim().length > 0 ? l.slice(indent) : ""))].join("\n");
+  }
+
   function findUsageSnippet(compName: string): string {
     // Try to find a JSX usage of <CompName in all stories
     const jsxRegex = new RegExp(`<${compName}\\b[^]*?(?:/>|</${compName}>)`, "g");
@@ -205,10 +220,10 @@ export function parseComponents(): ComponentInfo[] {
         for (const match of matches) {
           const trimmed = match.trim();
           if (trimmed.length < 250 && !trimmed.includes("PlusIcon")) {
-            return trimmed;
+            return dedentSnippet(trimmed);
           }
         }
-        return matches[0].trim();
+        return dedentSnippet(matches[0].trim());
       }
     }
     // Fallback default usage snippet
