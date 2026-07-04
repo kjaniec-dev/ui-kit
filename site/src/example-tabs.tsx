@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Tabs, TabsList, TabsTrigger, TabsContent, CodeBlock } from "@kjaniec-dev/ui";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@kjaniec-dev/ui";
 import componentsData from "../../packages/mcp/data/components.json";
 import { exampleOverrides } from "./example-overrides";
+import { HighlightedCode } from "./highlighted-code";
 
 interface PropDoc {
   name: string;
@@ -95,7 +96,7 @@ export function ExampleTabs({ components, code, children }: ExampleTabsProps) {
       </TabsContent>
       <TabsContent value="code">
         {code !== undefined ? (
-          <CodeBlock
+          <HighlightedCode
             code={primary ? `${primary.importPath}\n\n${code}` : code}
             language="tsx"
           />
@@ -105,7 +106,7 @@ export function ExampleTabs({ components, code, children }: ExampleTabsProps) {
               <p className="text-[0.72rem] uppercase tracking-[0.08em] font-semibold text-muted-foreground mb-2 mt-0">
                 {doc.name}
               </p>
-              <CodeBlock
+              <HighlightedCode
                 code={`${doc.importPath}\n\n${exampleOverrides[doc.name] ?? doc.usageSnippet ?? ""}`}
                 language="tsx"
               />
