@@ -1,6 +1,6 @@
 {
   "name": "@kjaniec-dev/ui",
-  "version": "0.7.2",
+  "version": "0.8.0",
   "description": "React component library built on the @kjaniec-dev/design token system",
   "license": "MIT",
   "author": "kjaniec-dev",
@@ -42,7 +42,7 @@
     "test": "vitest run"
   },
   "peerDependencies": {
-    "@kjaniec-dev/design": ">=0.7.2",
+    "@kjaniec-dev/design": ">=0.8.0",
     "react": ">=18",
     "react-dom": ">=18"
   },

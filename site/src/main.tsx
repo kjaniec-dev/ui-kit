@@ -532,7 +532,7 @@ function Gallery() {
           </div>
           <div className="flex items-center gap-2.5">
             <Badge variant="primary" dot>
-              50 components
+              45 components
             </Badge>
             <Button variant="outline" size="icon" aria-label="Theme" onClick={() => setDark((d) => !d)}>
               {dark ? IcoSun : IcoMoon}
