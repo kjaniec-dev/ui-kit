@@ -23,9 +23,9 @@ const docs = componentsData as unknown as ComponentDoc[];
 const byName = new Map(docs.map((d) => [d.name, d]));
 
 interface ExampleTabsProps {
-  /** Component names to document, looked up in components.json. First entry drives the code snippet. */
+  /** Component names to document, looked up in components.json. Each entry gets a props table and a code snippet. */
   components: string[];
-  /** Explicit snippet; overrides both example-overrides.ts and the extracted usageSnippet. */
+  /** Explicit section-wide snippet; replaces the per-component snippets with a single block. */
   code?: string;
   children: React.ReactNode;
 }
@@ -42,9 +42,6 @@ export function ExampleTabs({ components, code, children }: ExampleTabsProps) {
     .filter((d): d is ComponentDoc => !!d);
 
   const primary = entries[0];
-  const snippet =
-    code ?? (primary ? exampleOverrides[primary.name] ?? primary.usageSnippet ?? "" : "");
-  const codeText = primary ? `${primary.importPath}\n\n${snippet}` : snippet;
 
   return (
     <Tabs defaultValue="demo">
@@ -97,7 +94,24 @@ export function ExampleTabs({ components, code, children }: ExampleTabsProps) {
         ))}
       </TabsContent>
       <TabsContent value="code">
-        <CodeBlock code={codeText} language="tsx" />
+        {code !== undefined ? (
+          <CodeBlock
+            code={primary ? `${primary.importPath}\n\n${code}` : code}
+            language="tsx"
+          />
+        ) : (
+          entries.map((doc) => (
+            <div key={doc.name} className="mb-6">
+              <p className="text-[0.72rem] uppercase tracking-[0.08em] font-semibold text-muted-foreground mb-2 mt-0">
+                {doc.name}
+              </p>
+              <CodeBlock
+                code={`${doc.importPath}\n\n${exampleOverrides[doc.name] ?? doc.usageSnippet ?? ""}`}
+                language="tsx"
+              />
+            </div>
+          ))
+        )}
       </TabsContent>
     </Tabs>
   );
