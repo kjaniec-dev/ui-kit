@@ -6,6 +6,8 @@ import { cn } from "../lib/cn";
 interface TabsCtx {
   value: string;
   setValue: (v: string) => void;
+  /** Instance-unique prefix so multiple Tabs on one page never share DOM ids. */
+  uid: string;
 }
 const TabsContext = React.createContext<TabsCtx | null>(null);
 function useTabs() {
@@ -24,6 +26,7 @@ export interface TabsProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function Tabs({ value, defaultValue, onValueChange, className, children, ...props }: TabsProps) {
   const [internal, setInternal] = React.useState(defaultValue ?? "");
+  const uid = React.useId();
   const current = value ?? internal;
   const setValue = React.useCallback(
     (v: string) => {
@@ -33,7 +36,7 @@ export function Tabs({ value, defaultValue, onValueChange, className, children, 
     [value, onValueChange]
   );
   return (
-    <TabsContext.Provider value={{ value: current, setValue }}>
+    <TabsContext.Provider value={{ value: current, setValue, uid }}>
       <div className={className} {...props}>
         {children}
       </div>
@@ -98,15 +101,15 @@ export interface TabsTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonE
 
 export const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
   ({ className, value, children, ...props }, ref) => {
-    const { value: current, setValue } = useTabs();
+    const { value: current, setValue, uid } = useTabs();
     const active = current === value;
     return (
       <button
         ref={ref}
         type="button"
         role="tab"
-        id={`tabs-trigger-${value}`}
-        aria-controls={`tabs-panel-${value}`}
+        id={`tabs-trigger-${uid}-${value}`}
+        aria-controls={`tabs-panel-${uid}-${value}`}
         aria-selected={active}
         tabIndex={active ? 0 : -1}
         onClick={() => setValue(value)}
@@ -134,15 +137,15 @@ export interface TabsContentProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
   ({ className, value, ...props }, ref) => {
-    const { value: current } = useTabs();
+    const { value: current, uid } = useTabs();
     const active = current === value;
     if (!active) return null;
     return (
       <div
         ref={ref}
         role="tabpanel"
-        id={`tabs-panel-${value}`}
-        aria-labelledby={`tabs-trigger-${value}`}
+        id={`tabs-panel-${uid}-${value}`}
+        aria-labelledby={`tabs-trigger-${uid}-${value}`}
         tabIndex={0}
         className={cn("pt-5 text-[0.9rem] text-muted-foreground outline-none", className)}
         {...props}
