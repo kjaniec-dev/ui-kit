@@ -42,7 +42,9 @@ export const DropdownMenuTrigger = React.forwardRef<
 >(({ onClick, asChild, ...props }, ref) => {
   const ctx = React.useContext(MenuContext)!;
   if (asChild) {
-    const child = React.Children.only(props.children) as React.ReactElement;
+    const child = React.Children.only(props.children) as React.ReactElement<
+      React.ComponentPropsWithRef<"button">
+    >;
     return React.cloneElement(child, {
       ref,
       ...props,

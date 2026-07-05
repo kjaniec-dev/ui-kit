@@ -1,5 +1,5 @@
 import * as React from "react";
-import type { Preview, Decorator } from "@storybook/react";
+import type { Preview, Decorator } from "@storybook/react-vite";
 import "./styles.css";
 
 /** Applies the `.dark` class to the preview root based on the toolbar toggle. */
@@ -36,7 +36,7 @@ const preview: Preview = {
         ],
       },
     },
-    backgrounds: { disable: true },
+    backgrounds: { disabled: true },
   },
   globalTypes: {
     theme: {

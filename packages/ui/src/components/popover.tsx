@@ -81,7 +81,9 @@ export const PopoverTrigger = React.forwardRef<
     else if (ref) (ref as React.MutableRefObject<HTMLButtonElement | null>).current = node;
   };
   if (asChild) {
-    const child = React.Children.only(props.children) as React.ReactElement;
+    const child = React.Children.only(props.children) as React.ReactElement<
+      React.ComponentPropsWithRef<"button">
+    >;
     return React.cloneElement(child, {
       ref: setRefs,
       ...props,

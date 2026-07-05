@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CodeBlock } from "./code-block";
 
 const sample = `import { Button } from "@kjaniec-dev/ui";

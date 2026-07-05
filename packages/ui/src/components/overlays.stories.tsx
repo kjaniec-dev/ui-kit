@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as React from "react";
 import { Modal, ModalTitle, ModalDescription, ModalActions } from "./modal";
 import { Tooltip } from "./tooltip";

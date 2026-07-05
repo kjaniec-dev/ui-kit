@@ -7,6 +7,12 @@
     "packages/*",
     "site"
   ],
+  "overrides": {
+    "@types/react": "^19.2.17",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "esbuild": "^0.28.1"
+  },
   "scripts": {
     "tokens:check": "node -e \"JSON.parse(require('fs').readFileSync('./packages/design/tokens.json','utf8')); console.log('Tokens OK')\"",
     "storybook": "npm run storybook --workspace @kjaniec-dev/ui",

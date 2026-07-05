@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react";
+import type { Meta } from "@storybook/react-vite";
 import { FormField } from "./form-field";
 import { Input } from "./input";
 import { Select } from "./select";

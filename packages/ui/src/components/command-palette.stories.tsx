@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react";
+import type { Meta } from "@storybook/react-vite";
 import * as React from "react";
 import { CommandPalette } from "./command-palette";
 import { Button } from "./button";

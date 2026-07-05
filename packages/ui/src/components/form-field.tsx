@@ -16,7 +16,12 @@ export const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
     const hintId = `${id}-hint`;
     const errorId = `${id}-error`;
 
-    const child = React.Children.only(children) as React.ReactElement;
+    const child = React.Children.only(children) as React.ReactElement<{
+      id?: string;
+      "aria-describedby"?: string;
+      "aria-invalid"?: boolean | "true" | "false";
+      required?: boolean;
+    }>;
     const clonedChild = React.cloneElement(child, {
       id: child.props.id ?? id,
       "aria-describedby": cn(

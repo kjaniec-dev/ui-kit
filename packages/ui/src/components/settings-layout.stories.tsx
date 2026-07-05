@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react";
+import type { Meta } from "@storybook/react-vite";
 import { SettingsLayout } from "./settings-layout";
 import { Card } from "./card";
 import { Button } from "./button";

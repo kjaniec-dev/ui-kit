@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react";
+import type { Meta } from "@storybook/react-vite";
 import { DashboardShell } from "./dashboard-shell";
 import { PageHeader } from "./page-header";
 import { Button } from "./button";

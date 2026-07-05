@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react";
+import type { Meta } from "@storybook/react-vite";
 import * as React from "react";
 import { ConfirmDialog } from "./confirm-dialog";
 import { Button } from "./button";
