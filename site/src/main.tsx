@@ -300,7 +300,7 @@ const projectColumns = [
 ];
 
 const sampleProjects: ProjectRow[] = [
-  { name: "KJ UI Kit v0.7.2", status: "success", owner: "K. Janiec", budget: "$15,400" },
+  { name: "KJ UI Kit v0.8.0", status: "success", owner: "K. Janiec", budget: "$15,400" },
   { name: "SaaS Dashboard Phase 2", status: "warning", owner: "M. Kowalski", budget: "$8,200" },
   { name: "Database Integration", status: "danger", owner: "J. Nowak", budget: "$22,000" },
   { name: "Marketing Landing Page", status: "info", owner: "A. Zielinski", budget: "$4,500" },
@@ -469,7 +469,7 @@ function Gallery() {
           </div>
           <div>
             <div className="font-bold text-sm leading-tight">@kjaniec-dev/ui</div>
-            <div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.7.2</div>
+            <div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.8.0</div>
           </div>
         </div>
         <div className="text-[0.68rem] uppercase tracking-[0.09em] font-semibold text-muted-foreground px-3 pt-3 pb-1.5">
@@ -1491,7 +1491,7 @@ function Gallery() {
               </div>
               <div>
                 <div className="font-bold text-sm leading-tight">@kjaniec-dev/ui</div>
-                <div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.7.2</div>
+                <div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.8.0</div>
               </div>
             </div>
             <div className="text-[0.68rem] uppercase tracking-[0.09em] font-semibold text-muted-foreground px-3 pt-3 pb-1.5">
