@@ -110,3 +110,46 @@ describe("Combobox (single)", () => {
     expect(screen.queryByRole("combobox")).not.toBeInTheDocument();
   });
 });
+
+describe("Combobox (multiple)", () => {
+  // The trigger is the only button carrying aria-expanded.
+  const openMenu = () => fireEvent.click(screen.getByRole("button", { expanded: false }));
+
+  it("toggles values and fires onChange with an array, staying open", () => {
+    const onChange = vi.fn();
+    render(<Combobox multiple options={options} placeholder="Pick" onChange={onChange} />);
+    openMenu();
+    fireEvent.click(screen.getByRole("option", { name: "Apple" }));
+    expect(onChange).toHaveBeenLastCalledWith(["apple"]);
+    expect(screen.getByRole("listbox")).toBeInTheDocument(); // still open
+    fireEvent.click(screen.getByRole("option", { name: "Banana" }));
+    expect(onChange).toHaveBeenLastCalledWith(["apple", "banana"]);
+    fireEvent.click(screen.getByRole("option", { name: "Apple" })); // toggle off
+    expect(onChange).toHaveBeenLastCalledWith(["banana"]);
+  });
+
+  it("renders removable chips and removes on the chip button", () => {
+    const onChange = vi.fn();
+    render(
+      <Combobox multiple options={options} defaultValue={["apple", "banana"]} placeholder="Pick" onChange={onChange} />
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Remove Apple" }));
+    expect(onChange).toHaveBeenLastCalledWith(["banana"]);
+  });
+
+  it("marks the listbox aria-multiselectable", () => {
+    render(<Combobox multiple options={options} placeholder="Pick" />);
+    fireEvent.click(screen.getByRole("button", { expanded: false }));
+    expect(screen.getByRole("listbox")).toHaveAttribute("aria-multiselectable", "true");
+  });
+
+  it("removes the last chip on Backspace when the search is empty", () => {
+    const onChange = vi.fn();
+    render(
+      <Combobox multiple options={options} defaultValue={["apple", "banana"]} placeholder="Pick" onChange={onChange} />
+    );
+    fireEvent.click(screen.getByRole("button", { expanded: false }));
+    fireEvent.keyDown(screen.getByRole("combobox"), { key: "Backspace" });
+    expect(onChange).toHaveBeenLastCalledWith(["apple"]);
+  });
+});

@@ -9,11 +9,8 @@ export interface ComboboxOption {
   disabled?: boolean;
 }
 
-export interface ComboboxProps {
+interface ComboboxBaseProps {
   options: ComboboxOption[];
-  value?: string;
-  defaultValue?: string;
-  onChange?: (value: string) => void;
   /** Trigger text when nothing is selected. Default "Select…". */
   placeholder?: string;
   /** Search input placeholder inside the popup. Default "Search…". */
@@ -29,6 +26,20 @@ export interface ComboboxProps {
   "aria-describedby"?: string;
 }
 
+export type ComboboxProps =
+  | (ComboboxBaseProps & {
+      multiple?: false;
+      value?: string;
+      defaultValue?: string;
+      onChange?: (value: string) => void;
+    })
+  | (ComboboxBaseProps & {
+      multiple: true;
+      value?: string[];
+      defaultValue?: string[];
+      onChange?: (value: string[]) => void;
+    });
+
 // Internal selection is always an array; single mode holds at most one entry.
 function toArray(v: string | string[] | undefined): string[] {
   if (v == null) return [];
@@ -36,12 +47,9 @@ function toArray(v: string | string[] | undefined): string[] {
 }
 
 export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
-  function Combobox(
-    {
+  function Combobox(props, ref) {
+    const {
       options,
-      value,
-      defaultValue,
-      onChange,
       placeholder = "Select…",
       searchPlaceholder = "Search…",
       emptyMessage = "No results",
@@ -51,17 +59,17 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
       id,
       name,
       "aria-describedby": describedBy,
-    },
-    ref
-  ) {
+    } = props;
+    const multiple = props.multiple ?? false;
+
     const reactId = React.useId();
     const baseId = id ?? reactId;
     const listId = `${baseId}-listbox`;
     const optionId = (i: number) => `${baseId}-opt-${i}`;
 
-    const controlled = value !== undefined;
-    const [internal, setInternal] = React.useState<string[]>(() => toArray(defaultValue));
-    const selected = controlled ? toArray(value) : internal;
+    const controlled = props.value !== undefined;
+    const [internal, setInternal] = React.useState<string[]>(() => toArray(props.defaultValue));
+    const selected = controlled ? toArray(props.value) : internal;
 
     const [open, setOpen] = React.useState(false);
     const [search, setSearch] = React.useState("");
@@ -88,11 +96,15 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
       return i === -1 ? 0 : i;
     }, [filtered]);
 
-    const labelFor = (v: string) => options.find((o) => o.value === v)?.label ?? "";
+    const labelFor = (v: string) => options.find((o) => o.value === v)?.label ?? v;
 
-    const commit = (next: string) => {
-      if (!controlled) setInternal(next ? [next] : []);
-      onChange?.(next);
+    const emit = (next: string[]) => {
+      if (!controlled) setInternal(next);
+      if (multiple) {
+        (props.onChange as ((v: string[]) => void) | undefined)?.(next);
+      } else {
+        (props.onChange as ((v: string) => void) | undefined)?.(next[0] ?? "");
+      }
     };
 
     const closePopup = React.useCallback(() => {
@@ -106,9 +118,21 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
 
     const handleSelect = (opt: ComboboxOption) => {
       if (opt.disabled) return;
-      commit(opt.value);
-      closePopup();
-      triggerRef.current?.focus();
+      if (multiple) {
+        const next = selected.includes(opt.value)
+          ? selected.filter((v) => v !== opt.value)
+          : [...selected, opt.value];
+        emit(next);
+        inputRef.current?.focus();
+      } else {
+        emit([opt.value]);
+        closePopup();
+        triggerRef.current?.focus();
+      }
+    };
+
+    const removeValue = (value: string) => {
+      emit(selected.filter((v) => v !== value));
     };
 
     // Reset the active option to the first enabled row on open / filter change.
@@ -181,6 +205,11 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
           closePopup();
           triggerRef.current?.focus();
           break;
+        case "Backspace":
+          if (multiple && search === "" && selected.length > 0) {
+            removeValue(selected[selected.length - 1]);
+          }
+          break;
       }
     };
 
@@ -190,6 +219,8 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
         openPopup();
       }
     };
+
+    const showPlaceholder = multiple ? selected.length === 0 : !selected[0];
 
     return (
       <div ref={containerRef} className={cn("relative w-full", className)}>
@@ -203,6 +234,29 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
             error ? "border-danger" : "border-input"
           )}
         >
+          {multiple &&
+            selected.map((value) => (
+              <span
+                key={value}
+                className="inline-flex items-center gap-1 rounded-kj-sm bg-primary/10 text-primary text-xs font-medium pl-2 pr-1 py-0.5"
+              >
+                {labelFor(value)}
+                <button
+                  type="button"
+                  aria-label={`Remove ${labelFor(value)}`}
+                  disabled={disabled}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeValue(value);
+                  }}
+                  className="rounded-full p-0.5 leading-none hover:bg-primary/20"
+                >
+                  <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                    <path d="M6 6l12 12M18 6L6 18" />
+                  </svg>
+                </button>
+              </span>
+            ))}
           <button
             ref={setTriggerRef}
             type="button"
@@ -217,12 +271,18 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
             onKeyDown={onTriggerKeyDown}
             className={cn(
               "flex-1 min-w-[60px] text-left bg-transparent border-none outline-none cursor-pointer text-sm disabled:cursor-not-allowed",
-              !selected[0] && "text-muted-foreground"
+              showPlaceholder && "text-muted-foreground"
             )}
           >
-            {(selected[0] ? labelFor(selected[0]) : "") || placeholder}
+            {multiple
+              ? selected.length === 0
+                ? placeholder
+                : ""
+              : (selected[0] ? labelFor(selected[0]) : "") || placeholder}
           </button>
-          {name && <input type="hidden" name={name} value={selected[0] ?? ""} />}
+          {name && (
+            <input type="hidden" name={name} value={multiple ? selected.join(",") : selected[0] ?? ""} />
+          )}
           <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="m6 9 6 6 6-6" />
@@ -252,7 +312,14 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
             {filtered.length === 0 ? (
               <div className="py-6 text-center text-sm text-muted-foreground">{emptyMessage}</div>
             ) : (
-              <div ref={listRef} id={listId} role="listbox" aria-label={placeholder} className="max-h-60 overflow-y-auto p-1">
+              <div
+                ref={listRef}
+                id={listId}
+                role="listbox"
+                aria-multiselectable={multiple || undefined}
+                aria-label={placeholder}
+                className="max-h-60 overflow-y-auto p-1"
+              >
                 {filtered.map((opt, i) => {
                   const isSelected = selected.includes(opt.value);
                   const isActive = i === activeIndex;
