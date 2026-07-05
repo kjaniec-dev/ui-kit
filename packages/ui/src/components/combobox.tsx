@@ -100,10 +100,10 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
 
     const emit = (next: string[]) => {
       if (!controlled) setInternal(next);
-      if (multiple) {
-        (props.onChange as ((v: string[]) => void) | undefined)?.(next);
+      if (props.multiple) {
+        props.onChange?.(next);
       } else {
-        (props.onChange as ((v: string) => void) | undefined)?.(next[0] ?? "");
+        props.onChange?.(next[0] ?? "");
       }
     };
 
@@ -280,8 +280,10 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
                 : ""
               : (selected[0] ? labelFor(selected[0]) : "") || placeholder}
           </button>
-          {name && (
-            <input type="hidden" name={name} value={multiple ? selected.join(",") : selected[0] ?? ""} />
+          {name && multiple &&
+            selected.map((v) => <input key={v} type="hidden" name={name} value={v} />)}
+          {name && !multiple && (
+            <input type="hidden" name={name} value={selected[0] ?? ""} />
           )}
           <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
