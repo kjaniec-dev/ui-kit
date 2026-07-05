@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "../lib/cn";
+import { FormField } from "./form-field";
 
 export interface ComboboxOption {
   value: string;
@@ -360,3 +361,30 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
   }
 );
 Combobox.displayName = "Combobox";
+
+// Distributive omit preserves the discriminated union (plain Omit<Union, K>
+// collapses it to the shared keys and drops the `multiple` narrowing).
+type DistributiveOmit<T, K extends PropertyKey> = T extends unknown ? Omit<T, K> : never;
+
+export type ComboboxFieldProps = DistributiveOmit<ComboboxProps, "error"> & {
+  label: string;
+  hint?: string;
+  error?: string;
+  required?: boolean;
+};
+
+export function ComboboxField({
+  label,
+  hint,
+  error,
+  required,
+  className,
+  ...props
+}: ComboboxFieldProps) {
+  return (
+    <FormField label={label} hint={hint} error={error} required={required} className={className}>
+      <Combobox error={!!error} {...(props as ComboboxProps)} />
+    </FormField>
+  );
+}
+ComboboxField.displayName = "ComboboxField";

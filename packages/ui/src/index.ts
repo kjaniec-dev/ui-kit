@@ -93,4 +93,10 @@ export {
   type PopoverProps,
   type PopoverContentProps,
 } from "./components/popover";
-export { Combobox, type ComboboxOption, type ComboboxProps } from "./components/combobox";
+export {
+  Combobox,
+  ComboboxField,
+  type ComboboxOption,
+  type ComboboxProps,
+  type ComboboxFieldProps,
+} from "./components/combobox";

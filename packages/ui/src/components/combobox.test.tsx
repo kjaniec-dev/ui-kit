@@ -1,7 +1,7 @@
 import * as React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { Combobox } from "./combobox";
+import { Combobox, ComboboxField } from "./combobox";
 
 const options = [
   { value: "apple", label: "Apple" },
@@ -151,5 +151,28 @@ describe("Combobox (multiple)", () => {
     fireEvent.click(screen.getByRole("button", { expanded: false }));
     fireEvent.keyDown(screen.getByRole("combobox"), { key: "Backspace" });
     expect(onChange).toHaveBeenLastCalledWith(["apple"]);
+  });
+});
+
+describe("ComboboxField", () => {
+  it("associates the label with the combobox trigger", () => {
+    render(<ComboboxField label="Fruit" options={options} />);
+    expect(screen.getByLabelText("Fruit")).toHaveAttribute("aria-haspopup", "listbox");
+  });
+
+  it("shows the hint and links it via aria-describedby", () => {
+    render(<ComboboxField label="Fruit" hint="Pick one" options={options} />);
+    const trigger = screen.getByLabelText("Fruit");
+    expect(screen.getByText("Pick one")).toBeInTheDocument();
+    expect(trigger.getAttribute("aria-describedby")).toContain(screen.getByText("Pick one").id);
+  });
+
+  it("shows the error, hides the hint, and marks the trigger invalid", () => {
+    render(<ComboboxField label="Fruit" hint="Pick one" error="Required" options={options} />);
+    const trigger = screen.getByLabelText("Fruit");
+    expect(screen.getByText("Required")).toBeInTheDocument();
+    expect(screen.queryByText("Pick one")).not.toBeInTheDocument();
+    expect(trigger).toHaveAttribute("aria-invalid", "true");
+    expect(trigger.getAttribute("aria-describedby")).toContain(screen.getByText("Required").id);
   });
 });
