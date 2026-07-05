@@ -67,6 +67,21 @@ describe("Combobox (single)", () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
+  it("skips a disabled option when navigating with the keyboard", () => {
+    const onChange = vi.fn();
+    render(<Combobox options={options} placeholder="Pick fruit" onChange={onChange} />);
+    fireEvent.click(screen.getByRole("button", { name: "Pick fruit" }));
+    const input = screen.getByRole("combobox");
+    // active starts at apple (index 0). Three ArrowDown presses cycle
+    // apple -> banana -> cherry -> (durian is disabled, skipped) -> apple.
+    fireEvent.keyDown(input, { key: "ArrowDown" });
+    fireEvent.keyDown(input, { key: "ArrowDown" });
+    fireEvent.keyDown(input, { key: "ArrowDown" });
+    fireEvent.keyDown(input, { key: "Enter" });
+    expect(onChange).not.toHaveBeenCalledWith("durian");
+    expect(onChange).toHaveBeenCalledWith("apple");
+  });
+
   it("closes on Escape", () => {
     render(<Combobox options={options} placeholder="Pick fruit" />);
     fireEvent.click(screen.getByRole("button", { name: "Pick fruit" }));
@@ -85,5 +100,13 @@ describe("Combobox (single)", () => {
     const ref = React.createRef<HTMLButtonElement>();
     render(<Combobox options={options} placeholder="Pick fruit" ref={ref} />);
     expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+  });
+
+  it("closes when clicking outside the component", () => {
+    render(<Combobox options={options} placeholder="Pick fruit" />);
+    fireEvent.click(screen.getByRole("button", { name: "Pick fruit" }));
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
+    fireEvent.mouseDown(document.body);
+    expect(screen.queryByRole("combobox")).not.toBeInTheDocument();
   });
 });

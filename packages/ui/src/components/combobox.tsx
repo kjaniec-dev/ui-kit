@@ -220,7 +220,7 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
               !selected[0] && "text-muted-foreground"
             )}
           >
-            {selected[0] ? labelFor(selected[0]) : placeholder}
+            {(selected[0] ? labelFor(selected[0]) : "") || placeholder}
           </button>
           {name && <input type="hidden" name={name} value={selected[0] ?? ""} />}
           <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
@@ -239,7 +239,7 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
                 role="combobox"
                 aria-autocomplete="list"
                 aria-expanded={open}
-                aria-controls={listId}
+                aria-controls={filtered.length > 0 ? listId : undefined}
                 aria-activedescendant={filtered[activeIndex] ? optionId(activeIndex) : undefined}
                 aria-label={searchPlaceholder}
                 placeholder={searchPlaceholder}
