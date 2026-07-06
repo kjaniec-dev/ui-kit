@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { cn } from "../lib/cn";
-import { FormField } from "./form-field";
 
 export interface ComboboxOption {
   value: string;
@@ -21,6 +20,8 @@ interface ComboboxBaseProps {
   disabled?: boolean;
   /** Visual error state (red border + aria-invalid on the trigger). */
   error?: boolean;
+  /** Marks the trigger aria-required (buttons have no native `required` attribute). */
+  required?: boolean;
   className?: string;
   id?: string;
   name?: string;
@@ -56,6 +57,7 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
       emptyMessage = "No results",
       disabled = false,
       error = false,
+      required = false,
       className,
       id,
       name,
@@ -267,6 +269,7 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
             aria-expanded={open}
             aria-controls={open ? listId : undefined}
             aria-invalid={error || undefined}
+            aria-required={required || undefined}
             aria-describedby={describedBy}
             onClick={() => (open ? closePopup() : openPopup())}
             onKeyDown={onTriggerKeyDown}
@@ -373,6 +376,8 @@ export type ComboboxFieldProps = DistributiveOmit<ComboboxProps, "error"> & {
   required?: boolean;
 };
 
+import { FormField } from "./form-field";
+
 export function ComboboxField({
   label,
   hint,
@@ -383,7 +388,7 @@ export function ComboboxField({
 }: ComboboxFieldProps) {
   return (
     <FormField label={label} hint={hint} error={error} required={required} className={className}>
-      <Combobox error={!!error} {...(props as ComboboxProps)} />
+      <Combobox error={!!error} required={required} {...props} />
     </FormField>
   );
 }

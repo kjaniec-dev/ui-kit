@@ -175,4 +175,29 @@ describe("ComboboxField", () => {
     expect(trigger).toHaveAttribute("aria-invalid", "true");
     expect(trigger.getAttribute("aria-describedby")).toContain(screen.getByText("Required").id);
   });
+
+  it("supports multiple mode and associates label/hint/error the same as single-select", () => {
+    const onChange = vi.fn();
+    render(
+      <ComboboxField
+        label="Fruit"
+        hint="Pick one"
+        error="Required"
+        multiple
+        options={options}
+        defaultValue={["apple"]}
+        onChange={onChange}
+      />
+    );
+    const trigger = screen.getByLabelText("Fruit");
+    expect(screen.getByText("Apple")).toBeInTheDocument(); // rendered chip
+    expect(screen.getByText("Required")).toBeInTheDocument();
+    expect(screen.queryByText("Pick one")).not.toBeInTheDocument();
+    expect(trigger).toHaveAttribute("aria-invalid", "true");
+    expect(trigger.getAttribute("aria-describedby")).toContain(screen.getByText("Required").id);
+
+    fireEvent.click(trigger);
+    fireEvent.click(screen.getByRole("option", { name: "Banana" }));
+    expect(onChange).toHaveBeenLastCalledWith(["apple", "banana"]);
+  });
 });
