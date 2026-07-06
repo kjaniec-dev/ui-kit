@@ -2512,5 +2512,43 @@
     ],
     "cva": null,
     "usageSnippet": "<PopoverContent side={side} align=\"center\" className=\"w-40\">\n  <p className=\"m-0 text-sm\">side=\"{side}\"</p>\n</PopoverContent>"
+  },
+  {
+    "name": "Combobox",
+    "importPath": "import { Combobox } from \"@kjaniec-dev/ui\";",
+    "description": "React component Combobox.",
+    "props": [
+      {
+        "name": "value",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Combobox options={frameworks} value={value} onChange={setValue} placeholder=\"Select a framework…\" />"
+  },
+  {
+    "name": "ComboboxField",
+    "importPath": "import { ComboboxField } from \"@kjaniec-dev/ui\";",
+    "description": "React component ComboboxField.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<ComboboxField\n  options={frameworks}\n  label=\"Primary framework\"\n  required\n  hint=\"You can change this later.\"\n/>"
   }
 ]

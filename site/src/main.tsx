@@ -67,6 +67,7 @@ import {
   DashboardShell,
   TextField,
   SelectField,
+  ComboboxField,
   CheckboxField,
   SettingsLayout,
   DetailPageLayout,
@@ -339,6 +340,15 @@ function Gallery() {
 
   // New States for v0.7.0 features
   const [selectedRows, setSelectedRows] = React.useState<Set<React.Key>>(new Set());
+  const [framework, setFramework] = React.useState("");
+  const [stack, setStack] = React.useState<string[]>(["next"]);
+  const frameworkOptions = [
+    { value: "next", label: "Next.js" },
+    { value: "remix", label: "Remix" },
+    { value: "astro", label: "Astro" },
+    { value: "sveltekit", label: "SvelteKit" },
+    { value: "nuxt", label: "Nuxt" },
+  ];
   const [searchQuery, setSearchQuery] = React.useState("");
   const [confirmOpen, setConfirmOpen] = React.useState(false);
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -679,7 +689,7 @@ function Gallery() {
             </Box>
           </Sec>
 
-          <Sec id="forms" title="Forms" desc="Fields with labels, leading icons, selects, textareas and live validation." components={["Input", "TextField", "Textarea", "Select", "SelectField", "FormField"]}>
+          <Sec id="forms" title="Forms" desc="Fields with labels, leading icons, selects, textareas and live validation." components={["Input", "TextField", "Textarea", "Select", "SelectField", "Combobox", "ComboboxField", "FormField"]}>
             <Box>
               <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
                 <Field>
@@ -777,6 +787,28 @@ function Gallery() {
                     defaultChecked
                   />
                 </div>
+              </div>
+            </Box>
+            <Box>
+              <Sub>Combobox (searchable select)</Sub>
+              <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
+                <ComboboxField
+                  label="Primary framework"
+                  hint="Type to filter the list."
+                  options={frameworkOptions}
+                  value={framework}
+                  onChange={setFramework}
+                  placeholder="Select a framework…"
+                />
+                <ComboboxField
+                  label="Your stack"
+                  hint="Pick as many as you like."
+                  multiple
+                  options={frameworkOptions}
+                  value={stack}
+                  onChange={setStack}
+                  placeholder="Add frameworks…"
+                />
               </div>
             </Box>
           </Sec>
