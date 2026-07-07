@@ -267,7 +267,7 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
             disabled={disabled}
             aria-haspopup="listbox"
             aria-expanded={open}
-            aria-controls={open ? listId : undefined}
+            aria-controls={open && filtered.length > 0 ? listId : undefined}
             aria-invalid={error || undefined}
             aria-required={required || undefined}
             aria-describedby={describedBy}
@@ -378,18 +378,13 @@ export type ComboboxFieldProps = DistributiveOmit<ComboboxProps, "error"> & {
 
 import { FormField } from "./form-field";
 
-export function ComboboxField({
-  label,
-  hint,
-  error,
-  required,
-  className,
-  ...props
-}: ComboboxFieldProps) {
-  return (
-    <FormField label={label} hint={hint} error={error} required={required} className={className}>
-      <Combobox error={!!error} required={required} {...props} />
-    </FormField>
-  );
-}
+export const ComboboxField = React.forwardRef<HTMLButtonElement, ComboboxFieldProps>(
+  function ComboboxField({ label, hint, error, required, className, ...props }, ref) {
+    return (
+      <FormField label={label} hint={hint} error={error} required={required} className={className}>
+        <Combobox ref={ref} error={!!error} {...props} />
+      </FormField>
+    );
+  }
+);
 ComboboxField.displayName = "ComboboxField";

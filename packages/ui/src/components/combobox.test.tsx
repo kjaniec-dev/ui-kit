@@ -102,6 +102,53 @@ describe("Combobox (single)", () => {
     expect(ref.current).toBeInstanceOf(HTMLButtonElement);
   });
 
+  it("sets aria-required on the trigger only when required is true", () => {
+    const { rerender } = render(<Combobox options={options} placeholder="Pick fruit" />);
+    expect(screen.getByRole("button", { name: "Pick fruit" })).not.toHaveAttribute("aria-required");
+    rerender(<Combobox options={options} placeholder="Pick fruit" required />);
+    expect(screen.getByRole("button", { name: "Pick fruit" })).toHaveAttribute("aria-required", "true");
+  });
+
+  it("navigates backward with ArrowUp, skipping a disabled option", () => {
+    const onChange = vi.fn();
+    render(<Combobox options={options} placeholder="Pick fruit" onChange={onChange} />);
+    fireEvent.click(screen.getByRole("button", { name: "Pick fruit" }));
+    const input = screen.getByRole("combobox");
+    // active starts at apple (index 0); ArrowUp wraps past disabled durian to cherry.
+    fireEvent.keyDown(input, { key: "ArrowUp" });
+    fireEvent.keyDown(input, { key: "Enter" });
+    expect(onChange).toHaveBeenCalledWith("cherry");
+  });
+
+  it("Home jumps to the first enabled option", () => {
+    const onChange = vi.fn();
+    render(<Combobox options={options} placeholder="Pick fruit" onChange={onChange} />);
+    fireEvent.click(screen.getByRole("button", { name: "Pick fruit" }));
+    const input = screen.getByRole("combobox");
+    fireEvent.keyDown(input, { key: "ArrowDown" });
+    fireEvent.keyDown(input, { key: "ArrowDown" });
+    fireEvent.keyDown(input, { key: "Home" });
+    fireEvent.keyDown(input, { key: "Enter" });
+    expect(onChange).toHaveBeenCalledWith("apple");
+  });
+
+  it("End jumps to the last enabled option, skipping a trailing disabled one", () => {
+    const onChange = vi.fn();
+    render(<Combobox options={options} placeholder="Pick fruit" onChange={onChange} />);
+    fireEvent.click(screen.getByRole("button", { name: "Pick fruit" }));
+    const input = screen.getByRole("combobox");
+    fireEvent.keyDown(input, { key: "End" });
+    fireEvent.keyDown(input, { key: "Enter" });
+    expect(onChange).toHaveBeenCalledWith("cherry");
+  });
+
+  it("renders the empty message and no options when the option list is empty", () => {
+    render(<Combobox options={[]} placeholder="Pick fruit" emptyMessage="Nothing here" />);
+    fireEvent.click(screen.getByRole("button", { name: "Pick fruit" }));
+    expect(screen.getByText("Nothing here")).toBeInTheDocument();
+    expect(screen.queryAllByRole("option")).toHaveLength(0);
+  });
+
   it("closes when clicking outside the component", () => {
     render(<Combobox options={options} placeholder="Pick fruit" />);
     fireEvent.click(screen.getByRole("button", { name: "Pick fruit" }));
@@ -152,6 +199,20 @@ describe("Combobox (multiple)", () => {
     fireEvent.keyDown(screen.getByRole("combobox"), { key: "Backspace" });
     expect(onChange).toHaveBeenLastCalledWith(["apple"]);
   });
+
+  it("reflects a controlled value and only updates after the parent re-renders", () => {
+    const onChange = vi.fn();
+    const { rerender } = render(
+      <Combobox multiple options={options} value={["apple"]} placeholder="Pick" onChange={onChange} />
+    );
+    expect(screen.getByRole("button", { name: "Remove Apple" })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { expanded: false }));
+    fireEvent.click(screen.getByRole("option", { name: "Banana" }));
+    expect(onChange).toHaveBeenLastCalledWith(["apple", "banana"]);
+    expect(screen.queryByRole("button", { name: "Remove Banana" })).not.toBeInTheDocument();
+    rerender(<Combobox multiple options={options} value={["apple", "banana"]} placeholder="Pick" onChange={onChange} />);
+    expect(screen.getByRole("button", { name: "Remove Banana" })).toBeInTheDocument();
+  });
 });
 
 describe("ComboboxField", () => {
@@ -199,5 +260,11 @@ describe("ComboboxField", () => {
     fireEvent.click(trigger);
     fireEvent.click(screen.getByRole("option", { name: "Banana" }));
     expect(onChange).toHaveBeenLastCalledWith(["apple", "banana"]);
+  });
+
+  it("forwards its ref to the trigger button", () => {
+    const ref = React.createRef<HTMLButtonElement>();
+    render(<ComboboxField label="Fruit" options={options} ref={ref} />);
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement);
   });
 });
