@@ -61,4 +61,11 @@ describe("DatePicker", () => {
     render(<DatePicker ref={ref} />);
     expect(ref.current).toBeInstanceOf(HTMLButtonElement);
   });
+
+  it("closes on outside click", () => {
+    render(<DatePicker />);
+    fireEvent.click(screen.getByRole("button"));
+    fireEvent.mouseDown(document.body);
+    expect(screen.queryByRole("grid")).not.toBeInTheDocument();
+  });
 });
