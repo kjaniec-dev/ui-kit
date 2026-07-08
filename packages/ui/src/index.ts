@@ -100,3 +100,5 @@ export {
   type ComboboxProps,
   type ComboboxFieldProps,
 } from "./components/combobox";
+
+export { Calendar, type CalendarProps } from "./components/calendar";
