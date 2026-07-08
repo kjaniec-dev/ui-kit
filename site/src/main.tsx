@@ -69,6 +69,8 @@ import {
   SelectField,
   ComboboxField,
   CheckboxField,
+  Calendar,
+  DatePickerField,
   SettingsLayout,
   DetailPageLayout,
   TableToolbar,
@@ -349,6 +351,8 @@ function Gallery() {
     { value: "sveltekit", label: "SvelteKit" },
     { value: "nuxt", label: "Nuxt" },
   ];
+  const [meetingDate, setMeetingDate] = React.useState<Date | undefined>(undefined);
+  const [inlineDate, setInlineDate] = React.useState<Date | undefined>(new Date());
   const [searchQuery, setSearchQuery] = React.useState("");
   const [confirmOpen, setConfirmOpen] = React.useState(false);
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -689,7 +693,7 @@ function Gallery() {
             </Box>
           </Sec>
 
-          <Sec id="forms" title="Forms" desc="Fields with labels, leading icons, selects, textareas and live validation." components={["Input", "TextField", "Textarea", "Select", "SelectField", "Combobox", "ComboboxField", "FormField"]}>
+          <Sec id="forms" title="Forms" desc="Fields with labels, leading icons, selects, textareas and live validation." components={["Input", "TextField", "Textarea", "Select", "SelectField", "Combobox", "ComboboxField", "Calendar", "DatePicker", "DatePickerField", "FormField"]}>
             <Box>
               <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
                 <Field>
@@ -809,6 +813,22 @@ function Gallery() {
                   onChange={setStack}
                   placeholder="Add frameworks…"
                 />
+              </div>
+            </Box>
+            <Box>
+              <Sub>DatePicker / Calendar</Sub>
+              <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
+                <DatePickerField
+                  label="Meeting date"
+                  hint="Weekends are disabled."
+                  value={meetingDate}
+                  onChange={setMeetingDate}
+                  disabledDates={(d) => d.getDay() === 0 || d.getDay() === 6}
+                />
+                <div>
+                  <Sub>Calendar (standalone)</Sub>
+                  <Calendar value={inlineDate} onChange={setInlineDate} />
+                </div>
               </div>
             </Box>
           </Sec>

@@ -2550,5 +2550,221 @@
     "props": [],
     "cva": null,
     "usageSnippet": "<ComboboxField\n  options={frameworks}\n  label=\"Primary framework\"\n  required\n  hint=\"You can change this later.\"\n/>"
+  },
+  {
+    "name": "Calendar",
+    "importPath": "import { Calendar } from \"@kjaniec-dev/ui\";",
+    "description": "React component Calendar.",
+    "props": [
+      {
+        "name": "value",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "defaultValue",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onChange",
+        "type": "(date: Date) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "month",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Controlled displayed month. Omit for uncontrolled behavior."
+      },
+      {
+        "name": "defaultMonth",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Initial displayed month when uncontrolled. Defaults to `value` ?? today."
+      },
+      {
+        "name": "onMonthChange",
+        "type": "(month: Date) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "min",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "max",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "disabledDates",
+        "type": "(date: Date) => boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Calendar value={value} onChange={setValue} />"
+  },
+  {
+    "name": "DatePicker",
+    "importPath": "import { DatePicker } from \"@kjaniec-dev/ui\";",
+    "description": "React component DatePicker.",
+    "props": [
+      {
+        "name": "value",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "defaultValue",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onChange",
+        "type": "(date: Date) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "min",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "max",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "disabledDates",
+        "type": "(date: Date) => boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"Pick a date…\"",
+        "description": "Trigger text when nothing is selected. Default \"Pick a date…\"."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": ""
+      },
+      {
+        "name": "error",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": "Visual error state (red border + aria-invalid on the trigger)."
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": "Marks the trigger aria-required (buttons have no native `required` attribute)."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "\"aria-describedby\"",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<DatePicker value={value} onChange={setValue} />"
+  },
+  {
+    "name": "DatePickerField",
+    "importPath": "import { DatePickerField } from \"@kjaniec-dev/ui\";",
+    "description": "React component DatePickerField.",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<DatePickerField label=\"Due date\" required hint=\"Weekdays only.\" value={value} onChange={setValue} disabledDates={(d) => d.getDay() === 0 || d.getDay() === 6} />"
   }
 ]
