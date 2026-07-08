@@ -102,3 +102,4 @@ export {
 } from "./components/combobox";
 
 export { Calendar, type CalendarProps } from "./components/calendar";
+export { DatePicker, type DatePickerProps } from "./components/date-picker";
