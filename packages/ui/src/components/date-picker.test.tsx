@@ -92,6 +92,11 @@ describe("DatePickerField", () => {
     expect(trigger.getAttribute("aria-describedby")).toContain(screen.getByText("Required").id);
   });
 
+  it("marks the field required", () => {
+    render(<DatePickerField label="Due date" required />);
+    expect(screen.getByLabelText(/Due date/)).toHaveAttribute("aria-required", "true");
+  });
+
   it("forwards its ref to the trigger button", () => {
     const ref = React.createRef<HTMLButtonElement>();
     render(<DatePickerField label="Due date" ref={ref} />);
