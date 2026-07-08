@@ -1,7 +1,7 @@
 import * as React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { DatePicker } from "./date-picker";
+import { DatePicker, DatePickerField } from "./date-picker";
 
 const displayFormat = new Intl.DateTimeFormat(undefined, { dateStyle: "medium" });
 const fullDateFormat = new Intl.DateTimeFormat(undefined, { dateStyle: "full" });
@@ -67,5 +67,34 @@ describe("DatePicker", () => {
     fireEvent.click(screen.getByRole("button"));
     fireEvent.mouseDown(document.body);
     expect(screen.queryByRole("grid")).not.toBeInTheDocument();
+  });
+});
+
+describe("DatePickerField", () => {
+  it("associates the label with the trigger", () => {
+    render(<DatePickerField label="Due date" />);
+    expect(screen.getByLabelText("Due date")).toHaveAttribute("aria-haspopup", "grid");
+  });
+
+  it("shows the hint and links it via aria-describedby", () => {
+    render(<DatePickerField label="Due date" hint="Choose a weekday" />);
+    const trigger = screen.getByLabelText("Due date");
+    expect(screen.getByText("Choose a weekday")).toBeInTheDocument();
+    expect(trigger.getAttribute("aria-describedby")).toContain(screen.getByText("Choose a weekday").id);
+  });
+
+  it("shows the error, hides the hint, and marks the trigger invalid", () => {
+    render(<DatePickerField label="Due date" hint="Choose a weekday" error="Required" />);
+    const trigger = screen.getByLabelText("Due date");
+    expect(screen.getByText("Required")).toBeInTheDocument();
+    expect(screen.queryByText("Choose a weekday")).not.toBeInTheDocument();
+    expect(trigger).toHaveAttribute("aria-invalid", "true");
+    expect(trigger.getAttribute("aria-describedby")).toContain(screen.getByText("Required").id);
+  });
+
+  it("forwards its ref to the trigger button", () => {
+    const ref = React.createRef<HTMLButtonElement>();
+    render(<DatePickerField label="Due date" ref={ref} />);
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement);
   });
 });

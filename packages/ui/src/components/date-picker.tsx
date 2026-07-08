@@ -163,3 +163,22 @@ export const DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(
   }
 );
 DatePicker.displayName = "DatePicker";
+
+import { FormField } from "./form-field";
+
+export interface DatePickerFieldProps extends Omit<DatePickerProps, "error"> {
+  label: string;
+  hint?: string;
+  error?: string;
+}
+
+export const DatePickerField = React.forwardRef<HTMLButtonElement, DatePickerFieldProps>(
+  function DatePickerField({ label, hint, error, required, className, ...props }, ref) {
+    return (
+      <FormField label={label} hint={hint} error={error} required={required} className={className}>
+        <DatePicker ref={ref} error={!!error} {...props} />
+      </FormField>
+    );
+  }
+);
+DatePickerField.displayName = "DatePickerField";
