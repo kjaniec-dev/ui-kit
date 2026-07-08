@@ -34,7 +34,28 @@ describe("DatePicker", () => {
     expect(screen.getByRole("button", { name: displayFormat.format(new Date(2026, 6, 15)) })).toBeInTheDocument();
   });
 
-  it("closes on Escape and returns focus to the trigger", () => {
+  it("closes on Escape when focus is still on the trigger (real-world open path)", () => {
+    // Opening via click/keyboard never auto-focuses into the grid (roving
+    // tabindex only moves focus on actual arrow-key navigation), so focus
+    // stays on the trigger. Firing Escape anywhere but the focused element
+    // wouldn't reproduce a real keydown, since the event only bubbles
+    // through the focused element's own ancestors — the panel div is a
+    // sibling of the trigger, not an ancestor.
+    render(<DatePicker />);
+    const trigger = screen.getByRole("button");
+    fireEvent.click(trigger);
+    // jsdom's fireEvent.click does not move focus the way a real browser
+    // click does, so set focus explicitly to reproduce the real-world
+    // post-open state (focus remains on the trigger).
+    trigger.focus();
+    expect(screen.getByRole("grid")).toBeInTheDocument();
+    expect(trigger).toHaveFocus();
+    fireEvent.keyDown(trigger, { key: "Escape" });
+    expect(screen.queryByRole("grid")).not.toBeInTheDocument();
+    expect(trigger).toHaveFocus();
+  });
+
+  it("closes on Escape and returns focus to the trigger when focus is inside the grid", () => {
     render(<DatePicker />);
     const trigger = screen.getByRole("button");
     fireEvent.click(trigger);

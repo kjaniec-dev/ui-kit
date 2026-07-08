@@ -99,6 +99,15 @@ export const DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(
       if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         openPopup();
+      } else if (e.key === "Escape" && open) {
+        // The panel is a DOM sibling of the trigger, not a descendant, and
+        // the Calendar deliberately doesn't auto-focus into the grid on
+        // open. So while focus remains on the trigger, a real Escape
+        // keydown never bubbles into the panel's onKeyDown handler — it
+        // must be handled here instead. Focus is already on the trigger,
+        // so no refocus is needed.
+        e.preventDefault();
+        closePopup();
       }
     };
 
