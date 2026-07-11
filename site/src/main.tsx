@@ -71,6 +71,8 @@ import {
   CheckboxField,
   Calendar,
   DatePickerField,
+  RangeCalendar,
+  DateRangePickerField,
   SettingsLayout,
   DetailPageLayout,
   TableToolbar,
@@ -353,6 +355,8 @@ function Gallery() {
   ];
   const [meetingDate, setMeetingDate] = React.useState<Date | undefined>(undefined);
   const [inlineDate, setInlineDate] = React.useState<Date | undefined>(new Date());
+  const [bookingRange, setBookingRange] = React.useState<{ start?: Date; end?: Date }>({});
+  const [inlineRange, setInlineRange] = React.useState<{ start?: Date; end?: Date }>({});
   const [searchQuery, setSearchQuery] = React.useState("");
   const [confirmOpen, setConfirmOpen] = React.useState(false);
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -693,7 +697,7 @@ function Gallery() {
             </Box>
           </Sec>
 
-          <Sec id="forms" title="Forms" desc="Fields with labels, leading icons, selects, textareas and live validation." components={["Input", "TextField", "Textarea", "Select", "SelectField", "Combobox", "ComboboxField", "Calendar", "DatePicker", "DatePickerField", "FormField"]}>
+          <Sec id="forms" title="Forms" desc="Fields with labels, leading icons, selects, textareas and live validation." components={["Input", "TextField", "Textarea", "Select", "SelectField", "Combobox", "ComboboxField", "Calendar", "DatePicker", "DatePickerField", "RangeCalendar", "DateRangePicker", "DateRangePickerField", "FormField"]}>
             <Box>
               <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
                 <Field>
@@ -829,6 +833,22 @@ function Gallery() {
                   <Sub>Calendar (standalone)</Sub>
                   <Calendar value={inlineDate} onChange={setInlineDate} />
                 </div>
+              </div>
+            </Box>
+            <Box>
+              <Sub>DateRangePicker / RangeCalendar</Sub>
+              <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))" }}>
+                <DateRangePickerField
+                  label="Booking dates"
+                  hint="Weekends are disabled."
+                  value={bookingRange}
+                  onChange={setBookingRange}
+                  disabledDates={(d) => d.getDay() === 0 || d.getDay() === 6}
+                />
+              </div>
+              <div className="mt-5">
+                <Sub>RangeCalendar (standalone)</Sub>
+                <RangeCalendar value={inlineRange} onChange={setInlineRange} />
               </div>
             </Box>
           </Sec>

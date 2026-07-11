@@ -28,7 +28,7 @@ Only 5 of ~48 components have a `.test.tsx` file (`bottom-sheet`, `code-block`, 
 Components frequently needed in SaaS/admin UI kits that are currently missing from `packages/ui/src/components`.
 
 - [x] `DatePicker` / `Calendar` — `TableToolbar`/README mention date filters; single-date picker + standalone calendar grid shipped.
-- [ ] `DateRangePicker` — deferred from the `DatePicker` work (2026-07-07 design doc); needs a dual-month grid and a start/end hover-preview interaction, distinct enough to warrant its own spec.
+- [x] `DateRangePicker` — dual-month grid, locked navigation, hover preview, and `DateRangePickerField` wrapper shipped (2026-07-10 design doc).
 - [x] `Combobox` / `Autocomplete` — `Select` exists, but there's no searchable/filterable variant, common in B2B forms.
 - [ ] `FileUpload` / `Dropzone` — typical admin-panel need (CSV import, invoice attachments — fits the "Invoice & Accounting Dashboard" pattern in README).
 - [ ] `Timeline` / `ActivityFeed` — fits "Tenant & Property Manager" and "Project & Dev Console" patterns (event history, activity log).

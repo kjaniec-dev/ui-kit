@@ -2766,5 +2766,244 @@
     ],
     "cva": null,
     "usageSnippet": "<DatePickerField label=\"Due date\" required hint=\"Weekdays only.\" value={value} onChange={setValue} disabledDates={(d) => d.getDay() === 0 || d.getDay() === 6} />"
+  },
+  {
+    "name": "RangeCalendar",
+    "importPath": "import { RangeCalendar } from \"@kjaniec-dev/ui\";",
+    "description": "React component RangeCalendar.",
+    "props": [
+      {
+        "name": "value",
+        "type": "DateRange",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "defaultValue",
+        "type": "DateRange",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onChange",
+        "type": "(range: DateRange) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "month",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Controlled left-month. The right month is always this + 1 (locked navigation)."
+      },
+      {
+        "name": "defaultMonth",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onMonthChange",
+        "type": "(month: Date) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "min",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "max",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "disabledDates",
+        "type": "(date: Date) => boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<RangeCalendar value={value} onChange={setValue} />"
+  },
+  {
+    "name": "DateRange",
+    "importPath": "import { DateRange } from \"@kjaniec-dev/ui\";",
+    "description": "React component DateRange.",
+    "props": [
+      {
+        "name": "start",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "end",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<DateRange>({});\nreturn (\n  <div style={{ maxWidth: 280 }}>\n    <DateRangePicker value={value} onChange={setValue} />"
+  },
+  {
+    "name": "DateRangePicker",
+    "importPath": "import { DateRangePicker } from \"@kjaniec-dev/ui\";",
+    "description": "React component DateRangePicker.",
+    "props": [
+      {
+        "name": "value",
+        "type": "DateRange",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "defaultValue",
+        "type": "DateRange",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onChange",
+        "type": "(range: DateRange) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "min",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "max",
+        "type": "Date",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "disabledDates",
+        "type": "(date: Date) => boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"Pick a date range…\"",
+        "description": "Trigger text when nothing is selected. Default \"Pick a date range…\"."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": ""
+      },
+      {
+        "name": "error",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": "Visual error state (red border + aria-invalid on the trigger)."
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": "Marks the trigger aria-required (buttons have no native `required` attribute)."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "\"aria-describedby\"",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<DateRangePicker value={value} onChange={setValue} />"
+  },
+  {
+    "name": "DateRangePickerField",
+    "importPath": "import { DateRangePickerField } from \"@kjaniec-dev/ui\";",
+    "description": "React component DateRangePickerField.",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<DateRangePickerField\n  label=\"Booking dates\"\n  required\n  hint=\"Weekends are disabled.\"\n  value={value}\n  onChange={setValue}\n  disabledDates={(d) => d.getDay() === 0 || d.getDay() === 6}\n/>"
   }
 ]
