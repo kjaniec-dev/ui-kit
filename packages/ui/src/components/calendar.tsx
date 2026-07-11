@@ -61,6 +61,17 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
       today: isSameDay(d, today),
     });
 
+    const inViewMonth = (d: Date) => d.getMonth() === viewMonth.getMonth() && d.getFullYear() === viewMonth.getFullYear();
+
+    // CalendarGrid owns roving focus internally and only reports where it moved.
+    // When a keyboard move (PageUp/PageDown/Shift+PageUp/PageDown, or Arrow keys
+    // near a month boundary) lands outside the currently displayed month, this
+    // is what advances the header/grid to follow it — mirrors the pre-refactor
+    // Calendar's own `moveFocusTo`, which called `setViewMonth` directly.
+    const handleFocusDay = (d: Date) => {
+      if (!inViewMonth(d)) setViewMonth(d);
+    };
+
     return (
       <div ref={ref} className={cn("w-[280px] select-none", className)}>
         <div className="flex items-center justify-between mb-2">
@@ -91,6 +102,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
           isDayDisabled={isDayDisabled}
           cellState={cellState}
           onSelectDay={commitValue}
+          onFocusDay={handleFocusDay}
           initialFocusDate={selected ?? new Date()}
         />
       </div>
