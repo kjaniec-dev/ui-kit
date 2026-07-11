@@ -107,9 +107,10 @@ export const DateRangePicker = React.forwardRef<HTMLButtonElement, DateRangePick
       } else if (e.key === "Escape" && open) {
         // The panel is a DOM sibling of the trigger, not a descendant, and
         // RangeCalendar deliberately doesn't auto-focus into a grid on open.
-        // So while focus remains on the trigger, a real Escape keydown never
+        // So a real Escape keydown while focus is on the trigger never
         // bubbles into the panel's onKeyDown handler — it must be handled
-        // here instead. Focus is already on the trigger, so no refocus needed.
+        // here instead. Refocus the trigger explicitly rather than assuming
+        // it already has focus.
         e.preventDefault();
         closePopup();
         triggerRef.current?.focus();
