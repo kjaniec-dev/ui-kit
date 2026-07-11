@@ -349,9 +349,9 @@ describe("Dropzone", () => {
     render(<Dropzone onFiles={() => {}} />);
     const zone = screen.getByRole("button");
     fireEvent.dragEnter(zone, { dataTransfer: { files: [], types: ["Files"] } });
-    expect(zone.className).toContain("border-primary");
+    expect(zone).toHaveAttribute("data-drag-active", "true");
     fireEvent.drop(zone, { dataTransfer: { files: [makeFile()], types: ["Files"] } });
-    expect(zone.className).not.toContain("border-primary");
+    expect(zone).not.toHaveAttribute("data-drag-active");
   });
 
   it("does not open the picker or accept drops when disabled", () => {
@@ -482,6 +482,7 @@ export const Dropzone = React.forwardRef<HTMLButtonElement, DropzoneProps>(
           aria-describedby={describedBy}
           aria-invalid={ariaInvalid}
           aria-required={ariaRequired}
+          data-drag-active={dragActive || undefined}
           onClick={openPicker}
           onDragEnter={handleDragEnter}
           onDragOver={handleDragOver}
