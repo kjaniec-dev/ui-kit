@@ -115,3 +115,5 @@ export {
   type DateRangePickerProps,
   type DateRangePickerFieldProps,
 } from "./components/date-range-picker";
+
+export { Dropzone, type DropzoneProps } from "./components/dropzone";
