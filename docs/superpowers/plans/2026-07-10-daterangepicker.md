@@ -398,6 +398,16 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
       today: isSameDay(d, today),
     });
 
+    const inViewMonth = (d: Date) => d.getMonth() === viewMonth.getMonth() && d.getFullYear() === viewMonth.getFullYear();
+
+    // CalendarGrid owns roving focus internally and only reports where it moved
+    // via onFocusDay. When a keyboard move (PageUp/PageDown, Shift+PageUp/PageDown,
+    // or an Arrow key crossing a month boundary) lands outside the currently
+    // displayed month, this is what advances the header/grid to follow it.
+    const handleFocusDay = (d: Date) => {
+      if (!inViewMonth(d)) setViewMonth(d);
+    };
+
     return (
       <div ref={ref} className={cn("w-[280px] select-none", className)}>
         <div className="flex items-center justify-between mb-2">
@@ -428,6 +438,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
           isDayDisabled={isDayDisabled}
           cellState={cellState}
           onSelectDay={commitValue}
+          onFocusDay={handleFocusDay}
           initialFocusDate={selected ?? new Date()}
         />
       </div>
@@ -500,6 +511,23 @@ describe("RangeCalendar", () => {
     fireEvent.click(screen.getByRole("button", { name: "Previous month" }));
     expect(screen.getByRole("grid", { name: monthLabel(2026, 6) })).toBeInTheDocument();
     expect(screen.getByRole("grid", { name: monthLabel(2026, 7) })).toBeInTheDocument();
+  });
+
+  it("a keyboard move landing outside both visible months shifts the locked pair", () => {
+    render(
+      <RangeCalendar
+        defaultMonth={new Date(2026, 6, 1)}
+        defaultValue={{ start: new Date(2026, 6, 15), end: new Date(2026, 6, 15) }}
+      />
+    );
+    const leftGrid = screen.getByRole("grid", { name: monthLabel(2026, 6) });
+    // Shift+PageDown moves the focused day +1 year (July 2027), which is
+    // outside the initially-visible [July 2026, August 2026] pair — this is
+    // the case that requires CalendarGrid's onFocusDay to reach RangeCalendar's
+    // setViewMonth, not just a same-pair move like a plain PageDown would be.
+    fireEvent.keyDown(leftGrid, { key: "PageDown", shiftKey: true });
+    expect(screen.getByRole("grid", { name: monthLabel(2027, 6) })).toBeInTheDocument();
+    expect(screen.getByRole("grid", { name: monthLabel(2027, 7) })).toBeInTheDocument();
   });
 
   it("click start then click end (later date) commits the range via onChange", () => {
@@ -739,6 +767,21 @@ export const RangeCalendar = React.forwardRef<HTMLDivElement, RangeCalendarProps
       return { rangeStart: range.start ? isSameDay(d, range.start) : false, today: isToday };
     };
 
+    const inLockedRange = (d: Date) =>
+      (d.getMonth() === leftMonth.getMonth() && d.getFullYear() === leftMonth.getFullYear()) ||
+      (d.getMonth() === rightMonth.getMonth() && d.getFullYear() === rightMonth.getFullYear());
+
+    // Each CalendarGrid owns its own roving focus internally and only reports
+    // where it moved via onFocusDay. That single callback serves two purposes
+    // here: (1) drives the hover/keyboard-focus range preview (setHoverDate),
+    // and (2) — mirroring Calendar's own onFocusDay wiring — advances the
+    // locked month pair when a keyboard move (PageUp/PageDown, Shift+PageUp/
+    // PageDown, or an Arrow key) lands outside both currently visible months.
+    const handleFocusDay = (d: Date) => {
+      setHoverDate(d);
+      if (!inLockedRange(d)) setViewMonth(d);
+    };
+
     const navButton = (direction: "prev" | "next") => (
       <button
         type="button"
@@ -765,7 +808,7 @@ export const RangeCalendar = React.forwardRef<HTMLDivElement, RangeCalendarProps
             isDayDisabled={isDayDisabled}
             cellState={cellState}
             onSelectDay={handleSelectDay}
-            onFocusDay={setHoverDate}
+            onFocusDay={handleFocusDay}
             initialFocusDate={pendingStart ?? range.start ?? new Date()}
           />
         </div>
@@ -780,7 +823,7 @@ export const RangeCalendar = React.forwardRef<HTMLDivElement, RangeCalendarProps
             isDayDisabled={isDayDisabled}
             cellState={cellState}
             onSelectDay={handleSelectDay}
-            onFocusDay={setHoverDate}
+            onFocusDay={handleFocusDay}
             initialFocusDate={pendingStart ?? range.start ?? new Date()}
           />
         </div>
