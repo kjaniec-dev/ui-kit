@@ -108,3 +108,4 @@ export {
   type DatePickerProps,
   type DatePickerFieldProps,
 } from "./components/date-picker";
+export { RangeCalendar, type RangeCalendarProps, type DateRange } from "./components/range-calendar";
