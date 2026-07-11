@@ -53,6 +53,15 @@ export function dateKey(d: Date): string {
   return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
 }
 
+// Local YYYY-MM-DD, not Date#toISOString() — that converts to UTC first and
+// can shift the calendar date across a timezone boundary.
+export function toISODateString(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
 export const monthLabelFormat = new Intl.DateTimeFormat(undefined, { month: "long", year: "numeric" });
 export const fullDateFormat = new Intl.DateTimeFormat(undefined, { dateStyle: "full" });
 const weekdayShortFormat = new Intl.DateTimeFormat(undefined, { weekday: "short" });

@@ -129,7 +129,7 @@ export const RangeCalendar = React.forwardRef<HTMLDivElement, RangeCalendarProps
     // locked month pair when a keyboard move (PageUp/PageDown, Shift+PageUp/
     // PageDown, or an Arrow key) lands outside both currently visible months.
     const handleFocusDay = (d: Date) => {
-      setHoverDate(d);
+      if (pendingStart !== undefined) setHoverDate(d);
       if (!inLockedRange(d)) setViewMonth(d);
     };
 

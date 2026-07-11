@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cn } from "../lib/cn";
 import { Calendar } from "./calendar";
+import { toISODateString } from "./calendar-internals";
 
 export interface DatePickerProps {
   value?: Date;
@@ -25,15 +26,6 @@ export interface DatePickerProps {
 }
 
 const displayFormat = new Intl.DateTimeFormat(undefined, { dateStyle: "medium" });
-
-// Local YYYY-MM-DD, not Date#toISOString() — that converts to UTC first and
-// can shift the calendar date across a timezone boundary.
-function toISODateString(d: Date): string {
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${y}-${m}-${day}`;
-}
 
 export const DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(
   function DatePicker(

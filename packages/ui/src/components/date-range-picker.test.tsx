@@ -88,6 +88,22 @@ describe("DateRangePicker", () => {
     render(<DateRangePicker ref={ref} />);
     expect(ref.current).toBeInstanceOf(HTMLButtonElement);
   });
+
+  it("renders hidden start/end inputs with local YYYY-MM-DD values when name is set", () => {
+    const onChange = vi.fn();
+    const { container } = render(<DateRangePicker name="stay" onChange={onChange} />);
+    fireEvent.click(screen.getByRole("button"));
+    fireEvent.click(screen.getByRole("gridcell", { name: fullDateFormat.format(day1) }));
+    fireEvent.click(screen.getByRole("gridcell", { name: fullDateFormat.format(day2) }));
+
+    const toLocalISO = (d: Date) =>
+      `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+
+    const startInput = container.querySelector('input[type="hidden"][name="stayStart"]');
+    const endInput = container.querySelector('input[type="hidden"][name="stayEnd"]');
+    expect(startInput).toHaveAttribute("value", toLocalISO(day1));
+    expect(endInput).toHaveAttribute("value", toLocalISO(day2));
+  });
 });
 
 describe("DateRangePickerField", () => {
