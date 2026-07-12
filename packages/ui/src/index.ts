@@ -17,6 +17,7 @@ export { Checkbox, CheckboxField, Radio, type CheckboxProps, type CheckboxFieldP
 export { Switch, type SwitchProps } from "./components/switch";
 export { Slider, sliderThumbCSS, type SliderProps } from "./components/slider";
 export { Segmented, type SegmentedProps, type SegmentedOption } from "./components/segmented";
+export { ToggleGroup, type ToggleGroupProps, type ToggleGroupOption } from "./components/toggle-group";
 
 export {
   Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter,
@@ -86,6 +87,7 @@ export {
 
 export { Kbd, type KbdProps } from "./components/kbd";
 export { CodeBlock, type CodeBlockProps } from "./components/code-block";
+export { Separator, type SeparatorProps } from "./components/separator";
 export {
   Popover,
   PopoverTrigger,
