@@ -2,13 +2,13 @@ import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ToggleGroup } from "./toggle-group";
 
-const meta: Meta<typeof ToggleGroup> = {
+const meta = {
   title: "Selection/ToggleGroup",
   component: ToggleGroup,
-};
+} satisfies Meta<typeof ToggleGroup>;
 export default meta;
 
-type Story = StoryObj<typeof ToggleGroup>;
+type Story = StoryObj<Meta<typeof ToggleGroup>>;
 
 const options = [
   { value: "bold", label: "B" },
