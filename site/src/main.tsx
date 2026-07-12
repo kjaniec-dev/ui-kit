@@ -17,6 +17,7 @@ import {
   Switch,
   Slider,
   Segmented,
+  ToggleGroup,
   Card,
   CardHeader,
   CardTitle,
@@ -95,7 +96,8 @@ import {
   PopoverTrigger,
   PopoverContent,
   Kbd,
-  CodeBlock
+  CodeBlock,
+  Separator
 } from "@kjaniec-dev/ui";
 import "./index.css";
 import { ExampleTabs } from "./example-tabs";
@@ -333,6 +335,7 @@ function Gallery() {
   const [dark, setDark] = React.useState(false);
   const [tab, setTab] = React.useState("overview");
   const [seg, setSeg] = React.useState("day");
+  const [format, setFormat] = React.useState<string[]>(["bold"]);
   const [page, setPage] = React.useState(1);
   const [tablePage, setTablePage] = React.useState(1);
   const [bottomNavActive, setBottomNavActive] = React.useState("home");
@@ -568,7 +571,7 @@ function Gallery() {
           </div>
           <div className="flex items-center gap-2.5">
             <Badge variant="primary" dot>
-              45 components
+              47 components
             </Badge>
             <Button variant="outline" size="icon" aria-label="Theme" onClick={() => setDark((d) => !d)}>
               {dark ? IcoSun : IcoMoon}
@@ -889,7 +892,7 @@ function Gallery() {
             </Box>
           </Sec>
 
-          <Sec id="selection" title="Selection controls" desc="Checkboxes, radios, switches, a slider and a segmented control." components={["Checkbox", "CheckboxField", "Radio", "Switch", "Slider", "Segmented"]}>
+          <Sec id="selection" title="Selection controls" desc="Checkboxes, radios, switches, a slider, a segmented control and a multi-select toggle group." components={["Checkbox", "CheckboxField", "Radio", "Switch", "Slider", "Segmented", "ToggleGroup"]}>
             <Grid>
               <Box className="mb-0">
                 <Sub>Checkbox & radio</Sub>
@@ -917,6 +920,16 @@ function Gallery() {
                       { value: "day", label: "Day" },
                       { value: "week", label: "Week" },
                       { value: "month", label: "Month" },
+                    ]}
+                  />
+                  <ToggleGroup
+                    value={format}
+                    onChange={setFormat}
+                    aria-label="Text formatting"
+                    options={[
+                      { value: "bold", label: <strong>B</strong> },
+                      { value: "italic", label: <em>I</em> },
+                      { value: "underline", label: <span className="underline">U</span> },
                     ]}
                   />
                 </div>
@@ -1261,7 +1274,7 @@ function Gallery() {
             id="primitives"
             title="Primitives"
             desc="Popover panels, keyboard hints and code blocks."
-            components={["Popover", "PopoverContent", "Kbd", "CodeBlock"]}
+            components={["Popover", "PopoverContent", "Kbd", "CodeBlock", "Separator"]}
             code={`<Popover>
   <PopoverTrigger asChild>
     <Button variant="outline">Filters</Button>
@@ -1299,6 +1312,19 @@ function Gallery() {
                 <span className="inline-flex items-center gap-2">
                   Close <Kbd>Esc</Kbd>
                 </span>
+              </div>
+            </Box>
+            <Box>
+              <Sub>Separator</Sub>
+              <div className="w-64">
+                <p className="m-0 text-sm">Above</p>
+                <Separator className="my-3" />
+                <p className="m-0 text-sm">Below</p>
+              </div>
+              <div className="mt-4 flex items-stretch gap-3 h-8">
+                <span className="text-sm text-muted-foreground">Left</span>
+                <Separator orientation="vertical" />
+                <span className="text-sm text-muted-foreground">Right</span>
               </div>
             </Box>
             <Box>

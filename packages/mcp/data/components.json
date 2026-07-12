@@ -491,6 +491,57 @@
     "usageSnippet": "<Segmented\n  value={v}\n  onChange={setV}\n  options={[\n    { value: \"day\", label: \"Day\" },\n    { value: \"week\", label: \"Week\" },\n    { value: \"month\", label: \"Month\" },\n  ]}\n/>"
   },
   {
+    "name": "ToggleGroup",
+    "importPath": "import { ToggleGroup } from \"@kjaniec-dev/ui\";",
+    "description": "Multi-select toggle row. Always controlled — each button's pressed state is independent.",
+    "props": [
+      {
+        "name": "options",
+        "type": "ToggleGroupOption<T>[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "value",
+        "type": "T[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onChange",
+        "type": "(value: T[]) => void",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "\"aria-label\"",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ToggleGroup options={options} value={value} onChange={setValue} aria-label=\"Text formatting\" />"
+  },
+  {
     "name": "Card",
     "importPath": "import { Card } from \"@kjaniec-dev/ui\";",
     "description": "React component Card.",
@@ -2444,6 +2495,36 @@
     ],
     "cva": null,
     "usageSnippet": "<CodeBlock>\n  <!-- Content -->\n</CodeBlock>"
+  },
+  {
+    "name": "Separator",
+    "importPath": "import { Separator } from \"@kjaniec-dev/ui\";",
+    "description": "Thin layout divider. Decorative by default; pass decorative={false} for a semantic role=\"separator\".",
+    "props": [
+      {
+        "name": "orientation",
+        "type": "\"horizontal\" | \"vertical\"",
+        "optional": true,
+        "defaultValue": "\"horizontal\"",
+        "description": ""
+      },
+      {
+        "name": "decorative",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Purely visual by default (role=\"none\", hidden from a11y tree). Set false for a semantically meaningful divider."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Separator className=\"my-3\" />"
   },
   {
     "name": "Popover",
