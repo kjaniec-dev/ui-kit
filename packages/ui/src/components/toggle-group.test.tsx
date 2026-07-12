@@ -6,7 +6,7 @@ const options = [
   { value: "bold", label: "B" },
   { value: "italic", label: "I" },
   { value: "underline", label: "U" },
-] as const;
+];
 
 describe("ToggleGroup", () => {
   it("renders a group with the given aria-label", () => {
