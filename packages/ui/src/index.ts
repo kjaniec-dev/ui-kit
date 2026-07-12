@@ -117,3 +117,13 @@ export {
 } from "./components/date-range-picker";
 
 export { Dropzone, type DropzoneProps } from "./components/dropzone";
+
+export {
+  FileUpload,
+  FileUploadField,
+  type FileUploadProps,
+  type FileUploadFieldProps,
+  type UploadItem,
+  type UploadStatus,
+  type FileRejection,
+} from "./components/file-upload";
