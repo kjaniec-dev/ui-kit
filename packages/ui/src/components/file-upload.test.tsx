@@ -39,6 +39,21 @@ describe("FileUpload", () => {
     expect(screen.queryByText("b.pdf")).not.toBeInTheDocument();
   });
 
+  it("accepts and rejects files from the same drop simultaneously", () => {
+    const onChange = vi.fn();
+    const onReject = vi.fn();
+    render(<FileUpload accept="image/*" onChange={onChange} onReject={onReject} />);
+    const png = makeFile("a.png", "image/png", 1024);
+    const pdf = makeFile("b.pdf", "application/pdf", 1024);
+    drop([png, pdf]);
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange.mock.calls[0][0]).toHaveLength(1);
+    expect(onChange.mock.calls[0][0][0].file).toBe(png);
+    expect(onReject).toHaveBeenCalledWith([{ file: pdf, reason: "type" }]);
+    expect(screen.getByText("a.png")).toBeInTheDocument();
+    expect(screen.queryByText("b.pdf")).not.toBeInTheDocument();
+  });
+
   it("rejects a file over maxSize", () => {
     const onReject = vi.fn();
     render(<FileUpload maxSize={1000} onReject={onReject} />);
