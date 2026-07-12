@@ -974,6 +974,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: { onFiles: () => {} },
   render: () => {
     const [count, setCount] = React.useState(0);
     return (
@@ -986,6 +987,7 @@ export const Default: Story = {
 };
 
 export const Disabled: Story = {
+  args: { onFiles: () => {} },
   render: () => (
     <div style={{ maxWidth: 420 }}>
       <Dropzone onFiles={() => {}} disabled />
