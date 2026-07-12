@@ -73,6 +73,9 @@ import {
   DatePickerField,
   RangeCalendar,
   DateRangePickerField,
+  Dropzone,
+  FileUploadField,
+  type UploadItem,
   SettingsLayout,
   DetailPageLayout,
   TableToolbar,
@@ -357,6 +360,21 @@ function Gallery() {
   const [inlineDate, setInlineDate] = React.useState<Date | undefined>(new Date());
   const [bookingRange, setBookingRange] = React.useState<{ start?: Date; end?: Date }>({});
   const [inlineRange, setInlineRange] = React.useState<{ start?: Date; end?: Date }>({});
+  const [uploadFiles, setUploadFiles] = React.useState<UploadItem[]>([]);
+  const [dropCount, setDropCount] = React.useState(0);
+  React.useEffect(() => {
+    if (!uploadFiles.some((it) => it.status === "pending" || it.status === "uploading")) return;
+    const t = setInterval(() => {
+      setUploadFiles((items) =>
+        items.map((it) => {
+          if (it.status === "success" || it.status === "error") return it;
+          const next = (it.progress ?? 0) + 12;
+          return next >= 100 ? { ...it, status: "success", progress: 100 } : { ...it, status: "uploading", progress: next };
+        })
+      );
+    }, 400);
+    return () => clearInterval(t);
+  }, [uploadFiles]);
   const [searchQuery, setSearchQuery] = React.useState("");
   const [confirmOpen, setConfirmOpen] = React.useState(false);
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -697,7 +715,7 @@ function Gallery() {
             </Box>
           </Sec>
 
-          <Sec id="forms" title="Forms" desc="Fields with labels, leading icons, selects, textareas and live validation." components={["Input", "TextField", "Textarea", "Select", "SelectField", "Combobox", "ComboboxField", "Calendar", "DatePicker", "DatePickerField", "RangeCalendar", "DateRangePicker", "DateRangePickerField", "FormField"]}>
+          <Sec id="forms" title="Forms" desc="Fields with labels, leading icons, selects, textareas and live validation." components={["Input", "TextField", "Textarea", "Select", "SelectField", "Combobox", "ComboboxField", "Calendar", "DatePicker", "DatePickerField", "RangeCalendar", "DateRangePicker", "DateRangePickerField", "Dropzone", "FileUpload", "FileUploadField", "FormField"]}>
             <Box>
               <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
                 <Field>
@@ -849,6 +867,24 @@ function Gallery() {
               <div className="mt-5">
                 <Sub>RangeCalendar (standalone)</Sub>
                 <RangeCalendar value={inlineRange} onChange={setInlineRange} />
+              </div>
+            </Box>
+            <Box>
+              <Sub>FileUpload / Dropzone</Sub>
+              <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))" }}>
+                <FileUploadField
+                  label="Attachments"
+                  hint="PDF or images, up to 5 MB each. Uploads are simulated."
+                  accept="image/*,.pdf"
+                  maxSize={5 * 1024 * 1024}
+                  value={uploadFiles}
+                  onChange={setUploadFiles}
+                />
+              </div>
+              <div className="mt-5">
+                <Sub>Dropzone (standalone)</Sub>
+                <Dropzone onFiles={(files) => setDropCount((c) => c + files.length)} />
+                <p className="mt-2 text-sm text-muted-foreground">{dropCount} file(s) received</p>
               </div>
             </Box>
           </Sec>

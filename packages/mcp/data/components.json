@@ -3005,5 +3005,245 @@
     ],
     "cva": null,
     "usageSnippet": "<DateRangePickerField\n  label=\"Booking dates\"\n  required\n  hint=\"Weekends are disabled.\"\n  value={value}\n  onChange={setValue}\n  disabledDates={(d) => d.getDay() === 0 || d.getDay() === 6}\n/>"
+  },
+  {
+    "name": "Dropzone",
+    "importPath": "import { Dropzone } from \"@kjaniec-dev/ui\";",
+    "description": "React component Dropzone.",
+    "props": [
+      {
+        "name": "onFiles",
+        "type": "(files: File[]) => void",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "accept",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Native picker filter hint. Real enforcement lives in FileUpload's validation."
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Overrides the default drop-region content."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "\"aria-describedby\"",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "\"aria-invalid\"",
+        "type": "boolean | \"true\" | \"false\"",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "\"aria-required\"",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Dropzone onFiles={(files) => setCount((c) => c + files.length)} />"
+  },
+  {
+    "name": "FileUpload",
+    "importPath": "import { FileUpload } from \"@kjaniec-dev/ui\";",
+    "description": "React component FileUpload.",
+    "props": [
+      {
+        "name": "value",
+        "type": "UploadItem[]",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "defaultValue",
+        "type": "UploadItem[]",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onChange",
+        "type": "(items: UploadItem[]) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onReject",
+        "type": "(rejections: FileRejection[]) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Called with files rejected by validation on a given drop/selection."
+      },
+      {
+        "name": "accept",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "maxSize",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "maxFiles",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": ""
+      },
+      {
+        "name": "error",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": "Visual error state (danger border + aria-invalid on the dropzone)."
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": "aria-required on the dropzone."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "\"aria-describedby\"",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<FileUpload value={items} onChange={setItems} accept=\"image/*,.pdf\" maxSize={5 * 1024 * 1024} />"
+  },
+  {
+    "name": "FileUploadField",
+    "importPath": "import { FileUploadField } from \"@kjaniec-dev/ui\";",
+    "description": "React component FileUploadField.",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<FileUploadField\n  label=\"Attachments\"\n  hint=\"PDF or images, up to 5 MB each.\"\n  accept=\"image/*,.pdf\"\n  maxSize={5 * 1024 * 1024}\n  value={items}\n  onChange={setItems}\n/>"
+  },
+  {
+    "name": "UploadItem",
+    "importPath": "import { UploadItem } from \"@kjaniec-dev/ui\";",
+    "description": "React component UploadItem.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<UploadItem[]>([]);\nreturn (\n  <div style={{ maxWidth: 420 }}>\n    <FileUpload value={items} onChange={setItems} accept=\"image/*,.pdf\" maxSize={5 * 1024 * 1024} />"
+  },
+  {
+    "name": "UploadStatus",
+    "importPath": "import { UploadStatus } from \"@kjaniec-dev/ui\";",
+    "description": "React component UploadStatus.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<UploadStatus>\n  <!-- Content -->\n</UploadStatus>"
+  },
+  {
+    "name": "FileRejection",
+    "importPath": "import { FileRejection } from \"@kjaniec-dev/ui\";",
+    "description": "React component FileRejection.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<FileRejection>\n  <!-- Content -->\n</FileRejection>"
   }
 ]
