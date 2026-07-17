@@ -129,3 +129,24 @@ export {
   type UploadStatus,
   type FileRejection,
 } from "./components/file-upload";
+
+export {
+  Timeline,
+  TimelineItem,
+  TimelineSeparator,
+  TimelineConnector,
+  TimelineDot,
+  TimelineContent,
+  TimelineTitle,
+  TimelineTime,
+  type TimelineProps,
+  type TimelineItemProps,
+  type TimelineSeparatorProps,
+  type TimelineConnectorProps,
+  type TimelineDotProps,
+  type TimelineContentProps,
+  type TimelineAlign,
+  type TimelineDotVariant,
+  type TimelineDotSize,
+} from "./components/timeline";
+
