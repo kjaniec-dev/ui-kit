@@ -98,8 +98,8 @@ describe("Timeline", () => {
     const conn0 = container.querySelector('[data-testid="conn-0"]') as HTMLElement;
     const conn1 = container.querySelector('[data-testid="conn-1"]') as HTMLElement;
 
-    expect(conn0.className).not.toContain("group-last/timeline-item:hidden");
-    expect(conn1.className).toContain("group-last/timeline-item:hidden");
+    expect(conn0.className).not.toContain("hidden");
+    expect(conn1.className).toContain("hidden");
   });
 
   it("renders dots with correct size and variant classes", () => {
@@ -221,6 +221,6 @@ describe("Timeline", () => {
     );
 
     const conn0 = container.querySelector('[data-testid="conn-0"]') as HTMLElement;
-    expect(conn0.className).toContain("group-last/timeline-item:hidden");
+    expect(conn0.className).toContain("hidden");
   });
 });

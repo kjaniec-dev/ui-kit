@@ -92,7 +92,7 @@ export interface TimelineSeparatorProps extends React.HTMLAttributes<HTMLDivElem
 }
 
 export const TimelineSeparator = React.forwardRef<HTMLDivElement, TimelineSeparatorProps>(
-  ({ className, isEven: _propIsEven, align: propAlign, ...props }, ref) => {
+  ({ className, align: propAlign, ...props }, ref) => {
     const ctx = React.useContext(TimelineItemContext);
     const align = propAlign ?? ctx?.align ?? "left";
 
@@ -120,10 +120,11 @@ export const TimelineConnector = React.forwardRef<HTMLDivElement, TimelineConnec
 
     const connectorClass = cn(
       "grow",
-      isLast && "group-last/timeline-item:hidden",
+      isLast && "hidden",
       dashed ? "w-0 border-l border-dashed border-border" : "w-0.5 bg-border",
       className
     );
+
 
     return <div ref={ref} className={connectorClass} {...props} />;
   }
