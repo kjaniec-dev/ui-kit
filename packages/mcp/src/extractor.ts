@@ -210,20 +210,36 @@ export function parseComponents(): ComponentInfo[] {
   }
 
   function findUsageSnippet(compName: string): string {
-    // Try to find a JSX usage of <CompName in all stories
-    const jsxRegex = new RegExp(`<${compName}\\b[^]*?(?:/>|</${compName}>)`, "g");
+    // Try to find a double tag JSX usage <CompName>...</CompName> in all stories
+    const doubleTagRegex = new RegExp(`<${compName}\\b[^]*?</${compName}>`, "g");
+    // Fallback to self-closing JSX usage <CompName />
+    const singleTagRegex = new RegExp(`<${compName}\\b[^]*?/>`, "g");
+
     for (const storyFile of Object.keys(storyContents)) {
       const content = storyContents[storyFile];
-      const matches = content.match(jsxRegex);
-      if (matches && matches.length > 0) {
-        // Find the shortest clean-looking JSX usage snippet
-        for (const match of matches) {
+      
+      // Try double tag first
+      const doubleMatches = content.match(doubleTagRegex);
+      if (doubleMatches && doubleMatches.length > 0) {
+        for (const match of doubleMatches) {
+          const trimmed = match.trim();
+          if (trimmed.length < 500 && !trimmed.includes("PlusIcon")) {
+            return dedentSnippet(trimmed);
+          }
+        }
+        return dedentSnippet(doubleMatches[0].trim());
+      }
+
+      // Fallback to single tag
+      const singleMatches = content.match(singleTagRegex);
+      if (singleMatches && singleMatches.length > 0) {
+        for (const match of singleMatches) {
           const trimmed = match.trim();
           if (trimmed.length < 250 && !trimmed.includes("PlusIcon")) {
             return dedentSnippet(trimmed);
           }
         }
-        return dedentSnippet(matches[0].trim());
+        return dedentSnippet(singleMatches[0].trim());
       }
     }
     // Fallback default usage snippet
