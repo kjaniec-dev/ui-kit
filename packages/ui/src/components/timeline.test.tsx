@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest";
 import { render } from "@testing-library/react";
-import * as React from "react";
 import {
   Timeline,
   TimelineItem,
@@ -13,15 +12,15 @@ import {
 } from "./timeline";
 
 describe("Timeline", () => {
-  it("renders a semantic list structure with correct classes", () => {
-    const { getByRole, getAllByRole } = render(
+  it("renders a semantic list structure with correct classes for left alignment", () => {
+    const { getByRole, getAllByRole, container } = render(
       <Timeline>
         <TimelineItem>
-          <TimelineSeparator>
+          <TimelineSeparator data-testid="separator">
             <TimelineDot />
             <TimelineConnector />
           </TimelineSeparator>
-          <TimelineContent>
+          <TimelineContent data-testid="content">
             <TimelineTitle>Step 1</TimelineTitle>
           </TimelineContent>
         </TimelineItem>
@@ -34,6 +33,16 @@ describe("Timeline", () => {
     expect(list.className).toContain("flex");
     expect(list.className).toContain("flex-col");
     expect(items).toHaveLength(1);
+
+    const item = items[0];
+    expect(item.className).toContain("grid-cols-[auto_1fr]");
+
+    const separator = container.querySelector('[data-testid="separator"]') as HTMLElement;
+    expect(separator.className).toContain("col-start-1");
+
+    const content = container.querySelector('[data-testid="content"]') as HTMLElement;
+    expect(content.className).toContain("col-start-2");
+    expect(content.className).toContain("text-left");
   });
 
   it("applies correct layout alignment classes to item and content columns", () => {
@@ -186,5 +195,32 @@ describe("Timeline", () => {
     // Index 1 (Odd)
     expect(separator1.className).toContain("md:col-start-2");
     expect(content1.className).toContain("md:col-start-1");
+  });
+
+  it("handles conditional null/false children gracefully without breaking isLast", () => {
+    const showExtra = false;
+    const { container } = render(
+      <Timeline>
+        <TimelineItem>
+          <TimelineSeparator>
+            <TimelineDot />
+            <TimelineConnector data-testid="conn-0" />
+          </TimelineSeparator>
+          <TimelineContent>Content 1</TimelineContent>
+        </TimelineItem>
+        {showExtra && (
+          <TimelineItem>
+            <TimelineSeparator>
+              <TimelineDot />
+              <TimelineConnector data-testid="conn-extra" />
+            </TimelineSeparator>
+            <TimelineContent>Extra</TimelineContent>
+          </TimelineItem>
+        )}
+      </Timeline>
+    );
+
+    const conn0 = container.querySelector('[data-testid="conn-0"]') as HTMLElement;
+    expect(conn0.className).toContain("group-last/timeline-item:hidden");
   });
 });

@@ -24,15 +24,13 @@ export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Timeline = React.forwardRef<HTMLDivElement, TimelineProps>(
   ({ align = "left", className, children, ...props }, ref) => {
-    const count = React.Children.count(children);
-    // Clone children to inject index so alternating items can position themselves odd/even
-    const childrenWithIndex = React.Children.map(children, (child, index) => {
-      if (React.isValidElement(child)) {
-        return React.cloneElement(child as React.ReactElement<any>, {
-          index,
-        });
-      }
-      return child;
+    const validChildren = React.Children.toArray(children).filter(React.isValidElement);
+    const count = validChildren.length;
+
+    const childrenWithIndex = validChildren.map((child, index) => {
+      return React.cloneElement(child as React.ReactElement<any>, {
+        index,
+      });
     });
 
     return (
