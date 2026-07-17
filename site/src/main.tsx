@@ -97,7 +97,15 @@ import {
   PopoverContent,
   Kbd,
   CodeBlock,
-  Separator
+  Separator,
+  Timeline,
+  TimelineItem,
+  TimelineSeparator,
+  TimelineConnector,
+  TimelineDot,
+  TimelineContent,
+  TimelineTitle,
+  TimelineTime
 } from "@kjaniec-dev/ui";
 import "./index.css";
 import { ExampleTabs } from "./example-tabs";
@@ -1274,7 +1282,7 @@ function Gallery() {
             id="primitives"
             title="Primitives"
             desc="Popover panels, keyboard hints and code blocks."
-            components={["Popover", "PopoverContent", "Kbd", "CodeBlock", "Separator"]}
+            components={["Popover", "PopoverContent", "Kbd", "CodeBlock", "Separator", "Timeline"]}
             code={`<Popover>
   <PopoverTrigger asChild>
     <Button variant="outline">Filters</Button>
@@ -1326,6 +1334,47 @@ function Gallery() {
                 <Separator orientation="vertical" />
                 <span className="text-sm text-muted-foreground">Right</span>
               </div>
+            </Box>
+            <Box>
+              <Sub>Timeline / Activity Feed</Sub>
+              <Timeline>
+                <TimelineItem>
+                  <TimelineSeparator>
+                    <TimelineDot size="lg" variant="primary" className="font-bold text-xs">
+                      AK
+                    </TimelineDot>
+                    <TimelineConnector />
+                  </TimelineSeparator>
+                  <TimelineContent>
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-sm">Aleksandra Kowalska</span>
+                      <span className="text-xs text-muted-foreground">pushed to main</span>
+                      <TimelineTime className="ml-auto">10m ago</TimelineTime>
+                    </div>
+                    <div className="mt-2 text-xs bg-muted border border-border p-3 rounded-lg font-mono text-muted-foreground">
+                      feat(auth): add OAuth provider login options
+                    </div>
+                  </TimelineContent>
+                </TimelineItem>
+
+                <TimelineItem>
+                  <TimelineSeparator>
+                    <TimelineDot size="lg" variant="success" className="font-bold text-xs flex items-center justify-center">
+                      ✓
+                    </TimelineDot>
+                    <TimelineConnector />
+                  </TimelineSeparator>
+                  <TimelineContent>
+                    <div className="flex items-center gap-2">
+                      <TimelineTitle>Build Succeeded</TimelineTitle>
+                      <TimelineTime className="ml-auto">1h ago</TimelineTime>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Compiled assets successfully in 42s.
+                    </p>
+                  </TimelineContent>
+                </TimelineItem>
+              </Timeline>
             </Box>
             <Box>
               <Sub>Code block</Sub>

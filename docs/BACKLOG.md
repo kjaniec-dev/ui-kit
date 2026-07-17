@@ -31,7 +31,7 @@ Components frequently needed in SaaS/admin UI kits that are currently missing fr
 - [x] `DateRangePicker` — dual-month grid, locked navigation, hover preview, and `DateRangePickerField` wrapper shipped (2026-07-10 design doc).
 - [x] `Combobox` / `Autocomplete` — `Select` exists, but there's no searchable/filterable variant, common in B2B forms.
 - [x] `FileUpload` / `Dropzone` — transport-agnostic drag-drop + validation (accept/maxSize/maxFiles) + per-file progress rows, standalone `Dropzone` primitive, and `FileUploadField` wrapper shipped (2026-07-11 design doc).
-- [ ] `Timeline` / `ActivityFeed` — fits "Tenant & Property Manager" and "Project & Dev Console" patterns (event history, activity log).
+- [x] `Timeline` / `ActivityFeed` — fits "Tenant & Property Manager" and "Project & Dev Console" patterns (event history, activity log).
 - [ ] `Stepper` / `Wizard` — multi-step forms (onboarding, creation wizards).
 - [x] `ToggleGroup` / `Separator` (Divider) — multi-select toggle row and a generic layout divider (horizontal/vertical, decorative or semantic) shipped.
 
