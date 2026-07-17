@@ -140,6 +140,12 @@ function parseCvaCall(node: ts.CallExpression): CvaInfo | null {
   return result;
 }
 
+export function isComponentExport(node: ts.ExportDeclaration, element: ts.ExportSpecifier): boolean {
+  if (node.isTypeOnly || element.isTypeOnly) return false;
+  const name = element.name.getText();
+  return /^[A-Z]/.test(name) && !/(Props|Variants|Options|Tone|Option|Align|Size|Variant|Style)$/.test(name);
+}
+
 export function parseComponents(): ComponentInfo[] {
   console.error("Starting component TSX parsing...");
 
@@ -165,8 +171,7 @@ export function parseComponents(): ComponentInfo[] {
       if (node.exportClause && ts.isNamedExports(node.exportClause)) {
         for (const element of node.exportClause.elements) {
           const exportName = element.name.getText();
-          // Filter only capitalized exports (React components), ignore type-only exports, and ignore Props/Variants/Options/etc.
-          if (!element.isTypeOnly && /^[A-Z]/.test(exportName) && !/(Props|Variants|Options|Tone|Option|Align|Size|Variant|Style)$/.test(exportName)) {
+          if (isComponentExport(node, element)) {
             exports.push({
               name: exportName,
               fileRelativePath: relPath
