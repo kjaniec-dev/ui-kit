@@ -6,3 +6,7 @@ dist
 .junie
 storybook-static
 .worktrees/
+.superpowers/
+.playwright-mcp/
+.serena/
+
