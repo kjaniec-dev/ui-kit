@@ -82,7 +82,7 @@ interface StepperCtx {
   steps: number[];
 }
 
-export const StepperContext = React.createContext<StepperCtx | null>(null);
+const StepperContext = React.createContext<StepperCtx | null>(null);
 
 interface StepperItemCtx {
   value: number;
@@ -90,7 +90,7 @@ interface StepperItemCtx {
   isLast: boolean;
 }
 
-export const StepperItemContext = React.createContext<StepperItemCtx | null>(null);
+const StepperItemContext = React.createContext<StepperItemCtx | null>(null);
 
 export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
   value?: number;
