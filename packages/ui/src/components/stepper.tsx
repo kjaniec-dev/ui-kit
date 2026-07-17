@@ -19,18 +19,19 @@ export interface UseStepperReturn {
 }
 
 export function useStepper({ initialStep = 0, stepsCount }: UseStepperOptions): UseStepperReturn {
+  const safeStepsCount = Math.max(1, stepsCount);
   const [activeStep, setActiveStep] = React.useState(initialStep);
   const [completedSteps, setCompletedSteps] = React.useState<number[]>([]);
 
   const setStep = React.useCallback((step: number) => {
-    if (step >= 0 && step < stepsCount) {
+    if (step >= 0 && step < safeStepsCount) {
       setActiveStep(step);
     }
-  }, [stepsCount]);
+  }, [safeStepsCount]);
 
   const nextStep = React.useCallback(() => {
-    setActiveStep((prev) => Math.min(prev + 1, stepsCount - 1));
-  }, [stepsCount]);
+    setActiveStep((prev) => Math.min(prev + 1, safeStepsCount - 1));
+  }, [safeStepsCount]);
 
   const prevStep = React.useCallback(() => {
     setActiveStep((prev) => Math.max(prev - 1, 0));
@@ -38,10 +39,11 @@ export function useStepper({ initialStep = 0, stepsCount }: UseStepperOptions): 
 
   const completeStep = React.useCallback((step: number) => {
     setCompletedSteps((prev) => {
+      if (step < 0 || step >= safeStepsCount) return prev; // ignore out-of-range
       if (prev.includes(step)) return prev;
       return [...prev, step].sort((a, b) => a - b);
     });
-  }, []);
+  }, [safeStepsCount]);
 
   const uncompleteStep = React.useCallback((step: number) => {
     setCompletedSteps((prev) => prev.filter((s) => s !== step));
@@ -62,6 +64,6 @@ export function useStepper({ initialStep = 0, stepsCount }: UseStepperOptions): 
     uncompleteStep,
     reset,
     isFirstStep: activeStep === 0,
-    isLastStep: activeStep === stepsCount - 1,
+    isLastStep: activeStep === safeStepsCount - 1,
   };
 }

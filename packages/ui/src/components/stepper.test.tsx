@@ -55,4 +55,19 @@ describe("useStepper", () => {
     expect(result.current.activeStep).toBe(0);
     expect(result.current.completedSteps).toEqual([]);
   });
+
+  it("should treat stepsCount 0 safely (clamp to 1)", () => {
+    const { result } = renderHook(() => useStepper({ stepsCount: 0 }));
+    expect(result.current.activeStep).toBe(0);
+    expect(result.current.isFirstStep).toBe(true);
+    expect(result.current.isLastStep).toBe(true);
+    act(() => { result.current.nextStep(); });
+    expect(result.current.activeStep).toBe(0); // clamped, not -1
+  });
+
+  it("should ignore out-of-range indices in completeStep", () => {
+    const { result } = renderHook(() => useStepper({ stepsCount: 3 }));
+    act(() => { result.current.completeStep(99); });
+    expect(result.current.completedSteps).toEqual([]);
+  });
 });
