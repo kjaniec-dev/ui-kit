@@ -7,12 +7,14 @@ export type TimelineDotSize = "sm" | "md" | "lg";
 
 interface TimelineCtx {
   align: TimelineAlign;
+  count: number;
 }
 const TimelineContext = React.createContext<TimelineCtx | null>(null);
 
 interface TimelineItemCtx {
   isEven: boolean;
   align: TimelineAlign;
+  isLast: boolean;
 }
 const TimelineItemContext = React.createContext<TimelineItemCtx | null>(null);
 
@@ -22,6 +24,7 @@ export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Timeline = React.forwardRef<HTMLDivElement, TimelineProps>(
   ({ align = "left", className, children, ...props }, ref) => {
+    const count = React.Children.count(children);
     // Clone children to inject index so alternating items can position themselves odd/even
     const childrenWithIndex = React.Children.map(children, (child, index) => {
       if (React.isValidElement(child)) {
@@ -33,7 +36,7 @@ export const Timeline = React.forwardRef<HTMLDivElement, TimelineProps>(
     });
 
     return (
-      <TimelineContext.Provider value={{ align }}>
+      <TimelineContext.Provider value={{ align, count }}>
         <div
           ref={ref}
           role="list"
@@ -57,8 +60,9 @@ export const TimelineItem = React.forwardRef<HTMLDivElement, TimelineItemProps>(
     const ctx = React.useContext(TimelineContext);
     if (!ctx) throw new Error("TimelineItem must be used within a Timeline");
 
-    const { align } = ctx;
+    const { align, count } = ctx;
     const isEven = index % 2 === 0;
+    const isLast = index === count - 1;
 
     // Grid config per alignment
     const gridClass = cn(
@@ -69,7 +73,7 @@ export const TimelineItem = React.forwardRef<HTMLDivElement, TimelineItemProps>(
     );
 
     return (
-      <TimelineItemContext.Provider value={{ isEven, align }}>
+      <TimelineItemContext.Provider value={{ isEven, align, isLast }}>
         <div
           ref={ref}
           role="listitem"
@@ -113,8 +117,12 @@ export interface TimelineConnectorProps extends React.HTMLAttributes<HTMLDivElem
 
 export const TimelineConnector = React.forwardRef<HTMLDivElement, TimelineConnectorProps>(
   ({ className, dashed, ...props }, ref) => {
+    const ctx = React.useContext(TimelineItemContext);
+    const isLast = ctx?.isLast ?? false;
+
     const connectorClass = cn(
-      "grow group-last/timeline-item:hidden",
+      "grow",
+      isLast && "group-last/timeline-item:hidden",
       dashed ? "w-0 border-l border-dashed border-border" : "w-0.5 bg-border",
       className
     );

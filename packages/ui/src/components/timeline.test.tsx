@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render } from "@testing-library/react";
-
+import * as React from "react";
 import {
   Timeline,
   TimelineItem,
@@ -8,10 +8,117 @@ import {
   TimelineDot,
   TimelineConnector,
   TimelineContent,
+  TimelineTitle,
   TimelineTime,
 } from "./timeline";
 
-describe("Timeline Refactoring Tests", () => {
+describe("Timeline", () => {
+  it("renders a semantic list structure with correct classes", () => {
+    const { getByRole, getAllByRole } = render(
+      <Timeline>
+        <TimelineItem>
+          <TimelineSeparator>
+            <TimelineDot />
+            <TimelineConnector />
+          </TimelineSeparator>
+          <TimelineContent>
+            <TimelineTitle>Step 1</TimelineTitle>
+          </TimelineContent>
+        </TimelineItem>
+      </Timeline>
+    );
+
+    const list = getByRole("list");
+    const items = getAllByRole("listitem");
+
+    expect(list.className).toContain("flex");
+    expect(list.className).toContain("flex-col");
+    expect(items).toHaveLength(1);
+  });
+
+  it("applies correct layout alignment classes to item and content columns", () => {
+    const { container } = render(
+      <Timeline align="alternate">
+        <TimelineItem>
+          <TimelineSeparator data-testid="sep-0">
+            <TimelineDot />
+          </TimelineSeparator>
+          <TimelineContent data-testid="content-0">Item 1</TimelineContent>
+        </TimelineItem>
+        <TimelineItem>
+          <TimelineSeparator data-testid="sep-1">
+            <TimelineDot />
+          </TimelineSeparator>
+          <TimelineContent data-testid="content-1">Item 2</TimelineContent>
+        </TimelineItem>
+      </Timeline>
+    );
+
+    const content0 = container.querySelector('[data-testid="content-0"]') as HTMLElement;
+    const content1 = container.querySelector('[data-testid="content-1"]') as HTMLElement;
+    
+    // Index 0 (Even) -> right column in desktop, left column in mobile
+    expect(content0.className).toContain("md:col-start-3");
+    expect(content0.className).toContain("col-start-2");
+    
+    // Index 1 (Odd) -> left column in desktop, left column in mobile
+    expect(content1.className).toContain("md:col-start-1");
+    expect(content1.className).toContain("col-start-2");
+  });
+
+  it("hides connector on the last item", () => {
+    const { container } = render(
+      <Timeline>
+        <TimelineItem>
+          <TimelineSeparator>
+            <TimelineDot />
+            <TimelineConnector data-testid="conn-0" />
+          </TimelineSeparator>
+          <TimelineContent>Content 1</TimelineContent>
+        </TimelineItem>
+        <TimelineItem>
+          <TimelineSeparator>
+            <TimelineDot />
+            <TimelineConnector data-testid="conn-1" />
+          </TimelineSeparator>
+          <TimelineContent>Content 2</TimelineContent>
+        </TimelineItem>
+      </Timeline>
+    );
+
+    const conn0 = container.querySelector('[data-testid="conn-0"]') as HTMLElement;
+    const conn1 = container.querySelector('[data-testid="conn-1"]') as HTMLElement;
+
+    expect(conn0.className).not.toContain("group-last/timeline-item:hidden");
+    expect(conn1.className).toContain("group-last/timeline-item:hidden");
+  });
+
+  it("renders dots with correct size and variant classes", () => {
+    const { container } = render(
+      <Timeline>
+        <TimelineItem>
+          <TimelineSeparator>
+            <TimelineDot size="lg" variant="success" data-testid="dot" />
+          </TimelineSeparator>
+          <TimelineContent>Content</TimelineContent>
+        </TimelineItem>
+      </Timeline>
+    );
+
+    const dot = container.querySelector('[data-testid="dot"]') as HTMLElement;
+    expect(dot.className).toContain("w-8");
+    expect(dot.className).toContain("border-success");
+  });
+
+  it("renders custom children inside TimelineDot", () => {
+    const { getByText } = render(
+      <TimelineDot size="lg">
+        <span>Check</span>
+      </TimelineDot>
+    );
+    expect(getByText("Check")).toBeDefined();
+  });
+
   it("TimelineTime supports the standard dateTime attribute and renders as a time element", () => {
     const { container } = render(
       <TimelineTime dateTime="2026-07-17" data-testid="time">
