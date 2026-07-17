@@ -3326,5 +3326,162 @@
     "props": [],
     "cva": null,
     "usageSnippet": "<FileRejection>\n  <!-- Content -->\n</FileRejection>"
+  },
+  {
+    "name": "Timeline",
+    "importPath": "import { Timeline } from \"@kjaniec-dev/ui\";",
+    "description": "React component Timeline.",
+    "props": [
+      {
+        "name": "align",
+        "type": "TimelineAlign",
+        "optional": true,
+        "defaultValue": "\"left\"",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Timeline>\n<TimelineItem>\n  <TimelineSeparator>\n    <TimelineDot size=\"sm\" variant=\"success\" />"
+  },
+  {
+    "name": "TimelineItem",
+    "importPath": "import { TimelineItem } from \"@kjaniec-dev/ui\";",
+    "description": "React component TimelineItem.",
+    "props": [
+      {
+        "name": "index",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "0",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<TimelineItem>\n<TimelineSeparator>\n  <TimelineDot size=\"sm\" variant=\"success\" />"
+  },
+  {
+    "name": "TimelineSeparator",
+    "importPath": "import { TimelineSeparator } from \"@kjaniec-dev/ui\";",
+    "description": "React component TimelineSeparator.",
+    "props": [
+      {
+        "name": "isEven",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "align",
+        "type": "TimelineAlign",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<TimelineSeparator>\n<TimelineDot size=\"sm\" variant=\"success\" />"
+  },
+  {
+    "name": "TimelineConnector",
+    "importPath": "import { TimelineConnector } from \"@kjaniec-dev/ui\";",
+    "description": "React component TimelineConnector.",
+    "props": [
+      {
+        "name": "dashed",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<TimelineConnector />"
+  },
+  {
+    "name": "TimelineDot",
+    "importPath": "import { TimelineDot } from \"@kjaniec-dev/ui\";",
+    "description": "React component TimelineDot.",
+    "props": [
+      {
+        "name": "variant",
+        "type": "TimelineDotVariant",
+        "optional": true,
+        "defaultValue": "\"default\"",
+        "description": ""
+      },
+      {
+        "name": "size",
+        "type": "TimelineDotSize",
+        "optional": true,
+        "defaultValue": "\"md\"",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<TimelineDot size=\"sm\" variant=\"success\" />"
+  },
+  {
+    "name": "TimelineContent",
+    "importPath": "import { TimelineContent } from \"@kjaniec-dev/ui\";",
+    "description": "React component TimelineContent.",
+    "props": [
+      {
+        "name": "isEven",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "align",
+        "type": "TimelineAlign",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<TimelineContent>\n  <div style={{ display: \"flex\", justifyContent: \"space-between\", width: \"100%\" }}>\n    <TimelineTitle>Database Migrated</TimelineTitle>\n    <TimelineTime>5m ago</TimelineTime>\n  </div>\n</TimelineContent>"
+  },
+  {
+    "name": "TimelineTitle",
+    "importPath": "import { TimelineTitle } from \"@kjaniec-dev/ui\";",
+    "description": "React component TimelineTitle.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<TimelineTitle>Database Migrated</TimelineTitle>"
+  },
+  {
+    "name": "TimelineTime",
+    "importPath": "import { TimelineTime } from \"@kjaniec-dev/ui\";",
+    "description": "React component TimelineTime.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<TimelineTime>5m ago</TimelineTime>"
+  },
+  {
+    "name": "TimelineAlign",
+    "importPath": "import { TimelineAlign } from \"@kjaniec-dev/ui\";",
+    "description": "React component TimelineAlign.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<TimelineAlign>\n  <!-- Content -->\n</TimelineAlign>"
+  },
+  {
+    "name": "TimelineDotVariant",
+    "importPath": "import { TimelineDotVariant } from \"@kjaniec-dev/ui\";",
+    "description": "React component TimelineDotVariant.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<TimelineDotVariant>\n  <!-- Content -->\n</TimelineDotVariant>"
+  },
+  {
+    "name": "TimelineDotSize",
+    "importPath": "import { TimelineDotSize } from \"@kjaniec-dev/ui\";",
+    "description": "React component TimelineDotSize.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<TimelineDotSize>\n  <!-- Content -->\n</TimelineDotSize>"
   }
 ]
