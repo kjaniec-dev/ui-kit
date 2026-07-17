@@ -10,6 +10,12 @@ interface TimelineCtx {
 }
 const TimelineContext = React.createContext<TimelineCtx | null>(null);
 
+interface TimelineItemCtx {
+  isEven: boolean;
+  align: TimelineAlign;
+}
+const TimelineItemContext = React.createContext<TimelineItemCtx | null>(null);
+
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: TimelineAlign;
 }
@@ -62,26 +68,17 @@ export const TimelineItem = React.forwardRef<HTMLDivElement, TimelineItemProps>(
       align === "alternate" && "md:grid-cols-[1fr_auto_1fr] grid-cols-[auto_1fr]"
     );
 
-    // Pass isEven and align context properties down by mapping children
-    const childrenWithLayout = React.Children.map(children, (child) => {
-      if (React.isValidElement(child)) {
-        return React.cloneElement(child as React.ReactElement<any>, {
-          isEven,
-          align,
-        });
-      }
-      return child;
-    });
-
     return (
-      <div
-        ref={ref}
-        role="listitem"
-        className={cn(gridClass, className)}
-        {...props}
-      >
-        {childrenWithLayout}
-      </div>
+      <TimelineItemContext.Provider value={{ isEven, align }}>
+        <div
+          ref={ref}
+          role="listitem"
+          className={cn(gridClass, className)}
+          {...props}
+        >
+          {children}
+        </div>
+      </TimelineItemContext.Provider>
     );
   }
 );
@@ -93,7 +90,10 @@ export interface TimelineSeparatorProps extends React.HTMLAttributes<HTMLDivElem
 }
 
 export const TimelineSeparator = React.forwardRef<HTMLDivElement, TimelineSeparatorProps>(
-  ({ className, isEven, align, ...props }, ref) => {
+  ({ className, isEven: _propIsEven, align: propAlign, ...props }, ref) => {
+    const ctx = React.useContext(TimelineItemContext);
+    const align = propAlign ?? ctx?.align ?? "left";
+
     const separatorClass = cn(
       "flex flex-col items-center justify-self-center h-full min-h-[40px]",
       align === "alternate" && "md:col-start-2 col-start-1",
@@ -114,8 +114,8 @@ export interface TimelineConnectorProps extends React.HTMLAttributes<HTMLDivElem
 export const TimelineConnector = React.forwardRef<HTMLDivElement, TimelineConnectorProps>(
   ({ className, dashed, ...props }, ref) => {
     const connectorClass = cn(
-      "grow bg-border group-last/timeline-item:hidden",
-      dashed ? "w-0 border-l border-dashed border-border" : "w-0.5",
+      "grow group-last/timeline-item:hidden",
+      dashed ? "w-0 border-l border-dashed border-border" : "w-0.5 bg-border",
       className
     );
 
@@ -168,7 +168,11 @@ export interface TimelineContentProps extends React.HTMLAttributes<HTMLDivElemen
 }
 
 export const TimelineContent = React.forwardRef<HTMLDivElement, TimelineContentProps>(
-  ({ className, isEven, align, ...props }, ref) => {
+  ({ className, isEven: propIsEven, align: propAlign, ...props }, ref) => {
+    const ctx = React.useContext(TimelineItemContext);
+    const isEven = propIsEven ?? ctx?.isEven ?? false;
+    const align = propAlign ?? ctx?.align ?? "left";
+
     const contentClass = cn(
       "pb-8 flex flex-col gap-1 w-full",
       align === "left" && "col-start-2 text-left",
@@ -197,7 +201,7 @@ export const TimelineTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttr
 );
 TimelineTitle.displayName = "TimelineTitle";
 
-export const TimelineTime = React.forwardRef<HTMLTimeElement, React.HTMLAttributes<HTMLTimeElement>>(
+export const TimelineTime = React.forwardRef<HTMLTimeElement, React.TimeHTMLAttributes<HTMLTimeElement>>(
   ({ className, ...props }, ref) => (
     <time
       ref={ref}
