@@ -53,8 +53,8 @@ function runTest() {
       if (node.exportClause && ts.isNamedExports(node.exportClause)) {
         for (const element of node.exportClause.elements) {
           const exportName = element.name.getText();
-          // Filter only capitalized exports (React components) and ignore Props/Variants/Options/Tone/Option
-          if (/^[A-Z]/.test(exportName) && !/(Props|Variants|Options|Tone|Option)$/.test(exportName)) {
+          // Filter only capitalized exports (React components), ignore type-only exports, and ignore Props/Variants/Options/etc.
+          if (!element.isTypeOnly && /^[A-Z]/.test(exportName) && !/(Props|Variants|Options|Tone|Option|Align|Size|Variant|Style)$/.test(exportName)) {
             expectedExports.push(exportName);
           }
         }
