@@ -1,6 +1,9 @@
 import { describe, it, expect } from "vitest";
 import { renderHook, act } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import * as React from "react";
 import { useStepper } from "./stepper";
+import { Stepper, StepperContent } from "./stepper";
 
 describe("useStepper", () => {
   it("should initialize step state correctly", () => {
@@ -69,5 +72,38 @@ describe("useStepper", () => {
     const { result } = renderHook(() => useStepper({ stepsCount: 3 }));
     act(() => { result.current.completeStep(99); });
     expect(result.current.completedSteps).toEqual([]);
+  });
+});
+
+describe("Stepper Core State", () => {
+  it("should render active content panel correctly in uncontrolled mode", () => {
+    render(
+      <Stepper defaultValue={1}>
+        <StepperContent value={0}>Panel 0</StepperContent>
+        <StepperContent value={1}>Panel 1</StepperContent>
+      </Stepper>
+    );
+    expect(screen.queryByText("Panel 0")).toBeNull();
+    expect(screen.getByText("Panel 1")).toBeDefined();
+  });
+
+  it("should follow parent changes in controlled mode", () => {
+    const { rerender } = render(
+      <Stepper value={0}>
+        <StepperContent value={0}>Panel 0</StepperContent>
+        <StepperContent value={1}>Panel 1</StepperContent>
+      </Stepper>
+    );
+    expect(screen.getByText("Panel 0")).toBeDefined();
+    expect(screen.queryByText("Panel 1")).toBeNull();
+
+    rerender(
+      <Stepper value={1}>
+        <StepperContent value={0}>Panel 0</StepperContent>
+        <StepperContent value={1}>Panel 1</StepperContent>
+      </Stepper>
+    );
+    expect(screen.queryByText("Panel 0")).toBeNull();
+    expect(screen.getByText("Panel 1")).toBeDefined();
   });
 });
