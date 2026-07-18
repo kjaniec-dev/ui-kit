@@ -1,6 +1,12 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
-import { AppShell } from "./app-shell";
+import { describe, it, expect, vi } from "vitest";
+import {
+  AppShell,
+  AppShellBanner,
+  AppShellHeader,
+  AppShellMain,
+  AppShellFooter,
+} from "./app-shell";
 
 describe("AppShell", () => {
   it("renders header, banner, children, and footer via slot props", () => {
@@ -59,25 +65,75 @@ describe("AppShell", () => {
 
     fireEvent.click(toggleButton);
     expect(screen.getByText("Mobile Menu Links")).toBeInTheDocument();
+    expect(screen.getByRole("dialog", { name: "Mobile Navigation" })).toBeInTheDocument();
 
     const closeButton = screen.getByRole("button", { name: /close navigation/i });
     fireEvent.click(closeButton);
     expect(screen.queryByText("Mobile Menu Links")).not.toBeInTheDocument();
   });
 
-  it("renders compound subcomponents correctly", () => {
+  it("closes mobile navigation drawer on Escape key press", () => {
+    render(
+      <AppShell header={<div>Header</div>} mobileNav={<div>Mobile Menu Links</div>}>
+        <div>Page Body</div>
+      </AppShell>
+    );
+
+    const toggleButton = screen.getByRole("button", { name: /open navigation/i });
+    fireEvent.click(toggleButton);
+    expect(screen.getByRole("dialog", { name: "Mobile Navigation" })).toBeInTheDocument();
+
+    fireEvent.keyDown(window, { key: "Escape" });
+    expect(screen.queryByRole("dialog", { name: "Mobile Navigation" })).not.toBeInTheDocument();
+  });
+
+  it("calls onClose when closable AppShellBanner close button is clicked", () => {
+    const handleClose = vi.fn();
+    render(
+      <AppShellBanner closable onClose={handleClose}>
+        Banner Notice
+      </AppShellBanner>
+    );
+
+    const closeButton = screen.getByRole("button", { name: /close banner/i });
+    expect(closeButton).toBeInTheDocument();
+
+    fireEvent.click(closeButton);
+    expect(handleClose).toHaveBeenCalledTimes(1);
+  });
+
+  it("applies correct variant and position classes for header", () => {
+    const { container: glassSticky } = render(
+      <AppShellHeader variant="glass" position="sticky">Header</AppShellHeader>
+    );
+    expect(glassSticky.querySelector("header")).toHaveClass("bg-surface/80", "sticky");
+
+    const { container: solidFixed } = render(
+      <AppShellHeader variant="solid" position="fixed">Header</AppShellHeader>
+    );
+    expect(solidFixed.querySelector("header")).toHaveClass("bg-surface", "fixed");
+
+    const { container: transparentStatic } = render(
+      <AppShellHeader variant="transparent" position="static">Header</AppShellHeader>
+    );
+    expect(transparentStatic.querySelector("header")).toHaveClass("bg-transparent", "relative");
+  });
+
+  it("renders compound subcomponents directly or via exports", () => {
     render(
       <AppShell>
-        <AppShell.Banner>Banner Info</AppShell.Banner>
-        <AppShell.Header>Header Title</AppShell.Header>
-        <AppShell.Main width="wide">Body Section</AppShell.Main>
-        <AppShell.Footer>Footer Info</AppShell.Footer>
+        <AppShellBanner variant="accent">Banner Info</AppShellBanner>
+        <AppShellHeader>Header Title</AppShellHeader>
+        <AppShellMain width="wide">Body Section</AppShellMain>
+        <AppShellFooter>Footer Info</AppShellFooter>
       </AppShell>
     );
 
     expect(screen.getByText("Banner Info")).toBeInTheDocument();
+    expect(screen.getByText("Banner Info").parentElement).toHaveClass("bg-secondary");
     expect(screen.getByText("Header Title")).toBeInTheDocument();
     expect(screen.getByText("Body Section")).toBeInTheDocument();
     expect(screen.getByText("Footer Info")).toBeInTheDocument();
   });
 });
+

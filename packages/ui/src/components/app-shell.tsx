@@ -41,11 +41,11 @@ export interface AppShellFooterProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
 }
 
-const AppShellBanner = React.forwardRef<HTMLDivElement, AppShellBannerProps>(
+export const AppShellBanner = React.forwardRef<HTMLDivElement, AppShellBannerProps>(
   ({ className, variant = "primary", closable, onClose, children, ...props }, ref) => {
     const variantClass = {
       primary: "bg-primary text-primary-foreground",
-      accent: "bg-teal-500 text-white dark:bg-teal-600",
+      accent: "bg-secondary text-secondary-foreground",
       muted: "bg-surface border-b border-border text-muted-foreground",
     }[variant];
 
@@ -74,7 +74,7 @@ const AppShellBanner = React.forwardRef<HTMLDivElement, AppShellBannerProps>(
 );
 AppShellBanner.displayName = "AppShellBanner";
 
-const AppShellHeader = React.forwardRef<HTMLElement, AppShellHeaderProps>(
+export const AppShellHeader = React.forwardRef<HTMLElement, AppShellHeaderProps>(
   (
     {
       className,
@@ -145,10 +145,14 @@ const AppShellHeader = React.forwardRef<HTMLElement, AppShellHeaderProps>(
 
         {mobileNav && mobileOpen && (
           <div
+            aria-hidden="true"
             onClick={() => setMobileOpen(false)}
-            className="fixed inset-0 z-50 md:hidden bg-[color-mix(in_oklch,#09090b_45%,transparent)] backdrop-blur-[2px] transition-opacity duration-300"
+            className="fixed inset-0 z-50 md:hidden bg-overlay backdrop-blur-[2px] transition-opacity duration-300"
           >
             <aside
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile Navigation"
               onClick={(e) => e.stopPropagation()}
               className="w-72 h-full bg-surface border-r border-border flex flex-col shadow-kj-lg"
             >
@@ -177,7 +181,7 @@ const AppShellHeader = React.forwardRef<HTMLElement, AppShellHeaderProps>(
 );
 AppShellHeader.displayName = "AppShellHeader";
 
-const AppShellMain = React.forwardRef<HTMLElement, AppShellMainProps>(
+export const AppShellMain = React.forwardRef<HTMLElement, AppShellMainProps>(
   ({ className, width = "default", padded = true, children, ...props }, ref) => {
     const widthClass = {
       default: "max-w-7xl mx-auto w-full",
@@ -199,7 +203,7 @@ const AppShellMain = React.forwardRef<HTMLElement, AppShellMainProps>(
 );
 AppShellMain.displayName = "AppShellMain";
 
-const AppShellFooter = React.forwardRef<HTMLElement, AppShellFooterProps>(
+export const AppShellFooter = React.forwardRef<HTMLElement, AppShellFooterProps>(
   ({ className, bordered = true, children, ...props }, ref) => {
     return (
       <footer
