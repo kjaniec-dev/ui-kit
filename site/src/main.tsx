@@ -116,7 +116,10 @@ import {
   StepperDescription,
   StepperSeparator,
   StepperContent,
-  useStepper
+  useStepper,
+  Rating,
+  RatingField,
+  RatingSummary
 } from "@kjaniec-dev/ui";
 import "./index.css";
 import { ExampleTabs } from "./example-tabs";
@@ -341,6 +344,7 @@ const NAV = [
   ["feedback", "Feedback"],
   ["forms", "Forms"],
   ["selection", "Selection"],
+  ["rating", "Rating"],
   ["cards", "Cards"],
   ["navigation", "Navigation"],
   ["data", "Table"],
@@ -472,6 +476,13 @@ function Gallery() {
   const [activeSection, setActiveSection] = React.useState("buttons");
   const [tableState, setTableState] = React.useState<"default" | "loading" | "empty" | "error">("default");
   const emailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+
+  // Rating States
+  const [basicRating, setBasicRating] = React.useState(3.5);
+  const [heartRating, setHeartRating] = React.useState(4);
+  const [flameRating, setFlameRating] = React.useState(5);
+  const [shieldRating, setShieldRating] = React.useState(3);
+  const [fieldRating, setFieldRating] = React.useState(0);
 
   // New States for v0.7.0 features
   const [selectedRows, setSelectedRows] = React.useState<Set<React.Key>>(new Set());
@@ -1060,6 +1071,100 @@ function Gallery() {
                 </div>
               </Box>
             </Grid>
+          </Sec>
+
+          <Sec
+            id="rating"
+            title="Rating"
+            desc="Star and custom icon ratings, rating form fields, and score summary cards."
+            components={["Rating", "RatingField", "RatingSummary"]}
+          >
+            <Box>
+              <Sub>Interactive &amp; Sizes</Sub>
+              <div className="flex flex-wrap items-center gap-6">
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-xs text-muted-foreground font-medium">Small (sm)</span>
+                  <Rating size="sm" defaultValue={4} showValue />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-xs text-muted-foreground font-medium">Medium (md)</span>
+                  <Rating size="md" value={basicRating} onChange={setBasicRating} showValue />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-xs text-muted-foreground font-medium">Large (lg)</span>
+                  <Rating size="lg" defaultValue={4.5} precision={0.5} showValue />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-xs text-muted-foreground font-medium">Extra Large (xl)</span>
+                  <Rating size="xl" defaultValue={5} showValue />
+                </div>
+              </div>
+              <div className="h-px bg-border my-5" />
+              <Sub>Custom Icons &amp; Color Variants</Sub>
+              <div className="flex flex-wrap items-center gap-6">
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-xs text-muted-foreground font-medium">Hearts (Red)</span>
+                  <Rating icon="heart" color="#ef4444" value={heartRating} onChange={setHeartRating} showValue />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-xs text-muted-foreground font-medium">Flames (Orange)</span>
+                  <Rating icon="flame" color="#f97316" value={flameRating} onChange={setFlameRating} showValue />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-xs text-muted-foreground font-medium">Shields (Blue)</span>
+                  <Rating icon="shield" color="#3b82f6" value={shieldRating} onChange={setShieldRating} showValue />
+                </div>
+              </div>
+              <div className="h-px bg-border my-5" />
+              <Sub>States (Read-only &amp; Disabled)</Sub>
+              <div className="flex flex-wrap items-center gap-6">
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-xs text-muted-foreground font-medium font-mono">readOnly (4.8 / 5)</span>
+                  <Rating readOnly value={4.8} showValue showCount count={128} />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-xs text-muted-foreground font-medium font-mono">disabled</span>
+                  <Rating disabled value={3} showValue />
+                </div>
+              </div>
+            </Box>
+
+            <Box>
+              <Sub>RatingField Form Integration</Sub>
+              <div className="grid gap-6 md:grid-cols-2">
+                <RatingField
+                  label="Product Satisfaction"
+                  helperText="Please rate your experience with our platform."
+                  value={fieldRating}
+                  onChange={setFieldRating}
+                  required
+                  showValue
+                />
+                <RatingField
+                  label="Service Quality"
+                  errorMessage={fieldRating === 0 ? "Rating is required before submitting feedback." : undefined}
+                  value={fieldRating}
+                  onChange={setFieldRating}
+                  required
+                  showValue
+                />
+              </div>
+            </Box>
+
+            <Box>
+              <Sub>RatingSummary Card</Sub>
+              <RatingSummary
+                average={4.6}
+                totalCount={1248}
+                distribution={[
+                  { stars: 5, count: 850, percentage: 68 },
+                  { stars: 4, count: 240, percentage: 19 },
+                  { stars: 3, count: 98, percentage: 8 },
+                  { stars: 2, count: 35, percentage: 3 },
+                  { stars: 1, count: 25, percentage: 2 },
+                ]}
+              />
+            </Box>
           </Sec>
 
           <Sec id="cards" title="Cards & stats" desc="Cards with content and footer, with an image, and metric cards." components={["Card", "CardHeader", "CardTitle", "CardDescription", "CardContent", "CardFooter", "Stat", "MetricCard", "Avatar"]}>
