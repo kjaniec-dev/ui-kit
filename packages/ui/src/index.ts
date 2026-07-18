@@ -199,5 +199,5 @@ export type {
   AppShellFooterProps,
 } from "./components/app-shell";
 
-export { Rating, type RatingProps, type RatingSize } from "./components/rating";
+export { Rating, type RatingProps, type RatingSize, type RatingIconType } from "./components/rating/rating";
 

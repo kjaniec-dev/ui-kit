@@ -2,7 +2,8 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Implement a modern, accessible, and flexible Rating component suite (`Rating`, `RatingField`, and `RatingSummary`) in `@kjaniec-dev/ui` with Vitest unit tests and showcase gallery examples.
+**Goal:** Implement a modern, accessible, and flexible Rating component suite (`Rating`, `RatingField`, and `RatingSummary`) in `@kjaniec-dev/ui` with Vitest unit tests and showcase gallery exam1
+1ples.
 
 **Architecture:** Create modular components under `packages/ui/src/components/rating/`. `<Rating />` acts as the core primitive supporting fractional fills (via SVG linear gradients), hover states, size variants, custom icons, keyboard navigation, and form compatibility. `<RatingField />` wraps `Rating` with accessibility labels and error/helper text. `<RatingSummary />` provides aggregate ratings with 5-to-1 star distribution progress bars.
 
