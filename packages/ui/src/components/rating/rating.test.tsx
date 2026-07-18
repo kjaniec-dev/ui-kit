@@ -3,6 +3,8 @@ import { describe, it, expect, vi, afterEach } from "vitest";
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/vitest";
 import { Rating } from "./rating";
+import { RatingField } from "./index";
+
 
 afterEach(() => {
   cleanup();
@@ -250,4 +252,84 @@ describe("Rating Primitive", () => {
     expect(radiogroup).toHaveAttribute("aria-valuenow", "2");
   });
 });
+
+describe("RatingField Wrapper", () => {
+  it("renders label and associates with rating component", () => {
+    render(<RatingField label="Overall Quality" value={4} />);
+    expect(screen.getByText("Overall Quality")).toBeInTheDocument();
+    expect(screen.getByRole("radiogroup")).toBeInTheDocument();
+  });
+
+  it("renders required indicator (*) when required prop is true", () => {
+    render(<RatingField label="Service Rating" required />);
+    expect(screen.getByText("Service Rating")).toBeInTheDocument();
+    expect(screen.getByText("*")).toBeInTheDocument();
+  });
+
+  it("renders helper text and links via aria-describedby", () => {
+    render(
+      <RatingField
+        label="Cleanliness"
+        helperText="Rate from 1 to 5 stars based on your stay"
+      />
+    );
+    const helper = screen.getByText("Rate from 1 to 5 stars based on your stay");
+    expect(helper).toBeInTheDocument();
+    const radiogroup = screen.getByRole("radiogroup");
+    expect(radiogroup).toHaveAttribute(
+      "aria-describedby",
+      expect.stringContaining(helper.id)
+    );
+  });
+
+  it("renders error message state with error styling and links via aria-describedby", () => {
+    render(
+      <RatingField
+        label="Value"
+        errorMessage="Rating is required"
+      />
+    );
+    const error = screen.getByText("Rating is required");
+    expect(error).toBeInTheDocument();
+    expect(error).toHaveClass("text-danger");
+    const radiogroup = screen.getByRole("radiogroup");
+    expect(radiogroup).toHaveAttribute(
+      "aria-describedby",
+      expect.stringContaining(error.id)
+    );
+  });
+
+  it("combines existing aria-describedby with helperText and errorMessage", () => {
+    render(
+      <RatingField
+        label="Location"
+        aria-describedby="external-desc"
+        helperText="Please select a rating"
+        errorMessage="Field cannot be empty"
+      />
+    );
+    const radiogroup = screen.getByRole("radiogroup");
+    const describedBy = radiogroup.getAttribute("aria-describedby");
+    expect(describedBy).toContain("external-desc");
+    expect(describedBy).toContain(screen.getByText("Please select a rating").id);
+    expect(describedBy).toContain(screen.getByText("Field cannot be empty").id);
+  });
+
+  it("forwards RatingProps like value, onChange, max, disabled, readOnly", () => {
+    const onChange = vi.fn();
+    render(
+      <RatingField
+        label="Product Rating"
+        value={3}
+        max={5}
+        onChange={onChange}
+      />
+    );
+    const radios = screen.getAllByRole("radio");
+    expect(radios).toHaveLength(5);
+    fireEvent.click(radios[4]);
+    expect(onChange).toHaveBeenCalledWith(5);
+  });
+});
+
 
