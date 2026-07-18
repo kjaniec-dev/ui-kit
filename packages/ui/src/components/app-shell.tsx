@@ -144,17 +144,17 @@ export const AppShellHeader = React.forwardRef<HTMLElement, AppShellHeaderProps>
         </header>
 
         {mobileNav && mobileOpen && (
-          <div
-            aria-hidden="true"
-            onClick={() => setMobileOpen(false)}
-            className="fixed inset-0 z-50 md:hidden bg-overlay backdrop-blur-[2px] transition-opacity duration-300"
-          >
+          <div className="fixed inset-0 z-50 md:hidden flex">
+            <div
+              aria-hidden="true"
+              onClick={() => setMobileOpen(false)}
+              className="fixed inset-0 bg-overlay backdrop-blur-[2px] transition-opacity duration-300"
+            />
             <aside
               role="dialog"
               aria-modal="true"
               aria-label="Mobile Navigation"
-              onClick={(e) => e.stopPropagation()}
-              className="w-72 h-full bg-surface border-r border-border flex flex-col shadow-kj-lg"
+              className="relative z-10 w-72 h-full bg-surface border-r border-border flex flex-col shadow-kj-lg"
             >
               <div className="flex items-center justify-between p-4 border-b border-border">
                 <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Navigation</span>

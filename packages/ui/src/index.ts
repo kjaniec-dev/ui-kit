@@ -184,5 +184,17 @@ export {
   type UseStepperOptions,
   type UseStepperReturn,
 } from "./components/stepper";
-
-
+export {
+  AppShell,
+  AppShellBanner,
+  AppShellHeader,
+  AppShellMain,
+  AppShellFooter,
+} from "./components/app-shell";
+export type {
+  AppShellProps,
+  AppShellBannerProps,
+  AppShellHeaderProps,
+  AppShellMainProps,
+  AppShellFooterProps,
+} from "./components/app-shell";
