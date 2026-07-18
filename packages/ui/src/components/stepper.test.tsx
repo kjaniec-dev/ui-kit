@@ -1,8 +1,7 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { renderHook, act, render, screen, fireEvent, cleanup } from "@testing-library/react";
-import * as React from "react";
 import { useStepper } from "./stepper";
-import { Stepper, StepperContent, StepperList, StepperItem, StepperSeparator, StepperTrigger, StepperIndicator, StepperTitle } from "./stepper";
+import { Stepper, StepperContent, StepperList, StepperItem, StepperSeparator, StepperTrigger, StepperIndicator } from "./stepper";
 
 afterEach(() => {
   cleanup();

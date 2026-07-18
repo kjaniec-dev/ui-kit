@@ -6,7 +6,7 @@ import { cn } from "../lib/cn";
 export type SectionHeaderAlign = "left" | "center";
 export type SectionHeaderHeadingLevel = "h2" | "h3" | "h4";
 
-export interface SectionHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SectionHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
   kicker?: React.ReactNode;
   title?: React.ReactNode;
   description?: React.ReactNode;
