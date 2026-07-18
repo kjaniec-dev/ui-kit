@@ -4,6 +4,7 @@ import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/vitest";
 import { Rating } from "./rating";
 import { RatingField } from "./index";
+import { RatingSummary } from "./rating-summary";
 
 
 afterEach(() => {
@@ -329,6 +330,94 @@ describe("RatingField Wrapper", () => {
     expect(radios).toHaveLength(5);
     fireEvent.click(radios[4]);
     expect(onChange).toHaveBeenCalledWith(5);
+  });
+});
+
+describe("RatingSummary Component", () => {
+  const sampleDistribution = [
+    { stars: 5, count: 650, percentage: 65 },
+    { stars: 4, count: 200, percentage: 20 },
+    { stars: 3, count: 100, percentage: 10 },
+    { stars: 2, count: 30, percentage: 3 },
+    { stars: 1, count: 20, percentage: 2 },
+  ];
+
+  it("renders average score rendering and total count formatting", () => {
+    render(
+      <RatingSummary
+        average={4.5}
+        totalCount={1234}
+        distribution={sampleDistribution}
+      />
+    );
+
+    expect(screen.getByText("4.5")).toBeInTheDocument();
+    // formatted with toLocaleString() -> "1,234"
+    expect(screen.getByText(/1,234/)).toBeInTheDocument();
+  });
+
+  it("renders 5-star to 1-star percentage breakdown rows", () => {
+    render(
+      <RatingSummary
+        average={4.5}
+        totalCount={1000}
+        distribution={sampleDistribution}
+      />
+    );
+
+    // 5-star to 1-star labels
+    expect(screen.getByText("5 star")).toBeInTheDocument();
+    expect(screen.getByText("4 star")).toBeInTheDocument();
+    expect(screen.getByText("3 star")).toBeInTheDocument();
+    expect(screen.getByText("2 star")).toBeInTheDocument();
+    expect(screen.getByText("1 star")).toBeInTheDocument();
+
+    // Check percentages
+    expect(screen.getByText("65%")).toBeInTheDocument();
+    expect(screen.getByText("20%")).toBeInTheDocument();
+    expect(screen.getByText("10%")).toBeInTheDocument();
+    expect(screen.getByText("3%")).toBeInTheDocument();
+    expect(screen.getByText("2%")).toBeInTheDocument();
+  });
+
+  it("renders progress bar with correct ARIA attributes", () => {
+    render(
+      <RatingSummary
+        average={4.5}
+        totalCount={1000}
+        distribution={sampleDistribution}
+      />
+    );
+
+    const progressBars = screen.getAllByRole("progressbar");
+    expect(progressBars).toHaveLength(5);
+
+    expect(progressBars[0]).toHaveAttribute("aria-valuenow", "65");
+    expect(progressBars[0]).toHaveAttribute("aria-valuemin", "0");
+    expect(progressBars[0]).toHaveAttribute("aria-valuemax", "100");
+    expect(progressBars[0]).toHaveAttribute("aria-label", "5 star ratings: 65%");
+
+    expect(progressBars[4]).toHaveAttribute("aria-valuenow", "2");
+    expect(progressBars[4]).toHaveAttribute("aria-label", "1 star ratings: 2%");
+  });
+
+  it("supports custom max, size, and icon props", () => {
+    const CustomIcon = ({ className }: { className?: string }) => (
+      <span data-testid="summary-custom-icon" className={className}>★</span>
+    );
+
+    render(
+      <RatingSummary
+        average={3.5}
+        totalCount={50}
+        max={5}
+        size="lg"
+        icon={CustomIcon}
+        distribution={sampleDistribution}
+      />
+    );
+
+    expect(screen.getAllByTestId("summary-custom-icon").length).toBeGreaterThan(0);
   });
 });
 
