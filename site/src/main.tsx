@@ -79,6 +79,7 @@ import {
   type UploadItem,
   SettingsLayout,
   DetailPageLayout,
+  SectionHeader,
   TableToolbar,
   ConfirmDialog,
   Drawer,
@@ -1504,7 +1505,7 @@ function Gallery() {
             </Box>
           </Sec>
 
-          <Sec id="layouts" title="Layouts" desc="Full-page shell and page templates for SaaS/B2B products." components={["DashboardShell", "SettingsLayout", "DetailPageLayout", "PageHeader", "SidebarNav"]}>
+          <Sec id="layouts" title="Layouts" desc="Full-page shell and page templates for SaaS/B2B products." components={["DashboardShell", "SettingsLayout", "DetailPageLayout", "PageHeader", "SectionHeader", "SidebarNav"]}>
             <Tabs defaultValue="dashboard">
               <TabsList className="mb-4">
                 <TabsTrigger value="dashboard">DashboardShell</TabsTrigger>
@@ -1641,6 +1642,30 @@ function Gallery() {
                 </Box>
               </TabsContent>
             </Tabs>
+
+            <Box>
+              <Sub>Section header</Sub>
+              <div className="space-y-8 p-4 bg-canvas rounded-kj-md border border-border">
+                <SectionHeader
+                  kicker="Features"
+                  title="Everything you need to ship faster"
+                  description="Pre-built components designed with high performance and full accessibility in mind."
+                  actions={
+                    <>
+                      <Button variant="outline" size="sm">Documentation</Button>
+                      <Button size="sm">Get Started</Button>
+                    </>
+                  }
+                  divider
+                />
+                <SectionHeader
+                  kicker="Pricing"
+                  title="Simple, transparent pricing"
+                  description="No hidden fees. Free forever for open-source projects."
+                  align="center"
+                />
+              </div>
+            </Box>
           </Sec>
 
           <footer className="text-[0.8rem] text-muted-foreground pt-8 mt-4 border-t border-border">
