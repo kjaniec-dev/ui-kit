@@ -35,4 +35,33 @@ describe("BlogCard", () => {
     const img = screen.getByAltText("Design system cover");
     expect(img).toHaveAttribute("src", "https://example.com/cover.png");
   });
+
+  it("renders an anchor element when href is provided with target support", () => {
+    render(
+      <BlogCard
+        title="Link Card"
+        href="https://example.com/blog/1"
+        target="_blank"
+        rel="noopener noreferrer"
+      />
+    );
+
+    const link = screen.getByRole("link", { name: /link card/i });
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute("href", "https://example.com/blog/1");
+    expect(link).toHaveAttribute("target", "_blank");
+    expect(link).toHaveAttribute("rel", "noopener noreferrer");
+  });
+
+  it("applies sm:flex-row class when orientation is horizontal", () => {
+    const { container } = render(
+      <BlogCard
+        title="Horizontal Card"
+        orientation="horizontal"
+      />
+    );
+
+    const card = container.firstChild as HTMLElement;
+    expect(card).toHaveClass("sm:flex-row");
+  });
 });

@@ -10,7 +10,8 @@ export interface BlogCardAuthor {
   role?: string;
 }
 
-export interface BlogCardProps extends React.HTMLAttributes<HTMLElement> {
+export interface BlogCardProps
+  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "title"> {
   title: string;
   description?: string;
   coverUrl?: string;
@@ -51,7 +52,7 @@ export const BlogCard = React.forwardRef<HTMLElement, BlogCardProps>(
         href={href}
         interactive={isInteractive}
         className={cn(
-          "group flex overflow-hidden border border-border bg-card text-card-foreground transition-all duration-300",
+          "group flex overflow-hidden transition-all duration-300",
           isHorizontal ? "flex-col sm:flex-row" : "flex-col",
           className
         )}
@@ -83,7 +84,7 @@ export const BlogCard = React.forwardRef<HTMLElement, BlogCardProps>(
               )}
             </div>
 
-            <h3 className="text-base font-bold tracking-tight text-foreground transition-colors group-hover:text-amber-500">
+            <h3 className="text-base font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
               {title}
             </h3>
 
