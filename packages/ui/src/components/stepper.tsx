@@ -283,3 +283,159 @@ export const StepperSeparator = React.forwardRef<HTMLDivElement, StepperSeparato
 );
 StepperSeparator.displayName = "StepperSeparator";
 
+export interface StepperTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+
+export const StepperTrigger = React.forwardRef<HTMLButtonElement, StepperTriggerProps>(
+  ({ className, children, onClick, onKeyDown, ...props }, ref) => {
+    const ctx = React.useContext(StepperContext);
+    const itemCtx = React.useContext(StepperItemContext);
+    
+    if (!ctx || !itemCtx) {
+      throw new Error("StepperTrigger must be used within a StepperItem inside a Stepper");
+    }
+
+    const isCompleted = ctx.completedSteps.includes(itemCtx.value) || itemCtx.value < ctx.activeStep;
+    const isActive = ctx.activeStep === itemCtx.value;
+
+    // In linear mode, user can click completed steps to go back, but not future uncompleted ones
+    const isClickable = !ctx.linear || isCompleted || isActive;
+    const disabled = itemCtx.disabled || !isClickable;
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (disabled) {
+        e.preventDefault();
+        return;
+      }
+      ctx.setStep(itemCtx.value);
+      onClick?.(e);
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+      onKeyDown?.(e);
+      
+      const triggers = Array.from(
+        e.currentTarget.closest('[role="tablist"]')?.querySelectorAll('[role="tab"]') || []
+      ) as HTMLElement[];
+
+      const currentIndex = triggers.indexOf(e.currentTarget);
+      if (currentIndex === -1) return;
+
+      let targetIndex = -1;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        targetIndex = Math.min(currentIndex + 1, triggers.length - 1);
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        targetIndex = Math.max(currentIndex - 1, 0);
+      }
+
+      if (targetIndex !== -1 && triggers[targetIndex]) {
+        e.preventDefault();
+        triggers[targetIndex].focus();
+      }
+    };
+
+    return (
+      <button
+        ref={ref}
+        type="button"
+        role="tab"
+        aria-selected={isActive}
+        aria-disabled={disabled}
+        tabIndex={isActive ? 0 : -1}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        className={cn(
+          "flex items-center gap-3 bg-transparent border-0 p-0 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-md disabled:cursor-not-allowed disabled:opacity-50",
+          ctx.orientation === "vertical" ? "w-full" : "",
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  }
+);
+StepperTrigger.displayName = "StepperTrigger";
+
+export interface StepperIndicatorProps extends React.HTMLAttributes<HTMLSpanElement> {}
+
+export const StepperIndicator = React.forwardRef<HTMLSpanElement, StepperIndicatorProps>(
+  ({ className, children, ...props }, ref) => {
+    const ctx = React.useContext(StepperContext);
+    const itemCtx = React.useContext(StepperItemContext);
+    
+    if (!ctx || !itemCtx) {
+      throw new Error("StepperIndicator must be used within a StepperItem inside a Stepper");
+    }
+
+    const isCompleted = ctx.completedSteps.includes(itemCtx.value) || itemCtx.value < ctx.activeStep;
+    const isActive = ctx.activeStep === itemCtx.value;
+
+    return (
+      <span
+        ref={ref}
+        className={cn(
+          "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border text-sm font-semibold transition-all duration-200",
+          isCompleted
+            ? "bg-teal-600 border-teal-600 text-white"
+            : isActive
+            ? "border-amber-500 text-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.2)]"
+            : "border-zinc-700 text-zinc-400 bg-zinc-900/50",
+          className
+        )}
+        {...props}
+      >
+        {children ?? (isCompleted ? "✓" : itemCtx.value + 1)}
+      </span>
+    );
+  }
+);
+StepperIndicator.displayName = "StepperIndicator";
+
+export interface StepperTitleProps extends React.HTMLAttributes<HTMLSpanElement> {}
+
+export const StepperTitle = React.forwardRef<HTMLSpanElement, StepperTitleProps>(
+  ({ className, ...props }, ref) => {
+    const ctx = React.useContext(StepperContext);
+    const itemCtx = React.useContext(StepperItemContext);
+    
+    if (!ctx || !itemCtx) {
+      throw new Error("StepperTitle must be used within a StepperItem inside a Stepper");
+    }
+
+    const isActive = ctx.activeStep === itemCtx.value;
+
+    return (
+      <span
+        ref={ref}
+        className={cn(
+          "text-sm font-medium transition-colors duration-200",
+          isActive ? "text-zinc-100 font-semibold" : "text-zinc-400",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+StepperTitle.displayName = "StepperTitle";
+
+export interface StepperDescriptionProps extends React.HTMLAttributes<HTMLSpanElement> {}
+
+export const StepperDescription = React.forwardRef<HTMLSpanElement, StepperDescriptionProps>(
+  ({ className, ...props }, ref) => {
+    const itemCtx = React.useContext(StepperItemContext);
+    if (!itemCtx) throw new Error("StepperDescription must be used within a StepperItem");
+
+    return (
+      <span
+        ref={ref}
+        className={cn("text-xs text-zinc-500 text-left block", className)}
+        {...props}
+      />
+    );
+  }
+);
+StepperDescription.displayName = "StepperDescription";
+
+

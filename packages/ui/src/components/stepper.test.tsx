@@ -1,9 +1,10 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { renderHook, act } from "@testing-library/react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import * as React from "react";
 import { useStepper } from "./stepper";
-import { Stepper, StepperContent, StepperList, StepperItem, StepperSeparator } from "./stepper";
+import { Stepper, StepperContent, StepperList, StepperItem, StepperSeparator, StepperTrigger, StepperIndicator, StepperTitle } from "./stepper";
+
 
 describe("useStepper", () => {
   it("should initialize step state correctly", () => {
@@ -141,3 +142,67 @@ describe("Stepper Layout Primitives", () => {
     expect(updatedList.className).toContain("flex flex-col");
   });
 });
+
+describe("Stepper Interaction validation", () => {
+  it("should prevent clicking future steps in linear mode", () => {
+    const handleChange = vi.fn();
+    render(
+      <Stepper value={0} onValueChange={handleChange} linear={true}>
+        <StepperList>
+          <StepperItem value={0}>
+            <StepperTrigger data-testid="t-0"><StepperIndicator /></StepperTrigger>
+          </StepperItem>
+          <StepperItem value={1}>
+            <StepperTrigger data-testid="t-1"><StepperIndicator /></StepperTrigger>
+          </StepperItem>
+        </StepperList>
+      </Stepper>
+    );
+    
+    fireEvent.click(screen.getByTestId("t-1"));
+    expect(handleChange).not.toHaveBeenCalled();
+  });
+
+  it("should allow clicking future steps in non-linear mode", () => {
+    const handleChange = vi.fn();
+    render(
+      <Stepper value={0} onValueChange={handleChange} linear={false}>
+        <StepperList>
+          <StepperItem value={0}>
+            <StepperTrigger data-testid="t-0"><StepperIndicator /></StepperTrigger>
+          </StepperItem>
+          <StepperItem value={1}>
+            <StepperTrigger data-testid="t-1"><StepperIndicator /></StepperTrigger>
+          </StepperItem>
+        </StepperList>
+      </Stepper>
+    );
+
+    fireEvent.click(screen.getByTestId("t-1"));
+    expect(handleChange).toHaveBeenCalledWith(1);
+  });
+
+  it("should handle keyboard navigation using arrows", () => {
+    const handleChange = vi.fn();
+    render(
+      <Stepper value={0} onValueChange={handleChange} linear={false}>
+        <StepperList>
+          <StepperItem value={0}>
+            <StepperTrigger data-testid="t-0"><StepperIndicator /></StepperTrigger>
+          </StepperItem>
+          <StepperItem value={1}>
+            <StepperTrigger data-testid="t-1"><StepperIndicator /></StepperTrigger>
+          </StepperItem>
+        </StepperList>
+      </Stepper>
+    );
+
+    const firstTrigger = screen.getByTestId("t-0");
+    firstTrigger.focus();
+    fireEvent.keyDown(firstTrigger, { key: "ArrowRight" });
+    
+    // Focus should jump to step 1 trigger
+    expect(document.activeElement).toBe(screen.getByTestId("t-1"));
+  });
+});
+
