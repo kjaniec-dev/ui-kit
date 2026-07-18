@@ -397,7 +397,7 @@ function StepperDemo() {
                 <h4 className="text-sm font-semibold">Step 1: Account Setup</h4>
                 <p className="text-xs text-muted-foreground">Enter your contact email and password to create an account.</p>
                 <div className="pt-2 max-w-xs">
-                  <Input placeholder="email@company.com" size="sm" />
+                  <Input placeholder="email@company.com" />
                 </div>
               </div>
             </StepperContent>
@@ -407,7 +407,7 @@ function StepperDemo() {
                 <h4 className="text-sm font-semibold">Step 2: Shipping Address</h4>
                 <p className="text-xs text-muted-foreground">Specify the physical delivery location for your package.</p>
                 <div className="pt-2 max-w-xs">
-                  <Input placeholder="123 Main St, City, Country" size="sm" />
+                  <Input placeholder="123 Main St, City, Country" />
                 </div>
               </div>
             </StepperContent>
@@ -417,7 +417,7 @@ function StepperDemo() {
                 <h4 className="text-sm font-semibold">Step 3: Payment Details</h4>
                 <p className="text-xs text-muted-foreground">Review your checkout total and enter payment details.</p>
                 <div className="pt-2 max-w-xs">
-                  <Input placeholder="Card number: •••• •••• •••• 4242" size="sm" />
+                  <Input placeholder="Card number: •••• •••• •••• 4242" />
                 </div>
               </div>
             </StepperContent>
