@@ -59,6 +59,16 @@ export {
   type ToastOptions, type ToastTone,
 } from "./components/toast";
 export { PageHeader, type PageHeaderProps } from "./components/page-header";
+export {
+  SectionHeader,
+  type SectionHeaderProps,
+  type SectionHeaderAlign,
+  type SectionHeaderHeadingLevel,
+  type SectionHeaderKickerProps,
+  type SectionHeaderTitleProps,
+  type SectionHeaderDescriptionProps,
+  type SectionHeaderActionsProps,
+} from "./components/section-header";
 export { EmptyState, type EmptyStateProps } from "./components/empty-state";
 export { MetricCard, type MetricCardProps } from "./components/metric-card";
 export { DataTable, type DataTableProps, type DataTableColumn } from "./components/data-table";
