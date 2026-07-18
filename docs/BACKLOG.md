@@ -18,10 +18,10 @@ Only 5 of ~48 components have a `.test.tsx` file (`bottom-sheet`, `code-block`, 
 `docs/DESIGN.md` → "First components to build" lists components that were never implemented (confirmed via grep — zero occurrences in `packages/`). Either build them or remove them from the doc if no longer relevant.
 
 - [x] `SectionHeader`
-- [ ] `BlogCard`
-- [ ] `ProjectCard`
+- [x] `BlogCard`
+- [x] `ProjectCard`
 - [x] `AppShell` (generic shell for marketing/portfolio pages — distinct from the existing `DashboardShell`)
-- [ ] `PricingCard`
+- [x] `PricingCard`
 
 ## P1 — New components: common B2B/dashboard gaps
 
