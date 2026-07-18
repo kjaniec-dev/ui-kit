@@ -1,9 +1,12 @@
-import { describe, it, expect, vi } from "vitest";
-import { renderHook, act } from "@testing-library/react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { describe, it, expect, vi, afterEach } from "vitest";
+import { renderHook, act, render, screen, fireEvent, cleanup } from "@testing-library/react";
 import * as React from "react";
 import { useStepper } from "./stepper";
 import { Stepper, StepperContent, StepperList, StepperItem, StepperSeparator, StepperTrigger, StepperIndicator, StepperTitle } from "./stepper";
+
+afterEach(() => {
+  cleanup();
+});
 
 
 describe("useStepper", () => {
