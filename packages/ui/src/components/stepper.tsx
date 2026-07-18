@@ -117,37 +117,41 @@ export const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
       setSteps((prev) => prev.filter((v) => v !== val));
     }, []);
 
-    const setStep = React.useCallback((step: number) => {
-      if (!isControlled) {
-        setLocalValue(step);
-      }
-      onValueChange?.(step);
+    const setStep = React.useCallback(
+      (step: number) => {
+        if (!isControlled) {
+          setLocalValue(step);
+        }
+        onValueChange?.(step);
 
-      // Auto mark previous steps as completed in linear mode
-      if (linear) {
-        setCompletedSteps((prev) => {
-          const nextCompleted = [...prev];
-          for (let i = 0; i < step; i++) {
-            if (!nextCompleted.includes(i)) nextCompleted.push(i);
-          }
-          return nextCompleted.filter((s) => s < step).sort((a, b) => a - b);
-        });
-      }
-    }, [isControlled, onValueChange, linear]);
+        // Auto mark previous steps as completed in linear mode
+        if (linear) {
+          setCompletedSteps((prev) => {
+            const priorSteps = steps.filter((s) => s < step);
+            const nextCompleted = Array.from(new Set([...prev, ...priorSteps])).sort((a, b) => a - b);
+            return nextCompleted;
+          });
+        }
+      },
+      [isControlled, onValueChange, linear, steps]
+    );
+
+    const contextValue = React.useMemo(
+      () => ({
+        activeStep,
+        orientation,
+        linear,
+        setStep,
+        completedSteps,
+        registerStep,
+        unregisterStep,
+        steps,
+      }),
+      [activeStep, orientation, linear, setStep, completedSteps, registerStep, unregisterStep, steps]
+    );
 
     return (
-      <StepperContext.Provider
-        value={{
-          activeStep,
-          orientation,
-          linear,
-          setStep,
-          completedSteps,
-          registerStep,
-          unregisterStep,
-          steps,
-        }}
-      >
+      <StepperContext.Provider value={contextValue}>
         <div
           ref={ref}
           className={cn(

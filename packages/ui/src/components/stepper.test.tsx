@@ -106,4 +106,10 @@ describe("Stepper Core State", () => {
     expect(screen.queryByText("Panel 0")).toBeNull();
     expect(screen.getByText("Panel 1")).toBeDefined();
   });
+
+  it("should throw an error if StepperContent is used outside Stepper", () => {
+    expect(() => render(<StepperContent value={0}>Content</StepperContent>)).toThrow(
+      "StepperContent must be used within a Stepper"
+    );
+  });
 });
