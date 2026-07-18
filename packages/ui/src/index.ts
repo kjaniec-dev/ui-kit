@@ -150,3 +150,29 @@ export {
   type TimelineDotSize,
 } from "./components/timeline";
 
+export {
+  Stepper,
+  StepperList,
+  StepperItem,
+  StepperTrigger,
+  StepperIndicator,
+  StepperTitle,
+  StepperDescription,
+  StepperSeparator,
+  StepperContent,
+  useStepper,
+  type StepperProps,
+  type StepperListProps,
+  type StepperItemProps,
+  type StepperTriggerProps,
+  type StepperIndicatorProps,
+  type StepperTitleProps,
+  type StepperDescriptionProps,
+  type StepperSeparatorProps,
+  type StepperContentProps,
+  type StepperOrientation,
+  type UseStepperOptions,
+  type UseStepperReturn,
+} from "./components/stepper";
+
+
