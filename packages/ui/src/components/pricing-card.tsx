@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cn } from "../lib/cn";
 import { Card } from "./card";
-import { Button } from "./button";
+import { Button, buttonVariants } from "./button";
 
 export type PricingFeatureItem =
   | string
@@ -114,15 +114,17 @@ export const PricingCard = React.forwardRef<HTMLDivElement, PricingCardProps>(
           {cta ? (
             cta
           ) : ctaHref ? (
-            <Button
-              as="a"
-              href={ctaHref}
-              variant={isFeatured ? "primary" : "outline"}
-              className="w-full justify-center"
-              disabled={disabled}
+            <a
+              href={disabled ? undefined : ctaHref}
+              aria-disabled={disabled || undefined}
+              className={cn(
+                buttonVariants({ variant: isFeatured ? "primary" : "outline" }),
+                "w-full justify-center",
+                disabled && "pointer-events-none opacity-50"
+              )}
             >
               {ctaText}
-            </Button>
+            </a>
           ) : (
             <Button
               variant={isFeatured ? "primary" : "outline"}

@@ -45,4 +45,19 @@ describe("PricingCard", () => {
     fireEvent.click(button);
     expect(handleCta).toHaveBeenCalledTimes(1);
   });
+
+  it("renders ctaHref as an anchor element with proper href", () => {
+    render(
+      <PricingCard
+        name="Starter"
+        price="$0"
+        ctaHref="/signup"
+        ctaText="Get Started Now"
+      />
+    );
+
+    const link = screen.getByRole("link", { name: "Get Started Now" });
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute("href", "/signup");
+  });
 });
