@@ -196,3 +196,90 @@ export const StepperContent = React.forwardRef<HTMLDivElement, StepperContentPro
   }
 );
 StepperContent.displayName = "StepperContent";
+
+export interface StepperListProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export const StepperList = React.forwardRef<HTMLDivElement, StepperListProps>(
+  ({ className, children, ...props }, ref) => {
+    const ctx = React.useContext(StepperContext);
+    if (!ctx) throw new Error("StepperList must be used within a Stepper");
+
+    return (
+      <div
+        ref={ref}
+        role="tablist"
+        aria-orientation={ctx.orientation}
+        className={cn(
+          ctx.orientation === "horizontal"
+            ? "flex items-center justify-between w-full relative gap-4"
+            : "flex flex-col items-start gap-6 relative w-full",
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+StepperList.displayName = "StepperList";
+
+export interface StepperItemProps extends React.HTMLAttributes<HTMLDivElement> {
+  value: number;
+  disabled?: boolean;
+}
+
+export const StepperItem = React.forwardRef<HTMLDivElement, StepperItemProps>(
+  ({ value, disabled = false, className, children, ...props }, ref) => {
+    const ctx = React.useContext(StepperContext);
+    if (!ctx) throw new Error("StepperItem must be used within a Stepper");
+
+    React.useEffect(() => {
+      ctx.registerStep(value);
+      return () => ctx.unregisterStep(value);
+    }, [value, ctx.registerStep, ctx.unregisterStep]);
+
+    const isLast = ctx.steps[ctx.steps.length - 1] === value;
+
+    return (
+      <StepperItemContext.Provider value={{ value, disabled, isLast }}>
+        <div
+          ref={ref}
+          className={cn(
+            "group relative flex items-center gap-3 z-10",
+            ctx.orientation === "vertical" ? "flex items-start w-full" : "bg-zinc-950 px-2",
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </div>
+      </StepperItemContext.Provider>
+    );
+  }
+);
+StepperItem.displayName = "StepperItem";
+
+export interface StepperSeparatorProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export const StepperSeparator = React.forwardRef<HTMLDivElement, StepperSeparatorProps>(
+  ({ className, ...props }, ref) => {
+    const ctx = React.useContext(StepperContext);
+    if (!ctx) throw new Error("StepperSeparator must be used within a Stepper");
+
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          ctx.orientation === "horizontal"
+            ? "flex-1 h-[2px] bg-zinc-800 transition-all duration-300"
+            : "w-[2px] bg-zinc-800 absolute left-[17px] top-8 bottom-0 -ml-px z-0",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+StepperSeparator.displayName = "StepperSeparator";
+

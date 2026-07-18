@@ -3,7 +3,7 @@ import { renderHook, act } from "@testing-library/react";
 import { render, screen } from "@testing-library/react";
 import * as React from "react";
 import { useStepper } from "./stepper";
-import { Stepper, StepperContent } from "./stepper";
+import { Stepper, StepperContent, StepperList, StepperItem, StepperSeparator } from "./stepper";
 
 describe("useStepper", () => {
   it("should initialize step state correctly", () => {
@@ -111,5 +111,33 @@ describe("Stepper Core State", () => {
     expect(() => render(<StepperContent value={0}>Content</StepperContent>)).toThrow(
       "StepperContent must be used within a Stepper"
     );
+  });
+});
+
+describe("Stepper Layout Primitives", () => {
+  it("should render lists with correct layout orientations", () => {
+    const { rerender } = render(
+      <Stepper orientation="horizontal">
+        <StepperList>
+          <StepperItem value={0}>First</StepperItem>
+          <StepperSeparator />
+          <StepperItem value={1}>Second</StepperItem>
+        </StepperList>
+      </Stepper>
+    );
+    const list = screen.getByRole("tablist");
+    expect(list.className).toContain("flex items-center");
+
+    rerender(
+      <Stepper orientation="vertical">
+        <StepperList>
+          <StepperItem value={0}>First</StepperItem>
+          <StepperSeparator />
+          <StepperItem value={1}>Second</StepperItem>
+        </StepperList>
+      </Stepper>
+    );
+    const updatedList = screen.getByRole("tablist");
+    expect(updatedList.className).toContain("flex flex-col");
   });
 });
