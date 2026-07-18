@@ -20,7 +20,7 @@ Only 5 of ~48 components have a `.test.tsx` file (`bottom-sheet`, `code-block`, 
 - [x] `SectionHeader`
 - [ ] `BlogCard`
 - [ ] `ProjectCard`
-- [ ] `AppShell` (generic shell for marketing/portfolio pages — distinct from the existing `DashboardShell`)
+- [x] `AppShell` (generic shell for marketing/portfolio pages — distinct from the existing `DashboardShell`)
 - [ ] `PricingCard`
 
 ## P1 — New components: common B2B/dashboard gaps
