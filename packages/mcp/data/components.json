@@ -3164,5 +3164,136 @@
     "props": [],
     "cva": null,
     "usageSnippet": "<TimelineTime>5m ago</TimelineTime>"
+  },
+  {
+    "name": "Stepper",
+    "importPath": "import { Stepper } from \"@kjaniec-dev/ui\";",
+    "description": "React component Stepper.",
+    "props": [
+      {
+        "name": "value",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "defaultValue",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: number) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "orientation",
+        "type": "StepperOrientation",
+        "optional": true,
+        "defaultValue": "\"horizontal\"",
+        "description": ""
+      },
+      {
+        "name": "linear",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Stepper value={stepper.activeStep} onValueChange={stepper.setStep}>\n  <StepperList>\n    <StepperItem value={0}>\n      <StepperTrigger>\n        <StepperIndicator />\n        <div className=\"flex flex-col\">\n          <StepperTitle>Profile</StepperTitle>\n          <StepperDescription>User details</StepperDescription>\n        </div>\n      </StepperTrigger>\n    </StepperItem>\n    <StepperSeparator />\n    <StepperItem value={1}>\n      <StepperTrigger>\n        <StepperIndicator />\n        <div className=\"flex flex-col\">\n          <StepperTitle>Billing</StepperTitle>\n          <StepperDescription>Card info</StepperDescription>\n        </div>\n      </StepperTrigger>\n    </StepperItem>\n    <StepperSeparator />\n    <StepperItem value={2}>\n      <StepperTrigger>\n        <StepperIndicator />\n        <div className=\"flex flex-col\">\n          <StepperTitle>Review</StepperTitle>\n          <StepperDescription>Confirm</StepperDescription>\n        </div>\n      </StepperTrigger>\n    </StepperItem>\n  </StepperList>\n\n  <div className=\"p-4 bg-zinc-900 border border-zinc-800 rounded-lg min-h-[100px]\">\n    <StepperContent value={0}>\n      <p>Step 1 Form Content: Please input username.</p>\n    </StepperContent>\n    <StepperContent value={1}>\n      <p>Step 2 Form Content: Enter credit card details.</p>\n    </StepperContent>\n    <StepperContent value={2}>\n      <p>Step 3 Form Content: Review and click Submit.</p>\n    </StepperContent>\n  </div>\n\n  <div className=\"flex justify-between\">\n    <Button variant=\"secondary\" onClick={stepper.prevStep} disabled={stepper.isFirstStep}>\n      Back\n    </Button>\n    <Button onClick={stepper.isLastStep ? () => alert(\"Done\") : stepper.nextStep}>\n      {stepper.isLastStep ? \"Submit\" : \"Next\"}\n    </Button>\n  </div>\n</Stepper>"
+  },
+  {
+    "name": "StepperList",
+    "importPath": "import { StepperList } from \"@kjaniec-dev/ui\";",
+    "description": "React component StepperList.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<StepperList>\n  <StepperItem value={0}>\n    <StepperTrigger>\n      <StepperIndicator />\n      <div className=\"flex flex-col\">\n        <StepperTitle>Profile</StepperTitle>\n        <StepperDescription>User details</StepperDescription>\n      </div>\n    </StepperTrigger>\n  </StepperItem>\n  <StepperSeparator />\n  <StepperItem value={1}>\n    <StepperTrigger>\n      <StepperIndicator />\n      <div className=\"flex flex-col\">\n        <StepperTitle>Billing</StepperTitle>\n        <StepperDescription>Card info</StepperDescription>\n      </div>\n    </StepperTrigger>\n  </StepperItem>\n  <StepperSeparator />\n  <StepperItem value={2}>\n    <StepperTrigger>\n      <StepperIndicator />\n      <div className=\"flex flex-col\">\n        <StepperTitle>Review</StepperTitle>\n        <StepperDescription>Confirm</StepperDescription>\n      </div>\n    </StepperTrigger>\n  </StepperItem>\n</StepperList>"
+  },
+  {
+    "name": "StepperItem",
+    "importPath": "import { StepperItem } from \"@kjaniec-dev/ui\";",
+    "description": "React component StepperItem.",
+    "props": [
+      {
+        "name": "value",
+        "type": "number",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<StepperItem value={0}>\n  <StepperTrigger>\n    <StepperIndicator />\n    <div className=\"flex flex-col\">\n      <StepperTitle>Profile</StepperTitle>\n      <StepperDescription>User details</StepperDescription>\n    </div>\n  </StepperTrigger>\n</StepperItem>"
+  },
+  {
+    "name": "StepperTrigger",
+    "importPath": "import { StepperTrigger } from \"@kjaniec-dev/ui\";",
+    "description": "React component StepperTrigger.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<StepperTrigger>\n  <StepperIndicator />\n  <div className=\"flex flex-col\">\n    <StepperTitle>Profile</StepperTitle>\n    <StepperDescription>User details</StepperDescription>\n  </div>\n</StepperTrigger>"
+  },
+  {
+    "name": "StepperIndicator",
+    "importPath": "import { StepperIndicator } from \"@kjaniec-dev/ui\";",
+    "description": "React component StepperIndicator.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<StepperIndicator />"
+  },
+  {
+    "name": "StepperTitle",
+    "importPath": "import { StepperTitle } from \"@kjaniec-dev/ui\";",
+    "description": "React component StepperTitle.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<StepperTitle>Profile</StepperTitle>"
+  },
+  {
+    "name": "StepperDescription",
+    "importPath": "import { StepperDescription } from \"@kjaniec-dev/ui\";",
+    "description": "React component StepperDescription.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<StepperDescription>User details</StepperDescription>"
+  },
+  {
+    "name": "StepperSeparator",
+    "importPath": "import { StepperSeparator } from \"@kjaniec-dev/ui\";",
+    "description": "React component StepperSeparator.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<StepperSeparator />"
+  },
+  {
+    "name": "StepperContent",
+    "importPath": "import { StepperContent } from \"@kjaniec-dev/ui\";",
+    "description": "React component StepperContent.",
+    "props": [
+      {
+        "name": "value",
+        "type": "number",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<StepperContent value={0}>\n  <p>Step 1 Form Content: Please input username.</p>\n</StepperContent>"
   }
 ]
