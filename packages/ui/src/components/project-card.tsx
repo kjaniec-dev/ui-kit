@@ -86,7 +86,10 @@ export const ProjectCard = React.forwardRef<HTMLElement, ProjectCardProps>(
           <div className="mt-4 flex items-center justify-between border-t border-border/60 pt-3 text-[0.75rem] text-muted-foreground">
             <div className="flex items-center gap-3">
               {metrics.map((metric, idx) => (
-                <span key={idx} className="flex items-center gap-1 font-mono font-medium">
+                <span
+                  key={metric.label ? `${metric.label}-${idx}` : idx}
+                  className="flex items-center gap-1 font-mono font-medium"
+                >
                   {metric.icon && <span className="shrink-0">{metric.icon}</span>}
                   <span>{metric.value}</span>
                   {metric.label && <span className="text-muted-foreground/70">{metric.label}</span>}
@@ -95,7 +98,14 @@ export const ProjectCard = React.forwardRef<HTMLElement, ProjectCardProps>(
               {updatedAt && <span>{updatedAt}</span>}
             </div>
 
-            {actions && <div className="flex items-center gap-1 shrink-0">{actions}</div>}
+            {actions && (
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="flex items-center gap-1 shrink-0"
+              >
+                {actions}
+              </div>
+            )}
           </div>
         )}
       </Card>
