@@ -62,7 +62,7 @@
         "size": "md"
       }
     },
-    "usageSnippet": "<Button variant=\"primary\">Primary</Button>"
+    "usageSnippet": "<Button size=\"sm\">Get Started</Button>"
   },
   {
     "name": "Badge",
@@ -3353,5 +3353,300 @@
     ],
     "cva": null,
     "usageSnippet": "<StepperContent value={0}>\n  <p>Step 1 Form Content: Please input username.</p>\n</StepperContent>"
+  },
+  {
+    "name": "AppShell",
+    "importPath": "import { AppShell } from \"@kjaniec-dev/ui\";",
+    "description": "React component AppShell.",
+    "props": [
+      {
+        "name": "banner",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "header",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "footer",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "contentWidth",
+        "type": "\"default\" | \"narrow\" | \"wide\" | \"full\"",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "headerPosition",
+        "type": "\"sticky\" | \"fixed\" | \"static\"",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "headerVariant",
+        "type": "\"glass\" | \"solid\" | \"transparent\"",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "paddedContent",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "mobileNav",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<AppShell\n  banner={<div>🚀 Announcement: KJ Product Kit v1.0 released!</div>}\n  header={\n    <div className=\"w-full flex items-center justify-between\">\n      <div className=\"font-bold text-xl tracking-tight\">KJ Product Kit</div>\n      <div className=\"hidden md:flex items-center gap-6 text-sm text-muted-foreground font-medium\">\n        <a href=\"#\" className=\"hover:text-foreground\">Features</a>\n        <a href=\"#\" className=\"hover:text-foreground\">Docs</a>\n        <a href=\"#\" className=\"hover:text-foreground\">Pricing</a>\n      </div>\n      <Button size=\"sm\">Get Started</Button>\n    </div>\n  }\n  mobileNav={\n    <div className=\"flex flex-col gap-4 text-sm font-medium\">\n      <a href=\"#\" className=\"hover:text-foreground\">Features</a>\n      <a href=\"#\" className=\"hover:text-foreground\">Docs</a>\n      <a href=\"#\" className=\"hover:text-foreground\">Pricing</a>\n    </div>\n  }\n  footer={\n    <div className=\"flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground\">\n      <div>© 2026 KJ Product Kit. All rights reserved.</div>\n      <div className=\"flex gap-6\">\n        <a href=\"#\" className=\"hover:text-foreground\">Privacy</a>\n        <a href=\"#\" className=\"hover:text-foreground\">Terms</a>\n        <a href=\"#\" className=\"hover:text-foreground\">GitHub</a>\n      </div>\n    </div>\n  }\n>\n  <div className=\"py-12 space-y-6\">\n    <h1 className=\"text-4xl font-extrabold tracking-tight\">Build faster with KJ UI</h1>\n    <p className=\"text-lg text-muted-foreground max-w-2xl\">\n      A modern, accessible design system tailored for developer tools, SaaS applications, and developer portfolios.\n    </p>\n  </div>\n</AppShell>"
+  },
+  {
+    "name": "AppShellBanner",
+    "importPath": "import { AppShellBanner } from \"@kjaniec-dev/ui\";",
+    "description": "React component AppShellBanner.",
+    "props": [
+      {
+        "name": "variant",
+        "type": "\"primary\" | \"accent\" | \"muted\"",
+        "optional": true,
+        "defaultValue": "\"primary\"",
+        "description": ""
+      },
+      {
+        "name": "closable",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<AppShellBanner>\n  <!-- Content -->\n</AppShellBanner>"
+  },
+  {
+    "name": "AppShellHeader",
+    "importPath": "import { AppShellHeader } from \"@kjaniec-dev/ui\";",
+    "description": "React component AppShellHeader.",
+    "props": [
+      {
+        "name": "variant",
+        "type": "\"glass\" | \"solid\" | \"transparent\"",
+        "optional": true,
+        "defaultValue": "\"glass\"",
+        "description": ""
+      },
+      {
+        "name": "position",
+        "type": "\"sticky\" | \"fixed\" | \"static\"",
+        "optional": true,
+        "defaultValue": "\"sticky\"",
+        "description": ""
+      },
+      {
+        "name": "bordered",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "mobileNav",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<AppShellHeader>\n  <!-- Content -->\n</AppShellHeader>"
+  },
+  {
+    "name": "AppShellMain",
+    "importPath": "import { AppShellMain } from \"@kjaniec-dev/ui\";",
+    "description": "React component AppShellMain.",
+    "props": [
+      {
+        "name": "width",
+        "type": "\"default\" | \"narrow\" | \"wide\" | \"full\"",
+        "optional": true,
+        "defaultValue": "\"default\"",
+        "description": ""
+      },
+      {
+        "name": "padded",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<AppShellMain>\n  <!-- Content -->\n</AppShellMain>"
+  },
+  {
+    "name": "AppShellFooter",
+    "importPath": "import { AppShellFooter } from \"@kjaniec-dev/ui\";",
+    "description": "React component AppShellFooter.",
+    "props": [
+      {
+        "name": "bordered",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<AppShellFooter>\n  <!-- Content -->\n</AppShellFooter>"
+  },
+  {
+    "name": "Rating",
+    "importPath": "import { Rating } from \"@kjaniec-dev/ui\";",
+    "description": "React component Rating.",
+    "props": [
+      {
+        "name": "stars",
+        "type": "number",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "count",
+        "type": "number",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "percentage",
+        "type": "number",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Rating>\n  <!-- Content -->\n</Rating>"
+  },
+  {
+    "name": "RatingField",
+    "importPath": "import { RatingField } from \"@kjaniec-dev/ui\";",
+    "description": "React component RatingField.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<RatingField>\n  <!-- Content -->\n</RatingField>"
+  },
+  {
+    "name": "RatingSummary",
+    "importPath": "import { RatingSummary } from \"@kjaniec-dev/ui\";",
+    "description": "React component RatingSummary.",
+    "props": [
+      {
+        "name": "average",
+        "type": "number",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "totalCount",
+        "type": "number",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "distribution",
+        "type": "RatingDistributionItem[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "5",
+        "description": ""
+      },
+      {
+        "name": "size",
+        "type": "RatingSize",
+        "optional": true,
+        "defaultValue": "\"md\"",
+        "description": ""
+      },
+      {
+        "name": "icon",
+        "type": "RatingIconType | React.ComponentType<{ className?: string }>",
+        "optional": true,
+        "defaultValue": "\"star\"",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<RatingSummary>\n  <!-- Content -->\n</RatingSummary>"
   }
 ]

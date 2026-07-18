@@ -6,7 +6,7 @@ import { cn } from "../lib/cn";
 export interface AppShellProps extends React.HTMLAttributes<HTMLDivElement> {
   banner?: React.ReactNode;
   header?: React.ReactNode;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   footer?: React.ReactNode;
   contentWidth?: "default" | "narrow" | "wide" | "full";
   headerPosition?: "sticky" | "fixed" | "static";

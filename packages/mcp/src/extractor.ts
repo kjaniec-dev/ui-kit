@@ -190,14 +190,19 @@ export function parseComponents(): ComponentInfo[] {
   // 2. Read and cache all story files for extracting usage snippets
   const componentsDir = path.join(uiSrcDir, "components");
   const storyContents: Record<string, string> = {};
-  if (fs.existsSync(componentsDir)) {
-    const files = fs.readdirSync(componentsDir);
-    for (const f of files) {
-      if (f.endsWith(".stories.tsx")) {
-        storyContents[f] = fs.readFileSync(path.join(componentsDir, f), "utf8");
+  function readStoriesRecursively(dir: string) {
+    if (!fs.existsSync(dir)) return;
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        readStoriesRecursively(full);
+      } else if (entry.name.endsWith(".stories.tsx")) {
+        storyContents[entry.name] = fs.readFileSync(full, "utf8");
       }
     }
   }
+  readStoriesRecursively(componentsDir);
 
   // Snippets are lifted verbatim from story source, so lines after the first
   // keep the story file's indentation; re-baseline them to column 0.
@@ -254,14 +259,47 @@ export function parseComponents(): ComponentInfo[] {
   // 3. Process each component
   const componentsMap: Record<string, ComponentInfo> = {};
 
+  function resolveFilePaths(relPath: string): string[] {
+    const directTsx = path.resolve(uiSrcDir, relPath + ".tsx");
+    if (fs.existsSync(directTsx)) return [directTsx];
+
+    const directTs = path.resolve(uiSrcDir, relPath + ".ts");
+    if (fs.existsSync(directTs)) return [directTs];
+
+    const dirPath = path.resolve(uiSrcDir, relPath);
+    if (fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
+      const idxTs = path.join(dirPath, "index.ts");
+      const idxTsx = path.join(dirPath, "index.tsx");
+      const idxFile = fs.existsSync(idxTs) ? idxTs : fs.existsSync(idxTsx) ? idxTsx : null;
+      if (idxFile) {
+        const files: string[] = [idxFile];
+        const code = fs.readFileSync(idxFile, "utf8");
+        const source = ts.createSourceFile(idxFile, code, ts.ScriptTarget.Latest, true);
+        ts.forEachChild(source, (node) => {
+          if (ts.isExportDeclaration(node) && node.moduleSpecifier) {
+            const reExportRel = node.moduleSpecifier.getText().replace(/['"]/g, "");
+            const reExportTsx = path.resolve(dirPath, reExportRel + ".tsx");
+            const reExportTs = path.resolve(dirPath, reExportRel + ".ts");
+            if (fs.existsSync(reExportTsx)) files.push(reExportTsx);
+            else if (fs.existsSync(reExportTs)) files.push(reExportTs);
+          }
+        });
+        return files;
+      }
+    }
+    return [directTsx];
+  }
+
   // Group exports by file path to parse each file once
   const exportsByFile: Record<string, string[]> = {};
   for (const item of exports) {
-    const fullPath = path.resolve(uiSrcDir, item.fileRelativePath + ".tsx");
-    if (!exportsByFile[fullPath]) {
-      exportsByFile[fullPath] = [];
+    const targetPaths = resolveFilePaths(item.fileRelativePath);
+    for (const fullPath of targetPaths) {
+      if (!exportsByFile[fullPath]) {
+        exportsByFile[fullPath] = [];
+      }
+      exportsByFile[fullPath].push(item.name);
     }
-    exportsByFile[fullPath].push(item.name);
   }
 
   for (const filePath of Object.keys(exportsByFile)) {
