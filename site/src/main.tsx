@@ -105,7 +105,17 @@ import {
   TimelineDot,
   TimelineContent,
   TimelineTitle,
-  TimelineTime
+  TimelineTime,
+  Stepper,
+  StepperList,
+  StepperItem,
+  StepperTrigger,
+  StepperIndicator,
+  StepperTitle,
+  StepperDescription,
+  StepperSeparator,
+  StepperContent,
+  useStepper
 } from "@kjaniec-dev/ui";
 import "./index.css";
 import { ExampleTabs } from "./example-tabs";
@@ -337,6 +347,112 @@ const NAV = [
   ["primitives", "Primitives"],
   ["layouts", "Layouts"],
 ];
+
+function StepperDemo() {
+  const stepper = useStepper({ stepsCount: 3 });
+
+  return (
+    <div className="mt-8 border-t border-border/60 pt-6">
+      <Sub className="mb-2">Stepper / Interactive Multi-Step Wizard</Sub>
+      <p className="text-xs text-muted-foreground mb-4">
+        An interactive multi-step progress indicator and form wizard supporting step completion, active indicators, titles, descriptions, and content panels using <code>useStepper</code>.
+      </p>
+      <Box className="mb-0">
+        <Stepper value={stepper.activeStep} onValueChange={stepper.setStep}>
+          <StepperList>
+            <StepperItem value={0}>
+              <StepperTrigger>
+                <StepperIndicator />
+                <div className="flex flex-col text-left">
+                  <StepperTitle>Account</StepperTitle>
+                  <StepperDescription>User details</StepperDescription>
+                </div>
+              </StepperTrigger>
+            </StepperItem>
+            <StepperSeparator />
+            <StepperItem value={1}>
+              <StepperTrigger>
+                <StepperIndicator />
+                <div className="flex flex-col text-left">
+                  <StepperTitle>Shipping</StepperTitle>
+                  <StepperDescription>Delivery address</StepperDescription>
+                </div>
+              </StepperTrigger>
+            </StepperItem>
+            <StepperSeparator />
+            <StepperItem value={2}>
+              <StepperTrigger>
+                <StepperIndicator />
+                <div className="flex flex-col text-left">
+                  <StepperTitle>Payment</StepperTitle>
+                  <StepperDescription>Billing info</StepperDescription>
+                </div>
+              </StepperTrigger>
+            </StepperItem>
+          </StepperList>
+
+          <div className="mt-6 p-5 border border-border rounded-kj-lg bg-surface min-h-[120px] flex flex-col justify-between">
+            <StepperContent value={0}>
+              <div className="space-y-2">
+                <h4 className="text-sm font-semibold">Step 1: Account Setup</h4>
+                <p className="text-xs text-muted-foreground">Enter your contact email and password to create an account.</p>
+                <div className="pt-2 max-w-xs">
+                  <Input placeholder="email@company.com" size="sm" />
+                </div>
+              </div>
+            </StepperContent>
+
+            <StepperContent value={1}>
+              <div className="space-y-2">
+                <h4 className="text-sm font-semibold">Step 2: Shipping Address</h4>
+                <p className="text-xs text-muted-foreground">Specify the physical delivery location for your package.</p>
+                <div className="pt-2 max-w-xs">
+                  <Input placeholder="123 Main St, City, Country" size="sm" />
+                </div>
+              </div>
+            </StepperContent>
+
+            <StepperContent value={2}>
+              <div className="space-y-2">
+                <h4 className="text-sm font-semibold">Step 3: Payment Details</h4>
+                <p className="text-xs text-muted-foreground">Review your checkout total and enter payment details.</p>
+                <div className="pt-2 max-w-xs">
+                  <Input placeholder="Card number: •••• •••• •••• 4242" size="sm" />
+                </div>
+              </div>
+            </StepperContent>
+
+            <div className="flex items-center justify-between pt-4 border-t border-border/60 mt-4">
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={stepper.prevStep}
+                disabled={stepper.isFirstStep}
+              >
+                Previous
+              </Button>
+              <div className="flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={stepper.reset}
+                >
+                  Reset
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={stepper.isLastStep ? () => alert("Wizard completed!") : stepper.nextStep}
+                >
+                  {stepper.isLastStep ? "Complete" : "Next Step"}
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Stepper>
+      </Box>
+    </div>
+  );
+}
 
 function Gallery() {
   const { toast } = useToast();
@@ -1021,7 +1137,7 @@ function Gallery() {
             </div>
           </Sec>
 
-          <Sec id="navigation" title="Navigation" desc="Tabs, dropdown menus, accordion, breadcrumbs and pagination." components={["Tabs", "DropdownMenu", "Accordion", "Breadcrumb", "Pagination", "BottomNavigation"]}>
+          <Sec id="navigation" title="Navigation" desc="Tabs, dropdown menus, accordion, breadcrumbs, pagination and step wizard." components={["Tabs", "DropdownMenu", "Accordion", "Breadcrumb", "Pagination", "BottomNavigation", "Stepper"]}>
             <Grid>
               <Box className="mb-0">
                 <Sub>Tabs</Sub>
@@ -1101,6 +1217,7 @@ function Gallery() {
                 />
               </div>
             </div>
+            <StepperDemo />
           </Sec>
 
           <Sec id="data" title="Table & data" desc="A table with statuses, avatars and aligned numbers." components={["DataTable", "DataTableColumn", "Table", "TableToolbar", "EmptyState", "ErrorState"]}>
