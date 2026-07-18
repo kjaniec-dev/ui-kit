@@ -1284,6 +1284,64 @@
     "usageSnippet": "<PageHeader\n  eyebrow=\"B2B SaaS\"\n  title=\"Dashboard Shell\"\n  description=\"The shell structure renders a responsive frame container with a sticky sidebar, topbar, and main canvas.\"\n  actions={<Button size=\"sm\">New Project</Button>}\n/>"
   },
   {
+    "name": "SectionHeader",
+    "importPath": "import { SectionHeader } from \"@kjaniec-dev/ui\";",
+    "description": "React component SectionHeader.",
+    "props": [
+      {
+        "name": "kicker",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "title",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "description",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "actions",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "align",
+        "type": "SectionHeaderAlign",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "headingLevel",
+        "type": "SectionHeaderHeadingLevel",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "divider",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<SectionHeader align=\"center\" divider>\n  <SectionHeader.Kicker>Custom Section</SectionHeader.Kicker>\n  <SectionHeader.Title as=\"h3\">Custom Compound Layout</SectionHeader.Title>\n  <SectionHeader.Description>\n    Fully customized layout constructed using compound sub-components.\n  </SectionHeader.Description>\n  <SectionHeader.Actions className=\"justify-center mt-4\">\n    <Button variant=\"secondary\" size=\"sm\">\n      Learn More\n    </Button>\n  </SectionHeader.Actions>\n</SectionHeader>"
+  },
+  {
     "name": "EmptyState",
     "importPath": "import { EmptyState } from \"@kjaniec-dev/ui\";",
     "description": "React component EmptyState.",
