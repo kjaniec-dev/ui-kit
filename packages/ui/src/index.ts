@@ -198,3 +198,6 @@ export type {
   AppShellMainProps,
   AppShellFooterProps,
 } from "./components/app-shell";
+
+export { Rating, type RatingProps, type RatingSize } from "./components/rating";
+
