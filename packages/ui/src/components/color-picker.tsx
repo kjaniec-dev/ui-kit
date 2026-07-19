@@ -103,3 +103,40 @@ export function hslToHex(h: number, s: number, l: number): string {
 
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase();
 }
+
+export interface ColorPickerSwatchProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  color: string;
+  selected?: boolean;
+  size?: "sm" | "md" | "lg";
+}
+
+export const ColorPickerSwatch = React.forwardRef<
+  HTMLButtonElement,
+  ColorPickerSwatchProps
+>(({ color, selected = false, size = "md", className, style, ...props }, ref) => {
+  const sizeClasses = {
+    sm: "w-5 h-5",
+    md: "w-7 h-7",
+    lg: "w-9 h-9",
+  };
+
+  return (
+    <button
+      ref={ref}
+      type="button"
+      style={{ backgroundColor: color, ...style }}
+      className={cn(
+        "relative shrink-0 rounded-full border border-border/50 shadow-sm transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary flex items-center justify-center text-white text-xs font-bold",
+        sizeClasses[size],
+        selected && "ring-2 ring-primary ring-offset-2 ring-offset-surface",
+        className
+      )}
+      {...props}
+    >
+      {selected && <span aria-hidden="true">✓</span>}
+    </button>
+  );
+});
+ColorPickerSwatch.displayName = "ColorPickerSwatch";
+

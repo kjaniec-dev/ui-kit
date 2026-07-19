@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest";
-import { isValidHex, hexToHsl, hslToHex, DEFAULT_COLOR_SWATCHES } from "./color-picker";
+import { describe, it, expect, vi } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { isValidHex, hexToHsl, hslToHex, DEFAULT_COLOR_SWATCHES, ColorPickerSwatch } from "./color-picker";
 
 describe("Color Picker Utilities", () => {
   it("exports DEFAULT_COLOR_SWATCHES array with 12 colors", () => {
@@ -34,4 +35,25 @@ describe("Color Picker Utilities", () => {
     expect(hslToHex(360, 100, 50)).toBe("#FF0000");
   });
 });
+
+describe("ColorPickerSwatch", () => {
+  it("renders a button with background color", () => {
+    render(<ColorPickerSwatch color="#EF4444" aria-label="Red swatch" />);
+    const button = screen.getByRole("button", { name: "Red swatch" });
+    expect(button).toBeInTheDocument();
+  });
+
+  it("shows checkmark when selected is true", () => {
+    render(<ColorPickerSwatch color="#EF4444" selected aria-label="Red swatch" />);
+    expect(screen.getByText("✓")).toBeInTheDocument();
+  });
+
+  it("calls onClick when clicked", () => {
+    const onClick = vi.fn();
+    render(<ColorPickerSwatch color="#EF4444" onClick={onClick} aria-label="Red swatch" />);
+    fireEvent.click(screen.getByRole("button", { name: "Red swatch" }));
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+});
+
 
