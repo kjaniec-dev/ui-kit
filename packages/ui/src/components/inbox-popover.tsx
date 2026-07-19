@@ -102,26 +102,183 @@ export function useInboxState(initial: NotificationItemData[]): InboxStateReturn
 }
 
 // ---------------------------------------------------------------------------
-// InboxPopover component skeleton (to be completed in subsequent tasks)
+// InboxPopover — context + root
 // ---------------------------------------------------------------------------
 
+interface InboxCtx {
+  open: boolean;
+  setOpen: (v: boolean) => void;
+  triggerRef: React.MutableRefObject<HTMLButtonElement | null>;
+}
+const InboxContext = React.createContext<InboxCtx | null>(null);
+
+function useInboxContext(part: string): InboxCtx {
+  const ctx = React.useContext(InboxContext);
+  if (!ctx) throw new Error(`${part} must be used inside <InboxPopover>`);
+  return ctx;
+}
+
 export interface InboxPopoverProps {
-  /** The list of notification items to display. */
-  items: NotificationItemData[];
-  /** Called when the user clicks "Mark all as read". */
-  onMarkAllRead?: () => void;
-  /** Optional className for the popover panel. */
+  children: React.ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   className?: string;
 }
 
-/**
- * InboxPopover — skeleton placeholder.
- * Full implementation added in subsequent tasks.
- */
-export function InboxPopover({ items, onMarkAllRead, className }: InboxPopoverProps) {
+export function InboxPopover({
+  children,
+  className,
+  open: openProp,
+  onOpenChange,
+}: InboxPopoverProps) {
+  const [openState, setOpenState] = React.useState(false);
+  const controlled = openProp !== undefined;
+  const open = controlled ? openProp : openState;
+  const triggerRef = React.useRef<HTMLButtonElement | null>(null);
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  const setOpen = React.useCallback(
+    (v: boolean) => {
+      if (!controlled) setOpenState(v);
+      onOpenChange?.(v);
+    },
+    [controlled, onOpenChange]
+  );
+
+  React.useEffect(() => {
+    if (!open) return;
+    const onDoc = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        triggerRef.current?.focus();
+      }
+    };
+    document.addEventListener("mousedown", onDoc);
+    document.addEventListener("keydown", onEsc);
+    return () => {
+      document.removeEventListener("mousedown", onDoc);
+      document.removeEventListener("keydown", onEsc);
+    };
+  }, [open, setOpen]);
+
   return (
-    <div className={cn("inbox-popover", className)} aria-label="Notifications">
-      {/* Full implementation coming in Task 2 */}
+    <InboxContext.Provider value={{ open, setOpen, triggerRef }}>
+      <div ref={ref} className={cn("relative inline-block", className)}>
+        {children}
+      </div>
+    </InboxContext.Provider>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// InboxTrigger — bell button with unread badge
+// ---------------------------------------------------------------------------
+
+export interface InboxTriggerProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Badge count. Hidden when 0 or undefined. */
+  unreadCount?: number;
+  /** Accessible label (default: "Notifications"). */
+  label?: string;
+}
+
+export function InboxTrigger({
+  unreadCount,
+  label = "Notifications",
+  className,
+  onClick,
+  ...props
+}: InboxTriggerProps) {
+  const ctx = useInboxContext("InboxTrigger");
+  const setRef = (node: HTMLButtonElement | null) => {
+    ctx.triggerRef.current = node;
+  };
+
+  const displayCount =
+    unreadCount == null || unreadCount <= 0
+      ? null
+      : unreadCount > 99
+      ? "99+"
+      : String(unreadCount);
+
+  return (
+    <button
+      ref={setRef}
+      type="button"
+      aria-label={label}
+      aria-haspopup="dialog"
+      aria-expanded={ctx.open}
+      className={cn(
+        "relative inline-flex items-center justify-center w-9 h-9 rounded-full",
+        "bg-surface border border-border text-muted-foreground",
+        "hover:bg-muted hover:text-foreground transition-colors",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+        className
+      )}
+      onClick={(e) => {
+        ctx.setOpen(!ctx.open);
+        onClick?.(e);
+      }}
+      {...props}
+    >
+      {/* Bell icon */}
+      <svg
+        width={16}
+        height={16}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+      </svg>
+
+      {/* Unread badge */}
+      {displayCount != null && (
+        <span
+          aria-hidden="true"
+          className={cn(
+            "absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1",
+            "rounded-full bg-primary text-primary-foreground",
+            "text-[9px] font-bold leading-4 flex items-center justify-center"
+          )}
+        >
+          {displayCount}
+        </span>
+      )}
+    </button>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// InboxContent — stub (full implementation in Task 4)
+// ---------------------------------------------------------------------------
+
+export interface InboxContentProps {
+  items: NotificationItemData[];
+  onMarkAllRead?: () => void;
+  onDismiss?: (id: string) => void;
+  viewAllHref?: string;
+  viewAllLabel?: string;
+  emptyState?: React.ReactNode;
+  width?: number | string;
+  maxHeight?: number | string;
+  className?: string;
+}
+
+export function InboxContent(_props: InboxContentProps) {
+  const ctx = useInboxContext("InboxContent");
+  if (!ctx.open) return null;
+  return (
+    <div role="dialog" aria-label="Notifications" tabIndex={-1}>
+      {/* full implementation in Task 4 */}
     </div>
   );
 }

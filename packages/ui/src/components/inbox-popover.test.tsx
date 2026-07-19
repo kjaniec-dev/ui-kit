@@ -1,8 +1,12 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
-import { renderHook, act } from "@testing-library/react";
+import { render, screen, renderHook, act } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import {
   formatRelativeTime,
   useInboxState,
+  InboxPopover,
+  InboxTrigger,
+  InboxContent,
   type NotificationItemData,
 } from "./inbox-popover";
 
@@ -99,5 +103,79 @@ describe("useInboxState", () => {
     const { result } = renderHook(() => useInboxState(makeItems()));
     act(() => result.current.dismiss("1")); // id "1" is unread
     expect(result.current.unreadCount).toBe(1);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// InboxTrigger tests
+// ---------------------------------------------------------------------------
+
+describe("InboxTrigger", () => {
+  it("renders a button with aria-label 'Notifications'", () => {
+    render(
+      <InboxPopover>
+        <InboxTrigger />
+        <InboxContent items={[]} />
+      </InboxPopover>
+    );
+    expect(screen.getByRole("button", { name: "Notifications" })).toBeInTheDocument();
+  });
+
+  it("shows the unread badge with count when unreadCount > 0", () => {
+    render(
+      <InboxPopover>
+        <InboxTrigger unreadCount={5} />
+        <InboxContent items={[]} />
+      </InboxPopover>
+    );
+    expect(screen.getByText("5")).toBeInTheDocument();
+  });
+
+  it("hides the badge when unreadCount is 0", () => {
+    render(
+      <InboxPopover>
+        <InboxTrigger unreadCount={0} />
+        <InboxContent items={[]} />
+      </InboxPopover>
+    );
+    expect(screen.queryByText("0")).not.toBeInTheDocument();
+  });
+
+  it("shows '99+' when unreadCount exceeds 99", () => {
+    render(
+      <InboxPopover>
+        <InboxTrigger unreadCount={150} />
+        <InboxContent items={[]} />
+      </InboxPopover>
+    );
+    expect(screen.getByText("99+")).toBeInTheDocument();
+  });
+
+  it("toggles the panel open on click", async () => {
+    render(
+      <InboxPopover>
+        <InboxTrigger />
+        <InboxContent items={[]} />
+      </InboxPopover>
+    );
+    const trigger = screen.getByRole("button", { name: "Notifications" });
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    await userEvent.click(trigger);
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+
+  it("closes the panel on Escape and returns focus to the trigger", async () => {
+    render(
+      <InboxPopover>
+        <InboxTrigger />
+        <InboxContent items={[]} />
+      </InboxPopover>
+    );
+    const trigger = screen.getByRole("button", { name: "Notifications" });
+    await userEvent.click(trigger);
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    await userEvent.keyboard("{Escape}");
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(document.activeElement).toBe(trigger);
   });
 });
