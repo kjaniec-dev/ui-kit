@@ -247,7 +247,7 @@ export const StepperItem = React.forwardRef<HTMLDivElement, StepperItemProps>(
           ref={ref}
           className={cn(
             "group relative flex items-center gap-3 z-10",
-            ctx.orientation === "vertical" ? "flex items-start w-full" : "bg-background px-2",
+            ctx.orientation === "vertical" ? "flex items-start w-full" : "",
             className
           )}
           {...props}

@@ -11,17 +11,48 @@ export type SliderProps = React.InputHTMLAttributes<HTMLInputElement>;
  * expressed as Tailwind utilities.
  */
 export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
-  ({ className, ...props }, ref) => (
-    <input
-      ref={ref}
-      type="range"
-      className={cn(
-        "kj-slider w-full h-1.5 rounded-full bg-input appearance-none cursor-pointer",
-        className
-      )}
-      {...props}
-    />
-  )
+  ({ className, style, value, defaultValue, min = 0, max = 100, onChange, ...props }, ref) => {
+    const [localValue, setLocalValue] = React.useState<number>(
+      Number(defaultValue ?? value ?? 50)
+    );
+    const isControlled = value !== undefined;
+    const currentVal = isControlled ? Number(value) : localValue;
+
+    const numMin = Number(min);
+    const numMax = Number(max);
+    const percentage = Math.min(
+      100,
+      Math.max(0, ((currentVal - numMin) / (numMax - numMin)) * 100)
+    );
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!isControlled) {
+        setLocalValue(Number(e.target.value));
+      }
+      onChange?.(e);
+    };
+
+    return (
+      <input
+        ref={ref}
+        type="range"
+        value={value}
+        defaultValue={defaultValue}
+        min={min}
+        max={max}
+        onChange={handleChange}
+        style={{
+          background: `linear-gradient(to right, var(--kj-primary) ${percentage}%, var(--kj-border, rgba(120, 120, 128, 0.2)) ${percentage}%)`,
+          ...style,
+        }}
+        className={cn(
+          "kj-slider w-full h-1.5 rounded-full appearance-none cursor-pointer accent-primary",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
 );
 Slider.displayName = "Slider";
 
