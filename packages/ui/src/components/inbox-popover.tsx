@@ -69,6 +69,16 @@ export interface InboxStateReturn {
   dismiss: (id: string) => void;
 }
 
+/**
+ * Local-state convenience hook for InboxPopover.
+ * Intended for demos, Storybook stories, and simple apps.
+ *
+ * NOTE: `initial` is used only as the seed value for `useState`.
+ * Re-rendering the parent with a new `initial` array does NOT reset
+ * the hook's state. This is intentional — the hook owns its state
+ * independently after mount. To reset from the outside, remount the
+ * component using a `key` prop.
+ */
 export function useInboxState(initial: NotificationItemData[]): InboxStateReturn {
   const [items, setItems] = React.useState<NotificationItemData[]>(initial);
 
