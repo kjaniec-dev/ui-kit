@@ -1,6 +1,9 @@
+// @vitest-environment jsdom
+import "@testing-library/jest-dom/vitest";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { isValidHex, hexToHsl, hslToHex, DEFAULT_COLOR_SWATCHES, ColorPickerSwatch } from "./color-picker";
+
 
 describe("Color Picker Utilities", () => {
   it("exports DEFAULT_COLOR_SWATCHES array with 12 colors", () => {

@@ -125,6 +125,7 @@ export const ColorPickerSwatch = React.forwardRef<
     <button
       ref={ref}
       type="button"
+      aria-pressed={selected}
       style={{ backgroundColor: color, ...style }}
       className={cn(
         "relative shrink-0 rounded-full border border-border/50 shadow-sm transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary flex items-center justify-center text-white text-xs font-bold",
