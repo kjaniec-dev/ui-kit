@@ -272,8 +272,8 @@ export const StepperSeparator = React.forwardRef<HTMLDivElement, StepperSeparato
         ref={ref}
         className={cn(
           ctx.orientation === "horizontal"
-            ? "flex-1 h-[2px] bg-zinc-800 transition-all duration-300"
-            : "w-[2px] bg-zinc-800 absolute left-[17px] top-8 bottom-0 -ml-px z-0",
+            ? "flex-1 h-[2px] bg-border transition-all duration-300"
+            : "w-[2px] bg-border absolute left-[17px] top-8 bottom-0 -ml-px z-0",
           className
         )}
         {...props}
@@ -344,7 +344,7 @@ export const StepperTrigger = React.forwardRef<HTMLButtonElement, StepperTrigger
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         className={cn(
-          "flex items-center gap-3 bg-transparent border-0 p-0 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-md disabled:cursor-not-allowed disabled:opacity-50",
+          "flex items-center gap-3 bg-transparent border-0 p-0 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md disabled:cursor-not-allowed disabled:opacity-50",
           ctx.orientation === "vertical" ? "w-full" : "",
           className
         )}
@@ -377,10 +377,10 @@ export const StepperIndicator = React.forwardRef<HTMLSpanElement, StepperIndicat
         className={cn(
           "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border text-sm font-semibold transition-all duration-200",
           isCompleted
-            ? "bg-teal-600 border-teal-600 text-white"
+            ? "bg-primary border-primary text-primary-foreground"
             : isActive
-            ? "border-amber-500 text-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.2)]"
-            : "border-zinc-700 text-zinc-400 bg-zinc-900/50",
+            ? "border-primary text-primary bg-primary/10 ring-2 ring-primary/20"
+            : "border-border text-muted-foreground bg-muted/40",
           className
         )}
         {...props}
@@ -410,7 +410,7 @@ export const StepperTitle = React.forwardRef<HTMLSpanElement, StepperTitleProps>
         ref={ref}
         className={cn(
           "text-sm font-medium transition-colors duration-200",
-          isActive ? "text-zinc-100 font-semibold" : "text-zinc-400",
+          isActive ? "text-foreground font-semibold" : "text-muted-foreground",
           className
         )}
         {...props}
@@ -430,7 +430,7 @@ export const StepperDescription = React.forwardRef<HTMLSpanElement, StepperDescr
     return (
       <span
         ref={ref}
-        className={cn("text-xs text-zinc-500 text-left block", className)}
+        className={cn("text-xs text-muted-foreground text-left block", className)}
         {...props}
       />
     );

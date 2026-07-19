@@ -1837,7 +1837,7 @@ function Gallery() {
               </TabsContent>
             </Tabs>
 
-            <Box>
+            <Box className="mt-10">
               <Sub>Section header</Sub>
               <div className="space-y-8 p-4 bg-canvas rounded-kj-md border border-border">
                 <SectionHeader
