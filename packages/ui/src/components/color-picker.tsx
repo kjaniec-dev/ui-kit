@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "../lib/cn";
+import { Popover, PopoverTrigger, PopoverContent } from "./popover";
 
 export const DEFAULT_COLOR_SWATCHES = [
   "#EF4444", // Red
@@ -140,4 +141,184 @@ export const ColorPickerSwatch = React.forwardRef<
   );
 });
 ColorPickerSwatch.displayName = "ColorPickerSwatch";
+
+export interface ColorPickerProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange" | "value" | "defaultValue"> {
+  /** Current hex color value (controlled). */
+  value?: string;
+  /** Initial hex color value (uncontrolled). Defaults to "#3B82F6". */
+  defaultValue?: string;
+  /** Called when color changes. */
+  onChange?: (hex: string) => void;
+  /** Array of hex color strings for preset palette. Defaults to DEFAULT_COLOR_SWATCHES. */
+  swatches?: readonly string[] | string[];
+  /** Whether the picker is disabled. */
+  disabled?: boolean;
+  /** Whether to show the manual Hex text input inside the popover. Defaults to true. */
+  showHexInput?: boolean;
+  /** Additional class name for the container. */
+  className?: string;
+}
+
+export const ColorPicker = React.forwardRef<HTMLDivElement, ColorPickerProps>(
+  (
+    {
+      value,
+      defaultValue = "#3B82F6",
+      onChange,
+      swatches = DEFAULT_COLOR_SWATCHES,
+      disabled = false,
+      showHexInput = true,
+      className,
+      ...props
+    },
+    ref
+  ) => {
+    const isControlled = value !== undefined;
+    const [localColor, setLocalColor] = React.useState<string>(
+      normalizeHex(defaultValue)
+    );
+    const color = isControlled ? normalizeHex(value) : localColor;
+
+    const [hexInputValue, setHexInputValue] = React.useState<string>(color);
+
+    React.useEffect(() => {
+      setHexInputValue(color);
+    }, [color]);
+
+    const handleColorChange = React.useCallback(
+      (newHex: string) => {
+        const normalized = normalizeHex(newHex);
+        if (!isControlled) {
+          setLocalColor(normalized);
+        }
+        onChange?.(normalized);
+      },
+      [isControlled, onChange]
+    );
+
+    const hsl = React.useMemo(() => hexToHsl(color), [color]);
+
+    const handleHueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const h = Number(e.target.value);
+      const newHex = hslToHex(h, Math.max(hsl.s, 40), Math.max(hsl.l, 30));
+      handleColorChange(newHex);
+    };
+
+    const handleHexSubmit = () => {
+      if (isValidHex(hexInputValue)) {
+        handleColorChange(hexInputValue);
+      } else {
+        setHexInputValue(color);
+      }
+    };
+
+    return (
+      <div ref={ref} className={cn("inline-block", className)} {...props}>
+        <Popover>
+          <PopoverTrigger asChild>
+            <button
+              type="button"
+              disabled={disabled}
+              aria-label={`Select color, current ${color}`}
+              className={cn(
+                "inline-flex items-center gap-2.5 px-3 py-1.5 rounded-kj-md border border-border bg-surface text-sm font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
+              )}
+            >
+              <span
+                style={{ backgroundColor: color }}
+                className="w-5 h-5 rounded-full border border-border/50 shadow-sm shrink-0"
+              />
+              <span className="font-mono text-xs uppercase">{color}</span>
+              <svg
+                width={12}
+                height={12}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                className="text-muted-foreground ml-auto"
+                aria-hidden="true"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+          </PopoverTrigger>
+          <PopoverContent side="bottom" align="start" className="w-64 p-3.5 space-y-3.5">
+            {/* Header Banner */}
+            <div className="flex items-center gap-3 p-2 rounded-kj-md bg-muted/40 border border-border">
+              <span
+                style={{ backgroundColor: color }}
+                className="w-8 h-8 rounded-full border border-border/50 shadow-sm shrink-0"
+              />
+              <div>
+                <p className="text-xs text-muted-foreground">Selected Color</p>
+                <p className="text-sm font-mono font-bold text-foreground uppercase">{color}</p>
+              </div>
+            </div>
+
+            {/* Swatches Grid */}
+            <div className="space-y-1.5">
+              <p className="text-xs font-semibold text-muted-foreground">Preset Swatches</p>
+              <div className="grid grid-cols-6 gap-2">
+                {swatches.map((swatch) => {
+                  const normalizedSwatch = normalizeHex(swatch);
+                  return (
+                    <ColorPickerSwatch
+                      key={swatch}
+                      color={swatch}
+                      selected={normalizedSwatch === color}
+                      aria-label={`Select color ${swatch}`}
+                      onClick={() => handleColorChange(swatch)}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Hue Slider */}
+            <div className="space-y-1.5">
+              <p className="text-xs font-semibold text-muted-foreground">Hue</p>
+              <input
+                type="range"
+                min={0}
+                max={360}
+                value={hsl.h}
+                onChange={handleHueChange}
+                aria-label="Hue slider"
+                className="w-full h-3 rounded-full appearance-none cursor-pointer"
+                style={{
+                  background:
+                    "linear-gradient(to right, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%)",
+                }}
+              />
+            </div>
+
+            {/* Manual Hex Input */}
+            {showHexInput && (
+              <div className="space-y-1.5">
+                <p className="text-xs font-semibold text-muted-foreground">Hex Code</p>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={hexInputValue}
+                    onChange={(e) => setHexInputValue(e.target.value)}
+                    onBlur={handleHexSubmit}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") handleHexSubmit();
+                    }}
+                    placeholder="#000000"
+                    className="flex-1 px-2.5 py-1 text-xs font-mono rounded-kj-md border border-border bg-surface text-foreground uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  />
+                </div>
+              </div>
+            )}
+          </PopoverContent>
+        </Popover>
+      </div>
+    );
+  }
+);
+ColorPicker.displayName = "ColorPicker";
+
 

@@ -2,7 +2,8 @@
 import "@testing-library/jest-dom/vitest";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { isValidHex, hexToHsl, hslToHex, DEFAULT_COLOR_SWATCHES, ColorPickerSwatch } from "./color-picker";
+import userEvent from "@testing-library/user-event";
+import { isValidHex, hexToHsl, hslToHex, DEFAULT_COLOR_SWATCHES, ColorPickerSwatch, ColorPicker } from "./color-picker";
 
 
 describe("Color Picker Utilities", () => {
@@ -58,5 +59,47 @@ describe("ColorPickerSwatch", () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 });
+
+describe("ColorPicker", () => {
+  it("renders trigger button displaying initial hex value", () => {
+    render(<ColorPicker defaultValue="#3B82F6" />);
+    expect(screen.getByRole("button", { name: /#3B82F6/i })).toBeInTheDocument();
+  });
+
+  it("opens popover on click and shows swatch grid", async () => {
+    render(<ColorPicker defaultValue="#3B82F6" />);
+    const trigger = screen.getByRole("button", { name: /#3B82F6/i });
+    await userEvent.click(trigger);
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+
+  it("selecting a swatch calls onChange and updates selected color", async () => {
+    const onChange = vi.fn();
+    render(<ColorPicker defaultValue="#3B82F6" onChange={onChange} />);
+    const trigger = screen.getByRole("button", { name: /#3B82F6/i });
+    await userEvent.click(trigger);
+    const redSwatch = screen.getByRole("button", { name: "Select color #EF4444" });
+    await userEvent.click(redSwatch);
+    expect(onChange).toHaveBeenCalledWith("#EF4444");
+  });
+
+  it("typing a valid hex value into input updates the color", async () => {
+    const onChange = vi.fn();
+    render(<ColorPicker defaultValue="#3B82F6" onChange={onChange} />);
+    await userEvent.click(screen.getByRole("button", { name: /#3B82F6/i }));
+    const hexInput = screen.getByPlaceholderText("#000000");
+    await userEvent.clear(hexInput);
+    await userEvent.type(hexInput, "#10B981{Enter}");
+    expect(onChange).toHaveBeenCalledWith("#10B981");
+  });
+
+  it("does not open popover when disabled", async () => {
+    render(<ColorPicker disabled defaultValue="#3B82F6" />);
+    const trigger = screen.getByRole("button");
+    await userEvent.click(trigger);
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+});
+
 
 
