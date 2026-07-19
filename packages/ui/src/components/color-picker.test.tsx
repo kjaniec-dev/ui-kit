@@ -3,8 +3,7 @@ import "@testing-library/jest-dom/vitest";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { isValidHex, hexToHsl, hslToHex, DEFAULT_COLOR_SWATCHES, ColorPickerSwatch, ColorPicker } from "./color-picker";
-
+import { isValidHex, hexToHsl, hslToHex, DEFAULT_COLOR_SWATCHES, ColorPickerSwatch, ColorPicker, ColorPickerField } from "./color-picker";
 
 describe("Color Picker Utilities", () => {
   it("exports DEFAULT_COLOR_SWATCHES array with 12 colors", () => {
@@ -100,6 +99,23 @@ describe("ColorPicker", () => {
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 });
+
+describe("ColorPickerField", () => {
+  it("renders label, hint, and error message", () => {
+    render(
+      <ColorPickerField
+        label="Brand Color"
+        hint="Primary theme accent"
+        error="Invalid color"
+        defaultValue="#3B82F6"
+      />
+    );
+    expect(screen.getByText("Brand Color")).toBeInTheDocument();
+    expect(screen.getByText("Primary theme accent")).toBeInTheDocument();
+    expect(screen.getByText("Invalid color")).toBeInTheDocument();
+  });
+});
+
 
 
 

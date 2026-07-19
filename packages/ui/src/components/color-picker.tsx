@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cn } from "../lib/cn";
 import { Popover, PopoverTrigger, PopoverContent } from "./popover";
+import { Field, Label, Hint } from "./field";
 
 export const DEFAULT_COLOR_SWATCHES = [
   "#EF4444", // Red
@@ -323,5 +324,29 @@ export const ColorPicker = React.forwardRef<HTMLDivElement, ColorPickerProps>(
   }
 );
 ColorPicker.displayName = "ColorPicker";
+
+export interface ColorPickerFieldProps extends ColorPickerProps {
+  label?: React.ReactNode;
+  hint?: React.ReactNode;
+  error?: React.ReactNode;
+  required?: boolean;
+}
+
+export const ColorPickerField = React.forwardRef<
+  HTMLDivElement,
+  ColorPickerFieldProps
+>(({ label, hint, error, required, ...props }, ref) => {
+  return (
+    <Field>
+      {label && <Label required={required}>{label}</Label>}
+      <ColorPicker ref={ref} {...props} />
+      {hint && <Hint>{hint}</Hint>}
+      {error && <Hint error>{error}</Hint>}
+    </Field>
+  );
+});
+ColorPickerField.displayName = "ColorPickerField";
+
+
 
 
