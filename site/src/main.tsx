@@ -501,6 +501,24 @@ const INBOX_ITEMS: NotificationItemData[] = [
   },
 ];
 
+const codeInbox = `import { InboxPopover, InboxTrigger, InboxContent, useInboxState } from "@kjaniec-dev/ui";
+
+function NotificationCenter() {
+  const { items, unreadCount, markAllRead, dismiss } = useInboxState(initialItems);
+
+  return (
+    <InboxPopover>
+      <InboxTrigger unreadCount={unreadCount} />
+      <InboxContent
+        items={items}
+        onMarkAllRead={markAllRead}
+        onDismiss={dismiss}
+        viewAllHref="/notifications"
+      />
+    </InboxPopover>
+  );
+}`;
+
 function InboxDemo() {
   const { items, unreadCount, markAllRead, dismiss } = useInboxState(INBOX_ITEMS);
   return (
@@ -1563,9 +1581,10 @@ function Gallery() {
             title="InboxPopover"
             desc="Bell-triggered notification inbox with unread badge, mark-all-read, and per-item dismiss."
             components={["InboxPopover", "InboxTrigger", "InboxContent", "NotificationItem", "useInboxState"]}
+            code={codeInbox}
           >
             <Box>
-              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <div className="flex justify-end">
                 <InboxDemo />
               </div>
             </Box>
