@@ -234,7 +234,16 @@ export {
   type NotificationItemData,
   type InboxStateReturn,
 } from "./components/inbox-popover";
-
-
-
-
+export {
+  ColorPicker,
+  ColorPickerField,
+  ColorPickerSwatch,
+  DEFAULT_COLOR_SWATCHES,
+  isValidHex,
+  normalizeHex,
+  hexToHsl,
+  hslToHex,
+  type ColorPickerProps,
+  type ColorPickerFieldProps,
+  type ColorPickerSwatchProps,
+} from "./components/color-picker";
