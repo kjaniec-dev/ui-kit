@@ -11,6 +11,7 @@ describe("Color Picker Utilities", () => {
     expect(isValidHex("#3B82F6")).toBe(true);
     expect(isValidHex("#fff")).toBe(true);
     expect(isValidHex("3B82F6")).toBe(true);
+    expect(isValidHex(" #3B82F6 ")).toBe(true);
     expect(isValidHex("#3B82")).toBe(false);
     expect(isValidHex("invalid")).toBe(false);
   });
@@ -23,8 +24,14 @@ describe("Color Picker Utilities", () => {
     expect(hsl.l).toBeGreaterThanOrEqual(0);
   });
 
+  it("hexToHsl handles invalid hex gracefully", () => {
+    expect(hexToHsl("invalid")).toEqual({ h: 0, s: 0, l: 0 });
+  });
+
   it("hslToHex converts HSL values back to hex string", () => {
     const hex = hslToHex(217, 91, 60);
     expect(hex.toUpperCase()).toMatch(/^#[0-9A-F]{6}$/);
+    expect(hslToHex(360, 100, 50)).toBe("#FF0000");
   });
 });
+

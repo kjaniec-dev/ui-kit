@@ -19,7 +19,8 @@ export const DEFAULT_COLOR_SWATCHES = [
 ] as const;
 
 export function isValidHex(hex: string): boolean {
-  const clean = hex.startsWith("#") ? hex.slice(1) : hex;
+  const trimmed = hex.trim();
+  const clean = trimmed.startsWith("#") ? trimmed.slice(1) : trimmed;
   return /^[0-9A-Fa-f]{3}$|^[0-9A-Fa-f]{6}$/.test(clean);
 }
 
@@ -33,6 +34,7 @@ export function normalizeHex(hex: string): string {
 }
 
 export function hexToHsl(hex: string): { h: number; s: number; l: number } {
+  if (!isValidHex(hex)) return { h: 0, s: 0, l: 0 };
   const normalized = normalizeHex(hex);
   const r = parseInt(normalized.slice(1, 3), 16) / 255;
   const g = parseInt(normalized.slice(3, 5), 16) / 255;
@@ -69,27 +71,28 @@ export function hexToHsl(hex: string): { h: number; s: number; l: number } {
 }
 
 export function hslToHex(h: number, s: number, l: number): string {
+  const normalizedH = ((h % 360) + 360) % 360;
   const sPct = s / 100;
   const lPct = l / 100;
 
   const c = (1 - Math.abs(2 * lPct - 1)) * sPct;
-  const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+  const x = c * (1 - Math.abs(((normalizedH / 60) % 2) - 1));
   const m = lPct - c / 2;
   let r = 0;
   let g = 0;
   let b = 0;
 
-  if (0 <= h && h < 60) {
+  if (0 <= normalizedH && normalizedH < 60) {
     r = c; g = x; b = 0;
-  } else if (60 <= h && h < 120) {
+  } else if (60 <= normalizedH && normalizedH < 120) {
     r = x; g = c; b = 0;
-  } else if (120 <= h && h < 180) {
+  } else if (120 <= normalizedH && normalizedH < 180) {
     r = 0; g = c; b = x;
-  } else if (180 <= h && h < 240) {
+  } else if (180 <= normalizedH && normalizedH < 240) {
     r = 0; g = x; b = c;
-  } else if (240 <= h && h < 300) {
+  } else if (240 <= normalizedH && normalizedH < 300) {
     r = x; g = 0; b = c;
-  } else if (300 <= h && h < 360) {
+  } else if (300 <= normalizedH && normalizedH < 360) {
     r = c; g = 0; b = x;
   }
 
