@@ -119,7 +119,12 @@ import {
   useStepper,
   Rating,
   RatingField,
-  RatingSummary
+  RatingSummary,
+  InboxPopover,
+  InboxTrigger,
+  InboxContent,
+  useInboxState,
+  type NotificationItemData
 } from "@kjaniec-dev/ui";
 import "./index.css";
 import { ExampleTabs } from "./example-tabs";
@@ -349,6 +354,7 @@ const NAV = [
   ["navigation", "Navigation"],
   ["data", "Table"],
   ["overlays", "Overlays"],
+  ["inbox-popover", "InboxPopover"],
   ["primitives", "Primitives"],
   ["layouts", "Layouts"],
 ];
@@ -456,6 +462,57 @@ function StepperDemo() {
         </Stepper>
       </Box>
     </div>
+  );
+}
+
+const INBOX_ITEMS: NotificationItemData[] = [
+  {
+    id: "i1",
+    title: <span>Deployment <strong>prod-v3.2</strong> succeeded</span>,
+    icon: (
+      <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+        <path d="M20 6 9 17l-5-5" />
+      </svg>
+    ),
+    timestamp: new Date(Date.now() - 2 * 60_000),
+    read: false,
+    href: "#",
+  },
+  {
+    id: "i2",
+    title: <span><strong>Alex</strong> approved your PR</span>,
+    body: '"LGTM 🚀 Merging now."',
+    avatarFallback: "AL",
+    timestamp: new Date(Date.now() - 20 * 60_000),
+    read: false,
+    href: "#",
+  },
+  {
+    id: "i3",
+    title: <span>Invoice <strong>#1042</strong> paid</span>,
+    icon: (
+      <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+        <rect x="2" y="5" width="20" height="14" rx="2" /><line x1="2" y1="10" x2="22" y2="10" />
+      </svg>
+    ),
+    timestamp: new Date(Date.now() - 3_600_000),
+    read: true,
+    href: "#",
+  },
+];
+
+function InboxDemo() {
+  const { items, unreadCount, markAllRead, dismiss } = useInboxState(INBOX_ITEMS);
+  return (
+    <InboxPopover>
+      <InboxTrigger unreadCount={unreadCount} />
+      <InboxContent
+        items={items}
+        onMarkAllRead={markAllRead}
+        onDismiss={dismiss}
+        viewAllHref="#"
+      />
+    </InboxPopover>
   );
 }
 
@@ -1497,6 +1554,19 @@ function Gallery() {
                 <Tooltip content="Contextual tooltip">
                   <Button variant="ghost">Hover for Tooltip</Button>
                 </Tooltip>
+              </div>
+            </Box>
+          </Sec>
+
+          <Sec
+            id="inbox-popover"
+            title="InboxPopover"
+            desc="Bell-triggered notification inbox with unread badge, mark-all-read, and per-item dismiss."
+            components={["InboxPopover", "InboxTrigger", "InboxContent", "NotificationItem", "useInboxState"]}
+          >
+            <Box>
+              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <InboxDemo />
               </div>
             </Box>
           </Sec>
