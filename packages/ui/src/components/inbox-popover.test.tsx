@@ -9,7 +9,6 @@ import {
   InboxContent,
   NotificationItem,
   type NotificationItemData,
-  type NotificationItemProps,
   type InboxContentProps,
 } from "./inbox-popover";
 

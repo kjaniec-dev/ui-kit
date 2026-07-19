@@ -220,5 +220,21 @@ export {
   type ProjectCardMetric,
 } from "./components/project-card";
 
+export {
+  InboxPopover,
+  InboxTrigger,
+  InboxContent,
+  NotificationItem,
+  useInboxState,
+  formatRelativeTime,
+  type InboxPopoverProps,
+  type InboxTriggerProps,
+  type InboxContentProps,
+  type NotificationItemProps,
+  type NotificationItemData,
+  type InboxStateReturn,
+} from "./components/inbox-popover";
+
+
 
 
