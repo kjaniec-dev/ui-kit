@@ -43,4 +43,12 @@ describe("formatRelativeTime", () => {
     const iso = new Date(Date.now() - 2 * 60_000).toISOString();
     expect(formatRelativeTime(iso)).toBe("2 min ago");
   });
+
+  it("returns empty string for unparseable date strings", () => {
+    expect(formatRelativeTime("not-a-date")).toBe("");
+  });
+
+  it('still returns "Yesterday" for dates 47 hours ago (upper bound of floor window)', () => {
+    expect(formatRelativeTime(makeDate(47 * 3_600_000))).toBe("Yesterday");
+  });
 });

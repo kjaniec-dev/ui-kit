@@ -42,6 +42,7 @@ export interface NotificationItemData {
 
 export function formatRelativeTime(date: Date | string): string {
   const d = typeof date === "string" ? new Date(date) : date;
+  if (isNaN(d.getTime())) return "";
   const diffMs = Date.now() - d.getTime();
   const diffMin = Math.floor(diffMs / 60_000);
   const diffH = Math.floor(diffMs / 3_600_000);
@@ -50,6 +51,7 @@ export function formatRelativeTime(date: Date | string): string {
   if (diffMin < 1) return "Just now";
   if (diffMin < 60) return `${diffMin} min ago`;
   if (diffH < 24) return diffH === 1 ? "1 hour ago" : `${diffH} hours ago`;
+  // "Yesterday" fires from 24h to 47h59m (floor-based). Intentional — matches common app conventions.
   if (diffD === 1) return "Yesterday";
   if (diffD < 7) return `${diffD} days ago`;
   return d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
