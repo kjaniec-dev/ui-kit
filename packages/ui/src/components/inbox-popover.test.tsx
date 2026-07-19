@@ -7,7 +7,10 @@ import {
   InboxPopover,
   InboxTrigger,
   InboxContent,
+  NotificationItem,
   type NotificationItemData,
+  type NotificationItemProps,
+  type InboxContentProps,
 } from "./inbox-popover";
 
 describe("formatRelativeTime", () => {
@@ -179,3 +182,154 @@ describe("InboxTrigger", () => {
     expect(document.activeElement).toBe(trigger);
   });
 });
+
+// ---------------------------------------------------------------------------
+// InboxContent & NotificationItem tests
+// ---------------------------------------------------------------------------
+
+const NOW = new Date();
+const UNREAD_ITEM: NotificationItemData = {
+  id: "n1",
+  title: "Deployment succeeded",
+  timestamp: NOW,
+  read: false,
+};
+const READ_ITEM: NotificationItemData = {
+  id: "n2",
+  title: "Invoice paid",
+  body: "Invoice #1042",
+  timestamp: NOW,
+  read: true,
+};
+
+function Wrapper({ children }: { children: React.ReactNode }) {
+  return (
+    <InboxPopover>
+      <InboxTrigger />
+      {children}
+    </InboxPopover>
+  );
+}
+
+async function openPanel(items: NotificationItemData[], props: Partial<InboxContentProps> = {}) {
+  const utils = render(
+    <Wrapper>
+      <InboxContent items={items} {...props} />
+    </Wrapper>
+  );
+  await userEvent.click(screen.getByRole("button", { name: /notifications/i }));
+  return utils;
+}
+
+describe("InboxContent — empty state", () => {
+  it("shows the default empty state when items is empty", async () => {
+    await openPanel([]);
+    expect(screen.getByText("All caught up")).toBeInTheDocument();
+  });
+
+  it("renders a custom emptyState when provided", async () => {
+    await openPanel([], { emptyState: <p>Nothing here</p> });
+    expect(screen.getByText("Nothing here")).toBeInTheDocument();
+  });
+
+  it("'Mark all read' is disabled when items is empty", async () => {
+    await openPanel([]);
+    const btn = screen.getByRole("button", { name: /mark all read/i });
+    expect(btn).toBeDisabled();
+  });
+
+  it("does not show the footer link when viewAllHref is not provided", async () => {
+    await openPanel([]);
+    expect(screen.queryByRole("link", { name: /view all/i })).not.toBeInTheDocument();
+  });
+});
+
+describe("InboxContent — with items", () => {
+  it("renders notification titles", async () => {
+    await openPanel([UNREAD_ITEM, READ_ITEM]);
+    expect(screen.getByText("Deployment succeeded")).toBeInTheDocument();
+    expect(screen.getByText("Invoice paid")).toBeInTheDocument();
+  });
+
+  it("renders the body when provided", async () => {
+    await openPanel([READ_ITEM]);
+    expect(screen.getByText("Invoice #1042")).toBeInTheDocument();
+  });
+
+  it("calls onMarkAllRead when 'Mark all read' is clicked", async () => {
+    const onMarkAllRead = vi.fn();
+    await openPanel([UNREAD_ITEM], { onMarkAllRead });
+    await userEvent.click(screen.getByRole("button", { name: /mark all read/i }));
+    expect(onMarkAllRead).toHaveBeenCalledTimes(1);
+  });
+
+  it("'Mark all read' is disabled when all items are read", async () => {
+    await openPanel([READ_ITEM]);
+    expect(screen.getByRole("button", { name: /mark all read/i })).toBeDisabled();
+  });
+
+  it("renders the 'View all' footer link when viewAllHref is provided", async () => {
+    await openPanel([UNREAD_ITEM], { viewAllHref: "/notifications" });
+    const link = screen.getByRole("link", { name: /view all/i });
+    expect(link).toHaveAttribute("href", "/notifications");
+  });
+});
+
+describe("NotificationItem", () => {
+  it("calls onDismiss with the item id when × is clicked", async () => {
+    const onDismiss = vi.fn();
+    render(<NotificationItem item={UNREAD_ITEM} onDismiss={onDismiss} />);
+    const dismissBtn = screen.getByRole("button", { name: "Dismiss" });
+    await userEvent.click(dismissBtn);
+    expect(onDismiss).toHaveBeenCalledWith("n1");
+  });
+
+  it("clicking dismiss does not also fire onClick on the row", async () => {
+    const onClick = vi.fn();
+    const item = { ...UNREAD_ITEM, onClick };
+    const onDismiss = vi.fn();
+    render(<NotificationItem item={item} onDismiss={onDismiss} />);
+    await userEvent.click(screen.getByRole("button", { name: "Dismiss" }));
+    expect(onClick).not.toHaveBeenCalled();
+  });
+
+  it("renders the row as a link when href is provided", () => {
+    const item = { ...UNREAD_ITEM, href: "/deploy/123" };
+    render(<NotificationItem item={item} />);
+    expect(screen.getByRole("link")).toHaveAttribute("href", "/deploy/123");
+  });
+
+  it("renders the row as a button when href is absent", () => {
+    render(<NotificationItem item={UNREAD_ITEM} />);
+    const buttons = screen.getAllByRole("button");
+    const rowBtn = buttons.find((b) => b.getAttribute("aria-label") !== "Dismiss");
+    expect(rowBtn).toBeInTheDocument();
+  });
+
+  it("renders icon when provided", () => {
+    const item = {
+      ...UNREAD_ITEM,
+      icon: <svg data-testid="custom-icon" />,
+    };
+    render(<NotificationItem item={item} />);
+    expect(screen.getByTestId("custom-icon")).toBeInTheDocument();
+  });
+
+  it("renders avatar image when avatarSrc is provided", () => {
+    const item = { ...UNREAD_ITEM, avatarSrc: "https://example.com/avatar.png", avatarFallback: "KJ" };
+    render(<NotificationItem item={item} />);
+    expect(screen.getByRole("img")).toHaveAttribute("src", "https://example.com/avatar.png");
+  });
+
+  it("renders initials when avatarFallback is provided without avatarSrc", () => {
+    const item = { ...UNREAD_ITEM, avatarFallback: "KJ" };
+    render(<NotificationItem item={item} />);
+    expect(screen.getByText("KJ")).toBeInTheDocument();
+  });
+
+  it("omits the icon/avatar slot when neither is provided", () => {
+    render(<NotificationItem item={UNREAD_ITEM} />);
+    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+  });
+});
+
