@@ -201,7 +201,9 @@ export const ColorPicker = React.forwardRef<HTMLDivElement, ColorPickerProps>(
 
     const handleHueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const h = Number(e.target.value);
-      const newHex = hslToHex(h, Math.max(hsl.s, 40), Math.max(hsl.l, 30));
+      const s = hsl.s === 0 ? 100 : hsl.s;
+      const l = hsl.s === 0 ? 50 : hsl.l;
+      const newHex = hslToHex(h, s, l);
       handleColorChange(newHex);
     };
 
@@ -301,6 +303,7 @@ export const ColorPicker = React.forwardRef<HTMLDivElement, ColorPickerProps>(
                 <div className="flex items-center gap-2">
                   <input
                     type="text"
+                    aria-label="Hex Code"
                     value={hexInputValue}
                     onChange={(e) => setHexInputValue(e.target.value)}
                     onBlur={handleHexSubmit}
