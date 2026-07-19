@@ -124,7 +124,10 @@ import {
   InboxTrigger,
   InboxContent,
   useInboxState,
-  type NotificationItemData
+  type NotificationItemData,
+  ColorPicker,
+  ColorPickerField,
+  ColorPickerSwatch
 } from "@kjaniec-dev/ui";
 import "./index.css";
 import { ExampleTabs } from "./example-tabs";
@@ -350,6 +353,7 @@ const NAV = [
   ["forms", "Forms"],
   ["selection", "Selection"],
   ["rating", "Rating"],
+  ["color-picker", "ColorPicker"],
   ["cards", "Cards"],
   ["navigation", "Navigation"],
   ["data", "Table"],
@@ -531,6 +535,38 @@ function InboxDemo() {
         viewAllHref="#"
       />
     </InboxPopover>
+  );
+}
+
+const codeColorPicker = `import { ColorPickerField } from "@kjaniec-dev/ui";
+
+export function AccentColorPicker() {
+  const [color, setColor] = React.useState("#3B82F6");
+  return (
+    <ColorPickerField
+      label="Accent Color"
+      hint="Used for primary buttons and interactive highlights"
+      value={color}
+      onChange={setColor}
+    />
+  );
+}`;
+
+function ColorPickerDemo() {
+  const [color, setColor] = React.useState("#3B82F6");
+  return (
+    <div className="space-y-4 max-w-sm">
+      <ColorPickerField
+        label="Accent Color"
+        hint="Used for primary buttons and interactive highlights"
+        value={color}
+        onChange={setColor}
+      />
+      <div className="p-3 rounded-kj-md border border-border flex items-center gap-3">
+        <span className="w-6 h-6 rounded-full border border-border shrink-0" style={{ backgroundColor: color }} />
+        <span className="text-xs font-mono text-muted-foreground uppercase">Active: {color}</span>
+      </div>
+    </div>
   );
 }
 
@@ -1239,6 +1275,18 @@ function Gallery() {
                   { stars: 1, count: 25, percentage: 2 },
                 ]}
               />
+            </Box>
+          </Sec>
+
+          <Sec
+            id="color-picker"
+            title="ColorPicker"
+            desc="Swatch-triggered color picker popover with preset swatches, Hue slider, and Hex input."
+            components={["ColorPicker", "ColorPickerField", "ColorPickerSwatch"]}
+            code={codeColorPicker}
+          >
+            <Box>
+              <ColorPickerDemo />
             </Box>
           </Sec>
 
