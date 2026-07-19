@@ -58,6 +58,40 @@ export function formatRelativeTime(date: Date | string): string {
 }
 
 // ---------------------------------------------------------------------------
+// useInboxState — optional local-state convenience hook
+// ---------------------------------------------------------------------------
+
+export interface InboxStateReturn {
+  items: NotificationItemData[];
+  unreadCount: number;
+  markRead: (id: string) => void;
+  markAllRead: () => void;
+  dismiss: (id: string) => void;
+}
+
+export function useInboxState(initial: NotificationItemData[]): InboxStateReturn {
+  const [items, setItems] = React.useState<NotificationItemData[]>(initial);
+
+  const unreadCount = items.filter((i) => !i.read).length;
+
+  const markRead = React.useCallback((id: string) => {
+    setItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, read: true } : item))
+    );
+  }, []);
+
+  const markAllRead = React.useCallback(() => {
+    setItems((prev) => prev.map((item) => ({ ...item, read: true })));
+  }, []);
+
+  const dismiss = React.useCallback((id: string) => {
+    setItems((prev) => prev.filter((item) => item.id !== id));
+  }, []);
+
+  return { items, unreadCount, markRead, markAllRead, dismiss };
+}
+
+// ---------------------------------------------------------------------------
 // InboxPopover component skeleton (to be completed in subsequent tasks)
 // ---------------------------------------------------------------------------
 

@@ -1,5 +1,10 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
-import { formatRelativeTime } from "./inbox-popover";
+import { renderHook, act } from "@testing-library/react";
+import {
+  formatRelativeTime,
+  useInboxState,
+  type NotificationItemData,
+} from "./inbox-popover";
 
 describe("formatRelativeTime", () => {
   afterEach(() => {
@@ -50,5 +55,49 @@ describe("formatRelativeTime", () => {
 
   it('still returns "Yesterday" for dates 47 hours ago (upper bound of floor window)', () => {
     expect(formatRelativeTime(makeDate(47 * 3_600_000))).toBe("Yesterday");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// useInboxState tests
+// ---------------------------------------------------------------------------
+
+const ITEMS: NotificationItemData[] = [
+  { id: "1", title: "First", timestamp: new Date(), read: false },
+  { id: "2", title: "Second", timestamp: new Date(), read: false },
+  { id: "3", title: "Third", timestamp: new Date(), read: true },
+];
+
+describe("useInboxState", () => {
+  it("initialises with correct unreadCount", () => {
+    const { result } = renderHook(() => useInboxState(ITEMS));
+    expect(result.current.unreadCount).toBe(2);
+  });
+
+  it("markRead sets a single item to read and decrements unreadCount", () => {
+    const { result } = renderHook(() => useInboxState(ITEMS));
+    act(() => result.current.markRead("1"));
+    expect(result.current.items.find((i) => i.id === "1")?.read).toBe(true);
+    expect(result.current.unreadCount).toBe(1);
+  });
+
+  it("markAllRead sets all items to read", () => {
+    const { result } = renderHook(() => useInboxState(ITEMS));
+    act(() => result.current.markAllRead());
+    expect(result.current.items.every((i) => i.read)).toBe(true);
+    expect(result.current.unreadCount).toBe(0);
+  });
+
+  it("dismiss removes the item from the list", () => {
+    const { result } = renderHook(() => useInboxState(ITEMS));
+    act(() => result.current.dismiss("2"));
+    expect(result.current.items.find((i) => i.id === "2")).toBeUndefined();
+    expect(result.current.items).toHaveLength(2);
+  });
+
+  it("dismiss of an unread item decrements unreadCount", () => {
+    const { result } = renderHook(() => useInboxState(ITEMS));
+    act(() => result.current.dismiss("1")); // id "1" is unread
+    expect(result.current.unreadCount).toBe(1);
   });
 });
