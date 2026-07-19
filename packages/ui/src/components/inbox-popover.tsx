@@ -300,51 +300,6 @@ export function NotificationItem({ item, onDismiss, className }: NotificationIte
     </div>
   );
 
-  const actionsBlock = (
-    <div className="flex items-start gap-2 flex-shrink-0 mt-0.5">
-      <span
-        role="button"
-        tabIndex={0}
-        aria-label="Dismiss"
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          onDismiss?.(item.id);
-        }}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            e.stopPropagation();
-            onDismiss?.(item.id);
-          }
-        }}
-        className={cn(
-          "text-muted-foreground hover:text-foreground transition-colors",
-          "opacity-0 group-hover:opacity-100 focus:opacity-100",
-          "text-base leading-none p-0.5 rounded cursor-pointer"
-        )}
-      >
-        ×
-      </span>
-      <span
-        aria-label={item.read ? undefined : "Unread"}
-        aria-hidden={item.read ? true : undefined}
-        className={cn(
-          "w-[7px] h-[7px] rounded-full flex-shrink-0 mt-1",
-          item.read ? "border border-border" : "bg-primary"
-        )}
-      />
-    </div>
-  );
-
-  const innerContent = (
-    <>
-      {leadingSlot}
-      {textBlock}
-      {actionsBlock}
-    </>
-  );
-
   const sharedClass = cn(
     "group relative flex items-start gap-2.5 px-3.5 py-2.5 w-full text-left",
     "border-b border-border last:border-0",
@@ -353,26 +308,61 @@ export function NotificationItem({ item, onDismiss, className }: NotificationIte
     className
   );
 
-  if (item.href) {
-    return (
-      <a
-        href={item.href}
-        onClick={() => item.onClick?.(item.id)}
-        className={sharedClass}
-      >
-        {innerContent}
-      </a>
-    );
-  }
+  const mainContent = (
+    <>
+      {leadingSlot}
+      {textBlock}
+    </>
+  );
 
-  return (
+  const mainAction = item.href ? (
+    <a
+      href={item.href}
+      onClick={() => item.onClick?.(item.id)}
+      className="flex-1 flex items-start gap-2.5 min-w-0 text-left outline-none"
+    >
+      {mainContent}
+    </a>
+  ) : (
     <button
       type="button"
       onClick={() => item.onClick?.(item.id)}
-      className={sharedClass}
+      className="flex-1 flex items-start gap-2.5 min-w-0 text-left outline-none"
     >
-      {innerContent}
+      {mainContent}
     </button>
+  );
+
+  return (
+    <div className={sharedClass}>
+      {mainAction}
+      <div className="flex items-start gap-2 flex-shrink-0 mt-0.5">
+        <button
+          type="button"
+          aria-label="Dismiss"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onDismiss?.(item.id);
+          }}
+          className={cn(
+            "text-muted-foreground hover:text-foreground transition-colors",
+            "opacity-0 group-hover:opacity-100 focus:opacity-100",
+            "text-base leading-none p-0.5 rounded"
+          )}
+        >
+          ×
+        </button>
+        <span
+          aria-label={item.read ? undefined : "Unread"}
+          aria-hidden={item.read ? true : undefined}
+          className={cn(
+            "w-[7px] h-[7px] rounded-full flex-shrink-0 mt-1",
+            item.read ? "border border-border" : "bg-primary"
+          )}
+        />
+      </div>
+    </div>
   );
 }
 
