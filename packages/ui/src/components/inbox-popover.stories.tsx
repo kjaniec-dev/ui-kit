@@ -60,12 +60,14 @@ function LiveDemo({ initialItems }: { initialItems: NotificationItemData[] }) {
   );
 }
 
-const meta: Meta = {
+const meta: Meta<typeof InboxPopover> = {
   title: "Components/InboxPopover",
+  component: InboxPopover,
   tags: ["autodocs"],
 };
+
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => <LiveDemo initialItems={SAMPLE_ITEMS} />,
