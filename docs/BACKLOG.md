@@ -37,7 +37,7 @@ Components frequently needed in SaaS/admin UI kits that are currently missing fr
 
 ## P2 — New components: nice-to-have
 
-- [ ] `NotificationCenter` / `InboxPopover` — persistent notifications (bell icon in the top nav), complements the existing `Toast`.
+- [x] `NotificationCenter` / `InboxPopover` — persistent notifications (bell icon in the top nav), complements the existing `Toast`.
 - [x] Rating — star/icon rating suite with RatingField wrapper and RatingSummary distribution progress bars shipped.
 - [ ] `ColorPicker`
 
