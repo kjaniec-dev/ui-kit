@@ -40,6 +40,8 @@ Components frequently needed in SaaS/admin UI kits that are currently missing fr
 - [x] `NotificationCenter` / `InboxPopover` — persistent notifications (bell icon in the top nav), complements the existing `Toast`.
 - [x] Rating — star/icon rating suite with RatingField wrapper and RatingSummary distribution progress bars shipped.
 - [x] `ColorPicker`
+- [ ] `ProgressRing` — circular progress indicator (SVG `stroke-dashoffset`); `Progress` is linear only. Needed for course completion indicators, occupancy rates, and dashboard KPIs.
+- [ ] `ImageGallery` — CSS Grid thumbnail grid + `Modal`-based lightbox with keyboard navigation (←/→/Esc). Needed for property photo showcases in the landlord app.
 
 ## P2 — Tooling & process
 
