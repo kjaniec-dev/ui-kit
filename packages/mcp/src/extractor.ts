@@ -15,7 +15,9 @@ function findProjectRoot(): string {
         if (pkg.name === "kj-product-kit-starter" || pkg.name === "kj-product-kit") {
           return dir;
         }
-      } catch (e) {}
+      } catch {
+        /* ignore */
+      }
     }
     dir = path.dirname(dir);
   }
@@ -27,7 +29,9 @@ function findProjectRoot(): string {
         if (pkg.name === "kj-product-kit-starter" || pkg.name === "kj-product-kit") {
           return dir;
         }
-      } catch (e) {}
+      } catch {
+        /* ignore */
+      }
     }
     dir = path.dirname(dir);
   }

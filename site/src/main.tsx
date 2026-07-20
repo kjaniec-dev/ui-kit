@@ -125,9 +125,7 @@ import {
   InboxContent,
   useInboxState,
   type NotificationItemData,
-  ColorPicker,
   ColorPickerField,
-  ColorPickerSwatch
 } from "@kjaniec-dev/ui";
 import "./index.css";
 import { ExampleTabs } from "./example-tabs";
@@ -2047,9 +2045,14 @@ function Gallery() {
       />
 
       {sidebarOpen && (
-        <div className="fixed inset-0 z-50 flex" onClick={() => setSidebarOpen(false)}>
+        <div
+          className="fixed inset-0 z-50 flex"
+          role="presentation"
+          onClick={() => setSidebarOpen(false)}
+        >
           <aside
             className="w-[260px] h-full overflow-y-auto bg-surface border-r border-border p-6 shadow-kj-lg"
+            role="presentation"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-2.5 px-2 pb-5">

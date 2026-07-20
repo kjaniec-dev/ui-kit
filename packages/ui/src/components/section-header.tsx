@@ -16,12 +16,12 @@ export interface SectionHeaderProps extends Omit<React.HTMLAttributes<HTMLDivEle
   divider?: boolean;
 }
 
-export interface SectionHeaderKickerProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+export type SectionHeaderKickerProps = React.HTMLAttributes<HTMLParagraphElement>;
 export interface SectionHeaderTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
   as?: SectionHeaderHeadingLevel;
 }
-export interface SectionHeaderDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
-export interface SectionHeaderActionsProps extends React.HTMLAttributes<HTMLDivElement> {}
+export type SectionHeaderDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
+export type SectionHeaderActionsProps = React.HTMLAttributes<HTMLDivElement>;
 
 const SectionHeaderKicker = React.forwardRef<HTMLParagraphElement, SectionHeaderKickerProps>(
   ({ className, children, ...props }, ref) => {

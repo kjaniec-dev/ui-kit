@@ -181,9 +181,9 @@ export function BottomSheetHeader({ className, ...props }: React.HTMLAttributes<
   return <div className={cn("p-6 flex flex-col gap-1.5 border-b border-border", className)} {...props} />;
 }
 
-export function BottomSheetTitle({ className, id, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+export function BottomSheetTitle({ className, id, children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   const ctx = React.useContext(BottomSheetContext);
-  return <h2 id={id ?? ctx?.titleId} className={cn("m-0 text-[1.15rem] font-bold tracking-[-0.01em]", className)} {...props} />;
+  return <h2 id={id ?? ctx?.titleId} className={cn("m-0 text-[1.15rem] font-bold tracking-[-0.01em]", className)} {...props}>{children}</h2>;
 }
 
 export function BottomSheetDescription({ className, id, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {

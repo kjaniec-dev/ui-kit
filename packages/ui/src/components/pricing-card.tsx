@@ -115,8 +115,9 @@ export const PricingCard = React.forwardRef<HTMLDivElement, PricingCardProps>(
             cta
           ) : ctaHref ? (
             <a
-              href={disabled ? undefined : ctaHref}
+              href={ctaHref}
               aria-disabled={disabled || undefined}
+              tabIndex={disabled ? -1 : undefined}
               className={cn(
                 buttonVariants({ variant: isFeatured ? "primary" : "outline" }),
                 "w-full justify-center",

@@ -198,12 +198,14 @@ export const TimelineContent = React.forwardRef<HTMLDivElement, TimelineContentP
 TimelineContent.displayName = "TimelineContent";
 
 export const TimelineTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, ...props }, ref) => (
+  ({ className, children, ...props }, ref) => (
     <h4
       ref={ref}
       className={cn("m-0 text-sm font-semibold tracking-[-0.01em] text-foreground", className)}
       {...props}
-    />
+    >
+      {children}
+    </h4>
   )
 );
 TimelineTitle.displayName = "TimelineTitle";

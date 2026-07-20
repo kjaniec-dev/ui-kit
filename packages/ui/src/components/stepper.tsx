@@ -197,7 +197,7 @@ export const StepperContent = React.forwardRef<HTMLDivElement, StepperContentPro
 );
 StepperContent.displayName = "StepperContent";
 
-export interface StepperListProps extends React.HTMLAttributes<HTMLDivElement> {}
+export type StepperListProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const StepperList = React.forwardRef<HTMLDivElement, StepperListProps>(
   ({ className, children, ...props }, ref) => {
@@ -237,7 +237,7 @@ export const StepperItem = React.forwardRef<HTMLDivElement, StepperItemProps>(
     React.useEffect(() => {
       ctx.registerStep(value);
       return () => ctx.unregisterStep(value);
-    }, [value, ctx.registerStep, ctx.unregisterStep]);
+    }, [value, ctx]);
 
     const isLast = ctx.steps[ctx.steps.length - 1] === value;
 
@@ -260,7 +260,7 @@ export const StepperItem = React.forwardRef<HTMLDivElement, StepperItemProps>(
 );
 StepperItem.displayName = "StepperItem";
 
-export interface StepperSeparatorProps extends React.HTMLAttributes<HTMLDivElement> {}
+export type StepperSeparatorProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const StepperSeparator = React.forwardRef<HTMLDivElement, StepperSeparatorProps>(
   ({ className, ...props }, ref) => {
@@ -283,7 +283,7 @@ export const StepperSeparator = React.forwardRef<HTMLDivElement, StepperSeparato
 );
 StepperSeparator.displayName = "StepperSeparator";
 
-export interface StepperTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+export type StepperTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const StepperTrigger = React.forwardRef<HTMLButtonElement, StepperTriggerProps>(
   ({ className, children, onClick, onKeyDown, ...props }, ref) => {
@@ -357,7 +357,7 @@ export const StepperTrigger = React.forwardRef<HTMLButtonElement, StepperTrigger
 );
 StepperTrigger.displayName = "StepperTrigger";
 
-export interface StepperIndicatorProps extends React.HTMLAttributes<HTMLSpanElement> {}
+export type StepperIndicatorProps = React.HTMLAttributes<HTMLSpanElement>;
 
 export const StepperIndicator = React.forwardRef<HTMLSpanElement, StepperIndicatorProps>(
   ({ className, children, ...props }, ref) => {
@@ -392,7 +392,7 @@ export const StepperIndicator = React.forwardRef<HTMLSpanElement, StepperIndicat
 );
 StepperIndicator.displayName = "StepperIndicator";
 
-export interface StepperTitleProps extends React.HTMLAttributes<HTMLSpanElement> {}
+export type StepperTitleProps = React.HTMLAttributes<HTMLSpanElement>;
 
 export const StepperTitle = React.forwardRef<HTMLSpanElement, StepperTitleProps>(
   ({ className, ...props }, ref) => {
@@ -420,7 +420,7 @@ export const StepperTitle = React.forwardRef<HTMLSpanElement, StepperTitleProps>
 );
 StepperTitle.displayName = "StepperTitle";
 
-export interface StepperDescriptionProps extends React.HTMLAttributes<HTMLSpanElement> {}
+export type StepperDescriptionProps = React.HTMLAttributes<HTMLSpanElement>;
 
 export const StepperDescription = React.forwardRef<HTMLSpanElement, StepperDescriptionProps>(
   ({ className, ...props }, ref) => {

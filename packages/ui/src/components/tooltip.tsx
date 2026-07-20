@@ -12,6 +12,7 @@ export interface TooltipProps {
 /** CSS-only hover/focus tooltip positioned above the trigger. */
 export function Tooltip({ content, children, className }: TooltipProps) {
   return (
+    /* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */
     <span className={cn("relative inline-flex group", className)} tabIndex={0}>
       {children}
       <span

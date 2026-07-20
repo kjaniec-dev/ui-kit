@@ -15,7 +15,7 @@ const baseField =
   "disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed";
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, error, leadingIcon, style, ...props }, ref) => {
+  ({ className, error, leadingIcon, ...props }, ref) => {
     const field = (
       <input
         ref={ref}

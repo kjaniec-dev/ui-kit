@@ -3,7 +3,7 @@ import type { Preview, Decorator } from "@storybook/react-vite";
 import "./styles.css";
 
 /** Applies the `.dark` class to the preview root based on the toolbar toggle. */
-const withTheme: Decorator = (Story, context) => {
+const WithTheme: Decorator = (Story, context) => {
   const theme = context.globals.theme ?? "light";
   React.useEffect(() => {
     const root = document.documentElement;
@@ -17,7 +17,7 @@ const withTheme: Decorator = (Story, context) => {
 };
 
 const preview: Preview = {
-  decorators: [withTheme],
+  decorators: [WithTheme],
   parameters: {
     layout: "fullscreen",
     controls: { matchers: { color: /(background|color)$/i, date: /Date$/i } },

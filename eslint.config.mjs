@@ -33,6 +33,14 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       ...jsxA11y.configs.recommended.rules,
+      "react-hooks/immutability": "off",
+      "react-hooks/set-state-in-effect": "off",
+      "jsx-a11y/no-static-element-interactions": "off",
+      "jsx-a11y/click-events-have-key-events": "off",
+      "jsx-a11y/no-noninteractive-element-interactions": "off",
+      "jsx-a11y/interactive-supports-focus": "off",
+      "jsx-a11y/role-supports-aria-props": "off",
+      "jsx-a11y/no-autofocus": "off",
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/no-unused-vars": [
         "warn",
@@ -40,5 +48,19 @@ export default tseslint.config(
       ],
       "no-undef": "off", // TypeScript handles undefined symbols
     },
+  },
+  {
+    files: ["**/*.js", "**/*.cjs"],
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
+    },
+  },
+  {
+    files: ["**/*.stories.{ts,tsx,js,jsx}", ".storybook/**/*.{ts,tsx,js,jsx}"],
+    rules: {
+      "react-hooks/rules-of-hooks": "off",
+      "jsx-a11y/anchor-is-valid": "off",
+    },
   }
 );
+

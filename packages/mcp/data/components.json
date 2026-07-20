@@ -3648,5 +3648,537 @@
     ],
     "cva": null,
     "usageSnippet": "<RatingSummary>\n  <!-- Content -->\n</RatingSummary>"
+  },
+  {
+    "name": "PricingCard",
+    "importPath": "import { PricingCard } from \"@kjaniec-dev/ui\";",
+    "description": "React component PricingCard.",
+    "props": [
+      {
+        "name": "name",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "price",
+        "type": "string | number",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "period",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "features",
+        "type": "PricingFeatureItem[]",
+        "optional": true,
+        "defaultValue": "[]",
+        "description": ""
+      },
+      {
+        "name": "variant",
+        "type": "\"default\" | \"featured\" | \"outline\"",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "badge",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "popular",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": ""
+      },
+      {
+        "name": "ctaText",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"Get Started\"",
+        "description": ""
+      },
+      {
+        "name": "onCtaClick",
+        "type": "React.MouseEventHandler<HTMLButtonElement>",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "ctaHref",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "cta",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<PricingCard>\n  <!-- Content -->\n</PricingCard>"
+  },
+  {
+    "name": "BlogCard",
+    "importPath": "import { BlogCard } from \"@kjaniec-dev/ui\";",
+    "description": "React component BlogCard.",
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "coverUrl",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "coverAlt",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "category",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "readTime",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "publishedAt",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "author",
+        "type": "BlogCardAuthor",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "orientation",
+        "type": "\"vertical\" | \"horizontal\"",
+        "optional": true,
+        "defaultValue": "\"vertical\"",
+        "description": ""
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<BlogCard>\n  <!-- Content -->\n</BlogCard>"
+  },
+  {
+    "name": "ProjectCard",
+    "importPath": "import { ProjectCard } from \"@kjaniec-dev/ui\";",
+    "description": "React component ProjectCard.",
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "status",
+        "type": "ProjectCardStatus",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "techStack",
+        "type": "string[]",
+        "optional": true,
+        "defaultValue": "[]",
+        "description": ""
+      },
+      {
+        "name": "metrics",
+        "type": "ProjectCardMetric[]",
+        "optional": true,
+        "defaultValue": "[]",
+        "description": ""
+      },
+      {
+        "name": "updatedAt",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "actions",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ProjectCard>\n  <!-- Content -->\n</ProjectCard>"
+  },
+  {
+    "name": "InboxPopover",
+    "importPath": "import { InboxPopover } from \"@kjaniec-dev/ui\";",
+    "description": "React component InboxPopover.",
+    "props": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<InboxPopover>\n  <InboxTrigger unreadCount={unreadCount} />\n  <InboxContent\n    items={items}\n    onMarkAllRead={markAllRead}\n    onDismiss={dismiss}\n    viewAllHref=\"#\"\n  />\n</InboxPopover>"
+  },
+  {
+    "name": "InboxTrigger",
+    "importPath": "import { InboxTrigger } from \"@kjaniec-dev/ui\";",
+    "description": "React component InboxTrigger.",
+    "props": [
+      {
+        "name": "unreadCount",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Badge count. Hidden when 0 or undefined."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"Notifications\"",
+        "description": "Accessible label (default: \"Notifications\")."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<InboxTrigger unreadCount={unreadCount} />"
+  },
+  {
+    "name": "InboxContent",
+    "importPath": "import { InboxContent } from \"@kjaniec-dev/ui\";",
+    "description": "React component InboxContent.",
+    "props": [
+      {
+        "name": "items",
+        "type": "NotificationItemData[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onMarkAllRead",
+        "type": "() => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onDismiss",
+        "type": "(id: string) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "viewAllHref",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "viewAllLabel",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"View all notifications\"",
+        "description": ""
+      },
+      {
+        "name": "emptyState",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "width",
+        "type": "number | string",
+        "optional": true,
+        "defaultValue": "360",
+        "description": ""
+      },
+      {
+        "name": "maxHeight",
+        "type": "number | string",
+        "optional": true,
+        "defaultValue": "320",
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<InboxContent\n  items={items}\n  onMarkAllRead={markAllRead}\n  onDismiss={dismiss}\n  viewAllHref=\"#\"\n/>"
+  },
+  {
+    "name": "NotificationItem",
+    "importPath": "import { NotificationItem } from \"@kjaniec-dev/ui\";",
+    "description": "React component NotificationItem.",
+    "props": [
+      {
+        "name": "item",
+        "type": "NotificationItemData",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onDismiss",
+        "type": "(id: string) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<NotificationItem>\n  <!-- Content -->\n</NotificationItem>"
+  },
+  {
+    "name": "ColorPicker",
+    "importPath": "import { ColorPicker } from \"@kjaniec-dev/ui\";",
+    "description": "React component ColorPicker.",
+    "props": [
+      {
+        "name": "value",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Current hex color value (controlled)."
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"#3B82F6\"",
+        "description": "Initial hex color value (uncontrolled). Defaults to \"#3B82F6\"."
+      },
+      {
+        "name": "onChange",
+        "type": "(hex: string) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Called when color changes."
+      },
+      {
+        "name": "swatches",
+        "type": "readonly string[] | string[]",
+        "optional": true,
+        "defaultValue": "DEFAULT_COLOR_SWATCHES",
+        "description": "Array of hex color strings for preset palette. Defaults to DEFAULT_COLOR_SWATCHES."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": "Whether the picker is disabled."
+      },
+      {
+        "name": "showHexInput",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Whether to show the manual Hex text input inside the popover. Defaults to true."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Additional class name for the container."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ColorPicker>\n  <!-- Content -->\n</ColorPicker>"
+  },
+  {
+    "name": "ColorPickerField",
+    "importPath": "import { ColorPickerField } from \"@kjaniec-dev/ui\";",
+    "description": "React component ColorPickerField.",
+    "props": [
+      {
+        "name": "label",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "hint",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "error",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ColorPickerField\n  label=\"Brand Primary Color\"\n  hint=\"Choose your main product accent color\"\n  defaultValue=\"#3B82F6\"\n/>"
+  },
+  {
+    "name": "ColorPickerSwatch",
+    "importPath": "import { ColorPickerSwatch } from \"@kjaniec-dev/ui\";",
+    "description": "React component ColorPickerSwatch.",
+    "props": [
+      {
+        "name": "color",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "selected",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": ""
+      },
+      {
+        "name": "size",
+        "type": "\"sm\" | \"md\" | \"lg\"",
+        "optional": true,
+        "defaultValue": "\"md\"",
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ColorPickerSwatch>\n  <!-- Content -->\n</ColorPickerSwatch>"
+  },
+  {
+    "name": "DEFAULT_COLOR_SWATCHES",
+    "importPath": "import { DEFAULT_COLOR_SWATCHES } from \"@kjaniec-dev/ui\";",
+    "description": "React component DEFAULT_COLOR_SWATCHES.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<DEFAULT_COLOR_SWATCHES>\n  <!-- Content -->\n</DEFAULT_COLOR_SWATCHES>"
   }
 ]

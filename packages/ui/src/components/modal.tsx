@@ -135,9 +135,9 @@ export function Modal({ open, onClose, children, width = 440, className, showClo
   );
 }
 
-export function ModalTitle({ className, id, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+export function ModalTitle({ className, id, children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   const ctx = React.useContext(ModalContext);
-  return <h3 id={id ?? ctx?.titleId} className={cn("m-0 mb-2 text-[1.15rem] font-bold tracking-[-0.01em]", className)} {...props} />;
+  return <h3 id={id ?? ctx?.titleId} className={cn("m-0 mb-2 text-[1.15rem] font-bold tracking-[-0.01em]", className)} {...props}>{children}</h3>;
 }
 
 export function ModalDescription({ className, id, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
