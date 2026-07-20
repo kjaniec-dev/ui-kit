@@ -19,6 +19,8 @@
     "build-storybook": "npm run build-storybook --workspace @kjaniec-dev/ui",
     "build": "npm run build --workspaces",
     "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "npm run test --workspaces --if-present",
     "site:dev": "npm run dev --workspace @kjaniec-dev/site",
     "site:preview": "npm run preview --workspace @kjaniec-dev/site",

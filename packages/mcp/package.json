@@ -27,6 +27,7 @@
     "dev": "tsup --watch",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
     "test": "tsx src/run-test.ts",
     "prepublishOnly": "npm run clean && npm run build && npm run test"
   },
