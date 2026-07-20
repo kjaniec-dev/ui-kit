@@ -44,8 +44,8 @@ Components frequently needed in SaaS/admin UI kits that are currently missing fr
 ## P2 — Tooling & process
 
 - [x] Add a linter (ESLint flat config, likely with `eslint-plugin-react` + `jsx-a11y`) and a `lint` step in CI (`.github/workflows/ci.yml` currently only runs `tokens:check`, `typecheck`, `test`, `build`, `mcp:build`, `build-storybook`).
-- [ ] Add `CHANGELOG.md` for `@kjaniec-dev/ui` / `@kjaniec-dev/design` — both are published to npm but have no changelog, making it hard for consumers to track breaking changes.
-- [ ] Align `packages/mcp` on `vitest` instead of its own `run-test.ts` script, for tooling consistency with the rest of the monorepo.
+- [x] Add `CHANGELOG.md` for `@kjaniec-dev/ui` / `@kjaniec-dev/design` — both are published to npm but have no changelog, making it hard for consumers to track breaking changes.
+- [x] Align `packages/mcp` on `vitest` instead of its own `run-test.ts` script, for tooling consistency with the rest of the monorepo.
 
 ## P3 — Codebase hygiene
 
