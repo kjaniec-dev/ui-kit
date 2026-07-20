@@ -107,7 +107,8 @@ export function FormsSections() {
   const [heartRating, setHeartRating] = React.useState(4);
   const [flameRating, setFlameRating] = React.useState(5);
   const [shieldRating, setShieldRating] = React.useState(3);
-  const [fieldRating, setFieldRating] = React.useState(0);
+  const [productRating, setProductRating] = React.useState<number>(4);
+  const [serviceRating, setServiceRating] = React.useState<number>(0);
 
   return (
     <>
@@ -424,16 +425,16 @@ export function FormsSections() {
             <RatingField
               label="Product Satisfaction"
               helperText="Please rate your experience with our platform."
-              value={fieldRating}
-              onChange={setFieldRating}
+              value={productRating}
+              onChange={setProductRating}
               required
               showValue
             />
             <RatingField
               label="Service Quality"
-              errorMessage={fieldRating === 0 ? "Rating is required before submitting feedback." : undefined}
-              value={fieldRating}
-              onChange={setFieldRating}
+              errorMessage={serviceRating === 0 ? "Rating is required before submitting feedback." : undefined}
+              value={serviceRating}
+              onChange={setServiceRating}
               required
               showValue
             />
