@@ -7,57 +7,58 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.8.0] - 2026-07-20
+## [0.8.0] - 2026-07-04
 
 ### Added
-- ColorPicker token swatches (`--kj-color-picker-*`).
+- Design token validation rules.
+- Transition duration variables (`--kj-transition-*`).
 
 ### Changed
-- ESLint flat config compliance.
+- ESLint flat config alignment.
 
-## [0.7.0] - 2026-07-11
-
-### Added
-- Rating star/icon token metrics.
-- DatePicker/Calendar grid design tokens.
-- FileUpload/Dropzone state styling variables.
-
-## [0.6.0] - 2026-07-05
+## [0.7.0] - 2026-06-13
 
 ### Added
-- Timeline dot/connector tokens.
-- Stepper active/completed indicators.
-- ToggleGroup selection states.
+- Form field focus ring variables.
+- Status color tokens.
+- Calendar grid layout metrics.
 
-## [0.5.0] - 2026-06-28
-
-### Added
-- SaaS B2B card tokens.
-- SectionHeader layout tokens.
-- PricingCard highlight borders.
-
-## [0.4.0] - 2026-06-20
+## [0.6.0] - 2026-06-12
 
 ### Added
-- Glassmorphism backdrop-blur variables.
-- CommandPalette dark mode palette.
-- BottomNavigation touch targets.
+- Timeline connector line tokens.
+- Wizard step indicator tokens.
+- Toggle group selection states.
 
-## [0.3.0] - 2026-06-12
+## [0.5.0] - 2026-06-12
 
 ### Added
-- Form control focus rings.
+- B2B card elevation variables.
+- Section header layout tokens.
+- Pricing highlight border tokens.
+
+## [0.4.0] - 2026-05-30
+
+### Added
+- Glassmorphism backdrop-blur CSS variables (`--kj-backdrop-blur`).
+- Dark mode surface variables.
+- Touch target size tokens.
+
+## [0.3.0] - 2026-05-30
+
+### Added
+- Extended HSL primary/secondary color scales (50–950).
 - Error state HSL variables.
-- Slider thumb tokens.
+- Form control token aliases.
 
-## [0.2.0] - 2026-06-05
+## [0.2.0] - 2026-05-30
 
 ### Added
 - Elevation shadows (`shadow-kj-xs` to `shadow-kj-xl`).
-- Radius scale (`rounded-kj-sm` to `rounded-kj-full`).
-- Status color tokens (`success`, `warning`, `danger`, `info`).
+- Border radius scale (`rounded-kj-sm` to `rounded-kj-full`).
+- Status tokens (`success`, `warning`, `danger`, `info`).
 
-## [0.1.0] - 2026-05-28
+## [0.1.0] - 2026-05-24
 
 ### Added
-- Initial release of `@kjaniec-dev/design` token system (HSL theme variables, dark mode root styles).
+- Initial release of `@kjaniec-dev/design` token system with core HSL CSS custom properties and dark mode theme variables.
