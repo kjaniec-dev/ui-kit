@@ -76,6 +76,7 @@ export const PopoverTrigger = React.forwardRef<
 >(({ onClick, asChild, ...props }, ref) => {
   const ctx = usePopoverContext("PopoverTrigger");
   const setRefs = (node: HTMLButtonElement | null) => {
+    // eslint-disable-next-line react-hooks/immutability
     ctx.triggerRef.current = node;
     if (typeof ref === "function") ref(node);
     else if (ref) (ref as React.MutableRefObject<HTMLButtonElement | null>).current = node;
@@ -99,6 +100,7 @@ export const PopoverTrigger = React.forwardRef<
   }
   return (
     <button
+      /* eslint-disable-next-line react-hooks/immutability */
       ref={setRefs}
       {...props}
       type="button"

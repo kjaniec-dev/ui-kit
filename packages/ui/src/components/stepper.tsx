@@ -234,10 +234,12 @@ export const StepperItem = React.forwardRef<HTMLDivElement, StepperItemProps>(
     const ctx = React.useContext(StepperContext);
     if (!ctx) throw new Error("StepperItem must be used within a Stepper");
 
+    const { registerStep, unregisterStep } = ctx;
+
     React.useEffect(() => {
-      ctx.registerStep(value);
-      return () => ctx.unregisterStep(value);
-    }, [value, ctx]);
+      registerStep(value);
+      return () => unregisterStep(value);
+    }, [value, registerStep, unregisterStep]);
 
     const isLast = ctx.steps[ctx.steps.length - 1] === value;
 

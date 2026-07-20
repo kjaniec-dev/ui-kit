@@ -114,8 +114,9 @@ export const PricingCard = React.forwardRef<HTMLDivElement, PricingCardProps>(
           {cta ? (
             cta
           ) : ctaHref ? (
+            /* eslint-disable-next-line jsx-a11y/anchor-is-valid */
             <a
-              href={ctaHref}
+              href={disabled ? undefined : ctaHref}
               aria-disabled={disabled || undefined}
               tabIndex={disabled ? -1 : undefined}
               className={cn(

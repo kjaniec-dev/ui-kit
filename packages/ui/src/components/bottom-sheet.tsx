@@ -28,6 +28,7 @@ export function BottomSheet({
 
   React.useEffect(() => {
     if (open) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setMounted(true);
     } else {
       const timer = setTimeout(() => setMounted(false), 200);

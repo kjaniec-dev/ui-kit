@@ -196,6 +196,7 @@ export function InboxTrigger({
 }: InboxTriggerProps) {
   const ctx = useInboxContext("InboxTrigger");
   const setRef = (node: HTMLButtonElement | null) => {
+    // eslint-disable-next-line react-hooks/immutability
     ctx.triggerRef.current = node;
   };
 

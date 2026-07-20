@@ -29,7 +29,9 @@ export function CommandPalette({ open, onClose, items, placeholder = "Type a com
   // Reset state on open/close
   React.useEffect(() => {
     if (open) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSearch("");
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveIndex(0);
       document.body.style.overflow = "hidden";
     } else {
@@ -51,6 +53,7 @@ export function CommandPalette({ open, onClose, items, placeholder = "Type a com
 
   // Reset active index when filter changes
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setActiveIndex(0);
   }, [filteredItems]);
 
