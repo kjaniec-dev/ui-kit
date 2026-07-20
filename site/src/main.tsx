@@ -48,7 +48,7 @@ function SidebarContent({
           <div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.8.0</div>
         </div>
       </div>
-      <Input placeholder="Filter sections..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} size="sm" leadingIcon={IcoSearch} />
+      <Input placeholder="Filter sections..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} leadingIcon={IcoSearch} />
       <div className="text-[0.68rem] uppercase tracking-[0.09em] font-semibold text-muted-foreground px-3 pt-2 pb-0.5">Components</div>
       <nav className="flex flex-col gap-0.5">
         {filteredNav.map(([id, label]) => {

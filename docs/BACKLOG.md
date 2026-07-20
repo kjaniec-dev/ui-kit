@@ -49,7 +49,7 @@ Components frequently needed in SaaS/admin UI kits that are currently missing fr
 
 ## P3 — Codebase hygiene
 
-- [ ] Split `site/src/main.tsx` (1541 lines) into per-section modules, mirroring the existing pattern of `example-tabs.tsx` / `highlighted-code.tsx`, so new gallery sections don't keep growing a single file.
+- [x] Split `site/src/main.tsx` (1541 lines) into per-section modules, mirroring the existing pattern of `example-tabs.tsx` / `highlighted-code.tsx`, so new gallery sections don't keep growing a single file.
 
 ---
 
