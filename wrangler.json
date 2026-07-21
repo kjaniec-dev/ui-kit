@@ -2,7 +2,5 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "ui-kit",
   "compatibility_date": "2026-07-21",
-  "assets": {
-    "directory": "./site/dist"
-  }
+  "pages_build_output_dir": "./site/dist"
 }
