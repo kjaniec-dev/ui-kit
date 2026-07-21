@@ -5,6 +5,8 @@ import {
   Alert,
   Spinner,
   Progress,
+  ProgressRing,
+  ProgressRingField,
   Avatar,
   AvatarGroup,
   Stat,
@@ -283,7 +285,7 @@ export function PrimitivesSections() {
         </Box>
       </Sec>
 
-      <Sec id="feedback" title="Feedback & progress" desc="Inline alerts, toasts and progress indicators." components={["Alert", "ToastProvider", "Progress", "Spinner", "Skeleton"]}>
+      <Sec id="feedback" title="Feedback & progress" desc="Inline alerts, toasts and progress indicators." components={["Alert", "ToastProvider", "Progress", "ProgressRing", "ProgressRingField", "Spinner", "Skeleton"]}>
         <Box>
           <Sub>Alerts</Sub>
           <div className="flex flex-col gap-4">
@@ -328,6 +330,25 @@ export function PrimitivesSections() {
             </div>
           </Box>
         </Grid>
+        <Box className="mt-5">
+          <Sub>ProgressRing & ProgressRingField (v0.8.0)</Sub>
+          <div className="flex flex-wrap items-center gap-8">
+            <ProgressRing value={prog} showValue size="sm" />
+            <ProgressRing value={prog} showValue size="md" tone="primary" />
+            <ProgressRing value={prog} showValue size="lg" tone="success" />
+            <ProgressRing value={75} showValue size="xl" tone="info">
+              <span className="text-xs font-medium text-foreground">75 / 100</span>
+            </ProgressRing>
+            <ProgressRingField
+              label="Storage used"
+              hint="Updated 5m ago"
+              value={68}
+              showValue
+              size="md"
+              tone="warning"
+            />
+          </div>
+        </Box>
         <Box className="mt-5">
           <Sub>ErrorState & Skeletons</Sub>
           <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))" }}>

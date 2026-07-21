@@ -38,6 +38,8 @@ import {
   ProjectCard,
   BlogCard,
   PricingCard,
+  ImageGallery,
+  type GalleryImage,
   useToast,
 } from "@kjaniec-dev/ui";
 import { Sec, Box, Sub, Grid, IcoPlus, IcoWarn, IcoGear } from "./primitives";
@@ -530,6 +532,67 @@ export function DataDisplaySections() {
           />
         </Box>
       </Sec>
+
+      <Sec
+        id="gallery"
+        title="Image Gallery"
+        desc="Responsive grid of image thumbnails with interactive lightbox modal, title captions, and keyboard navigation."
+        components={["ImageGallery"]}
+      >
+        <Box>
+          <Sub>Default 3-Column Grid with Lightbox</Sub>
+          <ImageGallery images={galleryImages} columns={3} aspectRatio="square" />
+        </Box>
+        <Box>
+          <Sub>With Max Visible Overflow Overlay (+3)</Sub>
+          <ImageGallery images={galleryImages} columns={4} maxVisible={4} aspectRatio="video" />
+        </Box>
+      </Sec>
     </>
   );
 }
+
+const galleryImages: GalleryImage[] = [
+  {
+    src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&auto=format&fit=crop&q=80",
+    thumbnailSrc: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&auto=format&fit=crop&q=80",
+    alt: "Yosemite National Park Valley",
+    title: "Yosemite Valley",
+    caption: "Beautiful view of El Capitan and Half Dome at sunset",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?w=1200&auto=format&fit=crop&q=80",
+    thumbnailSrc: "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?w=400&auto=format&fit=crop&q=80",
+    alt: "Pine tree forest during daytime",
+    title: "Misty Forest",
+    caption: "Morning fog drifting through a dense pine forest",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&auto=format&fit=crop&q=80",
+    thumbnailSrc: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&auto=format&fit=crop&q=80",
+    alt: "Foggy mountain peak",
+    title: "Mountain Heights",
+    caption: "Dramatic cloud layers covering distant alpine peaks",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=1200&auto=format&fit=crop&q=80",
+    thumbnailSrc: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=400&auto=format&fit=crop&q=80",
+    alt: "Mountain landscape with lake",
+    title: "Emerald Lake",
+    caption: "Crystal clear water reflecting mountain shadows",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=1200&auto=format&fit=crop&q=80",
+    thumbnailSrc: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=400&auto=format&fit=crop&q=80",
+    alt: "Green grass field under blue sky",
+    title: "Rolling Hills",
+    caption: "Vast green meadow extending towards the horizon",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&auto=format&fit=crop&q=80",
+    thumbnailSrc: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&auto=format&fit=crop&q=80",
+    alt: "Sunlight filtering through trees",
+    title: "Golden Hour Forest",
+    caption: "Warm sunbeams illuminating woodland pathway",
+  },
+];
