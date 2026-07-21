@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-07-21
+
+### Added
+- `ProgressRing` & `ProgressRingField` components (SVG circular progress with 4 size presets, 6 tone colors, center content slot, and form field wrapper).
+- `ImageGallery` component with responsive thumbnail grid, `maxVisible` overflow counter (`+N`), and interactive Modal lightbox with keyboard navigation (`←`, `→`, `Esc`).
+- Storybook stories for `ProgressRing` and `ImageGallery`.
+- Vitest unit tests for `@kjaniec-dev/ui-mcp` extractor.
+- `CHANGELOG.md` files across `@kjaniec-dev/ui` and `@kjaniec-dev/design`.
+
 ## [0.8.0] - 2026-07-20
 
 ### Added

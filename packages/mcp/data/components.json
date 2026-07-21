@@ -192,6 +192,136 @@
     "usageSnippet": "<Progress {...args} />"
   },
   {
+    "name": "ProgressRing",
+    "importPath": "import { ProgressRing } from \"@kjaniec-dev/ui\";",
+    "description": "React component ProgressRing.",
+    "props": [
+      {
+        "name": "value",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "0",
+        "description": "Current progress value. Defaults to 0."
+      },
+      {
+        "name": "min",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "0",
+        "description": "Minimum progress value. Defaults to 0."
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "100",
+        "description": "Maximum progress value. Defaults to 100."
+      },
+      {
+        "name": "size",
+        "type": "ProgressRingSize",
+        "optional": true,
+        "defaultValue": "\"md\"",
+        "description": "Preset size of the ring. Defaults to \"md\"."
+      },
+      {
+        "name": "strokeWidth",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Override stroke thickness (in px)."
+      },
+      {
+        "name": "tone",
+        "type": "ProgressRingTone",
+        "optional": true,
+        "defaultValue": "\"primary\"",
+        "description": "Color tone of the progress indicator. Defaults to \"primary\"."
+      },
+      {
+        "name": "showValue",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": "Whether to show the percentage text inside the ring center if no children are provided. Defaults to false."
+      },
+      {
+        "name": "formatValue",
+        "type": "(value: number, percentage: number) => React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Optional formatter for the center percentage display."
+      },
+      {
+        "name": "trackClassName",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Additional CSS class for the background track circle."
+      },
+      {
+        "name": "indicatorClassName",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Additional CSS class for the progress indicator circle."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Custom center content."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ProgressRing value={75} size=\"sm\" showValue />\n        <p style={{ marginTop: 8, fontSize: 12 }}>Small (sm)</p>\n      </div>\n      <div style={{ textAlign: \"center\" }}>\n        <ProgressRing value={75} size=\"md\" showValue />\n        <p style={{ marginTop: 8, fontSize: 12 }}>Medium (md)</p>\n      </div>\n      <div style={{ textAlign: \"center\" }}>\n        <ProgressRing value={75} size=\"lg\" showValue />\n        <p style={{ marginTop: 8, fontSize: 12 }}>Large (lg)</p>\n      </div>\n      <div style={{ textAlign: \"center\" }}>\n        <ProgressRing value={75} size=\"xl\" showValue />\n        <p style={{ marginTop: 8, fontSize: 12 }}>Extra Large (xl)</p>\n      </div>\n    </div>\n  ),\n};\n\nexport const Tones: Story = {\n  render: () => (\n    <div style={{ display: \"flex\", gap: 20, alignItems: \"center\", flexWrap: \"wrap\" }}>\n      <ProgressRing value={60} tone=\"primary\" showValue />\n      <ProgressRing value={60} tone=\"secondary\" showValue />\n      <ProgressRing value={60} tone=\"success\" showValue />\n      <ProgressRing value={60} tone=\"warning\" showValue />\n      <ProgressRing value={60} tone=\"danger\" showValue />\n      <ProgressRing value={60} tone=\"info\" showValue />\n    </div>\n  ),\n};\n\nexport const CustomFormatting: Story = {\n  render: () => (\n    <div style={{ display: \"flex\", gap: 24, alignItems: \"center\", flexWrap: \"wrap\" }}>\n      <ProgressRing\n        value={3}\n        max={5}\n        size=\"lg\"\n        tone=\"success\"\n        formatValue={(val) => (\n          <span style={{ fontSize: 14, fontWeight: \"bold\" }}>{val} / 5</span>\n        )}\n      />\n      <ProgressRing\n        value={80}\n        size=\"lg\"\n        tone=\"info\"\n        formatValue={(val) => (\n          <div style={{ display: \"flex\", flexDirection: \"column\", alignItems: \"center\" }}>\n            <span style={{ fontSize: 16, fontWeight: \"bold\" }}>{val}GB</span>\n            <span style={{ fontSize: 10, opacity: 0.7 }}>of 100GB</span>\n          </div>\n        )}\n      />\n      <ProgressRing value={100} size=\"lg\" tone=\"success\">\n        <span style={{ fontSize: 20 }}>✓</span>\n      </ProgressRing>"
+  },
+  {
+    "name": "ProgressRingField",
+    "importPath": "import { ProgressRingField } from \"@kjaniec-dev/ui\";",
+    "description": "React component ProgressRingField.",
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": "Field label text."
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Helper hint text displayed beneath the control."
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Error message displayed beneath the control."
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Renders a required indicator (*)."
+      },
+      {
+        "name": "fieldClassName",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Class name for the outer field wrapper div."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ProgressRingField\n  label=\"Storage Limit\"\n  hint=\"75% of your allocated disk storage used\"\n  value={75}\n  size=\"lg\"\n  tone=\"warning\"\n  showValue\n/>"
+  },
+  {
     "name": "Input",
     "importPath": "import { Input } from \"@kjaniec-dev/ui\";",
     "description": "React component Input.",
@@ -4180,5 +4310,70 @@
     "props": [],
     "cva": null,
     "usageSnippet": "<DEFAULT_COLOR_SWATCHES>\n  <!-- Content -->\n</DEFAULT_COLOR_SWATCHES>"
+  },
+  {
+    "name": "ImageGallery",
+    "importPath": "import { ImageGallery } from \"@kjaniec-dev/ui\";",
+    "description": "React component ImageGallery.",
+    "props": [
+      {
+        "name": "images",
+        "type": "GalleryImage[]",
+        "optional": false,
+        "defaultValue": "[]",
+        "description": ""
+      },
+      {
+        "name": "columns",
+        "type": "2 | 3 | 4 | 5",
+        "optional": true,
+        "defaultValue": "3",
+        "description": ""
+      },
+      {
+        "name": "aspectRatio",
+        "type": "\"square\" | \"video\" | \"4/3\" | \"auto\" | string",
+        "optional": true,
+        "defaultValue": "\"square\"",
+        "description": ""
+      },
+      {
+        "name": "maxVisible",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "thumbnailClassName",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "lightboxClassName",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onImageClick",
+        "type": "(index: number) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ImageGallery images={sampleImages.slice(0, 4)} columns={2} />"
   }
 ]

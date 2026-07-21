@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-07-21
+
+### Added
+- ProgressRing SVG strokeDashoffset and size metrics.
+- ImageGallery thumbnail grid aspect-ratio token utilities.
+
 ## [0.8.0] - 2026-07-04
 
 ### Added
