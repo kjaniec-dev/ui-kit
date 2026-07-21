@@ -256,3 +256,10 @@ export {
   type ColorPickerFieldProps,
   type ColorPickerSwatchProps,
 } from "./components/color-picker";
+
+export {
+  ImageGallery,
+  type GalleryImage,
+  type ImageGalleryProps,
+} from "./components/image-gallery";
+
