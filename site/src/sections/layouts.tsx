@@ -74,25 +74,31 @@ export function LayoutsSections() {
             <AppShell
               className="h-full"
               banner={
-                <div className="flex items-center justify-between text-xs px-3 py-1.5 bg-primary/10 text-primary font-medium">
-                  <span>🚀 kj-product-kit v3.0 is live! Explore new modular layout primitives.</span>
-                  <Button variant="ghost" size="sm">Learn more</Button>
+                <div className="flex items-center justify-between text-xs px-4 py-2 bg-primary text-primary-foreground font-medium">
+                  <span>🚀 kj-product-kit v0.9.0 is live! Explore new modular layout primitives.</span>
+                  <Button variant="outline" size="sm" className="h-7 px-3 text-xs border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/15 font-semibold">
+                    Learn more
+                  </Button>
                 </div>
               }
               header={
-                <div className="flex items-center justify-between w-full h-full px-4 text-foreground">
-                  <div className="font-bold text-sm text-foreground flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-primary" />
-                    <span>ProductKit AppShell</span>
+                <div className="flex items-center justify-between w-full h-full px-6 bg-surface text-foreground border-b border-border">
+                  <div className="font-bold text-sm text-foreground flex items-center gap-2.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-primary shadow-sm" />
+                    <span className="font-semibold tracking-tight text-foreground">ProductKit AppShell</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Button variant="ghost" size="sm" className="text-foreground hover:bg-muted font-medium">Documentation</Button>
-                    <Button size="sm" variant="primary">Get Started</Button>
+                  <div className="flex items-center gap-3">
+                    <Button variant="ghost" size="sm" className="text-foreground hover:bg-muted font-medium">
+                      Documentation
+                    </Button>
+                    <Button size="sm" variant="primary" className="font-semibold">
+                      Get Started
+                    </Button>
                   </div>
                 </div>
               }
               footer={
-                <div className="px-4 py-3 border-t border-border text-xs text-muted-foreground flex justify-between items-center">
+                <div className="px-6 py-3 border-t border-border text-xs text-muted-foreground flex justify-between items-center bg-surface">
                   <span>© 2026 kj-product-kit</span>
                   <div className="flex gap-4">
                     <span>Privacy</span>
