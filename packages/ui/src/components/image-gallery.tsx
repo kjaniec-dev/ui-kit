@@ -77,6 +77,8 @@ export function ImageGallery({
   React.useEffect(() => {
     if (selectedIndex === null) return;
 
+    const originalOverflow = document.body.style.overflow;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         handleClose();
@@ -92,7 +94,7 @@ export function ImageGallery({
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "";
+      document.body.style.overflow = originalOverflow;
     };
   }, [selectedIndex, handleClose, handleNext, handlePrev]);
 
@@ -104,11 +106,16 @@ export function ImageGallery({
         {visibleImages.map((img, idx) => {
           const isLastOverlay = hasMaxVisible && idx === maxVisible - 1;
           const thumbSrc = img.thumbnailSrc || img.src;
+          const defaultAlt = img.alt || `Thumbnail ${idx + 1}`;
+          const buttonAriaLabel = isLastOverlay
+            ? `View all ${images.length} images`
+            : defaultAlt;
 
           return (
             <button
               key={idx}
               type="button"
+              aria-label={buttonAriaLabel}
               onClick={() => handleThumbnailClick(idx)}
               className={cn(
                 "relative group overflow-hidden rounded-kj-lg bg-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 cursor-pointer transition-all duration-200",
