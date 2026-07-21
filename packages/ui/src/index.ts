@@ -8,6 +8,15 @@ export { Badge, badgeVariants, type BadgeProps } from "./components/badge";
 export { Alert, type AlertProps } from "./components/alert";
 export { Spinner, type SpinnerProps } from "./components/spinner";
 export { Progress, type ProgressProps } from "./components/progress";
+export {
+  ProgressRing,
+  ProgressRingField,
+  type ProgressRingProps,
+  type ProgressRingFieldProps,
+  type ProgressRingSize,
+  type ProgressRingTone,
+} from "./components/progress-ring";
+
 
 export { Input, Textarea, TextField, type InputProps, type TextareaProps, type TextFieldProps } from "./components/input";
 export { Label, Hint, Field, type LabelProps, type HintProps } from "./components/field";
