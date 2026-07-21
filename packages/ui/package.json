@@ -43,7 +43,7 @@
     "test": "vitest run"
   },
   "peerDependencies": {
-    "@kjaniec-dev/design": ">=0.8.0",
+    "@kjaniec-dev/design": ">=0.9.0",
     "react": ">=18",
     "react-dom": ">=18"
   },
