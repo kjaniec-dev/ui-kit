@@ -16,7 +16,7 @@ import {
   Badge,
   Avatar,
   TextField,
-  SelectField,
+  Select,
   useToast,
 } from "@kjaniec-dev/ui";
 import { Sec, Box, Sub, IcoInfo, IcoSearch, IcoPlus, IcoGear } from "./primitives";
@@ -80,11 +80,14 @@ export function LayoutsSections() {
                 </div>
               }
               header={
-                <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-canvas/80 backdrop-blur">
-                  <div className="font-bold text-sm">ProductKit AppShell</div>
+                <div className="flex items-center justify-between w-full h-full px-4 text-foreground">
+                  <div className="font-bold text-sm text-foreground flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-primary" />
+                    <span>ProductKit AppShell</span>
+                  </div>
                   <div className="flex items-center gap-2">
-                    <Button variant="ghost" size="sm">Documentation</Button>
-                    <Button size="sm">Get Started</Button>
+                    <Button variant="ghost" size="sm" className="text-foreground hover:bg-muted font-medium">Documentation</Button>
+                    <Button size="sm" variant="primary">Get Started</Button>
                   </div>
                 </div>
               }
@@ -264,12 +267,12 @@ export function LayoutsSections() {
             searchPlaceholder="Search items by name or ID..."
             actions={
               <>
-                <SelectField label="" defaultValue="all" className="w-32">
+                <Select defaultValue="all" className="w-36 text-xs">
                   <option value="all">All Statuses</option>
                   <option value="active">Active</option>
                   <option value="archived">Archived</option>
-                </SelectField>
-                <Button size="sm" leadingIcon={IcoPlus}>
+                </Select>
+                <Button leadingIcon={IcoPlus}>
                   Add Item
                 </Button>
               </>

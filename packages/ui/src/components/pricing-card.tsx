@@ -67,15 +67,16 @@ export const PricingCard = React.forwardRef<HTMLDivElement, PricingCardProps>(
         )}
         {...props}
       >
-        {displayBadge && (
-          <div className="absolute -top-3 right-5 rounded-full bg-amber-500 px-3 py-0.5 text-[0.7rem] font-bold uppercase tracking-wider text-black shadow-sm">
-            {displayBadge}
+        <div className="mb-4 flex items-start justify-between gap-3">
+          <div>
+            <h3 className="text-xl font-bold tracking-tight text-foreground">{name}</h3>
+            {description && <p className="mt-1 text-xs text-muted-foreground">{description}</p>}
           </div>
-        )}
-
-        <div className="mb-4">
-          <h3 className="text-xl font-bold tracking-tight text-foreground">{name}</h3>
-          {description && <p className="mt-1 text-xs text-muted-foreground">{description}</p>}
+          {displayBadge && (
+            <span className="rounded-full bg-amber-500 px-3 py-0.5 text-[0.7rem] font-bold uppercase tracking-wider text-black shadow-sm shrink-0 mt-0.5">
+              {displayBadge}
+            </span>
+          )}
         </div>
 
         <div className="mb-6 flex items-baseline gap-1">
