@@ -98,12 +98,13 @@ export const ProgressRing = React.forwardRef<HTMLDivElement, ProgressRingProps>(
     const radius = Math.max(0, (dimension - strokeWidthVal) / 2);
     const circumference = 2 * Math.PI * radius;
     const strokeDashoffset = circumference - (percentage / 100) * circumference;
+    const computedAriaLabel = ariaLabel ?? (props["aria-labelledby"] ? undefined : "Progress");
 
     return (
       <div
         ref={ref}
         role="progressbar"
-        aria-label={ariaLabel ?? "Progress"}
+        aria-label={computedAriaLabel}
         aria-valuenow={clampedValue}
         aria-valuemin={min}
         aria-valuemax={max}
@@ -133,9 +134,10 @@ export const ProgressRing = React.forwardRef<HTMLDivElement, ProgressRingProps>(
             strokeWidth={strokeWidthVal}
             strokeDasharray={circumference}
             strokeDashoffset={strokeDashoffset}
-            strokeLinecap="round"
+            strokeLinecap={percentage === 0 ? "butt" : "round"}
             className={cn(
-              "fill-none transition-[stroke-dashoffset] duration-500 ease-in-out",
+              "fill-none transition-[stroke-dashoffset,opacity] duration-500 ease-in-out",
+              percentage === 0 && "opacity-0",
               toneClasses[tone],
               indicatorClassName
             )}
@@ -178,7 +180,7 @@ export const ProgressRingField = React.forwardRef<HTMLDivElement, ProgressRingFi
   ({ label, hint, error, required, fieldClassName, ...ringProps }, ref) => {
     return (
       <FormField label={label} hint={hint} error={error} required={required} className={fieldClassName}>
-        <ProgressRing ref={ref} {...ringProps} />
+        <ProgressRing ref={ref} aria-label={ringProps["aria-label"] ?? label} {...ringProps} />
       </FormField>
     );
   }
