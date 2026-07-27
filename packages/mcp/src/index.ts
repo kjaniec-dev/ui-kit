@@ -34,7 +34,7 @@ try {
 
 const server = new McpServer({
   name: "kj-product-kit-ui-mcp",
-  version: "0.4.0",
+  version: "0.9.1",
 });
 
 // Helper function to generate reference markdown for a component
@@ -205,10 +205,12 @@ server.tool(
     const setup = {
       installCommand: "npm install @kjaniec-dev/ui @kjaniec-dev/design",
       requiredImports: [
+        `@import "tailwindcss";                       /* imports Tailwind CSS v4 */`,
+        `@source "../node_modules/@kjaniec-dev/ui";  /* instructs Tailwind v4 to scan UI kit components for utility classes */`,
         `@import "@kjaniec-dev/design/tailwind.css"; /* registers all --kj-* tokens as Tailwind utilities */`,
         `@import "@kjaniec-dev/ui/ui.css";           /* imports component-specific layouts and styles */`
       ],
-      description: "In Tailwind v4, registering these imports in your root CSS automatically sets up background, border-radius, shadows, and color utilities."
+      description: "In Tailwind v4, registering these imports and the @source directive in your root CSS automatically sets up background, border-radius, shadows, and color utilities."
     };
 
     return {
