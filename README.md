@@ -84,9 +84,10 @@ npm run storybook     # → http://localhost:6006
 npm install @kjaniec-dev/ui @kjaniec-dev/design
 ```
 
-Root CSS (import order matters):
+Root CSS (import order matters — `@source` tells Tailwind v4 to scan the UI Kit components for utility classes):
 ```css
 @import "tailwindcss";
+@source "../node_modules/@kjaniec-dev/ui";
 @import "@kjaniec-dev/design/tailwind.css";
 @import "@kjaniec-dev/ui/ui.css";
 ```

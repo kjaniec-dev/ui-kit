@@ -20,6 +20,8 @@ Runtime deps: `class-variance-authority`, `clsx`, `tailwind-merge`.
 In your app's global stylesheet, import the design tokens (Tailwind v4 `@theme`) and the small runtime stylesheet that ships keyframes + the slider thumb:
 
 ```css
+@import "tailwindcss";
+@source "../node_modules/@kjaniec-dev/ui";
 @import "@kjaniec-dev/design/tailwind.css";
 @import "@kjaniec-dev/ui/ui.css";
 ```

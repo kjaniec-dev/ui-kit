@@ -108,6 +108,7 @@ npm install @kjaniec-dev/ui @kjaniec-dev/design
 In your root CSS stylesheet (import order matters):
 ```css
 @import "tailwindcss";
+@source "../node_modules/@kjaniec-dev/ui";
 @import "@kjaniec-dev/design/tailwind.css";
 @import "@kjaniec-dev/ui/ui.css";
 ```

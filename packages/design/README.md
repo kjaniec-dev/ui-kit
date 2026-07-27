@@ -43,6 +43,7 @@ Import the Tailwind theme bridge at the top of your global CSS stylesheet (Vite,
 
 ```css
 @import "tailwindcss";
+@source "../node_modules/@kjaniec-dev/ui";
 @import "@kjaniec-dev/design/tailwind.css";
 @import "@kjaniec-dev/ui/ui.css";
 ```
