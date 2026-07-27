@@ -75,7 +75,7 @@ export function LayoutsSections() {
               className="h-full"
               banner={
                 <div className="flex items-center justify-between text-xs px-4 py-2 bg-primary text-primary-foreground font-medium">
-                  <span>🚀 kj-product-kit v0.9.0 is live! Explore new modular layout primitives.</span>
+                  <span>🚀 kj-product-kit v0.9.1 is live! Explore new modular layout primitives.</span>
                   <Button variant="outline" size="sm" className="h-7 px-3 text-xs border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/15 font-semibold">
                     Learn more
                   </Button>
