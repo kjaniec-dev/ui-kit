@@ -1,4 +1,8 @@
-import type React from 'react';
+
+import type { InPostGeowidgetProps } from './inpost-geowidget';
+import type { InPostGeowidgetModalProps } from './inpost-geowidget-modal';
+
+export type { InPostGeowidgetProps, InPostGeowidgetModalProps };
 
 export interface InPostAddressDetails {
   city: string;
@@ -38,34 +42,6 @@ export type InPostConfigType =
   | 'international'
   | 'postBuy'
   | string;
-
-export interface InPostGeowidgetProps {
-  token?: string;
-  language?: InPostLanguage;
-  config?: InPostConfigType;
-  sandbox?: boolean;
-  onPointSelect?: (point: InPostPoint) => void;
-  onReady?: () => void;
-  onError?: (error: Error) => void;
-  className?: string;
-  style?: React.CSSProperties;
-  customScriptUrl?: string;
-  customCssUrl?: string;
-}
-
-export interface InPostGeowidgetModalProps extends Omit<InPostGeowidgetProps, 'className' | 'style'> {
-  value?: InPostPoint | string | null;
-  onSelect?: (point: InPostPoint) => void;
-  triggerText?: string;
-  modalTitle?: string;
-  disabled?: boolean;
-  open?: boolean;
-  onOpenChange?: (open: boolean) => void;
-  showSelectedBadge?: boolean;
-  className?: string;
-  buttonVariant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
-  buttonSize?: 'sm' | 'md' | 'lg';
-}
 
 export interface UseInPostScriptOptions {
   sandbox?: boolean;

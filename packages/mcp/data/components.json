@@ -4380,7 +4380,127 @@
     "name": "InPostGeowidget",
     "importPath": "import { InPostGeowidget } from \"@kjaniec-dev/ui\";",
     "description": "React component InPostGeowidget.",
-    "props": [],
+    "props": [
+      {
+        "name": "value",
+        "type": "InPostPoint | string | null",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Currently selected point object or point code string (e.g. 'WAW01M')."
+      },
+      {
+        "name": "onSelect",
+        "type": "(point: InPostPoint) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Callback triggered when point is selected on the map."
+      },
+      {
+        "name": "triggerText",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "'Wybierz Paczkomat®'",
+        "description": "Trigger button label. Default 'Wybierz Paczkomat®'."
+      },
+      {
+        "name": "modalTitle",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "'Wybierz punkt odbioru InPost'",
+        "description": "Modal header title. Default 'Wybierz punkt odbioru InPost'."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": "Disable trigger button. Default false."
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Controlled open state of the modal."
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Callback when open state changes."
+      },
+      {
+        "name": "showSelectedBadge",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Show selected point badge under trigger button. Default true."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "''",
+        "description": "Outer container CSS class name."
+      },
+      {
+        "name": "buttonVariant",
+        "type": "'primary' | 'secondary' | 'outline' | 'ghost' | 'danger'",
+        "optional": true,
+        "defaultValue": "'outline'",
+        "description": "Trigger button style variant ('primary', 'secondary', 'outline', 'ghost', 'danger'). Default 'outline'."
+      },
+      {
+        "name": "buttonSize",
+        "type": "'sm' | 'md' | 'lg'",
+        "optional": true,
+        "defaultValue": "'md'",
+        "description": "Trigger button size ('sm', 'md', 'lg'). Default 'md'."
+      },
+      {
+        "name": "token",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "InPost API Token (optional for sandbox)."
+      },
+      {
+        "name": "language",
+        "type": "InPostLanguage",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Widget language ('pl', 'en', 'uk', 'de', 'it', 'fr'). Default 'pl'."
+      },
+      {
+        "name": "config",
+        "type": "InPostConfigType",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Widget configuration type ('parcelCollect', 'parcelCollectPayment', 'international', 'postBuy'). Default 'parcelCollect'."
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Enable sandbox environment. Default false."
+      },
+      {
+        "name": "customScriptUrl",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Custom SDK JavaScript URL."
+      },
+      {
+        "name": "customCssUrl",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Custom SDK CSS URL."
+      }
+    ],
     "cva": null,
     "usageSnippet": "<InPostGeowidget\n  sandbox={true}\n  onPointSelect={(point) => setSelectedPoint(point)}\n/>"
   },
@@ -4388,7 +4508,127 @@
     "name": "InPostGeowidgetModal",
     "importPath": "import { InPostGeowidgetModal } from \"@kjaniec-dev/ui\";",
     "description": "React component InPostGeowidgetModal.",
-    "props": [],
+    "props": [
+      {
+        "name": "value",
+        "type": "InPostPoint | string | null",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Currently selected point object or point code string (e.g. 'WAW01M')."
+      },
+      {
+        "name": "onSelect",
+        "type": "(point: InPostPoint) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Callback triggered when point is selected on the map."
+      },
+      {
+        "name": "triggerText",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "'Wybierz Paczkomat®'",
+        "description": "Trigger button label. Default 'Wybierz Paczkomat®'."
+      },
+      {
+        "name": "modalTitle",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "'Wybierz punkt odbioru InPost'",
+        "description": "Modal header title. Default 'Wybierz punkt odbioru InPost'."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": "Disable trigger button. Default false."
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Controlled open state of the modal."
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Callback when open state changes."
+      },
+      {
+        "name": "showSelectedBadge",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Show selected point badge under trigger button. Default true."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "''",
+        "description": "Outer container CSS class name."
+      },
+      {
+        "name": "buttonVariant",
+        "type": "'primary' | 'secondary' | 'outline' | 'ghost' | 'danger'",
+        "optional": true,
+        "defaultValue": "'outline'",
+        "description": "Trigger button style variant ('primary', 'secondary', 'outline', 'ghost', 'danger'). Default 'outline'."
+      },
+      {
+        "name": "buttonSize",
+        "type": "'sm' | 'md' | 'lg'",
+        "optional": true,
+        "defaultValue": "'md'",
+        "description": "Trigger button size ('sm', 'md', 'lg'). Default 'md'."
+      },
+      {
+        "name": "token",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "InPost API Token (optional for sandbox)."
+      },
+      {
+        "name": "language",
+        "type": "InPostLanguage",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Widget language ('pl', 'en', 'uk', 'de', 'it', 'fr'). Default 'pl'."
+      },
+      {
+        "name": "config",
+        "type": "InPostConfigType",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Widget configuration type ('parcelCollect', 'parcelCollectPayment', 'international', 'postBuy'). Default 'parcelCollect'."
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Enable sandbox environment. Default false."
+      },
+      {
+        "name": "customScriptUrl",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Custom SDK JavaScript URL."
+      },
+      {
+        "name": "customCssUrl",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Custom SDK CSS URL."
+      }
+    ],
     "cva": null,
     "usageSnippet": "<InPostGeowidgetModal\n  sandbox={true}\n  value={point}\n  onSelect={(p) => setPoint(p)}\n/>"
   }

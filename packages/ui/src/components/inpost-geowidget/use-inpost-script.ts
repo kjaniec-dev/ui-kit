@@ -24,7 +24,7 @@ export function useInPostScript(options: UseInPostScriptOptions = {}): UseInPost
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Check if script is already present/loaded
+    // Check if script/customElement is already defined
     if (
       window.customElements?.get('inpost-geowidget') ||
       (window as unknown as { easyPack?: unknown }).easyPack
@@ -61,7 +61,17 @@ export function useInPostScript(options: UseInPostScriptOptions = {}): UseInPost
     }
 
     scriptPromise
-      .then(() => {
+      .then(async () => {
+        if ('customElements' in window && window.customElements.whenDefined) {
+          try {
+            await Promise.race([
+              window.customElements.whenDefined('inpost-geowidget'),
+              new Promise((r) => setTimeout(r, 1500)),
+            ]);
+          } catch {
+            /* ignore */
+          }
+        }
         setIsLoaded(true);
       })
       .catch((err) => {

@@ -1,8 +1,34 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import type { InPostGeowidgetProps, InPostPoint } from './types';
+import type { InPostConfigType, InPostLanguage, InPostPoint } from './types';
 import { useInPostScript } from './use-inpost-script';
+
+/** Props for the inline InPost GeoWidget map component. */
+export interface InPostGeowidgetProps {
+  /** InPost API Token (optional for sandbox). */
+  token?: string;
+  /** Widget language ('pl', 'en', 'uk', 'de', 'it', 'fr'). Default 'pl'. */
+  language?: InPostLanguage;
+  /** Widget configuration type ('parcelCollect', 'parcelCollectPayment', 'international', 'postBuy'). Default 'parcelCollect'. */
+  config?: InPostConfigType;
+  /** Enable sandbox environment. Default false. */
+  sandbox?: boolean;
+  /** Callback triggered when user selects a parcel locker or pick-up point on the map. */
+  onPointSelect?: (point: InPostPoint) => void;
+  /** Callback triggered when GeoWidget finishes loading. */
+  onReady?: () => void;
+  /** Callback triggered on script load error. */
+  onError?: (error: Error) => void;
+  /** Outer container CSS class name. */
+  className?: string;
+  /** Inline container styles. */
+  style?: React.CSSProperties;
+  /** Custom SDK JavaScript URL. */
+  customScriptUrl?: string;
+  /** Custom SDK CSS URL. */
+  customCssUrl?: string;
+}
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

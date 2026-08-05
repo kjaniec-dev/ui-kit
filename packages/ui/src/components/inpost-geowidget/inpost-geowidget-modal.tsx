@@ -4,7 +4,45 @@ import React, { useState } from 'react';
 import { Button } from '../button';
 import { Modal, ModalTitle } from '../modal';
 import { InPostGeowidget } from './inpost-geowidget';
-import type { InPostGeowidgetModalProps, InPostPoint } from './types';
+import type { InPostConfigType, InPostLanguage, InPostPoint } from './types';
+
+/** Props for the InPost GeoWidget Modal checkout component. */
+export interface InPostGeowidgetModalProps {
+  /** Currently selected point object or point code string (e.g. 'WAW01M'). */
+  value?: InPostPoint | string | null;
+  /** Callback triggered when point is selected on the map. */
+  onSelect?: (point: InPostPoint) => void;
+  /** Trigger button label. Default 'Wybierz Paczkomat®'. */
+  triggerText?: string;
+  /** Modal header title. Default 'Wybierz punkt odbioru InPost'. */
+  modalTitle?: string;
+  /** Disable trigger button. Default false. */
+  disabled?: boolean;
+  /** Controlled open state of the modal. */
+  open?: boolean;
+  /** Callback when open state changes. */
+  onOpenChange?: (open: boolean) => void;
+  /** Show selected point badge under trigger button. Default true. */
+  showSelectedBadge?: boolean;
+  /** Outer container CSS class name. */
+  className?: string;
+  /** Trigger button style variant ('primary', 'secondary', 'outline', 'ghost', 'danger'). Default 'outline'. */
+  buttonVariant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
+  /** Trigger button size ('sm', 'md', 'lg'). Default 'md'. */
+  buttonSize?: 'sm' | 'md' | 'lg';
+  /** InPost API Token (optional for sandbox). */
+  token?: string;
+  /** Widget language ('pl', 'en', 'uk', 'de', 'it', 'fr'). Default 'pl'. */
+  language?: InPostLanguage;
+  /** Widget configuration type ('parcelCollect', 'parcelCollectPayment', 'international', 'postBuy'). Default 'parcelCollect'. */
+  config?: InPostConfigType;
+  /** Enable sandbox environment. Default false. */
+  sandbox?: boolean;
+  /** Custom SDK JavaScript URL. */
+  customScriptUrl?: string;
+  /** Custom SDK CSS URL. */
+  customCssUrl?: string;
+}
 
 export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
   value,
