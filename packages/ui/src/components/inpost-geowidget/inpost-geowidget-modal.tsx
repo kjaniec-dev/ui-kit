@@ -148,8 +148,16 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
       )}
 
       <Modal open={isOpen} onClose={() => handleOpenToggle(false)} width={850}>
-        <ModalTitle>{modalTitle}</ModalTitle>
-        <div className="w-full h-[550px] min-h-[450px] mt-3">
+        <div className="flex items-center gap-3 pb-3 border-b border-slate-200 dark:border-slate-800">
+          <span className="font-black text-xs bg-amber-400 text-slate-950 px-2.5 py-1 rounded-md shadow-sm tracking-tight uppercase border border-amber-500/40">
+            InPost
+          </span>
+          <ModalTitle className="m-0 text-lg font-extrabold text-slate-900 dark:text-slate-100">
+            {modalTitle}
+          </ModalTitle>
+        </div>
+
+        <div className="w-full h-[550px] min-h-[450px] mt-3.5 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950">
           {isOpen && (
             <InPostGeowidget
               token={token}
