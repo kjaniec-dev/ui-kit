@@ -93,6 +93,8 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
     ? `${selectedPoint.address?.line1 || ''}, ${selectedPoint.address?.line2 || ''}`
     : null;
 
+  const isOutline = buttonVariant === 'outline';
+
   return (
     <div className={`inline-flex flex-col gap-3 min-w-[280px] ${className}`}>
       <Button
@@ -101,17 +103,27 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
         size={buttonSize}
         disabled={disabled}
         onClick={() => handleOpenToggle(true)}
-        className="group w-full justify-between gap-4 text-left font-bold bg-white hover:bg-amber-50/60 dark:bg-slate-900 dark:hover:bg-slate-800 border-2 border-slate-300 dark:border-slate-700 hover:border-amber-500 dark:hover:border-amber-500 shadow-sm hover:shadow-md transition-all py-2.5 px-3.5 rounded-xl text-slate-900 dark:text-slate-100"
+        className={`group w-full justify-between gap-4 text-left font-bold shadow-sm hover:shadow-md transition-all py-2.5 px-3.5 rounded-xl ${
+          isOutline
+            ? 'bg-white hover:bg-amber-50/60 dark:bg-slate-900 dark:hover:bg-slate-800 border-2 border-slate-300 dark:border-slate-700 hover:border-amber-500 dark:hover:border-amber-500 text-slate-900 dark:text-slate-100'
+            : 'border-2 border-transparent'
+        }`}
       >
         <span className="flex items-center gap-2.5 min-w-0">
           <span className="font-black text-[0.7rem] bg-amber-400 text-slate-950 px-2.5 py-1 rounded-md shadow-sm tracking-tight uppercase border border-amber-500/40 shrink-0 group-hover:scale-105 transition-transform">
             InPost
           </span>
-          <span className="truncate text-slate-900 dark:text-slate-100 font-bold text-sm group-hover:text-slate-950 dark:group-hover:text-white">
+          <span className={`truncate font-bold text-sm ${isOutline ? 'text-slate-900 dark:text-slate-100 group-hover:text-slate-950 dark:group-hover:text-white' : ''}`}>
             {selectedCode ? `Paczkomat® ${selectedCode}` : triggerText}
           </span>
         </span>
-        <span className="text-xs font-black bg-slate-950 text-amber-400 dark:bg-amber-400 dark:text-slate-950 group-hover:bg-amber-400 group-hover:text-slate-950 px-2.5 py-1 rounded-md shrink-0 shadow-sm uppercase tracking-wide transition-all">
+        <span
+          className={`text-xs font-black px-2.5 py-1 rounded-md shrink-0 shadow-sm uppercase tracking-wide transition-all ${
+            isOutline
+              ? 'bg-slate-950 text-amber-400 dark:bg-amber-400 dark:text-slate-950 group-hover:bg-amber-400 group-hover:text-slate-950'
+              : 'bg-amber-400 text-slate-950'
+          }`}
+        >
           {selectedCode ? 'Zmień' : 'Wybierz'}
         </span>
       </Button>
