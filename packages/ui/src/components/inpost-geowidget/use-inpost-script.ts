@@ -62,11 +62,11 @@ export function useInPostScript(options: UseInPostScriptOptions = {}): UseInPost
 
     scriptPromise
       .then(async () => {
-        if ('customElements' in window && window.customElements.whenDefined) {
+        if (typeof window !== 'undefined' && window.customElements?.whenDefined) {
           try {
             await Promise.race([
               window.customElements.whenDefined('inpost-geowidget'),
-              new Promise((r) => setTimeout(r, 1500)),
+              new Promise((r) => setTimeout(r, 50)),
             ]);
           } catch {
             /* ignore */
