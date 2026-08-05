@@ -169,7 +169,7 @@ export function OverlaysSections() {
         id="inbox-popover"
         title="InboxPopover"
         desc="Bell-triggered notification inbox with unread badge, mark-all-read, and per-item dismiss."
-        components={["InboxPopover", "InboxTrigger", "InboxContent", "NotificationItem", "useInboxState"]}
+        components={["InboxPopover", "InboxTrigger", "InboxContent", "NotificationItem"]}
         code={codeInbox}
       >
         <Box>

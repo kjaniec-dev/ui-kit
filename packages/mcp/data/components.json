@@ -4375,5 +4375,21 @@
     ],
     "cva": null,
     "usageSnippet": "<ImageGallery images={sampleImages.slice(0, 4)} columns={2} />"
+  },
+  {
+    "name": "InPostGeowidget",
+    "importPath": "import { InPostGeowidget } from \"@kjaniec-dev/ui\";",
+    "description": "React component InPostGeowidget.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<InPostGeowidget\n  sandbox={true}\n  onPointSelect={(point) => setSelectedPoint(point)}\n/>"
+  },
+  {
+    "name": "InPostGeowidgetModal",
+    "importPath": "import { InPostGeowidgetModal } from \"@kjaniec-dev/ui\";",
+    "description": "React component InPostGeowidgetModal.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<InPostGeowidgetModal\n  sandbox={true}\n  value={point}\n  onSelect={(p) => setPoint(p)}\n/>"
   }
 ]
