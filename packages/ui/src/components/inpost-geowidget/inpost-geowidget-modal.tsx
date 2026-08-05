@@ -17,7 +17,7 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
   showSelectedBadge = true,
   className = '',
   buttonVariant = 'outline',
-  buttonSize = 'default',
+  buttonSize = 'md',
   token,
   language,
   config,
@@ -55,21 +55,12 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
     ? `${selectedPoint.address?.line1 || ''}, ${selectedPoint.address?.line2 || ''}`
     : null;
 
-  const mappedVariant =
-    buttonVariant === 'default'
-      ? 'primary'
-      : buttonVariant === 'link'
-        ? 'ghost'
-        : buttonVariant;
-
-  const mappedSize = buttonSize === 'default' ? 'md' : buttonSize;
-
   return (
     <div className={`inline-flex flex-col gap-2 ${className}`}>
       <Button
         type="button"
-        variant={mappedVariant}
-        size={mappedSize}
+        variant={buttonVariant}
+        size={buttonSize}
         disabled={disabled}
         onClick={() => handleOpenToggle(true)}
         className="justify-between gap-3 text-left font-normal"
@@ -90,18 +81,20 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
         </div>
       )}
 
-      <Modal open={isOpen} onClose={() => handleOpenToggle(false)} width={800}>
-        {modalTitle && <ModalTitle className="mb-4">{modalTitle}</ModalTitle>}
-        <div className="w-full h-[600px] min-h-[500px]">
-          <InPostGeowidget
-            token={token}
-            language={language}
-            config={config}
-            sandbox={sandbox}
-            customScriptUrl={customScriptUrl}
-            customCssUrl={customCssUrl}
-            onPointSelect={handlePointSelect}
-          />
+      <Modal open={isOpen} onClose={() => handleOpenToggle(false)} width={850}>
+        <ModalTitle>{modalTitle}</ModalTitle>
+        <div className="w-full h-[550px] min-h-[450px] mt-3">
+          {isOpen && (
+            <InPostGeowidget
+              token={token}
+              language={language}
+              config={config}
+              sandbox={sandbox}
+              customScriptUrl={customScriptUrl}
+              customCssUrl={customCssUrl}
+              onPointSelect={handlePointSelect}
+            />
+          )}
         </div>
       </Modal>
     </div>

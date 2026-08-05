@@ -63,8 +63,8 @@ export interface InPostGeowidgetModalProps extends Omit<InPostGeowidgetProps, 'c
   onOpenChange?: (open: boolean) => void;
   showSelectedBadge?: boolean;
   className?: string;
-  buttonVariant?: 'default' | 'outline' | 'secondary' | 'ghost' | 'link';
-  buttonSize?: 'sm' | 'default' | 'lg';
+  buttonVariant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
+  buttonSize?: 'sm' | 'md' | 'lg';
 }
 
 export interface UseInPostScriptOptions {

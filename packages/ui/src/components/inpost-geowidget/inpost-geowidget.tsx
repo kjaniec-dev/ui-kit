@@ -14,6 +14,7 @@ declare global {
           language?: string;
           config?: string;
           sandbox?: string | boolean;
+          onpointselect?: string;
         },
         HTMLElement
       >;
@@ -22,7 +23,7 @@ declare global {
 }
 
 export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
-  token = '',
+  token,
   language = 'pl',
   config = 'parcelCollect',
   sandbox = false,
@@ -41,6 +42,7 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
   });
 
   const widgetRef = useRef<HTMLElement | null>(null);
+  const callbackNameRef = useRef<string>(`inpost_cb_${Math.random().toString(36).substring(2, 9)}`);
 
   useEffect(() => {
     if (error && onError) {
@@ -55,27 +57,41 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
   }, [isLoaded, onReady]);
 
   useEffect(() => {
-    const el = widgetRef.current;
-    if (!el || !onPointSelect) return;
+    const cbName = callbackNameRef.current;
 
-    const handlePointSelect = (event: Event) => {
-      const customEv = event as CustomEvent<InPostPoint>;
-      const point = customEv.detail || (customEv as unknown as { point: InPostPoint }).point;
-      if (point) {
+    (window as unknown as Record<string, (point: InPostPoint) => void>)[cbName] = (point: InPostPoint) => {
+      if (onPointSelect) {
         onPointSelect(point);
       }
     };
 
-    el.addEventListener('inpostgeowidget', handlePointSelect);
+    const el = widgetRef.current;
+    const handlePointSelect = (event: Event) => {
+      const customEv = event as CustomEvent<InPostPoint>;
+      const point = customEv.detail || (customEv as unknown as { point: InPostPoint }).point;
+      if (point && onPointSelect) {
+        onPointSelect(point);
+      }
+    };
+
+    if (el) {
+      el.addEventListener('inpostgeowidget', handlePointSelect);
+      el.addEventListener('onpointselect', handlePointSelect);
+    }
+
     return () => {
-      el.removeEventListener('inpostgeowidget', handlePointSelect);
+      delete (window as unknown as Record<string, unknown>)[cbName];
+      if (el) {
+        el.removeEventListener('inpostgeowidget', handlePointSelect);
+        el.removeEventListener('onpointselect', handlePointSelect);
+      }
     };
   }, [onPointSelect, isLoaded]);
 
   if (!isLoaded) {
     return (
       <div
-        className={`flex items-center justify-center min-h-[400px] bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-6 ${
+        className={`flex items-center justify-center min-h-[450px] bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-6 ${
           className || ''
         }`}
         style={style}
@@ -88,15 +104,26 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
     );
   }
 
+  const widgetProps: Record<string, string> = {
+    language,
+    config,
+    onpointselect: callbackNameRef.current,
+  };
+
+  if (token) {
+    widgetProps.token = token;
+  }
+
+  if (sandbox) {
+    widgetProps.sandbox = 'true';
+  }
+
   return (
-    <div className={`w-full min-h-[500px] relative ${className || ''}`} style={style}>
+    <div className={`w-full h-full min-h-[450px] relative ${className || ''}`} style={style}>
       {React.createElement('inpost-geowidget', {
         ref: widgetRef,
-        token,
-        language,
-        config,
-        sandbox: sandbox ? 'true' : 'false',
-        style: { width: '100%', height: '100%', display: 'block', minHeight: '500px' },
+        ...widgetProps,
+        style: { width: '100%', height: '100%', display: 'block', minHeight: '450px' },
       })}
     </div>
   );
