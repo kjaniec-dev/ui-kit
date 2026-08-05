@@ -376,7 +376,7 @@ export function DataDisplaySections() {
         id="data"
         title="Table & data"
         desc="Tables with statuses, avatars, aligned numbers, and interactive DataTables."
-        components={["DataTable", "DataTableColumn", "Table", "TableToolbar", "EmptyState", "ErrorState"]}
+        components={["DataTable", "Table", "TableToolbar", "EmptyState", "ErrorState"]}
       >
         <TableWrap>
           <Table>

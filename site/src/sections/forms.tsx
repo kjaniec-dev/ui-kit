@@ -474,7 +474,7 @@ export function FormsSections() {
         id="inpost-geowidget"
         title="InPost GeoWidget"
         desc="Modern React wrapper for InPost GeoWidget v5 map & modal parcel locker picker with auto script loading."
-        components={["InPostGeowidget", "InPostGeowidgetModal", "useInPostScript"]}
+        components={["InPostGeowidget", "InPostGeowidgetModal"]}
         code={`import { InPostGeowidgetModal } from "@kjaniec-dev/ui";
 
 export function InPostCheckout() {
