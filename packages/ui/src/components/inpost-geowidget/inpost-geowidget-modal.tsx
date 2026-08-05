@@ -94,39 +94,41 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
     : null;
 
   return (
-    <div className={`inline-flex flex-col gap-2.5 ${className}`}>
+    <div className={`inline-flex flex-col gap-3 min-w-[280px] ${className}`}>
       <Button
         type="button"
         variant={buttonVariant}
         size={buttonSize}
         disabled={disabled}
         onClick={() => handleOpenToggle(true)}
-        className="justify-between gap-3 text-left font-semibold border-2 border-slate-300 dark:border-slate-700 hover:border-amber-500 dark:hover:border-amber-500 shadow-sm transition-all"
+        className="w-full justify-between gap-4 text-left font-bold bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 hover:border-amber-500 dark:hover:border-amber-500 shadow-sm hover:shadow-md transition-all py-2.5 px-3.5 rounded-xl text-slate-900 dark:text-slate-100"
       >
-        <span className="flex items-center gap-2.5">
-          <span className="font-black text-[0.72rem] bg-amber-400 text-slate-950 px-2 py-0.5 rounded shadow-sm tracking-tight uppercase">
+        <span className="flex items-center gap-2.5 min-w-0">
+          <span className="font-black text-[0.7rem] bg-amber-400 text-slate-950 px-2.5 py-1 rounded-md shadow-sm tracking-tight uppercase border border-amber-500/30 shrink-0">
             InPost
           </span>
-          <span className="text-slate-900 dark:text-slate-100">
+          <span className="truncate text-slate-900 dark:text-slate-100 font-bold text-sm">
             {selectedCode ? `Paczkomat® ${selectedCode}` : triggerText}
           </span>
         </span>
-        <span className="text-xs font-bold text-amber-600 dark:text-amber-400">Zmień</span>
+        <span className="text-xs font-black bg-slate-900 text-amber-400 dark:bg-amber-400 dark:text-slate-950 px-2.5 py-1 rounded-md shrink-0 shadow-sm uppercase tracking-wide">
+          {selectedCode ? 'Zmień' : 'Wybierz'}
+        </span>
       </Button>
 
       {showSelectedBadge && selectedCode && (
-        <div className="text-xs bg-slate-950 text-slate-100 dark:bg-slate-900 border-2 border-slate-900 dark:border-amber-500/40 p-3 rounded-lg flex flex-col gap-1 shadow-md">
-          <div className="font-bold flex items-center justify-between">
+        <div className="text-xs bg-slate-950 text-slate-100 dark:bg-slate-900 border-2 border-slate-950 dark:border-amber-500/40 p-3.5 rounded-xl flex flex-col gap-1.5 shadow-md">
+          <div className="font-bold flex items-center justify-between gap-2">
             <span className="flex items-center gap-2 text-white">
-              <span className="w-2 h-2 rounded-full bg-amber-400 shadow-sm" />
-              <span>Paczkomat® {selectedCode}</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-sm animate-pulse" />
+              <span className="font-black text-sm text-amber-400">Paczkomat® {selectedCode}</span>
             </span>
             <span className="text-[0.65rem] bg-amber-400 text-slate-950 font-black px-2 py-0.5 rounded uppercase tracking-wider">
               Wybrany
             </span>
           </div>
           {selectedAddress && (
-            <div className="text-slate-300 dark:text-slate-400 text-[0.75rem] font-medium pl-4">
+            <div className="text-slate-200 dark:text-slate-300 text-[0.78rem] font-medium pl-4 border-l-2 border-slate-800">
               {selectedAddress}
             </div>
           )}
