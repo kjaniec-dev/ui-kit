@@ -105,7 +105,7 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
         onClick={() => handleOpenToggle(true)}
         className={`group w-full justify-between gap-4 text-left font-bold shadow-sm hover:shadow-md transition-all py-2.5 px-3.5 rounded-xl ${
           isOutline
-            ? 'bg-white hover:bg-amber-50/60 dark:bg-slate-900 dark:hover:bg-slate-800 border-2 border-slate-300 dark:border-slate-700 hover:border-amber-500 dark:hover:border-amber-500 text-slate-900 dark:text-slate-100'
+            ? 'bg-white hover:bg-amber-50/60 dark:bg-slate-900 dark:hover:bg-slate-800 border-2 border-slate-300 dark:border-slate-700 hover:border-amber-500 dark:hover:border-amber-500 text-slate-950 dark:text-slate-100'
             : 'border-2 border-transparent'
         }`}
       >
@@ -113,7 +113,7 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
           <span className="font-black text-[0.7rem] bg-amber-400 text-slate-950 px-2.5 py-1 rounded-md shadow-sm tracking-tight uppercase border border-amber-500/40 shrink-0 group-hover:scale-105 transition-transform">
             InPost
           </span>
-          <span className={`truncate font-bold text-sm ${isOutline ? 'text-slate-900 dark:text-slate-100 group-hover:text-slate-950 dark:group-hover:text-white' : ''}`}>
+          <span className={`truncate font-bold text-sm ${isOutline ? 'text-slate-950 dark:text-slate-100 group-hover:text-black dark:group-hover:text-white' : ''}`}>
             {selectedCode ? `Paczkomat® ${selectedCode}` : triggerText}
           </span>
         </span>
@@ -148,16 +148,16 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
       )}
 
       <Modal open={isOpen} onClose={() => handleOpenToggle(false)} width={850}>
-        <div className="flex items-center gap-3 pb-3 border-b border-slate-200 dark:border-slate-800">
-          <span className="font-black text-xs bg-amber-400 text-slate-950 px-2.5 py-1 rounded-md shadow-sm tracking-tight uppercase border border-amber-500/40">
+        <div className="flex items-center gap-3 pb-3.5 border-b-2 border-slate-200 dark:border-slate-800">
+          <span className="font-black text-xs bg-amber-400 text-slate-950 px-2.5 py-1 rounded-md shadow-sm tracking-tight uppercase border border-amber-500/40 shrink-0">
             InPost
           </span>
-          <ModalTitle className="m-0 text-lg font-extrabold text-slate-900 dark:text-slate-100">
+          <ModalTitle className="m-0 text-xl font-black text-slate-950 dark:text-white tracking-tight">
             {modalTitle}
           </ModalTitle>
         </div>
 
-        <div className="w-full h-[550px] min-h-[450px] mt-3.5 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950">
+        <div className="w-full h-[550px] min-h-[450px] mt-3.5 rounded-xl overflow-hidden shadow-sm border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
           {isOpen && (
             <InPostGeowidget
               token={token}
