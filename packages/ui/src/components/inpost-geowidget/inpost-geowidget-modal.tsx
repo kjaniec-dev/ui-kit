@@ -157,7 +157,7 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
           </ModalTitle>
         </div>
 
-        <div className="w-full h-[550px] min-h-[450px] mt-3.5 rounded-xl overflow-hidden">
+        <div className="w-full h-[600px] min-h-[500px] mt-3.5 rounded-xl overflow-hidden">
           {isOpen && (
             <InPostGeowidget
               token={token}

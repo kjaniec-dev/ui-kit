@@ -189,7 +189,7 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
 
     return (
       <div
-        className={`flex flex-col h-full min-h-[450px] bg-surface border-2 border-border rounded-xl p-4 font-sans text-foreground ${
+        className={`flex flex-col h-full min-h-[500px] bg-surface border-2 border-border rounded-xl p-4 font-sans text-foreground ${
           className || ''
         }`}
         style={style}
@@ -220,7 +220,7 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
           />
         </div>
 
-        <div className="flex-1 overflow-y-auto space-y-3 pr-1 max-h-[340px]">
+        <div className="flex-1 overflow-y-auto space-y-3 pr-1 max-h-[420px]">
           {filteredPoints.map((p) => {
             const isSelected = selectedMock?.name === p.name;
             return (
