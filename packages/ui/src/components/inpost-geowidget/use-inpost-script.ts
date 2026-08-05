@@ -3,10 +3,8 @@
 import { useEffect, useState } from 'react';
 import type { UseInPostScriptOptions, UseInPostScriptResult } from './types';
 
-const PROD_SCRIPT_URL = 'https://geowidget.easypack24.net/js/sdk-for-javascript.js';
-const PROD_CSS_URL = 'https://geowidget.easypack24.net/css/easypack.css';
-const SANDBOX_SCRIPT_URL = 'https://sandbox-geowidget.easypack24.net/js/sdk-for-javascript.js';
-const SANDBOX_CSS_URL = 'https://sandbox-geowidget.easypack24.net/css/easypack.css';
+const OFFICIAL_SCRIPT_URL = 'https://geowidget.easypack24.net/js/sdk-for-javascript.js';
+const OFFICIAL_CSS_URL = 'https://geowidget.easypack24.net/css/easypack.css';
 
 let scriptPromise: Promise<void> | null = null;
 
@@ -14,12 +12,8 @@ export function useInPostScript(options: UseInPostScriptOptions = {}): UseInPost
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const scriptUrl =
-    options.customScriptUrl ||
-    (options.sandbox ? SANDBOX_SCRIPT_URL : PROD_SCRIPT_URL);
-  const cssUrl =
-    options.customCssUrl ||
-    (options.sandbox ? SANDBOX_CSS_URL : PROD_CSS_URL);
+  const scriptUrl = options.customScriptUrl || OFFICIAL_SCRIPT_URL;
+  const cssUrl = options.customCssUrl || OFFICIAL_CSS_URL;
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -66,7 +60,7 @@ export function useInPostScript(options: UseInPostScriptOptions = {}): UseInPost
           try {
             await Promise.race([
               window.customElements.whenDefined('inpost-geowidget'),
-              new Promise((r) => setTimeout(r, 50)),
+              new Promise((r) => setTimeout(r, 100)),
             ]);
           } catch {
             /* ignore */

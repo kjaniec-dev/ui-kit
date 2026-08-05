@@ -104,6 +104,7 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
       el.addEventListener('inpostgeowidget', handlePointSelect);
       el.addEventListener('onpointselect', handlePointSelect);
     }
+    document.addEventListener('onpointselect', handlePointSelect);
 
     return () => {
       delete (window as unknown as Record<string, unknown>)[cbName];
@@ -111,8 +112,27 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
         el.removeEventListener('inpostgeowidget', handlePointSelect);
         el.removeEventListener('onpointselect', handlePointSelect);
       }
+      document.removeEventListener('onpointselect', handlePointSelect);
     };
   }, [onPointSelect, isLoaded]);
+
+  if (error) {
+    return (
+      <div
+        className={`flex flex-col items-center justify-center min-h-[450px] bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900 rounded-lg p-6 text-center ${
+          className || ''
+        }`}
+        style={style}
+      >
+        <p className="text-sm font-semibold text-red-800 dark:text-red-300 mb-1">
+          Błąd ładowania Geowidget InPost
+        </p>
+        <p className="text-xs text-red-600 dark:text-red-400 max-w-sm">
+          Nie udało się pobrać skryptu mapy z serwera InPost. Sprawdź połączenie lub spróbuj ponownie.
+        </p>
+      </div>
+    );
+  }
 
   if (!isLoaded) {
     return (
@@ -132,7 +152,7 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
 
   const widgetProps: Record<string, string> = {
     language,
-    config,
+    config: String(config).toLowerCase(),
     onpointselect: callbackNameRef.current,
   };
 
