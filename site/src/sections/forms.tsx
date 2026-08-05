@@ -484,6 +484,8 @@ export function InPostCheckout() {
       sandbox={true}
       value={point}
       onSelect={(p) => setPoint(p)}
+      buttonVariant="primary"
+      triggerText="Wybierz punkt Paczkomat®"
     />
   );
 }`}
@@ -493,7 +495,20 @@ export function InPostCheckout() {
           <p className="text-sm text-muted-foreground mb-4">
             Kliknij przycisk poniżej, aby otworzyć interaktywny modal z mapą punktów odbioru Paczkomat®.
           </p>
-          <InPostGeowidgetModal sandbox={true} />
+          <div className="flex flex-wrap items-center gap-4">
+            <InPostGeowidgetModal
+              sandbox={true}
+              buttonVariant="outline"
+              buttonSize="md"
+              triggerText="Wybierz punkt Paczkomat®"
+            />
+            <InPostGeowidgetModal
+              sandbox={true}
+              buttonVariant="primary"
+              buttonSize="md"
+              triggerText="Dostawa InPost (Design Kit)"
+            />
+          </div>
         </Box>
       </Sec>
     </>
