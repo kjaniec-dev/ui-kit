@@ -17,7 +17,7 @@ import {
 const NAV = [
   ["buttons", "Buttons"], ["badges", "Badges"], ["feedback", "Feedback"],
   ["forms", "Forms"], ["selection", "Selection"], ["rating", "Rating"],
-  ["color-picker", "ColorPicker"], ["cards", "Cards"], ["navigation", "Navigation"],
+  ["color-picker", "ColorPicker"], ["inpost-geowidget", "InPost GeoWidget"], ["cards", "Cards"], ["navigation", "Navigation"],
   ["data", "Table"], ["overlays", "Overlays"], ["inbox-popover", "InboxPopover"],
   ["primitives", "Primitives"], ["layouts", "Layouts"],
 ];

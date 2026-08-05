@@ -28,6 +28,7 @@ import {
   RatingField,
   RatingSummary,
   ColorPickerField,
+  InPostGeowidgetModal,
 } from "@kjaniec-dev/ui";
 import { Sec, Box, Sub, Grid, IcoSearch } from "./primitives";
 
@@ -466,6 +467,33 @@ export function FormsSections() {
       >
         <Box>
           <ColorPickerDemo />
+        </Box>
+      </Sec>
+
+      <Sec
+        id="inpost-geowidget"
+        title="InPost GeoWidget"
+        desc="Modern React wrapper for InPost GeoWidget v5 map & modal parcel locker picker with auto script loading."
+        components={["InPostGeowidget", "InPostGeowidgetModal", "useInPostScript"]}
+        code={`import { InPostGeowidgetModal } from "@kjaniec-dev/ui";
+
+export function InPostCheckout() {
+  const [point, setPoint] = React.useState(null);
+  return (
+    <InPostGeowidgetModal
+      sandbox={true}
+      value={point}
+      onSelect={(p) => setPoint(p)}
+    />
+  );
+}`}
+      >
+        <Box>
+          <Sub>InPost Geowidget Modal Picker</Sub>
+          <p className="text-sm text-muted-foreground mb-4">
+            Kliknij przycisk poniżej, aby otworzyć interaktywny modal z mapą punktów odbioru Paczkomat®.
+          </p>
+          <InPostGeowidgetModal sandbox={true} />
         </Box>
       </Sec>
     </>
