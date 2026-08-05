@@ -163,22 +163,22 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
   if (error) {
     return (
       <div
-        className={`flex flex-col items-center justify-center min-h-[450px] bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900 rounded-lg p-6 text-center ${
+        className={`flex flex-col items-center justify-center min-h-[450px] bg-red-50 dark:bg-red-950/20 border-2 border-red-200 dark:border-red-900 rounded-xl p-6 text-center ${
           className || ''
         }`}
         style={style}
       >
-        <p className="text-sm font-semibold text-red-800 dark:text-red-300 mb-1">
+        <p className="text-base font-bold text-red-900 dark:text-red-300 mb-1">
           Błąd ładowania Geowidget InPost
         </p>
-        <p className="text-xs text-red-600 dark:text-red-400 max-w-sm">
+        <p className="text-xs text-red-700 dark:text-red-400 max-w-sm">
           Nie udało się pobrać skryptu mapy z serwera InPost. Sprawdź połączenie z siecią.
         </p>
       </div>
     );
   }
 
-  // Fallback demo picker when token is not supplied
+  // Fallback interactive demo picker when token is not supplied
   if (!token) {
     const filteredPoints = MOCK_POINTS.filter(
       (p) =>
@@ -189,32 +189,38 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
 
     return (
       <div
-        className={`flex flex-col h-full min-h-[450px] bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-4 font-sans text-slate-900 dark:text-slate-100 ${
+        className={`flex flex-col h-full min-h-[450px] bg-slate-100/70 dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-xl p-4 font-sans text-slate-900 dark:text-slate-100 ${
           className || ''
         }`}
         style={style}
       >
-        <div className="bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-900/60 rounded-md p-3 mb-3 text-xs text-amber-900 dark:text-amber-300 flex flex-col gap-1">
-          <div className="font-semibold flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-            <span>Tryb demonstracyjny / Wybierz punkt InPost Paczkomat®</span>
+        {/* Banner with high-contrast InPost yellow theme */}
+        <div className="bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-slate-950 rounded-lg p-3.5 mb-3.5 shadow-sm flex flex-col gap-1">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-slate-950 animate-pulse" />
+              <span className="font-extrabold text-sm tracking-tight uppercase">InPost Paczkomat®</span>
+            </div>
+            <span className="text-[0.68rem] font-black bg-slate-950 text-amber-400 px-2 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
+              Tryb Pokazowy
+            </span>
           </div>
-          <p className="opacity-90 leading-relaxed">
-            Do połączenia z żywą, produkcyjną mapą InPost podaj własny prop <code className="bg-amber-100 dark:bg-amber-900/80 px-1 py-0.5 rounded font-mono">token="TWOJ_TOKEN"</code> zarejestrowany w InPost Manager dla Twojej domeny.
+          <p className="text-xs text-slate-950 font-medium leading-relaxed opacity-95">
+            Wybierz punkt z listy poniżej. Do załadowania żywej mapy produkcyjnej InPost przekaż prop <code className="bg-slate-950 text-amber-400 px-1.5 py-0.5 rounded font-mono text-[0.72rem] font-bold">token="TWOJ_TOKEN"</code>.
           </p>
         </div>
 
-        <div className="mb-3">
+        <div className="mb-3 relative">
           <input
             type="text"
             placeholder="Szukaj Paczkomatu (np. Warszawa, WAW01M, Towarowa)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-3 py-2 text-sm bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-md outline-none focus:ring-2 focus:ring-amber-500"
+            className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-lg outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 shadow-sm font-medium transition-all"
           />
         </div>
 
-        <div className="flex-1 overflow-y-auto space-y-2 pr-1 max-h-[340px]">
+        <div className="flex-1 overflow-y-auto space-y-2.5 pr-1 max-h-[340px]">
           {filteredPoints.map((p) => {
             const isSelected = selectedMock?.name === p.name;
             return (
@@ -226,32 +232,34 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
                     onPointSelect(p);
                   }
                 }}
-                className={`p-3 rounded-md border transition-all cursor-pointer flex items-center justify-between gap-3 ${
+                className={`p-3.5 rounded-lg border-2 transition-all cursor-pointer flex items-center justify-between gap-3 ${
                   isSelected
-                    ? 'bg-amber-500 text-white border-amber-600 shadow-sm'
-                    : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-amber-400 dark:hover:border-amber-500'
+                    ? 'bg-slate-950 text-white border-slate-950 shadow-md ring-2 ring-amber-400 dark:ring-amber-500'
+                    : 'bg-white dark:bg-slate-800 border-slate-200/90 dark:border-slate-700 hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-md text-slate-900 dark:text-slate-100'
                 }`}
               >
-                <div className="flex flex-col gap-0.5 min-w-0">
+                <div className="flex flex-col gap-1 min-w-0">
                   <div className="font-bold text-sm flex items-center gap-2">
-                    <span>Paczkomat® {p.name}</span>
+                    <span className={isSelected ? 'text-amber-400 font-extrabold' : 'text-slate-900 dark:text-slate-100'}>
+                      Paczkomat® {p.name}
+                    </span>
                     {p.location_description && (
-                      <span className={`text-[0.7rem] px-1.5 py-0.5 rounded font-normal ${isSelected ? 'bg-amber-600 text-amber-50' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'}`}>
+                      <span className={`text-[0.7rem] px-2 py-0.5 rounded-full font-semibold ${isSelected ? 'bg-slate-800 text-amber-300' : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600'}`}>
                         {p.location_description}
                       </span>
                     )}
                   </div>
-                  <div className={`text-xs ${isSelected ? 'text-amber-100' : 'text-slate-500 dark:text-slate-400'}`}>
+                  <div className={`text-xs font-medium ${isSelected ? 'text-slate-300' : 'text-slate-600 dark:text-slate-400'}`}>
                     {p.address.line1}, {p.address.line2}
                   </div>
                 </div>
 
                 <button
                   type="button"
-                  className={`px-3 py-1.5 rounded text-xs font-semibold shrink-0 ${
+                  className={`px-3.5 py-1.5 rounded-md text-xs font-bold shrink-0 transition-all ${
                     isSelected
-                      ? 'bg-white text-amber-900 shadow-sm'
-                      : 'bg-amber-500 text-white hover:bg-amber-600'
+                      ? 'bg-amber-400 text-slate-950 shadow-sm'
+                      : 'bg-amber-400 hover:bg-amber-500 text-slate-950 shadow-sm'
                   }`}
                 >
                   {isSelected ? 'Wybrano ✓' : 'Wybierz'}
@@ -267,14 +275,14 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
   if (!isLoaded) {
     return (
       <div
-        className={`flex items-center justify-center min-h-[450px] bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-6 ${
+        className={`flex items-center justify-center min-h-[450px] bg-slate-50 dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-xl p-6 ${
           className || ''
         }`}
         style={style}
       >
-        <div className="flex flex-col items-center gap-3 text-slate-500 dark:text-slate-400">
-          <div className="w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full animate-spin" />
-          <span className="text-sm font-medium">Ładowanie mapy InPost GeoWidget...</span>
+        <div className="flex flex-col items-center gap-3 text-slate-600 dark:text-slate-400">
+          <div className="w-9 h-9 border-4 border-amber-500 border-t-transparent rounded-full animate-spin" />
+          <span className="text-sm font-semibold">Ładowanie mapy InPost GeoWidget...</span>
         </div>
       </div>
     );

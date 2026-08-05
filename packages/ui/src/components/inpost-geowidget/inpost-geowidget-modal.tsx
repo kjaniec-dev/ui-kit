@@ -94,28 +94,42 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
     : null;
 
   return (
-    <div className={`inline-flex flex-col gap-2 ${className}`}>
+    <div className={`inline-flex flex-col gap-2.5 ${className}`}>
       <Button
         type="button"
         variant={buttonVariant}
         size={buttonSize}
         disabled={disabled}
         onClick={() => handleOpenToggle(true)}
-        className="justify-between gap-3 text-left font-normal"
+        className="justify-between gap-3 text-left font-semibold border-2 border-slate-300 dark:border-slate-700 hover:border-amber-500 dark:hover:border-amber-500 shadow-sm transition-all"
       >
-        <span className="flex items-center gap-2">
-          <span className="font-semibold text-amber-500">InPost</span>
-          <span>{selectedCode ? `Paczkomat: ${selectedCode}` : triggerText}</span>
+        <span className="flex items-center gap-2.5">
+          <span className="font-black text-[0.72rem] bg-amber-400 text-slate-950 px-2 py-0.5 rounded shadow-sm tracking-tight uppercase">
+            InPost
+          </span>
+          <span className="text-slate-900 dark:text-slate-100">
+            {selectedCode ? `Paczkomat® ${selectedCode}` : triggerText}
+          </span>
         </span>
-        <span className="text-xs opacity-75">Zmień</span>
+        <span className="text-xs font-bold text-amber-600 dark:text-amber-400">Zmień</span>
       </Button>
 
       {showSelectedBadge && selectedCode && (
-        <div className="text-xs text-slate-600 dark:text-slate-400 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/60 p-2.5 rounded-md flex flex-col gap-0.5">
-          <div className="font-semibold text-amber-900 dark:text-amber-300 flex items-center gap-1.5">
-            <span>Paczkomat® {selectedCode}</span>
+        <div className="text-xs bg-slate-950 text-slate-100 dark:bg-slate-900 border-2 border-slate-900 dark:border-amber-500/40 p-3 rounded-lg flex flex-col gap-1 shadow-md">
+          <div className="font-bold flex items-center justify-between">
+            <span className="flex items-center gap-2 text-white">
+              <span className="w-2 h-2 rounded-full bg-amber-400 shadow-sm" />
+              <span>Paczkomat® {selectedCode}</span>
+            </span>
+            <span className="text-[0.65rem] bg-amber-400 text-slate-950 font-black px-2 py-0.5 rounded uppercase tracking-wider">
+              Wybrany
+            </span>
           </div>
-          {selectedAddress && <div>{selectedAddress}</div>}
+          {selectedAddress && (
+            <div className="text-slate-300 dark:text-slate-400 text-[0.75rem] font-medium pl-4">
+              {selectedAddress}
+            </div>
+          )}
         </div>
       )}
 
