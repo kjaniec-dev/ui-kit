@@ -263,6 +263,13 @@ export {
   type ImageGalleryProps,
 } from "./components/image-gallery";
 
-export * from "./components/inpost-geowidget";
+export {
+  InPostGeowidget,
+  InPostGeowidgetModal,
+  useInPostScript,
+  type InPostGeowidgetProps,
+  type InPostGeowidgetModalProps,
+  type InPostPoint,
+} from "./components/inpost-geowidget";
 
 
