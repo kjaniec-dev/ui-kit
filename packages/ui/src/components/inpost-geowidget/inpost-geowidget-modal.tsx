@@ -105,7 +105,7 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
         onClick={() => handleOpenToggle(true)}
         className={`group w-full justify-between gap-4 text-left font-bold shadow-sm hover:shadow-md transition-all py-2.5 px-3.5 rounded-xl ${
           isOutline
-            ? 'bg-white hover:bg-amber-50/60 dark:bg-slate-900 dark:hover:bg-slate-800 border-2 border-slate-300 dark:border-slate-700 hover:border-amber-500 dark:hover:border-amber-500 text-black dark:text-slate-100'
+            ? 'bg-surface hover:bg-muted text-foreground border-2 border-border hover:border-primary'
             : 'border-2 border-transparent'
         }`}
       >
@@ -113,14 +113,14 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
           <span className="font-black text-[0.7rem] bg-amber-400 text-slate-950 px-2.5 py-1 rounded-md shadow-sm tracking-tight uppercase border border-amber-500/40 shrink-0 group-hover:scale-105 transition-transform">
             InPost
           </span>
-          <span className={`truncate font-bold text-sm ${isOutline ? 'text-black dark:text-slate-100 group-hover:text-black dark:group-hover:text-white' : ''}`}>
+          <span className={`truncate font-bold text-sm ${isOutline ? 'text-foreground group-hover:text-primary' : ''}`}>
             {selectedCode ? `Paczkomat® ${selectedCode}` : triggerText}
           </span>
         </span>
         <span
           className={`text-xs font-black px-2.5 py-1 rounded-md shrink-0 shadow-sm uppercase tracking-wide transition-all ${
             isOutline
-              ? 'bg-slate-950 text-amber-400 dark:bg-amber-400 dark:text-slate-950 group-hover:bg-amber-400 group-hover:text-slate-950'
+              ? 'bg-primary text-primary-foreground group-hover:bg-primary-hover'
               : 'bg-amber-400 text-slate-950'
           }`}
         >
@@ -129,18 +129,18 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
       </Button>
 
       {showSelectedBadge && selectedCode && (
-        <div className="text-xs bg-slate-950 text-slate-100 dark:bg-slate-900 border-2 border-slate-950 dark:border-amber-500/40 p-3.5 rounded-xl flex flex-col gap-1.5 shadow-md">
+        <div className="text-xs bg-surface text-foreground border-2 border-border p-3.5 rounded-xl flex flex-col gap-1.5 shadow-md">
           <div className="font-bold flex items-center justify-between gap-2">
-            <span className="flex items-center gap-2 text-white">
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-sm animate-pulse" />
-              <span className="font-black text-sm text-amber-400">Paczkomat® {selectedCode}</span>
+            <span className="flex items-center gap-2 text-foreground">
+              <span className="w-2.5 h-2.5 rounded-full bg-primary shadow-sm animate-pulse" />
+              <span className="font-black text-sm text-primary">Paczkomat® {selectedCode}</span>
             </span>
             <span className="text-[0.65rem] bg-amber-400 text-slate-950 font-black px-2 py-0.5 rounded uppercase tracking-wider">
               Wybrany
             </span>
           </div>
           {selectedAddress && (
-            <div className="text-slate-200 dark:text-slate-300 text-[0.78rem] font-medium pl-4 border-l-2 border-slate-800">
+            <div className="text-muted-foreground text-[0.78rem] font-medium pl-4 border-l-2 border-border">
               {selectedAddress}
             </div>
           )}
@@ -148,16 +148,16 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
       )}
 
       <Modal open={isOpen} onClose={() => handleOpenToggle(false)} width={850}>
-        <div className="flex items-center gap-3 pb-3.5 border-b-2 border-slate-200 dark:border-slate-800">
+        <div className="flex items-center gap-3 pb-3.5 border-b-2 border-border">
           <span className="font-black text-xs bg-amber-400 text-slate-950 px-2.5 py-1 rounded-md shadow-sm tracking-tight uppercase border border-amber-500/40 shrink-0">
             InPost
           </span>
-          <ModalTitle className="m-0 text-xl font-black text-black dark:text-white tracking-tight">
+          <ModalTitle className="m-0 text-xl font-black text-primary tracking-tight">
             {modalTitle}
           </ModalTitle>
         </div>
 
-        <div className="w-full h-[550px] min-h-[450px] mt-3.5 rounded-xl overflow-hidden shadow-sm border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
+        <div className="w-full h-[550px] min-h-[450px] mt-3.5 rounded-xl overflow-hidden shadow-sm border-2 border-border bg-surface">
           {isOpen && (
             <InPostGeowidget
               token={token}

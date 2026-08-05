@@ -163,15 +163,15 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
   if (error) {
     return (
       <div
-        className={`flex flex-col items-center justify-center min-h-[450px] bg-red-50 dark:bg-red-950/20 border-2 border-red-200 dark:border-red-900 rounded-xl p-6 text-center ${
+        className={`flex flex-col items-center justify-center min-h-[450px] bg-danger/10 border-2 border-danger rounded-xl p-6 text-center ${
           className || ''
         }`}
         style={style}
       >
-        <p className="text-base font-extrabold text-red-950 dark:text-red-300 mb-1">
+        <p className="text-base font-extrabold text-danger mb-1">
           Błąd ładowania Geowidget InPost
         </p>
-        <p className="text-xs text-red-800 dark:text-red-400 font-semibold max-w-sm">
+        <p className="text-xs text-muted-foreground font-semibold max-w-sm">
           Nie udało się pobrać skryptu mapy z serwera InPost. Sprawdź połączenie z siecią.
         </p>
       </div>
@@ -189,7 +189,7 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
 
     return (
       <div
-        className={`flex flex-col h-full min-h-[450px] bg-slate-50 dark:bg-slate-950 border-2 border-slate-300 dark:border-slate-800 rounded-xl p-4 font-sans text-slate-950 dark:text-slate-100 ${
+        className={`flex flex-col h-full min-h-[450px] bg-surface border-2 border-border rounded-xl p-4 font-sans text-foreground ${
           className || ''
         }`}
         style={style}
@@ -216,7 +216,7 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
             placeholder="Szukaj Paczkomatu (np. Warszawa, WAW01M, Towarowa)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 rounded-xl outline-none text-slate-950 dark:text-slate-100 placeholder:text-slate-500 font-extrabold focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30 shadow-sm transition-all"
+            className="w-full px-4 py-2.5 text-sm bg-surface border-2 border-border rounded-xl outline-none text-foreground placeholder:text-muted-foreground font-bold focus:border-primary focus:ring-2 focus:ring-primary/20 shadow-sm transition-all"
           />
         </div>
 
@@ -234,22 +234,22 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
                 }}
                 className={`p-4 rounded-xl border-2 transition-all cursor-pointer flex items-center justify-between gap-3 ${
                   isSelected
-                    ? 'bg-slate-950 text-white border-slate-950 shadow-md ring-2 ring-amber-400'
-                    : 'bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-800 hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-md text-slate-950 dark:text-slate-100'
+                    ? 'bg-primary text-primary-foreground border-primary shadow-md'
+                    : 'bg-surface border-border hover:border-primary hover:shadow-md text-foreground'
                 }`}
               >
                 <div className="flex flex-col gap-1 min-w-0">
                   <div className="font-black text-base flex items-center gap-2">
-                    <span className={isSelected ? 'text-amber-400 font-black' : 'text-slate-950 dark:text-slate-100 font-extrabold'}>
+                    <span className={isSelected ? 'text-primary-foreground font-black' : 'text-foreground font-black'}>
                       Paczkomat® {p.name}
                     </span>
                     {p.location_description && (
-                      <span className={`text-[0.72rem] px-2.5 py-0.5 rounded-full font-bold ${isSelected ? 'bg-slate-800 text-amber-300' : 'bg-slate-950 text-amber-400 dark:bg-slate-800 dark:text-amber-300'}`}>
+                      <span className={`text-[0.72rem] px-2.5 py-0.5 rounded-full font-bold ${isSelected ? 'bg-primary-hover text-primary-foreground' : 'bg-muted text-primary'}`}>
                         {p.location_description}
                       </span>
                     )}
                   </div>
-                  <div className={`text-xs font-bold ${isSelected ? 'text-slate-300' : 'text-slate-800 dark:text-slate-300'}`}>
+                  <div className={`text-xs font-bold ${isSelected ? 'text-primary-foreground/90' : 'text-muted-foreground'}`}>
                     {p.address.line1}, {p.address.line2}
                   </div>
                 </div>
@@ -259,7 +259,7 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
                   className={`px-4 py-2 rounded-lg text-xs font-black shrink-0 transition-all shadow-sm ${
                     isSelected
                       ? 'bg-amber-400 text-slate-950 border border-amber-500'
-                      : 'bg-slate-950 text-white hover:bg-amber-400 hover:text-slate-950 dark:bg-amber-400 dark:text-slate-950'
+                      : 'bg-primary hover:bg-primary-hover text-primary-foreground'
                   }`}
                 >
                   {isSelected ? 'Wybrano ✓' : 'Wybierz'}
@@ -275,14 +275,14 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
   if (!isLoaded) {
     return (
       <div
-        className={`flex items-center justify-center min-h-[450px] bg-white dark:bg-slate-950 border-2 border-slate-300 dark:border-slate-800 rounded-xl p-6 ${
+        className={`flex items-center justify-center min-h-[450px] bg-surface border-2 border-border rounded-xl p-6 ${
           className || ''
         }`}
         style={style}
       >
-        <div className="flex flex-col items-center gap-3 text-slate-950 dark:text-slate-300">
-          <div className="w-9 h-9 border-4 border-amber-500 border-t-transparent rounded-full animate-spin" />
-          <span className="text-sm font-extrabold">Ładowanie mapy InPost GeoWidget...</span>
+        <div className="flex flex-col items-center gap-3 text-muted-foreground">
+          <div className="w-9 h-9 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+          <span className="text-sm font-extrabold text-foreground">Ładowanie mapy InPost GeoWidget...</span>
         </div>
       </div>
     );
