@@ -111,7 +111,7 @@ export function Modal({ open, onClose, children, width = 440, className, showClo
           tabIndex={-1}
           style={{ maxWidth: width }}
           className={cn(
-            "relative w-full p-7 rounded-kj-2xl bg-surface border border-border shadow-kj-lg transition-transform duration-200 outline-none",
+            "relative w-full p-7 rounded-kj-2xl bg-surface text-foreground border border-border shadow-kj-lg transition-transform duration-200 outline-none",
             open ? "scale-100 translate-y-0" : "scale-95 translate-y-2",
             className
           )}
