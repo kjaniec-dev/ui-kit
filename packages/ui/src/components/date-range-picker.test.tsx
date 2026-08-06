@@ -2,6 +2,7 @@ import * as React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { DateRangePicker, DateRangePickerField } from "./date-range-picker";
+import { RangeCalendar } from "./range-calendar";
 
 const displayFormat = new Intl.DateTimeFormat(undefined, { dateStyle: "medium" });
 const fullDateFormat = new Intl.DateTimeFormat(undefined, { dateStyle: "full" });
@@ -103,6 +104,13 @@ describe("DateRangePicker", () => {
     const endInput = container.querySelector('input[type="hidden"][name="stayEnd"]');
     expect(startInput).toHaveAttribute("value", toLocalISO(day1));
     expect(endInput).toHaveAttribute("value", toLocalISO(day2));
+  });
+});
+
+describe("RangeCalendar", () => {
+  it("renders single month grid when singleMonth prop is true on RangeCalendar", () => {
+    render(<RangeCalendar singleMonth />);
+    expect(screen.getAllByRole("grid")).toHaveLength(1);
   });
 });
 

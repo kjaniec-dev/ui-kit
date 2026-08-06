@@ -21,6 +21,8 @@ export interface RangeCalendarProps {
   min?: Date;
   max?: Date;
   disabledDates?: (date: Date) => boolean;
+  /** Force rendering 1 month instead of 2 side-by-side. */
+  singleMonth?: boolean;
   className?: string;
 }
 
@@ -31,7 +33,7 @@ function isBetweenExclusive(d: Date, lo: Date, hi: Date): boolean {
 
 export const RangeCalendar = React.forwardRef<HTMLDivElement, RangeCalendarProps>(
   function RangeCalendar(
-    { value, defaultValue, onChange, month, defaultMonth, onMonthChange, min, max, disabledDates, className },
+    { value, defaultValue, onChange, month, defaultMonth, onMonthChange, min, max, disabledDates, singleMonth, className },
     ref
   ) {
     const controlled = value !== undefined;
@@ -146,13 +148,15 @@ export const RangeCalendar = React.forwardRef<HTMLDivElement, RangeCalendarProps
       </button>
     );
 
+    const showSingleMonth = singleMonth;
+
     return (
-      <div ref={ref} className={cn("flex gap-6 select-none", className)}>
-        <div className="w-[280px]">
+      <div ref={ref} className={cn("flex flex-col sm:flex-row gap-4 sm:gap-6 select-none max-w-full overflow-hidden", className)}>
+        <div className="w-full sm:w-[280px]">
           <div className="flex items-center justify-between mb-2">
             {navButton("prev")}
             <span className="text-sm font-medium text-foreground">{monthLabelFormat.format(leftMonth)}</span>
-            <span className="w-[26px]" aria-hidden="true" />
+            {showSingleMonth ? navButton("next") : <span className="w-[26px]" aria-hidden="true" />}
           </div>
           <CalendarGrid
             viewMonth={leftMonth}
@@ -163,21 +167,23 @@ export const RangeCalendar = React.forwardRef<HTMLDivElement, RangeCalendarProps
             initialFocusDate={pendingStart ?? range.start ?? new Date()}
           />
         </div>
-        <div className="w-[280px]">
-          <div className="flex items-center justify-between mb-2">
-            <span className="w-[26px]" aria-hidden="true" />
-            <span className="text-sm font-medium text-foreground">{monthLabelFormat.format(rightMonth)}</span>
-            {navButton("next")}
+        {!showSingleMonth && (
+          <div className="hidden sm:block w-[280px]">
+            <div className="flex items-center justify-between mb-2">
+              <span className="w-[26px]" aria-hidden="true" />
+              <span className="text-sm font-medium text-foreground">{monthLabelFormat.format(rightMonth)}</span>
+              {navButton("next")}
+            </div>
+            <CalendarGrid
+              viewMonth={rightMonth}
+              isDayDisabled={isDayDisabled}
+              cellState={cellState}
+              onSelectDay={handleSelectDay}
+              onFocusDay={handleFocusDay}
+              initialFocusDate={pendingStart ?? range.start ?? new Date()}
+            />
           </div>
-          <CalendarGrid
-            viewMonth={rightMonth}
-            isDayDisabled={isDayDisabled}
-            cellState={cellState}
-            onSelectDay={handleSelectDay}
-            onFocusDay={handleFocusDay}
-            initialFocusDate={pendingStart ?? range.start ?? new Date()}
-          />
-        </div>
+        )}
       </div>
     );
   }
