@@ -47,6 +47,18 @@ describe("DataTable", () => {
       expect(screen.getByText("my-toolbar")).toBeInTheDocument();
       expect(screen.getByText("my-pager")).toBeInTheDocument();
     });
+
+    it("renders TableWrap with horizontal scroll container enabled", () => {
+      const { container } = render(
+        <DataTable
+          columns={[{ header: "Col 1", accessor: () => "Val 1" }]}
+          data={[{ id: 1 }]}
+        />
+      );
+      const tableWrap = container.querySelector(".overflow-x-auto");
+      expect(tableWrap).toBeInTheDocument();
+      expect(tableWrap).not.toHaveClass("overflow-hidden");
+    });
   });
 
   describe("state slots", () => {

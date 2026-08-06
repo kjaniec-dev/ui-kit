@@ -120,7 +120,7 @@ export function DataTable<T>({
         </div>
       )}
 
-      <TableWrap className="relative overflow-hidden" {...props}>
+      <TableWrap className="relative overflow-x-auto overflow-y-hidden [scroll-behavior:smooth] [-webkit-overflow-scrolling:touch]" {...props}>
         <Table>
           <TableHeader>
             <TableRow>

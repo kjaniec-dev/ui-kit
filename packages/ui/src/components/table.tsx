@@ -4,7 +4,7 @@ import { cn } from "../lib/cn";
 /** Rounded, bordered wrapper around a <Table>. */
 export const TableWrap = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn("border border-border rounded-kj-lg overflow-x-auto w-full", className)} {...props} />
+    <div ref={ref} className={cn("w-full max-w-full overflow-x-auto border border-border rounded-kj-lg", className)} {...props} />
   )
 );
 TableWrap.displayName = "TableWrap";
