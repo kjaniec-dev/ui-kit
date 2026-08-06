@@ -156,7 +156,7 @@ export const RangeCalendar = React.forwardRef<HTMLDivElement, RangeCalendarProps
           <div className="flex items-center justify-between mb-2">
             {navButton("prev")}
             <span className="text-sm font-medium text-foreground">{monthLabelFormat.format(leftMonth)}</span>
-            {showSingleMonth ? navButton("next") : <span className="w-[26px]" aria-hidden="true" />}
+            <span className={showSingleMonth ? "" : "sm:hidden"}>{navButton("next")}</span>
           </div>
           <CalendarGrid
             viewMonth={leftMonth}

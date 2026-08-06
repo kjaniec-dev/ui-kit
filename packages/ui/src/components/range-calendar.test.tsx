@@ -17,7 +17,7 @@ describe("RangeCalendar", () => {
 
   it("Next/Previous month shifts both grids together", () => {
     render(<RangeCalendar defaultMonth={new Date(2026, 6, 1)} />);
-    fireEvent.click(screen.getByRole("button", { name: "Next month" }));
+    fireEvent.click(screen.getAllByRole("button", { name: "Next month" })[0]);
     expect(screen.getByRole("grid", { name: monthLabel(2026, 7) })).toBeInTheDocument();
     expect(screen.getByRole("grid", { name: monthLabel(2026, 8) })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Previous month" }));

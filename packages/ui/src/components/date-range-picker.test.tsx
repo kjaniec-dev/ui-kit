@@ -112,6 +112,26 @@ describe("RangeCalendar", () => {
     render(<RangeCalendar singleMonth />);
     expect(screen.getAllByRole("grid")).toHaveLength(1);
   });
+
+  it("renders next month button and advances month when clicked in single-month view", () => {
+    const onMonthChange = vi.fn();
+    const initialMonth = new Date(2026, 0, 1);
+    render(<RangeCalendar month={initialMonth} onMonthChange={onMonthChange} singleMonth />);
+    const nextButtons = screen.getAllByRole("button", { name: "Next month" });
+    expect(nextButtons.length).toBeGreaterThan(0);
+    fireEvent.click(nextButtons[0]);
+    expect(onMonthChange).toHaveBeenCalledWith(new Date(2026, 1, 1));
+  });
+
+  it("renders next month button in 1st month header even when singleMonth is false (for mobile view)", () => {
+    const onMonthChange = vi.fn();
+    const initialMonth = new Date(2026, 0, 1);
+    render(<RangeCalendar month={initialMonth} onMonthChange={onMonthChange} />);
+    const nextButtons = screen.getAllByRole("button", { name: "Next month" });
+    expect(nextButtons.length).toBeGreaterThanOrEqual(1);
+    fireEvent.click(nextButtons[0]);
+    expect(onMonthChange).toHaveBeenCalledWith(new Date(2026, 1, 1));
+  });
 });
 
 describe("DateRangePickerField", () => {
