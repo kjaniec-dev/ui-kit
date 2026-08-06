@@ -70,35 +70,35 @@ export function LayoutsSections() {
         </TabsList>
 
         <TabsContent value="appshell">
-          <div className="border border-border rounded-kj-xl overflow-hidden bg-canvas h-[380px] relative">
+          <div className="border border-border rounded-kj-xl overflow-hidden bg-canvas min-h-[380px] sm:h-[380px] relative">
             <AppShell
               className="h-full"
               banner={
-                <div className="flex items-center justify-between text-xs px-4 py-2 bg-primary text-primary-foreground font-medium">
+                <div className="flex flex-col sm:flex-row items-center justify-between text-xs px-4 py-2 bg-primary text-primary-foreground font-medium gap-2 text-center sm:text-left">
                   <span>🚀 kj-product-kit v0.9.1 is live! Explore new modular layout primitives.</span>
-                  <Button variant="outline" size="sm" className="h-7 px-3 text-xs border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/15 font-semibold">
+                  <Button variant="outline" size="sm" className="h-7 px-3 text-xs border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/15 font-semibold shrink-0">
                     Learn more
                   </Button>
                 </div>
               }
               header={
-                <div className="flex items-center justify-between w-full h-full px-6 bg-surface text-foreground border-b border-border">
+                <div className="flex items-center justify-between w-full h-full px-3 sm:px-6 bg-surface text-foreground border-b border-border">
                   <div className="font-bold text-sm text-foreground flex items-center gap-2.5">
                     <span className="w-2.5 h-2.5 rounded-full bg-primary shadow-sm" />
                     <span className="font-semibold tracking-tight text-foreground">ProductKit AppShell</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Button variant="ghost" size="sm" className="text-foreground hover:bg-muted font-medium">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <Button variant="ghost" size="sm" className="text-foreground hover:bg-muted font-medium text-xs sm:text-sm">
                       Documentation
                     </Button>
-                    <Button size="sm" variant="primary" className="font-semibold">
+                    <Button size="sm" variant="primary" className="font-semibold text-xs sm:text-sm">
                       Get Started
                     </Button>
                   </div>
                 </div>
               }
               footer={
-                <div className="px-6 py-3 border-t border-border text-xs text-muted-foreground flex justify-between items-center bg-surface">
+                <div className="px-4 sm:px-6 py-3 border-t border-border text-xs text-muted-foreground flex flex-col sm:flex-row gap-2 justify-between items-center bg-surface">
                   <span>© 2026 kj-product-kit</span>
                   <div className="flex gap-4">
                     <span>Privacy</span>
@@ -108,14 +108,14 @@ export function LayoutsSections() {
                 </div>
               }
             >
-              <div className="p-6 space-y-4">
+              <div className="p-4 sm:p-6 space-y-4">
                 <div className="space-y-1">
                   <h3 className="text-base font-bold m-0">Application Workspace</h3>
                   <p className="text-xs text-muted-foreground m-0">
                     A flexible top-level layout wrapper with optional announcement banner, sticky header, main container, and footer.
                   </p>
                 </div>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <Card className="p-3">
                     <div className="text-[10px] text-muted-foreground">Header Variant</div>
                     <div className="text-xs font-semibold mt-1">Glassmorphism</div>
@@ -135,7 +135,7 @@ export function LayoutsSections() {
         </TabsContent>
 
         <TabsContent value="dashboard">
-          <div className="border border-border rounded-kj-xl overflow-hidden bg-canvas h-[380px] relative">
+          <div className="border border-border rounded-kj-xl overflow-hidden bg-canvas min-h-[380px] sm:h-[380px] relative">
             <DashboardShell
               className="h-full min-h-0 [&_aside]:md:h-full [&_aside>div]:md:h-full"
               sidebarWidth="md:w-56"
@@ -145,7 +145,7 @@ export function LayoutsSections() {
                 <div className="flex items-center justify-between w-full h-full">
                   <div className="text-xs font-semibold">Overview</div>
                   <div className="flex items-center gap-3">
-                    <span className="text-xs text-muted-foreground">Admin Portal</span>
+                    <span className="text-xs text-muted-foreground hidden sm:inline">Admin Portal</span>
                     <Avatar size="sm" tone="primary">KJ</Avatar>
                   </div>
                 </div>
@@ -158,7 +158,7 @@ export function LayoutsSections() {
                     <p className="text-[10px] text-muted-foreground m-0">Here's what is happening today.</p>
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <Card className="p-3"><div className="text-[10px] text-muted-foreground">MRR</div><div className="text-sm font-bold">$12.4k</div></Card>
                   <Card className="p-3"><div className="text-[10px] text-muted-foreground">Sales</div><div className="text-sm font-bold">142</div></Card>
                   <Card className="p-3"><div className="text-[10px] text-muted-foreground">Active</div><div className="text-sm font-bold">98%</div></Card>
@@ -183,9 +183,9 @@ export function LayoutsSections() {
                 </div>
               }
             >
-              <Card className="p-6 space-y-4">
+              <Card className="p-4 sm:p-6 space-y-4">
                 <h3 className="text-base font-bold m-0">Personal Profile</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <TextField label="First Name" defaultValue="John" />
                   <TextField label="Last Name" defaultValue="Doe" />
                 </div>

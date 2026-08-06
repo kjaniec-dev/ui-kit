@@ -25,7 +25,7 @@ export const Default = {
       }
     >
       <Card className="p-6 space-y-4">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <TextField label="First Name" defaultValue="John" />
           <TextField label="Last Name" defaultValue="Doe" />
         </div>
