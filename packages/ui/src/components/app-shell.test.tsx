@@ -135,5 +135,33 @@ describe("AppShell", () => {
     expect(screen.getByText("Body Section")).toBeInTheDocument();
     expect(screen.getByText("Footer Info")).toBeInTheDocument();
   });
+
+  it("renders bottomNav slot when passed to AppShell", () => {
+    render(
+      <AppShell bottomNav={<nav data-testid="mobile-bottom-nav">Bottom Nav</nav>}>
+        <div>Content</div>
+      </AppShell>
+    );
+    expect(screen.getByTestId("mobile-bottom-nav")).toBeInTheDocument();
+  });
+
+  it("locks body scroll when mobileNav drawer is open", () => {
+    render(
+      <AppShell header={<div>Header</div>} mobileNav={<div>Mobile Menu Links</div>}>
+        <div>Page Body</div>
+      </AppShell>
+    );
+
+    expect(document.body.style.overflow).toBe("");
+
+    const toggleButton = screen.getByRole("button", { name: /open navigation/i });
+    fireEvent.click(toggleButton);
+    expect(document.body.style.overflow).toBe("hidden");
+
+    const closeButton = screen.getByRole("button", { name: /close navigation/i });
+    fireEvent.click(closeButton);
+    expect(document.body.style.overflow).toBe("");
+  });
 });
+
 

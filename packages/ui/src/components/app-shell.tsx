@@ -13,7 +13,9 @@ export interface AppShellProps extends React.HTMLAttributes<HTMLDivElement> {
   headerVariant?: "glass" | "solid" | "transparent";
   paddedContent?: boolean;
   mobileNav?: React.ReactNode;
+  bottomNav?: React.ReactNode;
 }
+
 
 export interface AppShellBannerProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "primary" | "accent" | "muted";
@@ -98,6 +100,18 @@ export const AppShellHeader = React.forwardRef<HTMLElement, AppShellHeaderProps>
       window.addEventListener("keydown", handleKeyDown);
       return () => window.removeEventListener("keydown", handleKeyDown);
     }, [mobileOpen]);
+
+    React.useEffect(() => {
+      if (mobileOpen) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "";
+      }
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }, [mobileOpen]);
+
 
     const positionClass = {
       sticky: "sticky top-0 z-40",
@@ -193,7 +207,7 @@ export const AppShellMain = React.forwardRef<HTMLElement, AppShellMainProps>(
     return (
       <main
         ref={ref}
-        className={cn("flex-1", padded && "px-4 sm:px-6 lg:px-8 py-8 md:py-12", widthClass, className)}
+        className={cn("flex-1", padded && "px-4 sm:px-6 lg:px-8 py-4 sm:py-6 md:py-12", widthClass, className)}
         {...props}
       >
         {children}
@@ -244,6 +258,7 @@ export const AppShell = React.forwardRef<HTMLDivElement, AppShellProps>(
       headerVariant = "glass",
       paddedContent = true,
       mobileNav,
+      bottomNav,
       ...props
     },
     ref
@@ -264,6 +279,11 @@ export const AppShell = React.forwardRef<HTMLDivElement, AppShellProps>(
           {children}
         </AppShellMain>
         {footer && <AppShellFooter>{footer}</AppShellFooter>}
+        {bottomNav && (
+          <div className="md:hidden sticky bottom-0 z-30 w-full bg-surface border-t border-border">
+            {bottomNav}
+          </div>
+        )}
       </div>
     );
   }
