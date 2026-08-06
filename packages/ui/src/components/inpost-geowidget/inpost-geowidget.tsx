@@ -110,6 +110,7 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
   const [selectedMock, setSelectedMock] = useState<InPostPoint | null>(null);
 
   const widgetRef = useRef<HTMLElement | null>(null);
+  // eslint-disable-next-line react-hooks/purity
   const callbackNameRef = useRef<string>(`inpost_cb_${Math.random().toString(36).substring(2, 9)}`);
 
   useEffect(() => {
@@ -291,6 +292,7 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
   const widgetProps: Record<string, string> = {
     language,
     config: String(config).toLowerCase(),
+    // eslint-disable-next-line react-hooks/refs
     onpointselect: callbackNameRef.current,
   };
 

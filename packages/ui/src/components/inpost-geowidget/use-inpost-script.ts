@@ -9,7 +9,13 @@ const OFFICIAL_CSS_URL = 'https://geowidget.easypack24.net/css/easypack.css';
 let scriptPromise: Promise<void> | null = null;
 
 export function useInPostScript(options: UseInPostScriptOptions = {}): UseInPostScriptResult {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return !!(
+      window.customElements?.get('inpost-geowidget') ||
+      (window as unknown as { easyPack?: unknown }).easyPack
+    );
+  });
   const [error, setError] = useState<Error | null>(null);
 
   const scriptUrl = options.customScriptUrl || OFFICIAL_SCRIPT_URL;
@@ -23,7 +29,6 @@ export function useInPostScript(options: UseInPostScriptOptions = {}): UseInPost
       window.customElements?.get('inpost-geowidget') ||
       (window as unknown as { easyPack?: unknown }).easyPack
     ) {
-      setIsLoaded(true);
       return;
     }
 

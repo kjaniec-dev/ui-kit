@@ -2857,6 +2857,13 @@
         "description": ""
       },
       {
+        "name": "singleMonth",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Force rendering 1 month instead of 2 side-by-side."
+      },
+      {
         "name": "className",
         "type": "string",
         "optional": true,
@@ -3387,6 +3394,13 @@
         "description": ""
       },
       {
+        "name": "responsive",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": ""
+      },
+      {
         "name": "linear",
         "type": "boolean",
         "optional": true,
@@ -3547,6 +3561,13 @@
       },
       {
         "name": "mobileNav",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "bottomNav",
         "type": "React.ReactNode",
         "optional": true,
         "defaultValue": null,
@@ -4121,6 +4142,13 @@
         "type": "React.ReactNode",
         "optional": true,
         "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "align",
+        "type": "\"auto\" | \"start\" | \"end\"",
+        "optional": true,
+        "defaultValue": "\"auto\"",
         "description": ""
       },
       {
