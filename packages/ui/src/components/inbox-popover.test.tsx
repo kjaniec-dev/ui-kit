@@ -221,6 +221,18 @@ async function openPanel(items: NotificationItemData[], props: Partial<InboxCont
 }
 
 describe("InboxContent — empty state", () => {
+  it("renders InboxContent with responsive max-width and alignment props", () => {
+    render(
+      <InboxPopover open>
+        <InboxTrigger unreadCount={2} />
+        <InboxContent items={[]} align="start" data-testid="inbox-content" />
+      </InboxPopover>
+    );
+    const content = screen.getByRole("dialog");
+    expect(content.className).toContain("max-w-[calc(100vw-1.5rem)]");
+    expect(content.className).toContain("left-0");
+  });
+
   it("shows the default empty state when items is empty", async () => {
     await openPanel([]);
     expect(screen.getByText("All caught up")).toBeInTheDocument();

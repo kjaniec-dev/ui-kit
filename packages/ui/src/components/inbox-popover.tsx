@@ -378,6 +378,7 @@ export interface InboxContentProps {
   viewAllHref?: string;
   viewAllLabel?: string;
   emptyState?: React.ReactNode;
+  align?: "auto" | "start" | "end";
   width?: number | string;
   maxHeight?: number | string;
   className?: string;
@@ -390,6 +391,7 @@ export function InboxContent({
   viewAllHref,
   viewAllLabel = "View all notifications",
   emptyState,
+  align = "auto",
   width = 360,
   maxHeight = 320,
   className,
@@ -418,17 +420,24 @@ export function InboxContent({
     </div>
   );
 
+  const alignClass = {
+    start: "left-0 top-[calc(100%+6px)]",
+    end: "right-0 top-[calc(100%+6px)]",
+    auto: "right-0 sm:right-0 left-auto top-[calc(100%+6px)] max-sm:left-1/2 max-sm:-translate-x-1/2",
+  }[align ?? "auto"];
+
   return (
     <div
       ref={ref}
       role="dialog"
       aria-label="Notifications"
       tabIndex={-1}
-      style={{ width }}
+      style={{ width: typeof width === "number" ? `${width}px` : width }}
       className={cn(
-        "absolute right-0 top-[calc(100%+6px)] z-40",
+        "absolute z-40 max-w-[calc(100vw-1.5rem)]",
         "bg-surface border border-border rounded-kj-md shadow-kj-lg outline-none",
         "animate-[kjpop_.12s_ease]",
+        alignClass,
         className
       )}
     >
