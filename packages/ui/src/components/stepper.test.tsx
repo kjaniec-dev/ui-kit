@@ -118,9 +118,22 @@ describe("Stepper Core State", () => {
 });
 
 describe("Stepper Layout Primitives", () => {
+  it("applies responsive orientation classes when responsive prop is true", () => {
+    render(
+      <Stepper orientation="horizontal" responsive>
+        <StepperList data-testid="stepper-list">
+          <StepperItem value={0}>Step 1</StepperItem>
+        </StepperList>
+      </Stepper>
+    );
+    const list = screen.getByTestId("stepper-list");
+    expect(list.className).toContain("flex-col");
+    expect(list.className).toContain("sm:flex-row");
+  });
+
   it("should render lists with correct layout orientations", () => {
     const { rerender } = render(
-      <Stepper orientation="horizontal">
+      <Stepper orientation="horizontal" responsive={false}>
         <StepperList>
           <StepperItem value={0}>First</StepperItem>
           <StepperSeparator />

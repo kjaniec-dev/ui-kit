@@ -74,6 +74,7 @@ export type StepperOrientation = "horizontal" | "vertical";
 interface StepperCtx {
   activeStep: number;
   orientation: StepperOrientation;
+  responsive?: boolean;
   linear: boolean;
   setStep: (step: number) => void;
   completedSteps: number[];
@@ -97,11 +98,12 @@ export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
   defaultValue?: number;
   onValueChange?: (value: number) => void;
   orientation?: StepperOrientation;
+  responsive?: boolean;
   linear?: boolean;
 }
 
 export const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
-  ({ value, defaultValue, onValueChange, orientation = "horizontal", linear = true, children, className, ...props }, ref) => {
+  ({ value, defaultValue, onValueChange, orientation = "horizontal", responsive = true, linear = true, children, className, ...props }, ref) => {
     const [localValue, setLocalValue] = React.useState(defaultValue ?? 0);
     const isControlled = value !== undefined;
     const activeStep = isControlled ? value : localValue;
@@ -140,6 +142,7 @@ export const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
       () => ({
         activeStep,
         orientation,
+        responsive,
         linear,
         setStep,
         completedSteps,
@@ -147,7 +150,7 @@ export const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
         unregisterStep,
         steps,
       }),
-      [activeStep, orientation, linear, setStep, completedSteps, registerStep, unregisterStep, steps]
+      [activeStep, orientation, responsive, linear, setStep, completedSteps, registerStep, unregisterStep, steps]
     );
 
     return (
@@ -204,17 +207,20 @@ export const StepperList = React.forwardRef<HTMLDivElement, StepperListProps>(
     const ctx = React.useContext(StepperContext);
     if (!ctx) throw new Error("StepperList must be used within a Stepper");
 
+    const isResponsiveHorizontal = ctx.orientation === "horizontal" && (ctx.responsive ?? true);
+
+    const orientationClass = isResponsiveHorizontal
+      ? "flex flex-col sm:flex-row items-start sm:items-center justify-between w-full relative gap-4"
+      : ctx.orientation === "horizontal"
+      ? "flex items-center justify-between w-full relative gap-4"
+      : "flex flex-col items-start gap-6 relative w-full";
+
     return (
       <div
         ref={ref}
         role="tablist"
         aria-orientation={ctx.orientation}
-        className={cn(
-          ctx.orientation === "horizontal"
-            ? "flex items-center justify-between w-full relative gap-4"
-            : "flex flex-col items-start gap-6 relative w-full",
-          className
-        )}
+        className={cn(orientationClass, className)}
         {...props}
       >
         {children}
@@ -242,6 +248,7 @@ export const StepperItem = React.forwardRef<HTMLDivElement, StepperItemProps>(
     }, [value, registerStep, unregisterStep]);
 
     const isLast = ctx.steps[ctx.steps.length - 1] === value;
+    const isResponsiveHorizontal = ctx.orientation === "horizontal" && (ctx.responsive ?? true);
 
     return (
       <StepperItemContext.Provider value={{ value, disabled, isLast }}>
@@ -249,7 +256,11 @@ export const StepperItem = React.forwardRef<HTMLDivElement, StepperItemProps>(
           ref={ref}
           className={cn(
             "group relative flex items-center gap-3 z-10",
-            ctx.orientation === "vertical" ? "flex items-start w-full" : "",
+            ctx.orientation === "vertical"
+              ? "flex items-start w-full"
+              : isResponsiveHorizontal
+              ? "w-full sm:w-auto items-start sm:items-center"
+              : "",
             className
           )}
           {...props}
@@ -269,11 +280,15 @@ export const StepperSeparator = React.forwardRef<HTMLDivElement, StepperSeparato
     const ctx = React.useContext(StepperContext);
     if (!ctx) throw new Error("StepperSeparator must be used within a Stepper");
 
+    const isResponsiveHorizontal = ctx.orientation === "horizontal" && (ctx.responsive ?? true);
+
     return (
       <div
         ref={ref}
         className={cn(
-          ctx.orientation === "horizontal"
+          isResponsiveHorizontal
+            ? "hidden sm:block flex-1 h-[2px] bg-border transition-all duration-300"
+            : ctx.orientation === "horizontal"
             ? "flex-1 h-[2px] bg-border transition-all duration-300"
             : "w-[2px] bg-border absolute left-[17px] top-8 bottom-0 -ml-px z-0",
           className
