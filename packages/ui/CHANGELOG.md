@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.1] - 2026-08-08
+
+### Added
+- `AppShell` mobile bottom navigation bar (`bottomNav` slot) and body scroll locking when mobile navigation menu is open.
+- `Stepper` responsive vertical auto-stacking on narrow viewports.
+
+### Fixed
+- `InboxPopover` responsive alignment, positioning, and max-width bounds on mobile devices.
+- Responsive card grid layouts across showcase layout demos.
+- MCP components metadata generation and CI linter fixes.
+
 ## [0.9.0] - 2026-07-21
 
 ### Added
