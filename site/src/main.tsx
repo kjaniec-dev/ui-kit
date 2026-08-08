@@ -45,7 +45,7 @@ function SidebarContent({
         <div className="grid place-items-center h-9 w-9 rounded-kj-md bg-primary text-primary-foreground font-bold font-mono shadow-kj-glow">KJ</div>
         <div>
           <div className="font-bold text-sm leading-tight">@kjaniec-dev/ui</div>
-          <div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.9.1</div>
+          <div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.9.2</div>
         </div>
       </div>
       <Input placeholder="Filter sections..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} leadingIcon={IcoSearch} />
