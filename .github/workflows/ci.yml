@@ -32,7 +32,7 @@ jobs:
       - name: Run typecheck
         run: npm run typecheck
 
-      - name: Run ESLint
+      - name: Run Biome (lint & format)
         run: npm run lint
 
       - name: Run unit & integration tests

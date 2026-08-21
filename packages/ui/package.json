@@ -1,6 +1,6 @@
 {
   "name": "@kjaniec-dev/ui",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "React component library built on the @kjaniec-dev/design token system",
   "license": "MIT",
   "author": "kjaniec-dev",
@@ -36,7 +36,7 @@
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint .",
+    "lint": "biome lint .",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "chromatic --exit-zero-on-changes",

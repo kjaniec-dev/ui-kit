@@ -1,0 +1,109 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.10/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": [
+      "**",
+      "!**/dist/**",
+      "!**/node_modules/**",
+      "!**/storybook-static/**",
+      "!**/coverage/**",
+      "!**/.superpowers/**",
+      "!**/.worktrees/**",
+      "!**/data/**/*.json",
+      "!**/*.html"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "trailingCommas": "es5",
+      "semicolons": "always"
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "none",
+      "a11y": {
+        "preset": "none",
+        "noSvgWithoutTitle": "off",
+        "useValidAnchor": "off",
+        "useButtonType": "off",
+        "noStaticElementInteractions": "warn",
+        "useKeyWithClickEvents": "warn",
+        "noNoninteractiveElementInteractions": "warn",
+        "useFocusableInteractive": "warn",
+        "useValidAriaProps": "warn",
+        "useAriaPropsForRole": "warn",
+        "noAutofocus": "warn",
+        "useHeadingContent": "warn",
+        "useAltText": "warn",
+        "useAriaActivedescendantWithTabindex": "warn",
+        "noRedundantRoles": "warn",
+        "noPositiveTabindex": "warn",
+        "useSemanticElements": "warn"
+      },
+      "correctness": {
+        "useHookAtTopLevel": "warn",
+        "useExhaustiveDependencies": "warn",
+        "noUnusedVariables": "warn",
+        "noUnusedImports": "warn",
+        "noUndeclaredVariables": "off"
+      },
+      "suspicious": {
+        "noExplicitAny": "warn",
+        "noArrayIndexKey": "off",
+        "noReactSpecificProps": "off",
+        "noAssignInExpressions": "warn"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "off"
+      },
+      "style": {
+        "noNonNullAssertion": "off",
+        "useNodejsImportProtocol": "off",
+        "useConst": "warn",
+        "useImportType": "off",
+        "noParameterAssign": "off"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.stories.{ts,tsx,js,jsx}", ".storybook/**/*.{ts,tsx,js,jsx}"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "useHookAtTopLevel": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/packages/mcp/data/*.json"],
+      "formatter": {
+        "enabled": false
+      },
+      "linter": {
+        "enabled": false
+      }
+    }
+  ]
+}
