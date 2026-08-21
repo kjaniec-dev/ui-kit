@@ -11,6 +11,10 @@
 @keyframes kjtoastout {
   to { opacity: 0; transform: translateX(20px); }
 }
+@keyframes kjshimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
 
 /* Range slider thumb (matches <Slider />) */
 .kj-slider::-webkit-slider-thumb {

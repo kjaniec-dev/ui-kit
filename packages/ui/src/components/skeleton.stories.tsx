@@ -35,6 +35,24 @@ export const Rectangular = {
   },
 };
 
+export const PulseAnimation = {
+  args: {
+    variant: "rectangular",
+    animation: "pulse",
+    width: 300,
+    height: 120,
+  },
+};
+
+export const StaticNoAnimation = {
+  args: {
+    variant: "rectangular",
+    animation: "none",
+    width: 300,
+    height: 120,
+  },
+};
+
 export const CardMockup = {
   render: () => (
     <div style={{ maxWidth: 360 }} className="p-5 border border-border rounded-kj-xl space-y-4 bg-surface">

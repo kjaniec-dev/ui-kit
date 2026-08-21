@@ -1774,6 +1774,13 @@
         "description": ""
       },
       {
+        "name": "animation",
+        "type": "\"shimmer\" | \"pulse\" | \"none\"",
+        "optional": true,
+        "defaultValue": "\"shimmer\"",
+        "description": ""
+      },
+      {
         "name": "width",
         "type": "string | number",
         "optional": true,
