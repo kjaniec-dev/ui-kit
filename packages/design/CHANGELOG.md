@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.3] - 2026-08-21
+
+### Added
+- Added `@custom-variant dark` in `tailwind.css` for robust class-based dark theme support in Tailwind CSS v4.
+
 ## [0.9.2] - 2026-08-08
 
 ### Fixed

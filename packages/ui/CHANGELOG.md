@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.3] - 2026-08-21
+
+### Added
+- `Skeleton` shimmer animation mode (`animation="shimmer"`) with ping-pong alternate cycle (`kjshimmer`) and support for `pulse` and `none` modes.
+- Storybook stories for `Skeleton` animation variants (`PulseAnimation`, `StaticNoAnimation`).
+- Vitest unit test suite for `Skeleton` component (`packages/ui/src/components/skeleton.test.tsx`).
+
+### Fixed
+- `Skeleton` contrast and visibility across light and dark themes using dynamic `via-foreground/10` gradient overlay and solid base tones.
+
 ## [0.9.2] - 2026-08-08
 
 ### Added
