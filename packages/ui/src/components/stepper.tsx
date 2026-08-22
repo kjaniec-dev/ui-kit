@@ -24,11 +24,14 @@ export function useStepper({ initialStep = 0, stepsCount }: UseStepperOptions): 
   const [activeStep, setActiveStep] = React.useState(initialStep);
   const [completedSteps, setCompletedSteps] = React.useState<number[]>([]);
 
-  const setStep = React.useCallback((step: number) => {
-    if (step >= 0 && step < safeStepsCount) {
-      setActiveStep(step);
-    }
-  }, [safeStepsCount]);
+  const setStep = React.useCallback(
+    (step: number) => {
+      if (step >= 0 && step < safeStepsCount) {
+        setActiveStep(step);
+      }
+    },
+    [safeStepsCount]
+  );
 
   const nextStep = React.useCallback(() => {
     setActiveStep((prev) => Math.min(prev + 1, safeStepsCount - 1));
@@ -38,13 +41,16 @@ export function useStepper({ initialStep = 0, stepsCount }: UseStepperOptions): 
     setActiveStep((prev) => Math.max(prev - 1, 0));
   }, []);
 
-  const completeStep = React.useCallback((step: number) => {
-    setCompletedSteps((prev) => {
-      if (step < 0 || step >= safeStepsCount) return prev; // ignore out-of-range
-      if (prev.includes(step)) return prev;
-      return [...prev, step].sort((a, b) => a - b);
-    });
-  }, [safeStepsCount]);
+  const completeStep = React.useCallback(
+    (step: number) => {
+      setCompletedSteps((prev) => {
+        if (step < 0 || step >= safeStepsCount) return prev; // ignore out-of-range
+        if (prev.includes(step)) return prev;
+        return [...prev, step].sort((a, b) => a - b);
+      });
+    },
+    [safeStepsCount]
+  );
 
   const uncompleteStep = React.useCallback((step: number) => {
     setCompletedSteps((prev) => prev.filter((s) => s !== step));
@@ -103,7 +109,20 @@ export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
-  ({ value, defaultValue, onValueChange, orientation = "horizontal", responsive = true, linear = true, children, className, ...props }, ref) => {
+  (
+    {
+      value,
+      defaultValue,
+      onValueChange,
+      orientation = "horizontal",
+      responsive = true,
+      linear = true,
+      children,
+      className,
+      ...props
+    },
+    ref
+  ) => {
     const [localValue, setLocalValue] = React.useState(defaultValue ?? 0);
     const isControlled = value !== undefined;
     const activeStep = isControlled ? value : localValue;
@@ -130,7 +149,9 @@ export const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
         if (linear) {
           setCompletedSteps((prev) => {
             const priorSteps = steps.filter((s) => s < step);
-            const nextCompleted = Array.from(new Set([...prev, ...priorSteps])).sort((a, b) => a - b);
+            const nextCompleted = Array.from(new Set([...prev, ...priorSteps])).sort(
+              (a, b) => a - b
+            );
             return nextCompleted;
           });
         }
@@ -150,7 +171,17 @@ export const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
         unregisterStep,
         steps,
       }),
-      [activeStep, orientation, responsive, linear, setStep, completedSteps, registerStep, unregisterStep, steps]
+      [
+        activeStep,
+        orientation,
+        responsive,
+        linear,
+        setStep,
+        completedSteps,
+        registerStep,
+        unregisterStep,
+        steps,
+      ]
     );
 
     return (
@@ -212,8 +243,8 @@ export const StepperList = React.forwardRef<HTMLDivElement, StepperListProps>(
     const orientationClass = isResponsiveHorizontal
       ? "flex flex-col sm:flex-row items-start sm:items-center justify-between w-full relative gap-4"
       : ctx.orientation === "horizontal"
-      ? "flex items-center justify-between w-full relative gap-4"
-      : "flex flex-col items-start gap-6 relative w-full";
+        ? "flex items-center justify-between w-full relative gap-4"
+        : "flex flex-col items-start gap-6 relative w-full";
 
     return (
       <div
@@ -259,8 +290,8 @@ export const StepperItem = React.forwardRef<HTMLDivElement, StepperItemProps>(
             ctx.orientation === "vertical"
               ? "flex items-start w-full"
               : isResponsiveHorizontal
-              ? "w-full sm:w-auto items-start sm:items-center"
-              : "",
+                ? "w-full sm:w-auto items-start sm:items-center"
+                : "",
             className
           )}
           {...props}
@@ -289,8 +320,8 @@ export const StepperSeparator = React.forwardRef<HTMLDivElement, StepperSeparato
           isResponsiveHorizontal
             ? "hidden sm:block flex-1 h-[2px] bg-border transition-all duration-300"
             : ctx.orientation === "horizontal"
-            ? "flex-1 h-[2px] bg-border transition-all duration-300"
-            : "w-[2px] bg-border absolute left-[17px] top-8 bottom-0 -ml-px z-0",
+              ? "flex-1 h-[2px] bg-border transition-all duration-300"
+              : "w-[2px] bg-border absolute left-[17px] top-8 bottom-0 -ml-px z-0",
           className
         )}
         {...props}
@@ -306,12 +337,13 @@ export const StepperTrigger = React.forwardRef<HTMLButtonElement, StepperTrigger
   ({ className, children, onClick, onKeyDown, ...props }, ref) => {
     const ctx = React.useContext(StepperContext);
     const itemCtx = React.useContext(StepperItemContext);
-    
+
     if (!ctx || !itemCtx) {
       throw new Error("StepperTrigger must be used within a StepperItem inside a Stepper");
     }
 
-    const isCompleted = ctx.completedSteps.includes(itemCtx.value) || itemCtx.value < ctx.activeStep;
+    const isCompleted =
+      ctx.completedSteps.includes(itemCtx.value) || itemCtx.value < ctx.activeStep;
     const isActive = ctx.activeStep === itemCtx.value;
 
     // In linear mode, user can click completed steps to go back, but not future uncompleted ones
@@ -329,7 +361,7 @@ export const StepperTrigger = React.forwardRef<HTMLButtonElement, StepperTrigger
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
       onKeyDown?.(e);
-      
+
       const triggers = Array.from(
         e.currentTarget.closest('[role="tablist"]')?.querySelectorAll('[role="tab"]') || []
       ) as HTMLElement[];
@@ -380,12 +412,13 @@ export const StepperIndicator = React.forwardRef<HTMLSpanElement, StepperIndicat
   ({ className, children, ...props }, ref) => {
     const ctx = React.useContext(StepperContext);
     const itemCtx = React.useContext(StepperItemContext);
-    
+
     if (!ctx || !itemCtx) {
       throw new Error("StepperIndicator must be used within a StepperItem inside a Stepper");
     }
 
-    const isCompleted = ctx.completedSteps.includes(itemCtx.value) || itemCtx.value < ctx.activeStep;
+    const isCompleted =
+      ctx.completedSteps.includes(itemCtx.value) || itemCtx.value < ctx.activeStep;
     const isActive = ctx.activeStep === itemCtx.value;
 
     return (
@@ -396,8 +429,8 @@ export const StepperIndicator = React.forwardRef<HTMLSpanElement, StepperIndicat
           isCompleted
             ? "bg-primary border-primary text-primary-foreground"
             : isActive
-            ? "border-primary text-primary bg-primary/10 ring-2 ring-primary/20"
-            : "border-border text-muted-foreground bg-muted/40",
+              ? "border-primary text-primary bg-primary/10 ring-2 ring-primary/20"
+              : "border-border text-muted-foreground bg-muted/40",
           className
         )}
         {...props}
@@ -415,7 +448,7 @@ export const StepperTitle = React.forwardRef<HTMLSpanElement, StepperTitleProps>
   ({ className, ...props }, ref) => {
     const ctx = React.useContext(StepperContext);
     const itemCtx = React.useContext(StepperItemContext);
-    
+
     if (!ctx || !itemCtx) {
       throw new Error("StepperTitle must be used within a StepperItem inside a Stepper");
     }
@@ -454,5 +487,3 @@ export const StepperDescription = React.forwardRef<HTMLSpanElement, StepperDescr
   }
 );
 StepperDescription.displayName = "StepperDescription";
-
-

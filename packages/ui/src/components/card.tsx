@@ -16,7 +16,8 @@ export const Card = React.forwardRef<HTMLElement, CardProps>(
       className={cn(
         "bg-card text-card-foreground rounded-kj-xl overflow-hidden border",
         elevated ? "border-transparent shadow-kj-lg" : "border-border shadow-kj-sm",
-        interactive && "cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-kj-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+        interactive &&
+          "cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-kj-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         className
       )}
       {...props}
@@ -32,18 +33,22 @@ export const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<
 );
 CardHeader.displayName = "CardHeader";
 
-export const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, children, ...props }, ref) => (
-    <h3 ref={ref} className={cn("m-0 text-base font-bold tracking-[-0.01em]", className)} {...props}>{children}</h3>
-  )
-);
+export const CardTitle = React.forwardRef<
+  HTMLHeadingElement,
+  React.HTMLAttributes<HTMLHeadingElement>
+>(({ className, children, ...props }, ref) => (
+  <h3 ref={ref} className={cn("m-0 text-base font-bold tracking-[-0.01em]", className)} {...props}>
+    {children}
+  </h3>
+));
 CardTitle.displayName = "CardTitle";
 
-export const CardDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
-  ({ className, ...props }, ref) => (
-    <p ref={ref} className={cn("m-0 text-[0.85rem] text-muted-foreground", className)} {...props} />
-  )
-);
+export const CardDescription = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+  <p ref={ref} className={cn("m-0 text-[0.85rem] text-muted-foreground", className)} {...props} />
+));
 CardDescription.displayName = "CardDescription";
 
 /** Body region with default padding. */
@@ -58,7 +63,10 @@ export const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn("flex gap-2.5 px-[1.35rem] py-[1.1rem] border-t border-border bg-muted/40", className)}
+      className={cn(
+        "flex gap-2.5 px-[1.35rem] py-[1.1rem] border-t border-border bg-muted/40",
+        className
+      )}
       {...props}
     />
   )

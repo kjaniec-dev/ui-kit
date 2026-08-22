@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import type { InPostConfigType, InPostLanguage, InPostPoint } from './types';
-import { useInPostScript } from './use-inpost-script';
+import React, { useEffect, useRef, useState } from "react";
+import type { InPostConfigType, InPostLanguage, InPostPoint } from "./types";
+import { useInPostScript } from "./use-inpost-script";
 
 /** Props for the inline InPost GeoWidget map component. */
 export interface InPostGeowidgetProps {
@@ -32,40 +32,55 @@ export interface InPostGeowidgetProps {
 
 const MOCK_POINTS: InPostPoint[] = [
   {
-    name: 'WAW01M',
-    address: { line1: 'ul. Towarowa 5', line2: '00-838 Warszawa' },
-    address_details: { city: 'Warszawa', street: 'Towarowa', building_number: '5', post_code: '00-838' },
+    name: "WAW01M",
+    address: { line1: "ul. Towarowa 5", line2: "00-838 Warszawa" },
+    address_details: {
+      city: "Warszawa",
+      street: "Towarowa",
+      building_number: "5",
+      post_code: "00-838",
+    },
     location: { latitude: 52.2297, longitude: 21.0122 },
-    type: ['parcel_locker'],
-    status: 'Operating',
-    location_description: 'Przy stacji benzynowej BP',
+    type: ["parcel_locker"],
+    status: "Operating",
+    location_description: "Przy stacji benzynowej BP",
   },
   {
-    name: 'KRA02N',
-    address: { line1: 'ul. Floriańska 12', line2: '31-021 Kraków' },
-    address_details: { city: 'Kraków', street: 'Floriańska', building_number: '12', post_code: '31-021' },
-    location: { latitude: 50.0647, longitude: 19.9450 },
-    type: ['parcel_locker'],
-    status: 'Operating',
-    location_description: 'Obok wejścia do sklepu',
+    name: "KRA02N",
+    address: { line1: "ul. Floriańska 12", line2: "31-021 Kraków" },
+    address_details: {
+      city: "Kraków",
+      street: "Floriańska",
+      building_number: "12",
+      post_code: "31-021",
+    },
+    location: { latitude: 50.0647, longitude: 19.945 },
+    type: ["parcel_locker"],
+    status: "Operating",
+    location_description: "Obok wejścia do sklepu",
   },
   {
-    name: 'GDA03P',
-    address: { line1: 'ul. Długa 8', line2: '80-827 Gdańsk' },
-    address_details: { city: 'Gdańsk', street: 'Długa', building_number: '8', post_code: '80-827' },
-    location: { latitude: 54.3520, longitude: 18.6466 },
-    type: ['parcel_locker'],
-    status: 'Operating',
-    location_description: 'Róg ulicy Długiej i Tkackiej',
+    name: "GDA03P",
+    address: { line1: "ul. Długa 8", line2: "80-827 Gdańsk" },
+    address_details: { city: "Gdańsk", street: "Długa", building_number: "8", post_code: "80-827" },
+    location: { latitude: 54.352, longitude: 18.6466 },
+    type: ["parcel_locker"],
+    status: "Operating",
+    location_description: "Róg ulicy Długiej i Tkackiej",
   },
   {
-    name: 'POZ04S',
-    address: { line1: 'ul. Półwiejska 42', line2: '61-888 Poznań' },
-    address_details: { city: 'Poznań', street: 'Półwiejska', building_number: '42', post_code: '61-888' },
+    name: "POZ04S",
+    address: { line1: "ul. Półwiejska 42", line2: "61-888 Poznań" },
+    address_details: {
+      city: "Poznań",
+      street: "Półwiejska",
+      building_number: "42",
+      post_code: "61-888",
+    },
     location: { latitude: 52.4064, longitude: 16.9252 },
-    type: ['parcel_locker'],
-    status: 'Operating',
-    location_description: 'Przy centrum handlowym Stary Browar',
+    type: ["parcel_locker"],
+    status: "Operating",
+    location_description: "Przy centrum handlowym Stary Browar",
   },
 ];
 
@@ -73,7 +88,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      'inpost-geowidget': React.DetailedHTMLProps<
+      "inpost-geowidget": React.DetailedHTMLProps<
         React.HTMLAttributes<HTMLElement> & {
           token?: string;
           language?: string;
@@ -89,8 +104,8 @@ declare global {
 
 export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
   token,
-  language = 'pl',
-  config = 'parcelCollect',
+  language = "pl",
+  config = "parcelCollect",
   sandbox = false,
   onPointSelect,
   onReady,
@@ -106,7 +121,7 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
     customCssUrl,
   });
 
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedMock, setSelectedMock] = useState<InPostPoint | null>(null);
 
   const widgetRef = useRef<HTMLElement | null>(null);
@@ -130,7 +145,9 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
 
     const cbName = callbackNameRef.current;
 
-    (window as unknown as Record<string, (point: InPostPoint) => void>)[cbName] = (point: InPostPoint) => {
+    (window as unknown as Record<string, (point: InPostPoint) => void>)[cbName] = (
+      point: InPostPoint
+    ) => {
       if (onPointSelect) {
         onPointSelect(point);
       }
@@ -146,18 +163,18 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
     };
 
     if (el) {
-      el.addEventListener('inpostgeowidget', handlePointSelect);
-      el.addEventListener('onpointselect', handlePointSelect);
+      el.addEventListener("inpostgeowidget", handlePointSelect);
+      el.addEventListener("onpointselect", handlePointSelect);
     }
-    document.addEventListener('onpointselect', handlePointSelect);
+    document.addEventListener("onpointselect", handlePointSelect);
 
     return () => {
       delete (window as unknown as Record<string, unknown>)[cbName];
       if (el) {
-        el.removeEventListener('inpostgeowidget', handlePointSelect);
-        el.removeEventListener('onpointselect', handlePointSelect);
+        el.removeEventListener("inpostgeowidget", handlePointSelect);
+        el.removeEventListener("onpointselect", handlePointSelect);
       }
-      document.removeEventListener('onpointselect', handlePointSelect);
+      document.removeEventListener("onpointselect", handlePointSelect);
     };
   }, [onPointSelect, isLoaded, token]);
 
@@ -165,13 +182,11 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
     return (
       <div
         className={`flex flex-col items-center justify-center min-h-[450px] bg-danger/10 border-2 border-danger rounded-xl p-6 text-center ${
-          className || ''
+          className || ""
         }`}
         style={style}
       >
-        <p className="text-base font-extrabold text-danger mb-1">
-          Błąd ładowania Geowidget InPost
-        </p>
+        <p className="text-base font-extrabold text-danger mb-1">Błąd ładowania Geowidget InPost</p>
         <p className="text-xs text-muted-foreground font-semibold max-w-sm">
           Nie udało się pobrać skryptu mapy z serwera InPost. Sprawdź połączenie z siecią.
         </p>
@@ -191,7 +206,7 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
     return (
       <div
         className={`flex flex-col h-full min-h-[500px] bg-surface border-2 border-border rounded-xl p-4 font-sans text-foreground ${
-          className || ''
+          className || ""
         }`}
         style={style}
       >
@@ -207,7 +222,11 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
             </span>
           </div>
           <p className="text-xs text-slate-950 font-bold leading-relaxed opacity-95">
-            Wybierz punkt z listy poniżej. Do załadowania produkcyjnej mapy przekaż prop <code className="bg-slate-950 text-amber-400 px-1.5 py-0.5 rounded font-mono text-[0.72rem] font-black">token="TWOJ_TOKEN"</code>.
+            Wybierz punkt z listy poniżej. Do załadowania produkcyjnej mapy przekaż prop{" "}
+            <code className="bg-slate-950 text-amber-400 px-1.5 py-0.5 rounded font-mono text-[0.72rem] font-black">
+              token="TWOJ_TOKEN"
+            </code>
+            .
           </p>
         </div>
 
@@ -235,22 +254,32 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
                 }}
                 className={`p-4 rounded-xl border-2 transition-all cursor-pointer flex items-center justify-between gap-3 ${
                   isSelected
-                    ? 'bg-primary text-primary-foreground border-primary shadow-md'
-                    : 'bg-surface border-border hover:border-primary hover:shadow-md text-foreground'
+                    ? "bg-primary text-primary-foreground border-primary shadow-md"
+                    : "bg-surface border-border hover:border-primary hover:shadow-md text-foreground"
                 }`}
               >
                 <div className="flex flex-col gap-1 min-w-0">
                   <div className="font-black text-base flex items-center gap-2">
-                    <span className={isSelected ? 'text-primary-foreground font-black' : 'text-foreground font-black'}>
+                    <span
+                      className={
+                        isSelected
+                          ? "text-primary-foreground font-black"
+                          : "text-foreground font-black"
+                      }
+                    >
                       Paczkomat® {p.name}
                     </span>
                     {p.location_description && (
-                      <span className={`text-[0.72rem] px-2.5 py-0.5 rounded-full font-bold ${isSelected ? 'bg-primary-hover text-primary-foreground' : 'bg-muted text-primary'}`}>
+                      <span
+                        className={`text-[0.72rem] px-2.5 py-0.5 rounded-full font-bold ${isSelected ? "bg-primary-hover text-primary-foreground" : "bg-muted text-primary"}`}
+                      >
                         {p.location_description}
                       </span>
                     )}
                   </div>
-                  <div className={`text-xs font-bold ${isSelected ? 'text-primary-foreground/90' : 'text-muted-foreground'}`}>
+                  <div
+                    className={`text-xs font-bold ${isSelected ? "text-primary-foreground/90" : "text-muted-foreground"}`}
+                  >
                     {p.address.line1}, {p.address.line2}
                   </div>
                 </div>
@@ -259,11 +288,11 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
                   type="button"
                   className={`px-4 py-2 rounded-lg text-xs font-black shrink-0 transition-all shadow-sm ${
                     isSelected
-                      ? 'bg-amber-400 text-slate-950 border border-amber-500'
-                      : 'bg-primary hover:bg-primary-hover text-primary-foreground'
+                      ? "bg-amber-400 text-slate-950 border border-amber-500"
+                      : "bg-primary hover:bg-primary-hover text-primary-foreground"
                   }`}
                 >
-                  {isSelected ? 'Wybrano ✓' : 'Wybierz'}
+                  {isSelected ? "Wybrano ✓" : "Wybierz"}
                 </button>
               </div>
             );
@@ -277,13 +306,15 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
     return (
       <div
         className={`flex items-center justify-center min-h-[450px] bg-surface border-2 border-border rounded-xl p-6 ${
-          className || ''
+          className || ""
         }`}
         style={style}
       >
         <div className="flex flex-col items-center gap-3 text-muted-foreground">
           <div className="w-9 h-9 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-          <span className="text-sm font-extrabold text-foreground">Ładowanie mapy InPost GeoWidget...</span>
+          <span className="text-sm font-extrabold text-foreground">
+            Ładowanie mapy InPost GeoWidget...
+          </span>
         </div>
       </div>
     );
@@ -301,15 +332,15 @@ export const InPostGeowidget: React.FC<InPostGeowidgetProps> = ({
   }
 
   if (sandbox) {
-    widgetProps.sandbox = 'true';
+    widgetProps.sandbox = "true";
   }
 
   return (
-    <div className={`w-full h-full min-h-[450px] relative ${className || ''}`} style={style}>
-      {React.createElement('inpost-geowidget', {
+    <div className={`w-full h-full min-h-[450px] relative ${className || ""}`} style={style}>
+      {React.createElement("inpost-geowidget", {
         ref: widgetRef,
         ...widgetProps,
-        style: { width: '100%', height: '100%', display: 'block', minHeight: '450px' },
+        style: { width: "100%", height: "100%", display: "block", minHeight: "450px" },
       })}
     </div>
   );

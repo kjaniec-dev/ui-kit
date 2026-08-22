@@ -20,5 +20,5 @@ export default defineConfig({
       console.error("Data generation failed during build:", e);
       process.exit(1);
     }
-  }
+  },
 });

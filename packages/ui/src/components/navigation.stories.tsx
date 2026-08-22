@@ -3,7 +3,11 @@ import * as React from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "./accordion";
 import {
-  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator,
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
 } from "./dropdown-menu";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbSeparator } from "./breadcrumb";
 import { Pagination } from "./pagination";
@@ -25,7 +29,9 @@ export const TabsStory: Story = {
         </TabsList>
         <TabsContent value="overview">A dashboard with key metrics and quick actions.</TabsContent>
         <TabsContent value="activity">An event timeline: sign-ins, edits and comments.</TabsContent>
-        <TabsContent value="settings">Workspace preferences, permissions and integrations.</TabsContent>
+        <TabsContent value="settings">
+          Workspace preferences, permissions and integrations.
+        </TabsContent>
       </Tabs>
     </div>
   ),
@@ -36,9 +42,20 @@ export const AccordionStory: Story = {
   render: () => (
     <div style={{ maxWidth: 520 }}>
       <Accordion type="single" defaultValue={["a"]}>
-        <AccordionItem value="a"><AccordionTrigger>How does billing work?</AccordionTrigger><AccordionContent>Monthly or annually — the annual plan includes two months free.</AccordionContent></AccordionItem>
-        <AccordionItem value="b"><AccordionTrigger>Can I change my plan later?</AccordionTrigger><AccordionContent>Yes, at any time. The difference is prorated.</AccordionContent></AccordionItem>
-        <AccordionItem value="c"><AccordionTrigger>What payment methods are supported?</AccordionTrigger><AccordionContent>Visa, Mastercard and Apple Pay.</AccordionContent></AccordionItem>
+        <AccordionItem value="a">
+          <AccordionTrigger>How does billing work?</AccordionTrigger>
+          <AccordionContent>
+            Monthly or annually — the annual plan includes two months free.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="b">
+          <AccordionTrigger>Can I change my plan later?</AccordionTrigger>
+          <AccordionContent>Yes, at any time. The difference is prorated.</AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="c">
+          <AccordionTrigger>What payment methods are supported?</AccordionTrigger>
+          <AccordionContent>Visa, Mastercard and Apple Pay.</AccordionContent>
+        </AccordionItem>
       </Accordion>
     </div>
   ),

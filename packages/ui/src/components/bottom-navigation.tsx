@@ -44,8 +44,8 @@ export const BottomNavigation = React.forwardRef<HTMLElement, BottomNavigationPr
               <span
                 className={cn(
                   "relative flex items-center justify-center p-1 rounded-full transition-all duration-200",
-                  isActive 
-                    ? "text-primary scale-110" 
+                  isActive
+                    ? "text-primary scale-110"
                     : "text-muted-foreground group-hover:text-foreground group-active:scale-95"
                 )}
               >
@@ -56,17 +56,21 @@ export const BottomNavigation = React.forwardRef<HTMLElement, BottomNavigationPr
                   </span>
                 )}
               </span>
-              
+
               <span
                 className={cn(
                   "text-[10px] font-semibold tracking-wide transition-all duration-200 select-none",
-                  showLabel ? "opacity-100 scale-100 h-auto" : "opacity-0 scale-75 h-0 overflow-hidden",
-                  isActive ? "text-primary font-bold" : "text-muted-foreground group-hover:text-foreground"
+                  showLabel
+                    ? "opacity-100 scale-100 h-auto"
+                    : "opacity-0 scale-75 h-0 overflow-hidden",
+                  isActive
+                    ? "text-primary font-bold"
+                    : "text-muted-foreground group-hover:text-foreground"
                 )}
               >
                 {item.label}
               </span>
-              
+
               {/* Subtle active indicator dot */}
               {isActive && (
                 <span className="absolute -bottom-1.5 w-1 h-1 rounded-full bg-primary animate-fade-in" />
@@ -74,7 +78,8 @@ export const BottomNavigation = React.forwardRef<HTMLElement, BottomNavigationPr
             </span>
           );
 
-          const itemClass = "group flex-1 flex flex-col items-center justify-center py-1 cursor-pointer transition-all duration-150 relative focus:outline-none";
+          const itemClass =
+            "group flex-1 flex flex-col items-center justify-center py-1 cursor-pointer transition-all duration-150 relative focus:outline-none";
 
           if (item.href) {
             return (

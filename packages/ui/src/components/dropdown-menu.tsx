@@ -9,7 +9,13 @@ interface MenuCtx {
 }
 const MenuContext = React.createContext<MenuCtx | null>(null);
 
-export function DropdownMenu({ children, className }: { children: React.ReactNode; className?: string }) {
+export function DropdownMenu({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   const [open, setOpen] = React.useState(false);
   const ref = React.useRef<HTMLDivElement>(null);
 
@@ -78,7 +84,12 @@ export interface DropdownMenuContentProps extends React.HTMLAttributes<HTMLDivEl
   align?: "start" | "end";
 }
 
-export function DropdownMenuContent({ className, align = "start", children, ...props }: DropdownMenuContentProps) {
+export function DropdownMenuContent({
+  className,
+  align = "start",
+  children,
+  ...props
+}: DropdownMenuContentProps) {
   const ctx = React.useContext(MenuContext)!;
   const ref = React.useRef<HTMLDivElement>(null);
 
@@ -86,7 +97,9 @@ export function DropdownMenuContent({ className, align = "start", children, ...p
     if (!ctx.open) return;
     const container = ref.current;
     if (container) {
-      const items = Array.from(container.querySelectorAll<HTMLButtonElement | HTMLAnchorElement>('[role="menuitem"]'));
+      const items = Array.from(
+        container.querySelectorAll<HTMLButtonElement | HTMLAnchorElement>('[role="menuitem"]')
+      );
       if (items.length > 0) {
         setTimeout(() => items[0].focus(), 50);
       }

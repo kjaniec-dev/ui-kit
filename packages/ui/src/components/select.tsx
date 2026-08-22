@@ -41,7 +41,8 @@ Select.displayName = "Select";
 
 import { FormField } from "./form-field";
 
-export interface SelectFieldProps extends Omit<React.ComponentPropsWithoutRef<typeof Select>, "error"> {
+export interface SelectFieldProps
+  extends Omit<React.ComponentPropsWithoutRef<typeof Select>, "error"> {
   label: string;
   hint?: string;
   error?: string;

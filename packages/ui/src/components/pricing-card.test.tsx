@@ -47,14 +47,7 @@ describe("PricingCard", () => {
   });
 
   it("renders ctaHref as an anchor element with proper href", () => {
-    render(
-      <PricingCard
-        name="Starter"
-        price="$0"
-        ctaHref="/signup"
-        ctaText="Get Started Now"
-      />
-    );
+    render(<PricingCard name="Starter" price="$0" ctaHref="/signup" ctaText="Get Started Now" />);
 
     const link = screen.getByRole("link", { name: "Get Started Now" });
     expect(link).toBeInTheDocument();

@@ -49,9 +49,12 @@ export function ImageGallery({
   const [selectedIndex, setSelectedIndex] = React.useState<number | null>(null);
 
   const columnClass = COLUMN_CLASSES[columns] || "grid-cols-3";
-  const aspectClass = ASPECT_CLASSES[aspectRatio] || (aspectRatio.startsWith("aspect-") ? aspectRatio : `aspect-[${aspectRatio}]`);
+  const aspectClass =
+    ASPECT_CLASSES[aspectRatio] ||
+    (aspectRatio.startsWith("aspect-") ? aspectRatio : `aspect-[${aspectRatio}]`);
 
-  const hasMaxVisible = typeof maxVisible === "number" && maxVisible > 0 && images.length > maxVisible;
+  const hasMaxVisible =
+    typeof maxVisible === "number" && maxVisible > 0 && images.length > maxVisible;
   const visibleImages = hasMaxVisible ? images.slice(0, maxVisible) : images;
   const remainingCount = hasMaxVisible ? images.length - maxVisible + 1 : 0;
 
@@ -107,9 +110,7 @@ export function ImageGallery({
           const isLastOverlay = hasMaxVisible && idx === maxVisible - 1;
           const thumbSrc = img.thumbnailSrc || img.src;
           const defaultAlt = img.alt || `Thumbnail ${idx + 1}`;
-          const buttonAriaLabel = isLastOverlay
-            ? `View all ${images.length} images`
-            : defaultAlt;
+          const buttonAriaLabel = isLastOverlay ? `View all ${images.length} images` : defaultAlt;
 
           return (
             <button
@@ -160,7 +161,16 @@ export function ImageGallery({
               aria-label="Close"
               className="p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
             >
-              <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width={20}
+                height={20}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M18 6 6 18M6 6l12 12" />
               </svg>
             </button>
@@ -175,7 +185,16 @@ export function ImageGallery({
                 aria-label="Previous image"
                 className="p-3 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer z-10 shrink-0"
               >
-                <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width={24}
+                  height={24}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="m15 18-6-6 6-6" />
                 </svg>
               </button>
@@ -196,7 +215,16 @@ export function ImageGallery({
                 aria-label="Next image"
                 className="p-3 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer z-10 shrink-0"
               >
-                <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width={24}
+                  height={24}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="m9 18 6-6-6-6" />
                 </svg>
               </button>
@@ -206,8 +234,14 @@ export function ImageGallery({
           {/* Footer (Title & Caption) */}
           {(activeImage.title || activeImage.caption) && (
             <div className="flex flex-col items-center justify-center text-center text-white pb-2 z-10">
-              {activeImage.title && <h3 className="text-base font-semibold text-white">{activeImage.title}</h3>}
-              {activeImage.caption && <p className="text-xs sm:text-sm text-white/70 max-w-lg mt-0.5">{activeImage.caption}</p>}
+              {activeImage.title && (
+                <h3 className="text-base font-semibold text-white">{activeImage.title}</h3>
+              )}
+              {activeImage.caption && (
+                <p className="text-xs sm:text-sm text-white/70 max-w-lg mt-0.5">
+                  {activeImage.caption}
+                </p>
+              )}
             </div>
           )}
         </div>

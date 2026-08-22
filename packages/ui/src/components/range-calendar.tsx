@@ -3,7 +3,13 @@
 import * as React from "react";
 import { cn } from "../lib/cn";
 import { CalendarGrid, type CalendarCellState } from "./calendar-grid";
-import { startOfDay, isSameDay, addMonths, startOfMonth, monthLabelFormat } from "./calendar-internals";
+import {
+  startOfDay,
+  isSameDay,
+  addMonths,
+  startOfMonth,
+  monthLabelFormat,
+} from "./calendar-internals";
 
 export interface DateRange {
   start?: Date;
@@ -33,7 +39,19 @@ function isBetweenExclusive(d: Date, lo: Date, hi: Date): boolean {
 
 export const RangeCalendar = React.forwardRef<HTMLDivElement, RangeCalendarProps>(
   function RangeCalendar(
-    { value, defaultValue, onChange, month, defaultMonth, onMonthChange, min, max, disabledDates, singleMonth, className },
+    {
+      value,
+      defaultValue,
+      onChange,
+      month,
+      defaultMonth,
+      onMonthChange,
+      min,
+      max,
+      disabledDates,
+      singleMonth,
+      className,
+    },
     ref
   ) {
     const controlled = value !== undefined;
@@ -142,7 +160,15 @@ export const RangeCalendar = React.forwardRef<HTMLDivElement, RangeCalendarProps
         onClick={() => setViewMonth(addMonths(leftMonth, direction === "prev" ? -1 : 1))}
         className="p-1.5 rounded-kj-sm text-muted-foreground hover:bg-muted hover:text-foreground"
       >
-        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          viewBox="0 0 24 24"
+          className="h-4 w-4"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           {direction === "prev" ? <path d="m15 18-6-6 6-6" /> : <path d="m9 18 6-6-6-6" />}
         </svg>
       </button>
@@ -151,11 +177,19 @@ export const RangeCalendar = React.forwardRef<HTMLDivElement, RangeCalendarProps
     const showSingleMonth = singleMonth;
 
     return (
-      <div ref={ref} className={cn("flex flex-col sm:flex-row gap-4 sm:gap-6 select-none max-w-full overflow-hidden", className)}>
+      <div
+        ref={ref}
+        className={cn(
+          "flex flex-col sm:flex-row gap-4 sm:gap-6 select-none max-w-full overflow-hidden",
+          className
+        )}
+      >
         <div className="w-full sm:w-[280px]">
           <div className="flex items-center justify-between mb-2">
             {navButton("prev")}
-            <span className="text-sm font-medium text-foreground">{monthLabelFormat.format(leftMonth)}</span>
+            <span className="text-sm font-medium text-foreground">
+              {monthLabelFormat.format(leftMonth)}
+            </span>
             <span className={showSingleMonth ? "" : "sm:hidden"}>{navButton("next")}</span>
           </div>
           <CalendarGrid
@@ -171,7 +205,9 @@ export const RangeCalendar = React.forwardRef<HTMLDivElement, RangeCalendarProps
           <div className="hidden sm:block w-[280px]">
             <div className="flex items-center justify-between mb-2">
               <span className="w-[26px]" aria-hidden="true" />
-              <span className="text-sm font-medium text-foreground">{monthLabelFormat.format(rightMonth)}</span>
+              <span className="text-sm font-medium text-foreground">
+                {monthLabelFormat.format(rightMonth)}
+              </span>
               {navButton("next")}
             </div>
             <CalendarGrid

@@ -3,7 +3,12 @@ import { cn } from "../lib/cn";
 
 export const Breadcrumb = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
   ({ className, children, ...props }, ref) => (
-    <nav ref={ref} aria-label="Breadcrumb" className={cn("flex items-center gap-1.5 text-[0.85rem] text-muted-foreground", className)} {...props}>
+    <nav
+      ref={ref}
+      aria-label="Breadcrumb"
+      className={cn("flex items-center gap-1.5 text-[0.85rem] text-muted-foreground", className)}
+      {...props}
+    >
       {children}
     </nav>
   )
@@ -25,7 +30,14 @@ export const BreadcrumbItem = React.forwardRef<HTMLAnchorElement, BreadcrumbItem
       );
     }
     return (
-      <a ref={ref} className={cn("text-inherit no-underline hover:text-foreground transition-colors", className)} {...props}>
+      <a
+        ref={ref}
+        className={cn(
+          "text-inherit no-underline hover:text-foreground transition-colors",
+          className
+        )}
+        {...props}
+      >
         {children}
       </a>
     );
@@ -34,5 +46,9 @@ export const BreadcrumbItem = React.forwardRef<HTMLAnchorElement, BreadcrumbItem
 BreadcrumbItem.displayName = "BreadcrumbItem";
 
 export function BreadcrumbSeparator() {
-  return <span aria-hidden className="text-muted-foreground/70">/</span>;
+  return (
+    <span aria-hidden className="text-muted-foreground/70">
+      /
+    </span>
+  );
 }

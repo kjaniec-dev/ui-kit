@@ -19,12 +19,25 @@ const options = [
 export const Default: Story = {
   render: () => {
     const [value, setValue] = React.useState<string[]>(["bold"]);
-    return <ToggleGroup options={options} value={value} onChange={setValue} aria-label="Text formatting" />;
+    return (
+      <ToggleGroup
+        options={options}
+        value={value}
+        onChange={setValue}
+        aria-label="Text formatting"
+      />
+    );
   },
 };
 
 export const Disabled: Story = {
   render: () => (
-    <ToggleGroup options={options} value={["bold", "italic"]} onChange={() => {}} disabled aria-label="Text formatting" />
+    <ToggleGroup
+      options={options}
+      value={["bold", "italic"]}
+      onChange={() => {}}
+      disabled
+      aria-label="Text formatting"
+    />
   ),
 };

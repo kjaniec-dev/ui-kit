@@ -29,8 +29,12 @@ export const Default = {
             <TextField label="Connection String" defaultValue="postgresql://db.kjaniec.dev:5432" />
             <CheckboxField label="Enable auto-backups daily" defaultChecked />
             <div className="flex gap-2 justify-end pt-4 border-t border-border">
-              <Button variant="outline" size="sm" onClick={() => setOpen(false)}>Cancel</Button>
-              <Button size="sm" onClick={() => setOpen(false)}>Save Changes</Button>
+              <Button variant="outline" size="sm" onClick={() => setOpen(false)}>
+                Cancel
+              </Button>
+              <Button size="sm" onClick={() => setOpen(false)}>
+                Save Changes
+              </Button>
             </div>
           </div>
         </Drawer>

@@ -99,9 +99,9 @@ describe("ImageGallery", () => {
       expect(dialog).toBeInTheDocument();
 
       // Lightbox displays active image
-      const lightboxImg = screen.getAllByRole("img").find((img) =>
-        img.getAttribute("src") === "https://example.com/image2.jpg"
-      );
+      const lightboxImg = screen
+        .getAllByRole("img")
+        .find((img) => img.getAttribute("src") === "https://example.com/image2.jpg");
       expect(lightboxImg).toBeInTheDocument();
     });
 

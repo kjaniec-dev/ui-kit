@@ -32,7 +32,10 @@ export function formatBytes(bytes: number): string {
 
 export function matchesAccept(file: File, accept?: string): boolean {
   if (!accept || accept.trim() === "") return true;
-  const tokens = accept.split(",").map((t) => t.trim()).filter(Boolean);
+  const tokens = accept
+    .split(",")
+    .map((t) => t.trim())
+    .filter(Boolean);
   if (tokens.length === 0) return true;
   const fileType = file.type.toLowerCase();
   const fileName = file.name.toLowerCase();

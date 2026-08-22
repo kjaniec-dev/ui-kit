@@ -49,7 +49,9 @@ export const SliderControl: Story = {
     return (
       <div style={{ width: 320 }}>
         <Slider min={0} max={100} value={v} onChange={(e) => setV(Number(e.target.value))} />
-        <p style={{ marginTop: 8, fontSize: 13, color: "var(--kj-muted-foreground)" }}>Value: {v}</p>
+        <p style={{ marginTop: 8, fontSize: 13, color: "var(--kj-muted-foreground)" }}>
+          Value: {v}
+        </p>
       </div>
     );
   },

@@ -120,7 +120,10 @@ export function DataTable<T>({
         </div>
       )}
 
-      <TableWrap className="relative overflow-x-auto overflow-y-hidden [scroll-behavior:smooth] [-webkit-overflow-scrolling:touch]" {...props}>
+      <TableWrap
+        className="relative overflow-x-auto overflow-y-hidden [scroll-behavior:smooth] [-webkit-overflow-scrolling:touch]"
+        {...props}
+      >
         <Table>
           <TableHeader>
             <TableRow>
@@ -148,9 +151,11 @@ export function DataTable<T>({
                 const isSortable = col.sortable && onSort && col.sortKey;
                 const isSortedActive = sortBy && col.sortKey === sortBy;
                 const ariaSort = isSortable
-                  ? (isSortedActive
-                    ? (sortDirection === "asc" ? "ascending" : "descending")
-                    : "none")
+                  ? isSortedActive
+                    ? sortDirection === "asc"
+                      ? "ascending"
+                      : "descending"
+                    : "none"
                   : undefined;
 
                 return (
@@ -183,15 +188,16 @@ export function DataTable<T>({
                       >
                         <span>{col.header}</span>
                         <span className="text-[10px] text-muted-foreground shrink-0 select-none">
-                          {isSortedActive ? (
-                            sortDirection === "asc" ? "▲" : "▼"
-                          ) : (
-                            "⇅"
-                          )}
+                          {isSortedActive ? (sortDirection === "asc" ? "▲" : "▼") : "⇅"}
                         </span>
                       </button>
                     ) : (
-                      <div className={cn("inline-flex items-center gap-1.5", alignClass === "text-right" && "justify-end w-full")}>
+                      <div
+                        className={cn(
+                          "inline-flex items-center gap-1.5",
+                          alignClass === "text-right" && "justify-end w-full"
+                        )}
+                      >
                         {col.header}
                       </div>
                     )}
@@ -203,7 +209,10 @@ export function DataTable<T>({
           <TableBody>
             {loading && data.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={columns.length + (isSelectionActive ? 1 : 0)} className="h-64 text-center">
+                <TableCell
+                  colSpan={columns.length + (isSelectionActive ? 1 : 0)}
+                  className="h-64 text-center"
+                >
                   <div className="flex flex-col items-center justify-center gap-3">
                     <Spinner size={32} />
                     <span className="text-sm text-muted-foreground">Loading dataset...</span>

@@ -18,9 +18,15 @@ export const Default = {
       description="Customize how your profile appears to other members."
       sidebar={
         <div className="flex flex-row lg:flex-col gap-1 w-full">
-          <Button variant="ghost" size="sm" className="justify-start bg-primary/10 text-primary">General</Button>
-          <Button variant="ghost" size="sm" className="justify-start text-muted-foreground">Team</Button>
-          <Button variant="ghost" size="sm" className="justify-start text-muted-foreground">Billing</Button>
+          <Button variant="ghost" size="sm" className="justify-start bg-primary/10 text-primary">
+            General
+          </Button>
+          <Button variant="ghost" size="sm" className="justify-start text-muted-foreground">
+            Team
+          </Button>
+          <Button variant="ghost" size="sm" className="justify-start text-muted-foreground">
+            Billing
+          </Button>
         </div>
       }
     >

@@ -40,13 +40,13 @@ export const WithBarClassName: Story = {
       <Progress
         value={75}
         barClassName="origin-left"
-        style={{ '--delay': '0s' } as React.CSSProperties}
+        style={{ "--delay": "0s" } as React.CSSProperties}
       />
       <Progress
         value={50}
         tone="secondary"
         barClassName="origin-left"
-        style={{ '--delay': '0.2s' } as React.CSSProperties}
+        style={{ "--delay": "0.2s" } as React.CSSProperties}
       />
     </div>
   ),

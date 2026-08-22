@@ -12,10 +12,24 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     const autoId = React.useId();
     const inputId = id ?? autoId;
     return (
-      <label htmlFor={inputId} className={cn("inline-flex items-center gap-2.5 cursor-pointer text-sm select-none", className)}>
+      <label
+        htmlFor={inputId}
+        className={cn(
+          "inline-flex items-center gap-2.5 cursor-pointer text-sm select-none",
+          className
+        )}
+      >
         <input ref={ref} id={inputId} type="checkbox" className="peer sr-only" {...props} />
         <span className="grid place-items-center h-[1.15rem] w-[1.15rem] shrink-0 rounded-[0.4rem] border-[1.5px] border-input bg-surface transition-all duration-150 peer-checked:bg-primary peer-checked:border-primary peer-focus-visible:ring-[3px] peer-focus-visible:ring-ring/35 peer-checked:[&_svg]:opacity-100 peer-checked:[&_svg]:scale-100">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" className="h-3 w-3 text-primary-foreground opacity-0 scale-50 transition-all duration-150">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={3}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-3 w-3 text-primary-foreground opacity-0 scale-50 transition-all duration-150"
+          >
             <path d="M20 6 9 17l-5-5" />
           </svg>
         </span>
@@ -35,7 +49,13 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
     const autoId = React.useId();
     const inputId = id ?? autoId;
     return (
-      <label htmlFor={inputId} className={cn("inline-flex items-center gap-2.5 cursor-pointer text-sm select-none", className)}>
+      <label
+        htmlFor={inputId}
+        className={cn(
+          "inline-flex items-center gap-2.5 cursor-pointer text-sm select-none",
+          className
+        )}
+      >
         <input ref={ref} id={inputId} type="radio" className="peer sr-only" {...props} />
         <span className="grid place-items-center h-[1.15rem] w-[1.15rem] shrink-0 rounded-full border-[1.5px] border-input bg-surface transition-all duration-150 peer-checked:bg-primary peer-checked:border-primary peer-focus-visible:ring-[3px] peer-focus-visible:ring-ring/35 peer-checked:[&>span]:opacity-100 peer-checked:[&>span]:scale-100">
           <span className="h-2 w-2 rounded-full bg-primary-foreground opacity-0 scale-[0.4] transition-all duration-150" />
@@ -71,10 +91,14 @@ export const CheckboxField = React.forwardRef<HTMLInputElement, CheckboxFieldPro
           {...props}
         />
         {hint && !error && (
-          <Hint id={hintId} className="pl-[1.8rem]">{hint}</Hint>
+          <Hint id={hintId} className="pl-[1.8rem]">
+            {hint}
+          </Hint>
         )}
         {error && (
-          <Hint id={errorId} error className="pl-[1.8rem]">{error}</Hint>
+          <Hint id={errorId} error className="pl-[1.8rem]">
+            {error}
+          </Hint>
         )}
       </div>
     );

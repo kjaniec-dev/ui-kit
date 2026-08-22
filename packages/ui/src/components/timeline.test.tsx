@@ -65,11 +65,11 @@ describe("Timeline", () => {
 
     const content0 = container.querySelector('[data-testid="content-0"]') as HTMLElement;
     const content1 = container.querySelector('[data-testid="content-1"]') as HTMLElement;
-    
+
     // Index 0 (Even) -> right column in desktop, left column in mobile
     expect(content0.className).toContain("md:col-start-3");
     expect(content0.className).toContain("col-start-2");
-    
+
     // Index 1 (Odd) -> left column in desktop, left column in mobile
     expect(content1.className).toContain("md:col-start-1");
     expect(content1.className).toContain("col-start-2");
@@ -165,9 +165,7 @@ describe("Timeline", () => {
             <TimelineSeparator data-testid="separator-0">
               <TimelineDot />
             </TimelineSeparator>
-            <TimelineContent data-testid="content-0">
-              Nested Content 0
-            </TimelineContent>
+            <TimelineContent data-testid="content-0">Nested Content 0</TimelineContent>
           </div>
         </TimelineItem>
         <TimelineItem>
@@ -175,9 +173,7 @@ describe("Timeline", () => {
             <TimelineSeparator data-testid="separator-1">
               <TimelineDot />
             </TimelineSeparator>
-            <TimelineContent data-testid="content-1">
-              Nested Content 1
-            </TimelineContent>
+            <TimelineContent data-testid="content-1">Nested Content 1</TimelineContent>
           </div>
         </TimelineItem>
       </Timeline>

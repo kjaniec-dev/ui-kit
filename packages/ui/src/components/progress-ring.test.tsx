@@ -62,14 +62,7 @@ describe("ProgressRing", () => {
 
 describe("ProgressRingField", () => {
   it("renders label and hint text", () => {
-    render(
-      <ProgressRingField
-        label="Disk Space"
-        hint="75% of 1TB used"
-        value={75}
-        showValue
-      />
-    );
+    render(<ProgressRingField label="Disk Space" hint="75% of 1TB used" value={75} showValue />);
 
     expect(screen.getByText("Disk Space")).toBeInTheDocument();
     expect(screen.getByText("75% of 1TB used")).toBeInTheDocument();

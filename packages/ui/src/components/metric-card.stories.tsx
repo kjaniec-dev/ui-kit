@@ -51,7 +51,13 @@ export const Neutral: Story = {
 
 export const GridDemo: Story = {
   render: () => (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+        gap: "1.5rem",
+      }}
+    >
       <MetricCard
         title="Revenue"
         value="$48,259.00"

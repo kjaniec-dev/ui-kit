@@ -17,7 +17,8 @@ export const Vertical: Story = {
     category: "Architecture",
     readTime: "6 min read",
     publishedAt: "Jul 18, 2026",
-    coverUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+    coverUrl:
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
     coverAlt: "Code editor background",
     author: {
       name: "Krystian Janiec",
@@ -35,7 +36,8 @@ export const Horizontal: Story = {
     readTime: "4 min read",
     publishedAt: "Jul 15, 2026",
     orientation: "horizontal",
-    coverUrl: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
+    coverUrl:
+      "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
     coverAlt: "Design workspace",
     author: {
       name: "Krystian Janiec",

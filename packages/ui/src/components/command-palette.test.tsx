@@ -18,9 +18,7 @@ function makeItems(actions: Partial<Record<string, () => void>> = {}): CommandPa
 }
 
 function renderPalette(props: Partial<React.ComponentProps<typeof CommandPalette>> = {}) {
-  return render(
-    <CommandPalette open onClose={() => {}} items={makeItems()} {...props} />
-  );
+  return render(<CommandPalette open onClose={() => {}} items={makeItems()} {...props} />);
 }
 
 const input = () => screen.getByRole("combobox");
@@ -153,9 +151,7 @@ describe("CommandPalette", () => {
 
   describe("scroll lock", () => {
     it("locks body scroll while open and restores it on close", () => {
-      const { rerender } = render(
-        <CommandPalette open onClose={() => {}} items={makeItems()} />
-      );
+      const { rerender } = render(<CommandPalette open onClose={() => {}} items={makeItems()} />);
       expect(document.body.style.overflow).toBe("hidden");
       rerender(<CommandPalette open={false} onClose={() => {}} items={makeItems()} />);
       expect(document.body.style.overflow).toBe("");

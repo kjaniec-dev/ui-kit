@@ -93,7 +93,10 @@ describe("Combobox (single)", () => {
     const { rerender } = render(<Combobox options={options} placeholder="Pick fruit" />);
     expect(screen.getByRole("button", { name: "Pick fruit" })).not.toHaveAttribute("aria-invalid");
     rerender(<Combobox options={options} placeholder="Pick fruit" error />);
-    expect(screen.getByRole("button", { name: "Pick fruit" })).toHaveAttribute("aria-invalid", "true");
+    expect(screen.getByRole("button", { name: "Pick fruit" })).toHaveAttribute(
+      "aria-invalid",
+      "true"
+    );
   });
 
   it("forwards its ref to the trigger button", () => {
@@ -106,7 +109,10 @@ describe("Combobox (single)", () => {
     const { rerender } = render(<Combobox options={options} placeholder="Pick fruit" />);
     expect(screen.getByRole("button", { name: "Pick fruit" })).not.toHaveAttribute("aria-required");
     rerender(<Combobox options={options} placeholder="Pick fruit" required />);
-    expect(screen.getByRole("button", { name: "Pick fruit" })).toHaveAttribute("aria-required", "true");
+    expect(screen.getByRole("button", { name: "Pick fruit" })).toHaveAttribute(
+      "aria-required",
+      "true"
+    );
   });
 
   it("navigates backward with ArrowUp, skipping a disabled option", () => {
@@ -178,7 +184,13 @@ describe("Combobox (multiple)", () => {
   it("renders removable chips and removes on the chip button", () => {
     const onChange = vi.fn();
     render(
-      <Combobox multiple options={options} defaultValue={["apple", "banana"]} placeholder="Pick" onChange={onChange} />
+      <Combobox
+        multiple
+        options={options}
+        defaultValue={["apple", "banana"]}
+        placeholder="Pick"
+        onChange={onChange}
+      />
     );
     fireEvent.click(screen.getByRole("button", { name: "Remove Apple" }));
     expect(onChange).toHaveBeenLastCalledWith(["banana"]);
@@ -193,7 +205,13 @@ describe("Combobox (multiple)", () => {
   it("removes the last chip on Backspace when the search is empty", () => {
     const onChange = vi.fn();
     render(
-      <Combobox multiple options={options} defaultValue={["apple", "banana"]} placeholder="Pick" onChange={onChange} />
+      <Combobox
+        multiple
+        options={options}
+        defaultValue={["apple", "banana"]}
+        placeholder="Pick"
+        onChange={onChange}
+      />
     );
     fireEvent.click(screen.getByRole("button", { expanded: false }));
     fireEvent.keyDown(screen.getByRole("combobox"), { key: "Backspace" });
@@ -203,14 +221,28 @@ describe("Combobox (multiple)", () => {
   it("reflects a controlled value and only updates after the parent re-renders", () => {
     const onChange = vi.fn();
     const { rerender } = render(
-      <Combobox multiple options={options} value={["apple"]} placeholder="Pick" onChange={onChange} />
+      <Combobox
+        multiple
+        options={options}
+        value={["apple"]}
+        placeholder="Pick"
+        onChange={onChange}
+      />
     );
     expect(screen.getByRole("button", { name: "Remove Apple" })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { expanded: false }));
     fireEvent.click(screen.getByRole("option", { name: "Banana" }));
     expect(onChange).toHaveBeenLastCalledWith(["apple", "banana"]);
     expect(screen.queryByRole("button", { name: "Remove Banana" })).not.toBeInTheDocument();
-    rerender(<Combobox multiple options={options} value={["apple", "banana"]} placeholder="Pick" onChange={onChange} />);
+    rerender(
+      <Combobox
+        multiple
+        options={options}
+        value={["apple", "banana"]}
+        placeholder="Pick"
+        onChange={onChange}
+      />
+    );
     expect(screen.getByRole("button", { name: "Remove Banana" })).toBeInTheDocument();
   });
 });

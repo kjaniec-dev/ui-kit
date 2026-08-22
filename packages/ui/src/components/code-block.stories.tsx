@@ -28,5 +28,8 @@ export const NotCopyable: Story = {
 };
 
 export const ScrollingMaxHeight: Story = {
-  args: { code: Array.from({ length: 30 }, (_, i) => `const line${i} = ${i};`).join("\n"), maxHeight: 180 },
+  args: {
+    code: Array.from({ length: 30 }, (_, i) => `const line${i} = ${i};`).join("\n"),
+    maxHeight: 180,
+  },
 };

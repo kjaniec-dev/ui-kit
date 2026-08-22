@@ -37,23 +37,16 @@ describe("AppShell", () => {
     );
     expect(narrowContainer.querySelector("main")).toHaveClass("max-w-5xl");
 
-    const { container: wideContainer } = render(
-      <AppShell contentWidth="wide">Content</AppShell>
-    );
+    const { container: wideContainer } = render(<AppShell contentWidth="wide">Content</AppShell>);
     expect(wideContainer.querySelector("main")).toHaveClass("max-w-screen-2xl");
 
-    const { container: fullContainer } = render(
-      <AppShell contentWidth="full">Content</AppShell>
-    );
+    const { container: fullContainer } = render(<AppShell contentWidth="full">Content</AppShell>);
     expect(fullContainer.querySelector("main")).toHaveClass("max-w-none");
   });
 
   it("renders mobile navigation drawer when mobileNav is provided and toggled", () => {
     render(
-      <AppShell
-        header={<div>Header</div>}
-        mobileNav={<div>Mobile Menu Links</div>}
-      >
+      <AppShell header={<div>Header</div>} mobileNav={<div>Mobile Menu Links</div>}>
         <div>Page Body</div>
       </AppShell>
     );
@@ -104,17 +97,23 @@ describe("AppShell", () => {
 
   it("applies correct variant and position classes for header", () => {
     const { container: glassSticky } = render(
-      <AppShellHeader variant="glass" position="sticky">Header</AppShellHeader>
+      <AppShellHeader variant="glass" position="sticky">
+        Header
+      </AppShellHeader>
     );
     expect(glassSticky.querySelector("header")).toHaveClass("bg-surface/80", "sticky");
 
     const { container: solidFixed } = render(
-      <AppShellHeader variant="solid" position="fixed">Header</AppShellHeader>
+      <AppShellHeader variant="solid" position="fixed">
+        Header
+      </AppShellHeader>
     );
     expect(solidFixed.querySelector("header")).toHaveClass("bg-surface", "fixed");
 
     const { container: transparentStatic } = render(
-      <AppShellHeader variant="transparent" position="static">Header</AppShellHeader>
+      <AppShellHeader variant="transparent" position="static">
+        Header
+      </AppShellHeader>
     );
     expect(transparentStatic.querySelector("header")).toHaveClass("bg-transparent", "relative");
   });
@@ -163,5 +162,3 @@ describe("AppShell", () => {
     expect(document.body.style.overflow).toBe("");
   });
 });
-
-

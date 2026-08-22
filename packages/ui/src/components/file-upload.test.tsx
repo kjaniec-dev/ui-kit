@@ -86,7 +86,12 @@ describe("FileUpload", () => {
   it("shows success and error states from the controlled value", () => {
     const items: UploadItem[] = [
       { id: "1", file: makeFile("ok.png", "image/png", 10), status: "success" },
-      { id: "2", file: makeFile("bad.png", "image/png", 10), status: "error", error: "Server rejected" },
+      {
+        id: "2",
+        file: makeFile("bad.png", "image/png", 10),
+        status: "error",
+        error: "Server rejected",
+      },
     ];
     render(<FileUpload value={items} onChange={() => {}} />);
     expect(screen.getByText("Uploaded")).toBeInTheDocument();
@@ -104,7 +109,9 @@ describe("FileUpload", () => {
   });
 
   it("hides remove buttons and reflects error/required on the dropzone when disabled/invalid", () => {
-    const items: UploadItem[] = [{ id: "1", file: makeFile("a.png", "image/png", 10), status: "pending" }];
+    const items: UploadItem[] = [
+      { id: "1", file: makeFile("a.png", "image/png", 10), status: "pending" },
+    ];
     const { rerender } = render(<FileUpload value={items} onChange={() => {}} disabled />);
     expect(screen.queryByRole("button", { name: /remove a\.png/i })).not.toBeInTheDocument();
     rerender(<FileUpload value={items} onChange={() => {}} error required />);
@@ -136,7 +143,9 @@ describe("FileUploadField", () => {
   });
 
   it("shows the error, hides the hint, and marks the dropzone invalid", () => {
-    render(<FileUploadField label="Attachments" hint="PDFs only" error="Required" onChange={() => {}} />);
+    render(
+      <FileUploadField label="Attachments" hint="PDFs only" error="Required" onChange={() => {}} />
+    );
     const zone = screen.getByLabelText("Attachments");
     expect(screen.getByText("Required")).toBeInTheDocument();
     expect(screen.queryByText("PDFs only")).not.toBeInTheDocument();

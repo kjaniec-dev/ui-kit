@@ -1,22 +1,22 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const tokensPath = path.join(__dirname, 'tokens.json');
-const themeCssPath = path.join(__dirname, 'src', 'theme.css');
-const tailwindCssPath = path.join(__dirname, 'src', 'tailwind.css');
+const tokensPath = path.join(__dirname, "tokens.json");
+const themeCssPath = path.join(__dirname, "src", "theme.css");
+const tailwindCssPath = path.join(__dirname, "src", "tailwind.css");
 
 // Read and parse tokens.json
-const tokens = JSON.parse(fs.readFileSync(tokensPath, 'utf8'));
+const tokens = JSON.parse(fs.readFileSync(tokensPath, "utf8"));
 
 // Utility to convert camelCase to kebab-case
 function toKebabCase(str) {
-  return str.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
+  return str.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, "$1-$2").toLowerCase();
 }
 
 // Generate CSS Custom Properties
 let themeLines = [];
-themeLines.push(':root {');
-themeLines.push('  color-scheme: light;');
+themeLines.push(":root {");
+themeLines.push("  color-scheme: light;");
 
 // 1. Semantic Light Colors
 const lightColors = tokens.color.semantic.light;
@@ -26,14 +26,14 @@ Object.entries(lightColors).forEach(([key, val]) => {
 
 // 2. Primary (amber) scale mapping
 const amberScale = tokens.color.primitive.amber;
-themeLines.push('  /* Primary (amber) scale */');
+themeLines.push("  /* Primary (amber) scale */");
 Object.entries(amberScale).forEach(([weight, val]) => {
   themeLines.push(`  --kj-primary-${weight}: ${val.$value};`);
 });
 
 // 3. Secondary (teal) scale mapping
 const tealScale = tokens.color.primitive.teal;
-themeLines.push('  /* Secondary (teal) scale */');
+themeLines.push("  /* Secondary (teal) scale */");
 Object.entries(tealScale).forEach(([weight, val]) => {
   themeLines.push(`  --kj-secondary-${weight}: ${val.$value};`);
 });
@@ -72,26 +72,26 @@ Object.entries(motion.ease).forEach(([key, val]) => {
   themeLines.push(`  --kj-ease-${key}: ${val.$value};`);
 });
 
-themeLines.push('}');
-themeLines.push('');
+themeLines.push("}");
+themeLines.push("");
 
 themeLines.push('[data-density="compact"] {');
-themeLines.push('  --kj-density: var(--kj-density-compact);');
-themeLines.push('}');
+themeLines.push("  --kj-density: var(--kj-density-compact);");
+themeLines.push("}");
 themeLines.push('[data-density="comfortable"] {');
-themeLines.push('  --kj-density: var(--kj-density-comfortable);');
-themeLines.push('}');
-themeLines.push('');
+themeLines.push("  --kj-density: var(--kj-density-comfortable);");
+themeLines.push("}");
+themeLines.push("");
 
 // 7. Semantic Dark Colors
-themeLines.push('.dark {');
-themeLines.push('  color-scheme: dark;');
+themeLines.push(".dark {");
+themeLines.push("  color-scheme: dark;");
 const darkColors = tokens.color.semantic.dark;
 Object.entries(darkColors).forEach(([key, val]) => {
   themeLines.push(`  --kj-${toKebabCase(key)}: ${val.$value};`);
 });
-themeLines.push('}');
-themeLines.push('');
+themeLines.push("}");
+themeLines.push("");
 
 // Add static helper styles
 themeLines.push(`html {
@@ -109,14 +109,14 @@ themeLines.push(`html {
 }`);
 
 // Write theme.css
-fs.writeFileSync(themeCssPath, themeLines.join('\n') + '\n', 'utf8');
-console.log('Generated src/theme.css');
+fs.writeFileSync(themeCssPath, themeLines.join("\n") + "\n", "utf8");
+console.log("Generated src/theme.css");
 
 // Generate tailwind.css
 let tailwindLines = [];
 tailwindLines.push('@import "./theme.css";');
-tailwindLines.push('');
-tailwindLines.push('@theme {');
+tailwindLines.push("");
+tailwindLines.push("@theme {");
 
 // Map tailwind variables
 // Semantic colors
@@ -168,8 +168,8 @@ Object.keys(motion.ease).forEach((key) => {
   tailwindLines.push(`  --animate-ease-${key}: var(--kj-ease-${key});`);
 });
 
-tailwindLines.push('}');
+tailwindLines.push("}");
 
 // Write tailwind.css
-fs.writeFileSync(tailwindCssPath, tailwindLines.join('\n') + '\n', 'utf8');
-console.log('Generated src/tailwind.css');
+fs.writeFileSync(tailwindCssPath, tailwindLines.join("\n") + "\n", "utf8");
+console.log("Generated src/tailwind.css");

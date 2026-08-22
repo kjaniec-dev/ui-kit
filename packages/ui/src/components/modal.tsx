@@ -16,7 +16,14 @@ export interface ModalProps {
 const ModalContext = React.createContext<{ titleId: string; descId: string } | null>(null);
 
 /** Centered overlay dialog. Closes on backdrop click and Escape. Includes focus trap and restore. */
-export function Modal({ open, onClose, children, width = 440, className, showClose = true }: ModalProps) {
+export function Modal({
+  open,
+  onClose,
+  children,
+  width = 440,
+  className,
+  showClose = true,
+}: ModalProps) {
   const titleId = React.useId();
   const descId = React.useId();
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -123,7 +130,16 @@ export function Modal({ open, onClose, children, width = 440, className, showClo
               aria-label="Close"
               className="absolute top-4 right-4 p-1.5 rounded-kj-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
             >
-              <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width={16}
+                height={16}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M18 6 6 18M6 6l12 12" />
               </svg>
             </button>
@@ -135,17 +151,42 @@ export function Modal({ open, onClose, children, width = 440, className, showClo
   );
 }
 
-export function ModalTitle({ className, id, children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+export function ModalTitle({
+  className,
+  id,
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLHeadingElement>) {
   const ctx = React.useContext(ModalContext);
-  return <h3 id={id ?? ctx?.titleId} className={cn("m-0 mb-2 text-[1.15rem] font-bold tracking-[-0.01em] text-foreground", className)} {...props}>{children}</h3>;
+  return (
+    <h3
+      id={id ?? ctx?.titleId}
+      className={cn(
+        "m-0 mb-2 text-[1.15rem] font-bold tracking-[-0.01em] text-foreground",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </h3>
+  );
 }
 
-export function ModalDescription({ className, id, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export function ModalDescription({
+  className,
+  id,
+  ...props
+}: React.HTMLAttributes<HTMLParagraphElement>) {
   const ctx = React.useContext(ModalContext);
-  return <p id={id ?? ctx?.descId} className={cn("m-0 text-[0.9rem] text-muted-foreground", className)} {...props} />;
+  return (
+    <p
+      id={id ?? ctx?.descId}
+      className={cn("m-0 text-[0.9rem] text-muted-foreground", className)}
+      {...props}
+    />
+  );
 }
 
 export function ModalActions({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return <div className={cn("flex gap-2.5 justify-end mt-6", className)} {...props} />;
 }
-

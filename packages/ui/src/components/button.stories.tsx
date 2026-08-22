@@ -2,7 +2,14 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Button } from "./button";
 
 const PlusIcon = (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M5 12h14M12 5v14" />
   </svg>
 );
@@ -12,7 +19,10 @@ const meta = {
   component: Button,
   tags: ["autodocs"],
   argTypes: {
-    variant: { control: "inline-radio", options: ["primary", "secondary", "outline", "ghost", "danger"] },
+    variant: {
+      control: "inline-radio",
+      options: ["primary", "secondary", "outline", "ghost", "danger"],
+    },
     size: { control: "inline-radio", options: ["sm", "md", "lg", "icon", "icon-sm"] },
     loading: { control: "boolean" },
     disabled: { control: "boolean" },

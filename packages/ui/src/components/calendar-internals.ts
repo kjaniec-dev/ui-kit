@@ -3,7 +3,11 @@ export function startOfDay(d: Date): Date {
 }
 
 export function isSameDay(a: Date, b: Date): boolean {
-  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  return (
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
+  );
 }
 
 export function addDays(d: Date, n: number): Date {
@@ -62,7 +66,10 @@ export function toISODateString(d: Date): string {
   return `${y}-${m}-${day}`;
 }
 
-export const monthLabelFormat = new Intl.DateTimeFormat(undefined, { month: "long", year: "numeric" });
+export const monthLabelFormat = new Intl.DateTimeFormat(undefined, {
+  month: "long",
+  year: "numeric",
+});
 export const fullDateFormat = new Intl.DateTimeFormat(undefined, { dateStyle: "full" });
 const weekdayShortFormat = new Intl.DateTimeFormat(undefined, { weekday: "short" });
 const weekdayLongFormat = new Intl.DateTimeFormat(undefined, { weekday: "long" });

@@ -1,13 +1,13 @@
-import { renderHook, waitFor } from '@testing-library/react';
-import { beforeEach, describe, expect, it } from 'vitest';
-import { useInPostScript } from './use-inpost-script';
+import { renderHook, waitFor } from "@testing-library/react";
+import { beforeEach, describe, expect, it } from "vitest";
+import { useInPostScript } from "./use-inpost-script";
 
-describe('useInPostScript', () => {
+describe("useInPostScript", () => {
   beforeEach(() => {
-    document.head.innerHTML = '';
+    document.head.innerHTML = "";
   });
 
-  it('injects script and link tags into document head', async () => {
+  it("injects script and link tags into document head", async () => {
     const { result } = renderHook(() => useInPostScript({ sandbox: false }));
 
     expect(result.current.isLoaded).toBe(false);
@@ -19,7 +19,7 @@ describe('useInPostScript', () => {
     expect(linkTag).not.toBeNull();
 
     // Simulate script load event
-    scriptTag?.dispatchEvent(new Event('load'));
+    scriptTag?.dispatchEvent(new Event("load"));
 
     await waitFor(() => {
       expect(result.current.isLoaded).toBe(true);

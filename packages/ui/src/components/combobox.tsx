@@ -254,7 +254,14 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
                   }}
                   className="rounded-full p-0.5 leading-none hover:bg-primary/20"
                 >
-                  <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-3 w-3"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  >
                     <path d="M6 6l12 12M18 6L6 18" />
                   </svg>
                 </button>
@@ -284,13 +291,20 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
                 : ""
               : (selected[0] ? labelFor(selected[0]) : "") || placeholder}
           </button>
-          {name && multiple &&
+          {name &&
+            multiple &&
             selected.map((v) => <input key={v} type="hidden" name={name} value={v} />)}
-          {name && !multiple && (
-            <input type="hidden" name={name} value={selected[0] ?? ""} />
-          )}
+          {name && !multiple && <input type="hidden" name={name} value={selected[0] ?? ""} />}
           <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              viewBox="0 0 24 24"
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="m6 9 6 6 6-6" />
             </svg>
           </span>
@@ -348,7 +362,15 @@ export const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
                     >
                       <span>{opt.label}</span>
                       {isSelected && (
-                        <svg viewBox="0 0 24 24" className="h-4 w-4 text-primary shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <svg
+                          viewBox="0 0 24 24"
+                          className="h-4 w-4 text-primary shrink-0"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
                           <path d="m5 12 5 5L20 7" />
                         </svg>
                       )}

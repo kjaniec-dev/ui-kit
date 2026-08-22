@@ -8,13 +8,7 @@ import {
   DropdownMenuSeparator,
 } from "./dropdown-menu";
 
-function Menu({
-  onEdit = () => {},
-  align,
-}: {
-  onEdit?: () => void;
-  align?: "start" | "end";
-}) {
+function Menu({ onEdit = () => {}, align }: { onEdit?: () => void; align?: "start" | "end" }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>Actions</DropdownMenuTrigger>

@@ -49,7 +49,10 @@ describe("RangeCalendar", () => {
     expect(onChange).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 20) }));
     expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toHaveBeenCalledWith({ start: new Date(2026, 6, 10), end: new Date(2026, 6, 20) });
+    expect(onChange).toHaveBeenCalledWith({
+      start: new Date(2026, 6, 10),
+      end: new Date(2026, 6, 20),
+    });
   });
 
   it("clicking an end date in the right-hand month completes a cross-month range", () => {
@@ -57,7 +60,10 @@ describe("RangeCalendar", () => {
     render(<RangeCalendar defaultMonth={new Date(2026, 6, 1)} onChange={onChange} />);
     fireEvent.click(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 25) }));
     fireEvent.click(screen.getByRole("gridcell", { name: dayLabel(2026, 7, 5) }));
-    expect(onChange).toHaveBeenCalledWith({ start: new Date(2026, 6, 25), end: new Date(2026, 7, 5) });
+    expect(onChange).toHaveBeenCalledWith({
+      start: new Date(2026, 6, 25),
+      end: new Date(2026, 7, 5),
+    });
   });
 
   it("clicking a day earlier than the in-progress start restarts the selection instead of committing", () => {
@@ -67,7 +73,10 @@ describe("RangeCalendar", () => {
     fireEvent.click(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 10) }));
     expect(onChange).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 15) }));
-    expect(onChange).toHaveBeenCalledWith({ start: new Date(2026, 6, 10), end: new Date(2026, 6, 15) });
+    expect(onChange).toHaveBeenCalledWith({
+      start: new Date(2026, 6, 10),
+      end: new Date(2026, 6, 15),
+    });
   });
 
   it("hovering while a start is picked previews the range without committing", () => {
@@ -76,8 +85,14 @@ describe("RangeCalendar", () => {
     fireEvent.click(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 10) }));
     fireEvent.mouseEnter(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 14) }));
     expect(onChange).not.toHaveBeenCalled();
-    expect(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 14) })).toHaveAttribute("aria-selected", "true");
-    expect(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 12) })).toHaveAttribute("aria-selected", "false");
+    expect(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 14) })).toHaveAttribute(
+      "aria-selected",
+      "true"
+    );
+    expect(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 12) })).toHaveAttribute(
+      "aria-selected",
+      "false"
+    );
   });
 
   it("disables days outside min/max and blocks selecting them in both months", () => {
@@ -97,9 +112,17 @@ describe("RangeCalendar", () => {
   });
 
   it("disabledDates predicate disables matching days in both months", () => {
-    render(<RangeCalendar defaultMonth={new Date(2026, 6, 1)} disabledDates={(d) => d.getDay() === 0} />);
-    expect(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 5) })).toHaveAttribute("aria-disabled", "true"); // July 5, 2026 is a Sunday
-    expect(screen.getByRole("gridcell", { name: dayLabel(2026, 7, 2) })).toHaveAttribute("aria-disabled", "true"); // August 2, 2026 is a Sunday
+    render(
+      <RangeCalendar defaultMonth={new Date(2026, 6, 1)} disabledDates={(d) => d.getDay() === 0} />
+    );
+    expect(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 5) })).toHaveAttribute(
+      "aria-disabled",
+      "true"
+    ); // July 5, 2026 is a Sunday
+    expect(screen.getByRole("gridcell", { name: dayLabel(2026, 7, 2) })).toHaveAttribute(
+      "aria-disabled",
+      "true"
+    ); // August 2, 2026 is a Sunday
   });
 
   it("moves the roving tabindex within a grid via ArrowRight without affecting the other grid", () => {
@@ -111,7 +134,10 @@ describe("RangeCalendar", () => {
     );
     const leftGrid = screen.getByRole("grid", { name: monthLabel(2026, 6) });
     fireEvent.keyDown(leftGrid, { key: "ArrowRight" });
-    expect(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 9) })).toHaveAttribute("tabindex", "0");
+    expect(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 9) })).toHaveAttribute(
+      "tabindex",
+      "0"
+    );
   });
 
   it("selects the roving day on Enter, completing the range on the second Enter", () => {
@@ -128,17 +154,37 @@ describe("RangeCalendar", () => {
     fireEvent.keyDown(leftGrid, { key: "ArrowRight" });
     fireEvent.keyDown(leftGrid, { key: "Enter" });
     expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toHaveBeenCalledWith({ start: new Date(2026, 6, 8), end: new Date(2026, 6, 9) });
+    expect(onChange).toHaveBeenCalledWith({
+      start: new Date(2026, 6, 8),
+      end: new Date(2026, 6, 9),
+    });
   });
 
   it("reflects a controlled value across both grids", () => {
     const { rerender } = render(
-      <RangeCalendar value={{ start: new Date(2026, 6, 5), end: new Date(2026, 6, 8) }} onChange={() => {}} />
+      <RangeCalendar
+        value={{ start: new Date(2026, 6, 5), end: new Date(2026, 6, 8) }}
+        onChange={() => {}}
+      />
     );
-    expect(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 5) })).toHaveAttribute("aria-selected", "true");
-    expect(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 8) })).toHaveAttribute("aria-selected", "true");
-    rerender(<RangeCalendar value={{ start: new Date(2026, 6, 5), end: new Date(2026, 6, 6) }} onChange={() => {}} />);
-    expect(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 8) })).toHaveAttribute("aria-selected", "false");
+    expect(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 5) })).toHaveAttribute(
+      "aria-selected",
+      "true"
+    );
+    expect(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 8) })).toHaveAttribute(
+      "aria-selected",
+      "true"
+    );
+    rerender(
+      <RangeCalendar
+        value={{ start: new Date(2026, 6, 5), end: new Date(2026, 6, 6) }}
+        onChange={() => {}}
+      />
+    );
+    expect(screen.getByRole("gridcell", { name: dayLabel(2026, 6, 8) })).toHaveAttribute(
+      "aria-selected",
+      "false"
+    );
   });
 
   it("forwards its ref to the outer container", () => {

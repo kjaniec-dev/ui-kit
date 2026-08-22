@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import {
-  Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter,
-} from "./card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./card";
 import { Stat } from "./stat";
 import { Avatar, AvatarGroup } from "./avatar";
 import { Button } from "./button";
@@ -11,7 +9,13 @@ const meta = {
   title: "Layout/Card",
   component: Card,
   tags: ["autodocs"],
-  decorators: [(Story) => <div style={{ maxWidth: 360 }}><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div style={{ maxWidth: 360 }}>
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof Card>;
 
 export default meta;
@@ -21,13 +25,19 @@ export const Basic: Story = {
   render: () => (
     <Card>
       <CardHeader>
-        <Badge variant="primary" className="self-start">Pro</Badge>
+        <Badge variant="primary" className="self-start">
+          Pro
+        </Badge>
         <CardTitle>Team Workspace</CardTitle>
-        <CardDescription>Unlimited projects, roles and activity history for your whole team.</CardDescription>
+        <CardDescription>
+          Unlimited projects, roles and activity history for your whole team.
+        </CardDescription>
       </CardHeader>
       <CardFooter>
         <Button size="sm">Choose plan</Button>
-        <Button size="sm" variant="ghost">Details</Button>
+        <Button size="sm" variant="ghost">
+          Details
+        </Button>
       </CardFooter>
     </Card>
   ),
@@ -77,7 +87,15 @@ export const Interactive: Story = {
 };
 
 export const Stats: StoryObj = {
-  decorators: [(Story) => <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, maxWidth: 720 }}><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div
+        style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, maxWidth: 720 }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
   render: () => (
     <>
       <Stat label="MRR" value="$128.4k" delta="12.3% MoM" trend="up" />
@@ -88,13 +106,23 @@ export const Stats: StoryObj = {
 };
 
 export const Avatars: StoryObj = {
-  decorators: [(Story) => <div style={{ maxWidth: 720 }}><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div style={{ maxWidth: 720 }}>
+        <Story />
+      </div>
+    ),
+  ],
   render: () => (
     <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
       <Avatar size="sm">SM</Avatar>
       <Avatar>KJ</Avatar>
-      <Avatar size="lg" tone="primary">PL</Avatar>
-      <Avatar tone="info" status>ON</Avatar>
+      <Avatar size="lg" tone="primary">
+        PL
+      </Avatar>
+      <Avatar tone="info" status>
+        ON
+      </Avatar>
       <AvatarGroup>
         <Avatar>AK</Avatar>
         <Avatar tone="primary">MR</Avatar>

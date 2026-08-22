@@ -34,9 +34,20 @@ import { Sec, Box, Sub, IcoPlus, IcoInfo, IcoSun } from "./primitives";
 const INBOX_ITEMS: NotificationItemData[] = [
   {
     id: "i1",
-    title: <span>Deployment <strong>prod-v3.2</strong> succeeded</span>,
+    title: (
+      <span>
+        Deployment <strong>prod-v3.2</strong> succeeded
+      </span>
+    ),
     icon: (
-      <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+      <svg
+        width={12}
+        height={12}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2.5}
+      >
         <path d="M20 6 9 17l-5-5" />
       </svg>
     ),
@@ -46,7 +57,11 @@ const INBOX_ITEMS: NotificationItemData[] = [
   },
   {
     id: "i2",
-    title: <span><strong>Alex</strong> approved your PR</span>,
+    title: (
+      <span>
+        <strong>Alex</strong> approved your PR
+      </span>
+    ),
     body: '"LGTM 🚀 Merging now."',
     avatarFallback: "AL",
     timestamp: new Date(Date.now() - 20 * 60_000),
@@ -55,10 +70,22 @@ const INBOX_ITEMS: NotificationItemData[] = [
   },
   {
     id: "i3",
-    title: <span>Invoice <strong>#1042</strong> paid</span>,
+    title: (
+      <span>
+        Invoice <strong>#1042</strong> paid
+      </span>
+    ),
     icon: (
-      <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-        <rect x="2" y="5" width="20" height="14" rx="2" /><line x1="2" y1="10" x2="22" y2="10" />
+      <svg
+        width={12}
+        height={12}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
+        <rect x="2" y="5" width="20" height="14" rx="2" />
+        <line x1="2" y1="10" x2="22" y2="10" />
       </svg>
     ),
     timestamp: new Date(Date.now() - 3_600_000),
@@ -90,12 +117,7 @@ export function InboxDemo() {
   return (
     <InboxPopover>
       <InboxTrigger unreadCount={unreadCount} />
-      <InboxContent
-        items={items}
-        onMarkAllRead={markAllRead}
-        onDismiss={dismiss}
-        viewAllHref="#"
-      />
+      <InboxContent items={items} onMarkAllRead={markAllRead} onDismiss={dismiss} viewAllHref="#" />
     </InboxPopover>
   );
 }
@@ -142,18 +164,39 @@ export function OverlaysSections() {
 
   return (
     <>
-      <Sec id="overlays" title="Overlays & Dialogs" desc="Modals, confirm dialogs, side drawers, command palettes and tooltips." components={["Modal", "ConfirmDialog", "Drawer", "CommandPalette", "Tooltip", "BottomSheet", "Fab"]}>
+      <Sec
+        id="overlays"
+        title="Overlays & Dialogs"
+        desc="Modals, confirm dialogs, side drawers, command palettes and tooltips."
+        components={[
+          "Modal",
+          "ConfirmDialog",
+          "Drawer",
+          "CommandPalette",
+          "Tooltip",
+          "BottomSheet",
+          "Fab",
+        ]}
+      >
         <Box>
           <div className="flex flex-wrap gap-3 items-center">
             <Button onClick={() => setOpen(true)}>Open custom modal</Button>
-            <Button variant="outline" onClick={() => setConfirmOpen(true)}>Open Confirm Dialog</Button>
-            <Button variant="outline" onClick={() => setDrawerOpen(true)}>Open Side Drawer</Button>
-            <Button variant="outline" onClick={() => setBottomSheetOpen(true)}>Open Bottom Sheet</Button>
+            <Button variant="outline" onClick={() => setConfirmOpen(true)}>
+              Open Confirm Dialog
+            </Button>
+            <Button variant="outline" onClick={() => setDrawerOpen(true)}>
+              Open Side Drawer
+            </Button>
+            <Button variant="outline" onClick={() => setBottomSheetOpen(true)}>
+              Open Bottom Sheet
+            </Button>
             <Button
               variant="outline"
               onClick={() => setCmdOpen(true)}
               leadingIcon={
-                <span className="font-mono text-xs border border-border px-1.5 py-0.5 rounded bg-subtle">⌘K</span>
+                <span className="font-mono text-xs border border-border px-1.5 py-0.5 rounded bg-subtle">
+                  ⌘K
+                </span>
               }
             >
               Open Command Palette
@@ -261,7 +304,9 @@ export function OverlaysSections() {
       >
         <div className="space-y-6">
           <div className="space-y-2">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">System Health</h4>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground m-0">
+              System Health
+            </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <Card className="p-3">
                 <div className="text-[10px] text-muted-foreground">Uptime</div>
@@ -275,8 +320,14 @@ export function OverlaysSections() {
           </div>
 
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">General Settings</h4>
-            <TextField label="Database URL" defaultValue="postgresql://db.kjaniec.dev:5432/main" readOnly />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground m-0">
+              General Settings
+            </h3>
+            <TextField
+              label="Database URL"
+              defaultValue="postgresql://db.kjaniec.dev:5432/main"
+              readOnly
+            />
             <SelectField label="Backup Frequency" defaultValue="daily">
               <option value="hourly">Hourly</option>
               <option value="daily">Daily</option>
@@ -286,7 +337,9 @@ export function OverlaysSections() {
           </div>
 
           <div className="pt-4 border-t border-border flex justify-end gap-3">
-            <Button variant="outline" size="sm" onClick={() => setDrawerOpen(false)}>Close</Button>
+            <Button variant="outline" size="sm" onClick={() => setDrawerOpen(false)}>
+              Close
+            </Button>
             <Button
               variant="primary"
               size="sm"
@@ -301,10 +354,7 @@ export function OverlaysSections() {
         </div>
       </Drawer>
 
-      <BottomSheet
-        open={bottomSheetOpen}
-        onClose={() => setBottomSheetOpen(false)}
-      >
+      <BottomSheet open={bottomSheetOpen} onClose={() => setBottomSheetOpen(false)}>
         <BottomSheetHeader>
           <BottomSheetTitle>Share this project</BottomSheetTitle>
           <BottomSheetDescription>
@@ -313,7 +363,11 @@ export function OverlaysSections() {
         </BottomSheetHeader>
         <BottomSheetContent>
           <div className="space-y-4">
-            <TextField label="Share link" defaultValue="https://app.kjaniec.dev/share/proj-8f3a" readOnly />
+            <TextField
+              label="Share link"
+              defaultValue="https://app.kjaniec.dev/share/proj-8f3a"
+              readOnly
+            />
             <SelectField label="Access level" defaultValue="view">
               <option value="view">View only</option>
               <option value="comment">Can comment</option>
@@ -323,7 +377,9 @@ export function OverlaysSections() {
           </div>
         </BottomSheetContent>
         <BottomSheetFooter>
-          <Button variant="outline" onClick={() => setBottomSheetOpen(false)}>Cancel</Button>
+          <Button variant="outline" onClick={() => setBottomSheetOpen(false)}>
+            Cancel
+          </Button>
           <Button
             variant="primary"
             onClick={() => {
@@ -336,11 +392,7 @@ export function OverlaysSections() {
         </BottomSheetFooter>
       </BottomSheet>
 
-      <CommandPalette
-        open={cmdOpen}
-        onClose={() => setCmdOpen(false)}
-        items={cmdItems}
-      />
+      <CommandPalette open={cmdOpen} onClose={() => setCmdOpen(false)} items={cmdItems} />
     </>
   );
 }

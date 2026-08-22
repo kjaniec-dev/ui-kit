@@ -61,8 +61,8 @@ export const PricingCard = React.forwardRef<HTMLDivElement, PricingCardProps>(
           isFeatured
             ? "border-amber-500/80 shadow-kj-lg ring-1 ring-amber-500/30"
             : resolvedVariant === "outline"
-            ? "border-border/80 bg-transparent shadow-none"
-            : "border-border shadow-kj-sm",
+              ? "border-border/80 bg-transparent shadow-none"
+              : "border-border shadow-kj-sm",
           className
         )}
         {...props}
@@ -88,7 +88,7 @@ export const PricingCard = React.forwardRef<HTMLDivElement, PricingCardProps>(
           <ul className="mb-6 flex flex-1 flex-col gap-2.5 p-0 text-xs list-none">
             {features.map((feature, idx) => {
               const text = typeof feature === "string" ? feature : feature.text;
-              const included = typeof feature === "string" ? true : feature.included ?? true;
+              const included = typeof feature === "string" ? true : (feature.included ?? true);
 
               return (
                 <li key={idx} className="flex items-center gap-2.5">
@@ -102,7 +102,11 @@ export const PricingCard = React.forwardRef<HTMLDivElement, PricingCardProps>(
                   >
                     {included ? "✓" : "✕"}
                   </span>
-                  <span className={cn(included ? "text-foreground" : "text-muted-foreground line-through opacity-70")}>
+                  <span
+                    className={cn(
+                      included ? "text-foreground" : "text-muted-foreground line-through opacity-70"
+                    )}
+                  >
                     {text}
                   </span>
                 </li>

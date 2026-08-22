@@ -19,10 +19,9 @@ describe("HighlightedCode", () => {
     expect(container.textContent).toContain(SNIPPET);
     expect(container.querySelector("pre.shiki")).toBeNull();
     // Shiki init downloads grammars in-process; allow more than waitFor's 1s default.
-    await waitFor(
-      () => expect(container.querySelector("pre.shiki")).not.toBeNull(),
-      { timeout: 10000 }
-    );
+    await waitFor(() => expect(container.querySelector("pre.shiki")).not.toBeNull(), {
+      timeout: 10000,
+    });
     expect(container.innerHTML).toContain("var(--kj-primary)");
     // Highlighted or not, the snippet text is unchanged.
     expect(container.textContent).toContain(SNIPPET);
@@ -31,9 +30,7 @@ describe("HighlightedCode", () => {
   it("copies the raw snippet text, not HTML", async () => {
     const { getByRole } = render(<HighlightedCode code={SNIPPET} language="tsx" />);
     fireEvent.click(getByRole("button", { name: "Copy" }));
-    await waitFor(() =>
-      expect(navigator.clipboard.writeText).toHaveBeenCalledWith(SNIPPET)
-    );
+    await waitFor(() => expect(navigator.clipboard.writeText).toHaveBeenCalledWith(SNIPPET));
   });
 
   it("shows the filename over the language in the header", () => {

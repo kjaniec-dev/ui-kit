@@ -15,7 +15,9 @@ export const SettingsLayout = React.forwardRef<HTMLDivElement, SettingsLayoutPro
         {/* Header */}
         {(title || description) && (
           <div className="border-b border-border pb-4">
-            {title && <h1 className="text-2xl font-bold tracking-tight text-foreground">{title}</h1>}
+            {title && (
+              <h1 className="text-2xl font-bold tracking-tight text-foreground">{title}</h1>
+            )}
             {description && <p className="text-sm text-muted-foreground mt-1">{description}</p>}
           </div>
         )}
@@ -30,9 +32,7 @@ export const SettingsLayout = React.forwardRef<HTMLDivElement, SettingsLayoutPro
           </aside>
 
           {/* Content */}
-          <div className="flex-1 max-w-3xl">
-            {children}
-          </div>
+          <div className="flex-1 max-w-3xl">{children}</div>
         </div>
       </div>
     );

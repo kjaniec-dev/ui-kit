@@ -85,9 +85,7 @@ export function useInboxState(initial: NotificationItemData[]): InboxStateReturn
   const unreadCount = items.filter((i) => !i.read).length;
 
   const markRead = React.useCallback((id: string) => {
-    setItems((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, read: true } : item))
-    );
+    setItems((prev) => prev.map((item) => (item.id === id ? { ...item, read: true } : item)));
   }, []);
 
   const markAllRead = React.useCallback(() => {
@@ -179,8 +177,7 @@ export function InboxPopover({
 // InboxTrigger — bell button with unread badge
 // ---------------------------------------------------------------------------
 
-export interface InboxTriggerProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface InboxTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Badge count. Hidden when 0 or undefined. */
   unreadCount?: number;
   /** Accessible label (default: "Notifications"). */
@@ -201,11 +198,7 @@ export function InboxTrigger({
   };
 
   const displayCount =
-    unreadCount == null || unreadCount <= 0
-      ? null
-      : unreadCount > 99
-      ? "99+"
-      : String(unreadCount);
+    unreadCount == null || unreadCount <= 0 ? null : unreadCount > 99 ? "99+" : String(unreadCount);
 
   const defaultLabel = displayCount ? `${label} (${displayCount} unread)` : label;
 
@@ -291,12 +284,15 @@ export function NotificationItem({ item, onDismiss, className }: NotificationIte
 
   const textBlock = (
     <div className="flex-1 min-w-0">
-      <p className={cn("text-sm leading-snug", item.read ? "text-muted-foreground" : "text-foreground")}>
+      <p
+        className={cn(
+          "text-sm leading-snug",
+          item.read ? "text-muted-foreground" : "text-foreground"
+        )}
+      >
         {item.title}
       </p>
-      {item.body && (
-        <p className="text-xs text-muted-foreground mt-0.5 truncate">{item.body}</p>
-      )}
+      {item.body && <p className="text-xs text-muted-foreground mt-0.5 truncate">{item.body}</p>}
       <p className="text-xs text-muted-foreground mt-1">{formatRelativeTime(item.timestamp)}</p>
     </div>
   );
@@ -410,7 +406,17 @@ export function InboxContent({
   const defaultEmptyState = (
     <div className="flex flex-col items-center justify-center py-10 px-5 text-center">
       <span className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-3 text-muted-foreground">
-        <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <svg
+          width={18}
+          height={18}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
           <path d="M13.73 21a2 2 0 0 1-3.46 0" />
         </svg>
@@ -462,18 +468,11 @@ export function InboxContent({
 
       {/* List or empty state */}
       {items.length === 0 ? (
-        emptyState ?? defaultEmptyState
+        (emptyState ?? defaultEmptyState)
       ) : (
-        <div
-          className="overflow-y-auto"
-          style={{ maxHeight }}
-        >
+        <div className="overflow-y-auto" style={{ maxHeight }}>
           {items.map((item) => (
-            <NotificationItem
-              key={item.id}
-              item={item}
-              onDismiss={onDismiss}
-            />
+            <NotificationItem key={item.id} item={item} onDismiss={onDismiss} />
           ))}
         </div>
       )}
@@ -492,4 +491,3 @@ export function InboxContent({
     </div>
   );
 }
-

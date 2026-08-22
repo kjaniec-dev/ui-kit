@@ -2,7 +2,13 @@ import * as React from "react";
 import { cn } from "../lib/cn";
 
 export type TimelineAlign = "left" | "right" | "alternate";
-export type TimelineDotVariant = "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+export type TimelineDotVariant =
+  | "default"
+  | "primary"
+  | "secondary"
+  | "success"
+  | "warning"
+  | "danger";
 export type TimelineDotSize = "sm" | "md" | "lg";
 
 interface TimelineCtx {
@@ -72,12 +78,7 @@ export const TimelineItem = React.forwardRef<HTMLDivElement, TimelineItemProps>(
 
     return (
       <TimelineItemContext.Provider value={{ isEven, align, isLast }}>
-        <div
-          ref={ref}
-          role="listitem"
-          className={cn(gridClass, className)}
-          {...props}
-        >
+        <div ref={ref} role="listitem" className={cn(gridClass, className)} {...props}>
           {children}
         </div>
       </TimelineItemContext.Provider>
@@ -124,7 +125,6 @@ export const TimelineConnector = React.forwardRef<HTMLDivElement, TimelineConnec
       dashed ? "w-0 border-l border-dashed border-border" : "w-0.5 bg-border",
       className
     );
-
 
     return <div ref={ref} className={connectorClass} {...props} />;
   }
@@ -184,11 +184,10 @@ export const TimelineContent = React.forwardRef<HTMLDivElement, TimelineContentP
       "pb-8 flex flex-col gap-1 w-full",
       align === "left" && "col-start-2 text-left",
       align === "right" && "col-start-1 text-right",
-      align === "alternate" && (
-        isEven 
-          ? "md:col-start-3 col-start-2 text-left" 
-          : "md:col-start-1 col-start-2 md:text-right text-left"
-      ),
+      align === "alternate" &&
+        (isEven
+          ? "md:col-start-3 col-start-2 text-left"
+          : "md:col-start-1 col-start-2 md:text-right text-left"),
       className
     );
 
@@ -197,26 +196,28 @@ export const TimelineContent = React.forwardRef<HTMLDivElement, TimelineContentP
 );
 TimelineContent.displayName = "TimelineContent";
 
-export const TimelineTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, children, ...props }, ref) => (
-    <h4
-      ref={ref}
-      className={cn("m-0 text-sm font-semibold tracking-[-0.01em] text-foreground", className)}
-      {...props}
-    >
-      {children}
-    </h4>
-  )
-);
+export const TimelineTitle = React.forwardRef<
+  HTMLHeadingElement,
+  React.HTMLAttributes<HTMLHeadingElement>
+>(({ className, children, ...props }, ref) => (
+  <h4
+    ref={ref}
+    className={cn("m-0 text-sm font-semibold tracking-[-0.01em] text-foreground", className)}
+    {...props}
+  >
+    {children}
+  </h4>
+));
 TimelineTitle.displayName = "TimelineTitle";
 
-export const TimelineTime = React.forwardRef<HTMLTimeElement, React.TimeHTMLAttributes<HTMLTimeElement>>(
-  ({ className, ...props }, ref) => (
-    <time
-      ref={ref}
-      className={cn("text-[0.75rem] text-muted-foreground font-normal", className)}
-      {...props}
-    />
-  )
-);
+export const TimelineTime = React.forwardRef<
+  HTMLTimeElement,
+  React.TimeHTMLAttributes<HTMLTimeElement>
+>(({ className, ...props }, ref) => (
+  <time
+    ref={ref}
+    className={cn("text-[0.75rem] text-muted-foreground font-normal", className)}
+    {...props}
+  />
+));
 TimelineTime.displayName = "TimelineTime";

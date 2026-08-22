@@ -16,7 +16,6 @@ export interface AppShellProps extends React.HTMLAttributes<HTMLDivElement> {
   bottomNav?: React.ReactNode;
 }
 
-
 export interface AppShellBannerProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "primary" | "accent" | "muted";
   closable?: boolean;
@@ -54,7 +53,11 @@ export const AppShellBanner = React.forwardRef<HTMLDivElement, AppShellBannerPro
     return (
       <div
         ref={ref}
-        className={cn("px-4 py-2 text-sm font-medium text-center flex items-center justify-center relative z-30", variantClass, className)}
+        className={cn(
+          "px-4 py-2 text-sm font-medium text-center flex items-center justify-center relative z-30",
+          variantClass,
+          className
+        )}
         {...props}
       >
         <div className="flex-1">{children}</div>
@@ -65,7 +68,16 @@ export const AppShellBanner = React.forwardRef<HTMLDivElement, AppShellBannerPro
             className="p-1 rounded opacity-80 hover:opacity-100 transition-opacity ml-2 cursor-pointer"
             aria-label="Close banner"
           >
-            <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width={14}
+              height={14}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M18 6 6 18M6 6l12 12" />
             </svg>
           </button>
@@ -112,7 +124,6 @@ export const AppShellHeader = React.forwardRef<HTMLElement, AppShellHeaderProps>
       };
     }, [mobileOpen]);
 
-
     const positionClass = {
       sticky: "sticky top-0 z-40",
       fixed: "fixed top-0 left-0 right-0 z-40",
@@ -146,7 +157,16 @@ export const AppShellHeader = React.forwardRef<HTMLElement, AppShellHeaderProps>
                 className="md:hidden p-2 -ml-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
                 aria-label="Open navigation"
               >
-                <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width={20}
+                  height={20}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <line x1="3" y1="12" x2="21" y2="12" />
                   <line x1="3" y1="6" x2="21" y2="6" />
                   <line x1="3" y1="18" x2="21" y2="18" />
@@ -171,21 +191,30 @@ export const AppShellHeader = React.forwardRef<HTMLElement, AppShellHeaderProps>
               className="relative z-10 w-72 h-full bg-surface border-r border-border flex flex-col shadow-kj-lg"
             >
               <div className="flex items-center justify-between p-4 border-b border-border">
-                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Navigation</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  Navigation
+                </span>
                 <button
                   type="button"
                   onClick={() => setMobileOpen(false)}
                   className="p-1 rounded text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
                   aria-label="Close navigation"
                 >
-                  <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    width={16}
+                    height={16}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <path d="M18 6 6 18M6 6l12 12" />
                   </svg>
                 </button>
               </div>
-              <div className="flex-1 overflow-y-auto p-4">
-                {mobileNav}
-              </div>
+              <div className="flex-1 overflow-y-auto p-4">{mobileNav}</div>
             </aside>
           </div>
         )}
@@ -207,7 +236,12 @@ export const AppShellMain = React.forwardRef<HTMLElement, AppShellMainProps>(
     return (
       <main
         ref={ref}
-        className={cn("flex-1", padded && "px-4 sm:px-6 lg:px-8 py-4 sm:py-6 md:py-12", widthClass, className)}
+        className={cn(
+          "flex-1",
+          padded && "px-4 sm:px-6 lg:px-8 py-4 sm:py-6 md:py-12",
+          widthClass,
+          className
+        )}
         {...props}
       >
         {children}
@@ -266,7 +300,10 @@ export const AppShell = React.forwardRef<HTMLDivElement, AppShellProps>(
     return (
       <div
         ref={ref}
-        className={cn("min-h-screen bg-canvas text-foreground flex flex-col antialiased", className)}
+        className={cn(
+          "min-h-screen bg-canvas text-foreground flex flex-col antialiased",
+          className
+        )}
         {...props}
       >
         {banner && <AppShellBanner>{banner}</AppShellBanner>}

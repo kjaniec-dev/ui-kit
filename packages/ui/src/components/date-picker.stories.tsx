@@ -35,7 +35,14 @@ export const Field: Story = {
     const [value, setValue] = React.useState<Date | undefined>(undefined);
     return (
       <div style={{ maxWidth: 280 }}>
-        <DatePickerField label="Due date" required hint="Weekdays only." value={value} onChange={setValue} disabledDates={(d) => d.getDay() === 0 || d.getDay() === 6} />
+        <DatePickerField
+          label="Due date"
+          required
+          hint="Weekdays only."
+          value={value}
+          onChange={setValue}
+          disabledDates={(d) => d.getDay() === 0 || d.getDay() === 6}
+        />
       </div>
     );
   },

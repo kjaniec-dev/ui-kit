@@ -5,8 +5,16 @@ import { Field, Label, Hint } from "./field";
 import { Select } from "./select";
 
 const SearchIcon = (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" />
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <circle cx="11" cy="11" r="8" />
+    <path d="m21 21-4.3-4.3" />
   </svg>
 );
 
@@ -20,7 +28,13 @@ const meta = {
     placeholder: { control: "text" },
   },
   args: { placeholder: "Wpisz tekst…" },
-  decorators: [(Story) => <div style={{ width: 320 }}><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div style={{ width: 320 }}>
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof Input>;
 
 export default meta;
@@ -50,8 +64,20 @@ export const LiveValidation: Story = {
     return (
       <Field>
         <Label required>E-mail</Label>
-        <Input type="email" placeholder="jane@company.com" value={email} error={err} onChange={(e) => setEmail(e.target.value)} />
-        <Hint error={err}>{!email ? "We'll use it to sign you in." : ok ? "Looks good ✓" : "Enter a valid email address."}</Hint>
+        <Input
+          type="email"
+          placeholder="jane@company.com"
+          value={email}
+          error={err}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Hint error={err}>
+          {!email
+            ? "We'll use it to sign you in."
+            : ok
+              ? "Looks good ✓"
+              : "Enter a valid email address."}
+        </Hint>
       </Field>
     );
   },

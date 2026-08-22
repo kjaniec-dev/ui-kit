@@ -12,7 +12,10 @@ export interface MetricCardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const MetricCard = React.forwardRef<HTMLDivElement, MetricCardProps>(
-  ({ className, title, value, trend, trendDirection = "neutral", description, icon, ...props }, ref) => {
+  (
+    { className, title, value, trend, trendDirection = "neutral", description, icon, ...props },
+    ref
+  ) => {
     const trendColor = {
       up: "text-success bg-success-surface border-success/20",
       down: "text-danger bg-danger-surface border-danger/20",
@@ -25,12 +28,16 @@ export const MetricCard = React.forwardRef<HTMLDivElement, MetricCardProps>(
           <span className="text-xs font-mono font-semibold uppercase tracking-[0.1em] text-muted-foreground">
             {title}
           </span>
-          {icon && <span className="text-muted-foreground shrink-0 [&_svg]:h-4 [&_svg]:w-4">{icon}</span>}
+          {icon && (
+            <span className="text-muted-foreground shrink-0 [&_svg]:h-4 [&_svg]:w-4">{icon}</span>
+          )}
         </div>
         <div className="flex items-baseline gap-2.5 mb-1.5">
           <span className="text-3xl font-bold tracking-tight text-foreground">{value}</span>
           {trend && (
-            <span className={cn("text-[0.75rem] font-bold px-2 py-0.5 rounded-full border", trendColor)}>
+            <span
+              className={cn("text-[0.75rem] font-bold px-2 py-0.5 rounded-full border", trendColor)}
+            >
               {trend}
             </span>
           )}

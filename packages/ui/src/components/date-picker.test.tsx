@@ -31,7 +31,9 @@ describe("DatePicker", () => {
 
   it("reflects a controlled value on the trigger", () => {
     render(<DatePicker value={new Date(2026, 6, 15)} onChange={() => {}} />);
-    expect(screen.getByRole("button", { name: displayFormat.format(new Date(2026, 6, 15)) })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: displayFormat.format(new Date(2026, 6, 15)) })
+    ).toBeInTheDocument();
   });
 
   it("closes on Escape when focus is still on the trigger (real-world open path)", () => {
@@ -101,7 +103,9 @@ describe("DatePickerField", () => {
     render(<DatePickerField label="Due date" hint="Choose a weekday" />);
     const trigger = screen.getByLabelText("Due date");
     expect(screen.getByText("Choose a weekday")).toBeInTheDocument();
-    expect(trigger.getAttribute("aria-describedby")).toContain(screen.getByText("Choose a weekday").id);
+    expect(trigger.getAttribute("aria-describedby")).toContain(
+      screen.getByText("Choose a weekday").id
+    );
   });
 
   it("shows the error, hides the hint, and marks the trigger invalid", () => {

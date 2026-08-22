@@ -85,7 +85,11 @@ describe("validateFiles", () => {
     expect(rejected).toEqual([{ file: pdf, reason: "count" }]);
   });
   it("accepts all when within limits", () => {
-    const { accepted, rejected } = validateFiles([png, pdf], { accept: "image/*,.pdf", maxSize: 1000, maxFiles: 5 });
+    const { accepted, rejected } = validateFiles([png, pdf], {
+      accept: "image/*,.pdf",
+      maxSize: 1000,
+      maxFiles: 5,
+    });
     expect(accepted).toEqual([png, pdf]);
     expect(rejected).toEqual([]);
   });

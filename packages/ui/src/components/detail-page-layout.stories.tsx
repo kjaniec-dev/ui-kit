@@ -20,7 +20,9 @@ export const Default = {
       onBackClick={() => alert("Back")}
       actions={
         <>
-          <Button variant="outline" size="sm">Refund</Button>
+          <Button variant="outline" size="sm">
+            Refund
+          </Button>
           <Button size="sm">Receipt</Button>
         </>
       }
@@ -41,8 +43,10 @@ export const Default = {
       <Card className="p-6">
         <h3 className="text-base font-bold mb-3">Billing Address</h3>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          John Doe<br />
-          ul. Marszałkowska 10/24<br />
+          John Doe
+          <br />
+          ul. Marszałkowska 10/24
+          <br />
           00-001 Warszawa, Poland
         </p>
       </Card>

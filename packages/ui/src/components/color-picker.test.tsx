@@ -3,7 +3,15 @@ import "@testing-library/jest-dom/vitest";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { isValidHex, hexToHsl, hslToHex, DEFAULT_COLOR_SWATCHES, ColorPickerSwatch, ColorPicker, ColorPickerField } from "./color-picker";
+import {
+  isValidHex,
+  hexToHsl,
+  hslToHex,
+  DEFAULT_COLOR_SWATCHES,
+  ColorPickerSwatch,
+  ColorPicker,
+  ColorPickerField,
+} from "./color-picker";
 
 describe("Color Picker Utilities", () => {
   it("exports DEFAULT_COLOR_SWATCHES array with 12 colors", () => {
@@ -115,7 +123,3 @@ describe("ColorPickerField", () => {
     expect(screen.getByText("Invalid color")).toBeInTheDocument();
   });
 });
-
-
-
-

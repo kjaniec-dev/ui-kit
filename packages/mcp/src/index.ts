@@ -20,13 +20,17 @@ try {
   if (fs.existsSync(componentsJsonPath)) {
     components = JSON.parse(fs.readFileSync(componentsJsonPath, "utf8"));
   } else {
-    console.error(`Warning: components.json not found at ${componentsJsonPath}. Run 'npm run build' first.`);
+    console.error(
+      `Warning: components.json not found at ${componentsJsonPath}. Run 'npm run build' first.`
+    );
   }
-  
+
   if (fs.existsSync(tokensJsonPath)) {
     tokens = JSON.parse(fs.readFileSync(tokensJsonPath, "utf8"));
   } else {
-    console.error(`Warning: tokens.json not found at ${tokensJsonPath}. Run 'npm run build' first.`);
+    console.error(
+      `Warning: tokens.json not found at ${tokensJsonPath}. Run 'npm run build' first.`
+    );
   }
 } catch (error) {
   console.error("Error loading component/token metadata files:", error);
@@ -41,9 +45,9 @@ const server = new McpServer({
 function generateComponentMarkdown(c: any): string {
   let md = `# ${c.name}\n\n`;
   md += `${c.description}\n\n`;
-  
+
   md += `## Import\n\`\`\`tsx\n${c.importPath}\n\`\`\`\n\n`;
-  
+
   if (c.props && c.props.length > 0) {
     md += `## Props\n\n`;
     md += "| Prop | Type | Optional | Default | Description |\n";
@@ -62,7 +66,7 @@ function generateComponentMarkdown(c: any): string {
       md += `### ${group}\n`;
       md += `Options: ${c.cva.variants[group].map((v: string) => `\`"${v}"\``).join(", ")}\n\n`;
     }
-    
+
     if (Object.keys(c.cva.defaultVariants).length > 0) {
       md += `**Default Variants:**\n`;
       for (const group of Object.keys(c.cva.defaultVariants)) {
@@ -87,17 +91,19 @@ server.tool(
   "List all React components available in the UI library. Provides component names, descriptions, and variant groups.",
   {},
   async () => {
-    const list = components.map(c => ({
+    const list = components.map((c) => ({
       name: c.name,
       description: c.description,
-      variants: c.cva ? Object.keys(c.cva.variants) : []
+      variants: c.cva ? Object.keys(c.cva.variants) : [],
     }));
 
     return {
-      content: [{
-        type: "text",
-        text: JSON.stringify(list, null, 2)
-      }]
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify(list, null, 2),
+        },
+      ],
     };
   }
 );
@@ -107,27 +113,33 @@ server.tool(
   "get_component",
   "Get details of a specific component including its imports, props table, style variants, and usage snippet.",
   {
-    name: z.string().describe("The name of the component (e.g. 'Button', 'Alert'). Case-insensitive.")
+    name: z
+      .string()
+      .describe("The name of the component (e.g. 'Button', 'Alert'). Case-insensitive."),
   },
   async ({ name }) => {
     const cleanName = name.toLowerCase();
-    const comp = components.find(c => c.name.toLowerCase() === cleanName);
-    
+    const comp = components.find((c) => c.name.toLowerCase() === cleanName);
+
     if (!comp) {
       return {
-        content: [{
-          type: "text",
-          text: `Component "${name}" not found.`
-        }]
+        content: [
+          {
+            type: "text",
+            text: `Component "${name}" not found.`,
+          },
+        ],
       };
     }
 
     const md = generateComponentMarkdown(comp);
     return {
-      content: [{
-        type: "text",
-        text: md
-      }]
+      content: [
+        {
+          type: "text",
+          text: md,
+        },
+      ],
     };
   }
 );
@@ -137,38 +149,50 @@ server.tool(
   "search_components",
   "Search the component library to find components matching keywords in names, descriptions, props, or usage snippets.",
   {
-    query: z.string().describe("The search term or description of the use-case (e.g., 'avatar cluster', 'input with icon', 'interactive link').")
+    query: z
+      .string()
+      .describe(
+        "The search term or description of the use-case (e.g., 'avatar cluster', 'input with icon', 'interactive link')."
+      ),
   },
   async ({ query }) => {
     const q = query.toLowerCase();
-    const results = components.filter(c => {
+    const results = components.filter((c) => {
       const nameMatch = c.name.toLowerCase().includes(q);
       const descMatch = c.description.toLowerCase().includes(q);
-      const propMatch = c.props.some((p: any) => p.name.toLowerCase().includes(q) || (p.description && p.description.toLowerCase().includes(q)));
+      const propMatch = c.props.some(
+        (p: any) =>
+          p.name.toLowerCase().includes(q) ||
+          (p.description && p.description.toLowerCase().includes(q))
+      );
       const usageMatch = c.usageSnippet && c.usageSnippet.toLowerCase().includes(q);
       return nameMatch || descMatch || propMatch || usageMatch;
     });
 
     if (results.length === 0) {
       return {
-        content: [{
-          type: "text",
-          text: `No components matched the query "${query}".`
-        }]
+        content: [
+          {
+            type: "text",
+            text: `No components matched the query "${query}".`,
+          },
+        ],
       };
     }
 
-    const matchedList = results.map(c => ({
+    const matchedList = results.map((c) => ({
       name: c.name,
       description: c.description,
-      importPath: c.importPath
+      importPath: c.importPath,
     }));
 
     return {
-      content: [{
-        type: "text",
-        text: JSON.stringify(matchedList, null, 2)
-      }]
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify(matchedList, null, 2),
+        },
+      ],
     };
   }
 );
@@ -178,20 +202,25 @@ server.tool(
   "get_tokens",
   "Get the design tokens filtered optionally by category (e.g. 'color', 'radius', 'shadow', 'font'). Returns light/dark values and Tailwind utility mapping.",
   {
-    category: z.string().optional().describe("Optional token category filter, e.g. 'color', 'radius', 'shadow', 'font'.")
+    category: z
+      .string()
+      .optional()
+      .describe("Optional token category filter, e.g. 'color', 'radius', 'shadow', 'font'."),
   },
   async ({ category }) => {
     let filteredTokens = tokens;
     if (category) {
       const cat = category.toLowerCase();
-      filteredTokens = tokens.filter(t => t.category.startsWith(cat) || t.name.startsWith(cat));
+      filteredTokens = tokens.filter((t) => t.category.startsWith(cat) || t.name.startsWith(cat));
     }
 
     return {
-      content: [{
-        type: "text",
-        text: JSON.stringify(filteredTokens, null, 2)
-      }]
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify(filteredTokens, null, 2),
+        },
+      ],
     };
   }
 );
@@ -208,16 +237,19 @@ server.tool(
         `@import "tailwindcss";                       /* imports Tailwind CSS v4 */`,
         `@source "../node_modules/@kjaniec-dev/ui";  /* instructs Tailwind v4 to scan UI kit components for utility classes */`,
         `@import "@kjaniec-dev/design/tailwind.css"; /* registers all --kj-* tokens as Tailwind utilities */`,
-        `@import "@kjaniec-dev/ui/ui.css";           /* imports component-specific layouts and styles */`
+        `@import "@kjaniec-dev/ui/ui.css";           /* imports component-specific layouts and styles */`,
       ],
-      description: "In Tailwind v4, registering these imports and the @source directive in your root CSS automatically sets up background, border-radius, shadows, and color utilities."
+      description:
+        "In Tailwind v4, registering these imports and the @source directive in your root CSS automatically sets up background, border-radius, shadows, and color utilities.",
     };
 
     return {
-      content: [{
-        type: "text",
-        text: JSON.stringify(setup, null, 2)
-      }]
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify(setup, null, 2),
+        },
+      ],
     };
   }
 );
@@ -225,17 +257,14 @@ server.tool(
 // --- RESOURCES IMPLEMENTATION ---
 
 // 1. Raw tokens.json
-server.resource(
-  "tokens",
-  "design://tokens",
-  { mimeType: "application/json" },
-  async (uri) => ({
-    contents: [{
+server.resource("tokens", "design://tokens", { mimeType: "application/json" }, async (uri) => ({
+  contents: [
+    {
       uri: uri.href,
-      text: JSON.stringify(tokens, null, 2)
-    }]
-  })
-);
+      text: JSON.stringify(tokens, null, 2),
+    },
+  ],
+}));
 
 // 2. Generated components index (markdown)
 server.resource(
@@ -244,17 +273,20 @@ server.resource(
   { mimeType: "text/markdown" },
   async (uri) => {
     let md = "# Component Index\n\n";
-    md += "A complete index of all exported UI components available in the `@kjaniec-dev/ui` library.\n\n";
+    md +=
+      "A complete index of all exported UI components available in the `@kjaniec-dev/ui` library.\n\n";
     md += "| Component | Import Statement | Description |\n";
     md += "| --- | --- | --- |\n";
     for (const c of components) {
       md += `| **[${c.name}](ui://component/${c.name.toLowerCase()})** | \`${c.importPath}\` | ${c.description} |\n`;
     }
     return {
-      contents: [{
-        uri: uri.href,
-        text: md
-      }]
+      contents: [
+        {
+          uri: uri.href,
+          text: md,
+        },
+      ],
     };
   }
 );
@@ -266,19 +298,21 @@ server.resource(
   async (uri, { name }) => {
     const nameStr = Array.isArray(name) ? name[0] : name;
     const cleanName = nameStr.toLowerCase();
-    const comp = components.find(c => c.name.toLowerCase() === cleanName);
-    
+    const comp = components.find((c) => c.name.toLowerCase() === cleanName);
+
     if (!comp) {
       throw new Error(`Component "${nameStr}" not found.`);
     }
 
     const md = generateComponentMarkdown(comp);
     return {
-      contents: [{
-        uri: uri.href,
-        text: md,
-        mimeType: "text/markdown"
-      }]
+      contents: [
+        {
+          uri: uri.href,
+          text: md,
+          mimeType: "text/markdown",
+        },
+      ],
     };
   }
 );

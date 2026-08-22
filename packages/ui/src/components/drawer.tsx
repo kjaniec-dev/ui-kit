@@ -95,14 +95,8 @@ export function Drawer({
   }, [open, onClose]);
 
   const sideClasses = {
-    right: cn(
-      "right-0 h-full border-l",
-      open ? "translate-x-0" : "translate-x-full"
-    ),
-    left: cn(
-      "left-0 h-full border-r",
-      open ? "translate-x-0" : "-translate-x-full"
-    ),
+    right: cn("right-0 h-full border-l", open ? "translate-x-0" : "translate-x-full"),
+    left: cn("left-0 h-full border-r", open ? "translate-x-0" : "-translate-x-full"),
   }[side];
 
   return (
@@ -132,8 +126,16 @@ export function Drawer({
         {(title || description) && (
           <div className="flex items-center justify-between p-6 border-b border-border">
             <div className="space-y-1">
-              {title && <h2 id="drawer-title" className="text-lg font-bold tracking-tight text-foreground">{title}</h2>}
-              {description && <p id="drawer-description" className="text-xs text-muted-foreground">{description}</p>}
+              {title && (
+                <h2 id="drawer-title" className="text-lg font-bold tracking-tight text-foreground">
+                  {title}
+                </h2>
+              )}
+              {description && (
+                <p id="drawer-description" className="text-xs text-muted-foreground">
+                  {description}
+                </p>
+              )}
             </div>
             <button
               type="button"
@@ -141,7 +143,16 @@ export function Drawer({
               aria-label="Close"
               className="p-1.5 rounded-kj-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
             >
-              <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width={16}
+                height={16}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M18 6 6 18M6 6l12 12" />
               </svg>
             </button>
@@ -149,9 +160,7 @@ export function Drawer({
         )}
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6">
-          {children}
-        </div>
+        <div className="flex-1 overflow-y-auto p-6">{children}</div>
       </div>
     </div>
   );

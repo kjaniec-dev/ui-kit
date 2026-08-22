@@ -1,6 +1,5 @@
-
-import type { InPostGeowidgetProps } from './inpost-geowidget';
-import type { InPostGeowidgetModalProps } from './inpost-geowidget-modal';
+import type { InPostGeowidgetProps } from "./inpost-geowidget";
+import type { InPostGeowidgetModalProps } from "./inpost-geowidget-modal";
 
 export type { InPostGeowidgetProps, InPostGeowidgetModalProps };
 
@@ -34,13 +33,13 @@ export interface InPostPoint {
   [key: string]: unknown;
 }
 
-export type InPostLanguage = 'pl' | 'en' | 'uk' | 'de' | 'it' | 'fr';
+export type InPostLanguage = "pl" | "en" | "uk" | "de" | "it" | "fr";
 
 export type InPostConfigType =
-  | 'parcelCollect'
-  | 'parcelCollectPayment'
-  | 'international'
-  | 'postBuy'
+  | "parcelCollect"
+  | "parcelCollectPayment"
+  | "international"
+  | "postBuy"
   | string;
 
 export interface UseInPostScriptOptions {

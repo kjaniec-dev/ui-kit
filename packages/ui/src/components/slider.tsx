@@ -12,9 +12,7 @@ export type SliderProps = React.InputHTMLAttributes<HTMLInputElement>;
  */
 export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
   ({ className, style, value, defaultValue, min = 0, max = 100, onChange, ...props }, ref) => {
-    const [localValue, setLocalValue] = React.useState<number>(
-      Number(defaultValue ?? value ?? 50)
-    );
+    const [localValue, setLocalValue] = React.useState<number>(Number(defaultValue ?? value ?? 50));
     const isControlled = value !== undefined;
     const currentVal = isControlled ? Number(value) : localValue;
 

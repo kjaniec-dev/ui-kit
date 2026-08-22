@@ -28,7 +28,8 @@ export const Default: Story = {
   args: {
     kicker: "Features",
     title: "Everything you need to ship faster",
-    description: "Pre-built components designed with high performance and full accessibility in mind.",
+    description:
+      "Pre-built components designed with high performance and full accessibility in mind.",
   },
 };
 

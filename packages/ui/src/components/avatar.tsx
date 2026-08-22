@@ -35,7 +35,11 @@ export interface AvatarProps
 export const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
   ({ className, size, tone, src, alt, status, children, ...props }, ref) => {
     const node = (
-      <span ref={ref} className={cn(avatarVariants({ size, tone }), "overflow-hidden", className)} {...props}>
+      <span
+        ref={ref}
+        className={cn(avatarVariants({ size, tone }), "overflow-hidden", className)}
+        {...props}
+      >
         {src ? <img src={src} alt={alt} className="h-full w-full object-cover" /> : children}
       </span>
     );

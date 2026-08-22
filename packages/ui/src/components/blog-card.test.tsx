@@ -54,12 +54,7 @@ describe("BlogCard", () => {
   });
 
   it("applies sm:flex-row class when orientation is horizontal", () => {
-    const { container } = render(
-      <BlogCard
-        title="Horizontal Card"
-        orientation="horizontal"
-      />
-    );
+    const { container } = render(<BlogCard title="Horizontal Card" orientation="horizontal" />);
 
     const card = container.firstChild as HTMLElement;
     expect(card).toHaveClass("sm:flex-row");

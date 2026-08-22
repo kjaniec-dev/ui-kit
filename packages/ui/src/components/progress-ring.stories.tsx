@@ -82,9 +82,7 @@ export const CustomFormatting: Story = {
         max={5}
         size="lg"
         tone="success"
-        formatValue={(val) => (
-          <span style={{ fontSize: 14, fontWeight: "bold" }}>{val} / 5</span>
-        )}
+        formatValue={(val) => <span style={{ fontSize: 14, fontWeight: "bold" }}>{val} / 5</span>}
       />
       <ProgressRing
         value={80}

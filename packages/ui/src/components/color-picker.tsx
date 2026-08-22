@@ -85,17 +85,29 @@ export function hslToHex(h: number, s: number, l: number): string {
   let b = 0;
 
   if (0 <= normalizedH && normalizedH < 60) {
-    r = c; g = x; b = 0;
+    r = c;
+    g = x;
+    b = 0;
   } else if (60 <= normalizedH && normalizedH < 120) {
-    r = x; g = c; b = 0;
+    r = x;
+    g = c;
+    b = 0;
   } else if (120 <= normalizedH && normalizedH < 180) {
-    r = 0; g = c; b = x;
+    r = 0;
+    g = c;
+    b = x;
   } else if (180 <= normalizedH && normalizedH < 240) {
-    r = 0; g = x; b = c;
+    r = 0;
+    g = x;
+    b = c;
   } else if (240 <= normalizedH && normalizedH < 300) {
-    r = x; g = 0; b = c;
+    r = x;
+    g = 0;
+    b = c;
   } else if (300 <= normalizedH && normalizedH < 360) {
-    r = c; g = 0; b = x;
+    r = c;
+    g = 0;
+    b = x;
   }
 
   const toHex = (n: number) => {
@@ -106,41 +118,39 @@ export function hslToHex(h: number, s: number, l: number): string {
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase();
 }
 
-export interface ColorPickerSwatchProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ColorPickerSwatchProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   color: string;
   selected?: boolean;
   size?: "sm" | "md" | "lg";
 }
 
-export const ColorPickerSwatch = React.forwardRef<
-  HTMLButtonElement,
-  ColorPickerSwatchProps
->(({ color, selected = false, size = "md", className, style, ...props }, ref) => {
-  const sizeClasses = {
-    sm: "w-5 h-5",
-    md: "w-7 h-7",
-    lg: "w-9 h-9",
-  };
+export const ColorPickerSwatch = React.forwardRef<HTMLButtonElement, ColorPickerSwatchProps>(
+  ({ color, selected = false, size = "md", className, style, ...props }, ref) => {
+    const sizeClasses = {
+      sm: "w-5 h-5",
+      md: "w-7 h-7",
+      lg: "w-9 h-9",
+    };
 
-  return (
-    <button
-      ref={ref}
-      type="button"
-      aria-pressed={selected}
-      style={{ backgroundColor: color, ...style }}
-      className={cn(
-        "relative shrink-0 rounded-full border border-border/50 shadow-sm transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary flex items-center justify-center text-white text-xs font-bold",
-        sizeClasses[size],
-        selected && "ring-2 ring-primary ring-offset-2 ring-offset-surface",
-        className
-      )}
-      {...props}
-    >
-      {selected && <span aria-hidden="true">✓</span>}
-    </button>
-  );
-});
+    return (
+      <button
+        ref={ref}
+        type="button"
+        aria-pressed={selected}
+        style={{ backgroundColor: color, ...style }}
+        className={cn(
+          "relative shrink-0 rounded-full border border-border/50 shadow-sm transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary flex items-center justify-center text-white text-xs font-bold",
+          sizeClasses[size],
+          selected && "ring-2 ring-primary ring-offset-2 ring-offset-surface",
+          className
+        )}
+        {...props}
+      >
+        {selected && <span aria-hidden="true">✓</span>}
+      </button>
+    );
+  }
+);
 ColorPickerSwatch.displayName = "ColorPickerSwatch";
 
 export interface ColorPickerProps
@@ -176,9 +186,7 @@ export const ColorPicker = React.forwardRef<HTMLDivElement, ColorPickerProps>(
     ref
   ) => {
     const isControlled = value !== undefined;
-    const [localColor, setLocalColor] = React.useState<string>(
-      normalizeHex(defaultValue)
-    );
+    const [localColor, setLocalColor] = React.useState<string>(normalizeHex(defaultValue));
     const color = isControlled ? normalizeHex(value) : localColor;
 
     const [hexInputValue, setHexInputValue] = React.useState<string>(color);
@@ -332,21 +340,16 @@ export interface ColorPickerFieldProps extends ColorPickerProps {
   required?: boolean;
 }
 
-export const ColorPickerField = React.forwardRef<
-  HTMLDivElement,
-  ColorPickerFieldProps
->(({ label, hint, error, required, ...props }, ref) => {
-  return (
-    <Field>
-      {label && <Label required={required}>{label}</Label>}
-      <ColorPicker ref={ref} {...props} />
-      {hint && <Hint>{hint}</Hint>}
-      {error && <Hint error>{error}</Hint>}
-    </Field>
-  );
-});
+export const ColorPickerField = React.forwardRef<HTMLDivElement, ColorPickerFieldProps>(
+  ({ label, hint, error, required, ...props }, ref) => {
+    return (
+      <Field>
+        {label && <Label required={required}>{label}</Label>}
+        <ColorPicker ref={ref} {...props} />
+        {hint && <Hint>{hint}</Hint>}
+        {error && <Hint error>{error}</Hint>}
+      </Field>
+    );
+  }
+);
 ColorPickerField.displayName = "ColorPickerField";
-
-
-
-

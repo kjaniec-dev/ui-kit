@@ -159,8 +159,16 @@ export const DateRangePicker = React.forwardRef<HTMLButtonElement, DateRangePick
         </button>
         {name && (
           <>
-            <input type="hidden" name={`${name}Start`} value={selected.start ? toISODateString(selected.start) : ""} />
-            <input type="hidden" name={`${name}End`} value={selected.end ? toISODateString(selected.end) : ""} />
+            <input
+              type="hidden"
+              name={`${name}Start`}
+              value={selected.start ? toISODateString(selected.start) : ""}
+            />
+            <input
+              type="hidden"
+              name={`${name}End`}
+              value={selected.end ? toISODateString(selected.end) : ""}
+            />
           </>
         )}
 
@@ -169,7 +177,13 @@ export const DateRangePicker = React.forwardRef<HTMLButtonElement, DateRangePick
             onKeyDown={onPanelKeyDown}
             className="absolute z-40 top-[calc(100%+6px)] left-0 sm:left-auto right-0 sm:right-auto max-w-[calc(100vw-2rem)] bg-surface border border-border rounded-kj-md shadow-kj-lg p-3 animate-[kjpop_.12s_ease]"
           >
-            <RangeCalendar value={selected} onChange={handleRangeChange} min={min} max={max} disabledDates={disabledDates} />
+            <RangeCalendar
+              value={selected}
+              onChange={handleRangeChange}
+              min={min}
+              max={max}
+              disabledDates={disabledDates}
+            />
           </div>
         )}
       </div>

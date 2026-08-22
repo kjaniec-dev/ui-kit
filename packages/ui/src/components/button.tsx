@@ -17,7 +17,8 @@ const buttonVariants = cva(
       variant: {
         primary: "bg-primary text-primary-foreground hover:bg-primary-hover",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary-hover",
-        outline: "bg-transparent text-foreground border-border hover:bg-muted hover:border-muted-foreground",
+        outline:
+          "bg-transparent text-foreground border-border hover:bg-muted hover:border-muted-foreground",
         ghost: "bg-transparent text-foreground hover:bg-muted",
         danger: "bg-danger text-white hover:brightness-95",
       },
@@ -45,7 +46,10 @@ export interface ButtonProps
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, loading, leadingIcon, trailingIcon, children, disabled, ...props }, ref) => {
+  (
+    { className, variant, size, loading, leadingIcon, trailingIcon, children, disabled, ...props },
+    ref
+  ) => {
     return (
       <button
         ref={ref}
@@ -61,9 +65,13 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           />
         )}
         <span className={cn("contents", loading && "invisible")}>
-          {leadingIcon && <span className="[&_svg]:h-[1.05em] [&_svg]:w-[1.05em]">{leadingIcon}</span>}
+          {leadingIcon && (
+            <span className="[&_svg]:h-[1.05em] [&_svg]:w-[1.05em]">{leadingIcon}</span>
+          )}
           {children}
-          {trailingIcon && <span className="[&_svg]:h-[1.05em] [&_svg]:w-[1.05em]">{trailingIcon}</span>}
+          {trailingIcon && (
+            <span className="[&_svg]:h-[1.05em] [&_svg]:w-[1.05em]">{trailingIcon}</span>
+          )}
         </span>
       </button>
     );

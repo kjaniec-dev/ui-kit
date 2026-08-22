@@ -57,7 +57,7 @@ describe("BottomSheet", () => {
         <div>Sheet Content</div>
       </BottomSheet>
     );
-    
+
     const event = new KeyboardEvent("keydown", { key: "Escape" });
     window.dispatchEvent(event);
     expect(handleClose).toHaveBeenCalledTimes(1);
@@ -160,7 +160,11 @@ describe("BottomSheet", () => {
     expect(document.activeElement).toBe(firstBtn);
 
     firstBtn.focus();
-    const shiftTabEvent = new KeyboardEvent("keydown", { key: "Tab", shiftKey: true, bubbles: true });
+    const shiftTabEvent = new KeyboardEvent("keydown", {
+      key: "Tab",
+      shiftKey: true,
+      bubbles: true,
+    });
     dialog.dispatchEvent(shiftTabEvent);
     expect(document.activeElement).toBe(secondBtn);
 
@@ -226,7 +230,7 @@ describe("BottomSheet", () => {
   it("redirects focus back inside the BottomSheet if focus somehow escapes outside", async () => {
     const trigger = document.createElement("button");
     document.body.appendChild(trigger);
-    
+
     const externalBtn = document.createElement("button");
     externalBtn.id = "external-btn";
     document.body.appendChild(externalBtn);

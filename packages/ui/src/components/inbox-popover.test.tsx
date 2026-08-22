@@ -327,7 +327,11 @@ describe("NotificationItem", () => {
   });
 
   it("renders avatar image when avatarSrc is provided", () => {
-    const item = { ...UNREAD_ITEM, avatarSrc: "https://example.com/avatar.png", avatarFallback: "KJ" };
+    const item = {
+      ...UNREAD_ITEM,
+      avatarSrc: "https://example.com/avatar.png",
+      avatarFallback: "KJ",
+    };
     render(<NotificationItem item={item} />);
     expect(screen.getByRole("img")).toHaveAttribute("src", "https://example.com/avatar.png");
   });
@@ -343,4 +347,3 @@ describe("NotificationItem", () => {
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
   });
 });
-

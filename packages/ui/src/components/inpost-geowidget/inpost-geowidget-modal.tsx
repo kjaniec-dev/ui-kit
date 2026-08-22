@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Button } from '../button';
-import { Modal, ModalTitle } from '../modal';
-import { InPostGeowidget } from './inpost-geowidget';
-import type { InPostConfigType, InPostLanguage, InPostPoint } from './types';
+import React, { useState } from "react";
+import { Button } from "../button";
+import { Modal, ModalTitle } from "../modal";
+import { InPostGeowidget } from "./inpost-geowidget";
+import type { InPostConfigType, InPostLanguage, InPostPoint } from "./types";
 
 /** Props for the InPost GeoWidget Modal checkout component. */
 export interface InPostGeowidgetModalProps {
@@ -27,9 +27,9 @@ export interface InPostGeowidgetModalProps {
   /** Outer container CSS class name. */
   className?: string;
   /** Trigger button style variant ('primary', 'secondary', 'outline', 'ghost', 'danger'). Default 'outline'. */
-  buttonVariant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
+  buttonVariant?: "primary" | "secondary" | "outline" | "ghost" | "danger";
   /** Trigger button size ('sm', 'md', 'lg'). Default 'md'. */
-  buttonSize?: 'sm' | 'md' | 'lg';
+  buttonSize?: "sm" | "md" | "lg";
   /** InPost API Token (optional for sandbox). */
   token?: string;
   /** Widget language ('pl', 'en', 'uk', 'de', 'it', 'fr'). Default 'pl'. */
@@ -47,15 +47,15 @@ export interface InPostGeowidgetModalProps {
 export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
   value,
   onSelect,
-  triggerText = 'Wybierz Paczkomat®',
-  modalTitle = 'Wybierz punkt odbioru InPost',
+  triggerText = "Wybierz Paczkomat®",
+  modalTitle = "Wybierz punkt odbioru InPost",
   disabled = false,
   open: controlledOpen,
   onOpenChange,
   showSelectedBadge = true,
-  className = '',
-  buttonVariant = 'outline',
-  buttonSize = 'md',
+  className = "",
+  buttonVariant = "outline",
+  buttonSize = "md",
   token,
   language,
   config,
@@ -65,7 +65,7 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
 }) => {
   const [internalOpen, setInternalOpen] = useState(false);
   const [selectedPoint, setSelectedPoint] = useState<InPostPoint | null>(
-    typeof value === 'object' && value ? value : null
+    typeof value === "object" && value ? value : null
   );
 
   const isControlled = controlledOpen !== undefined;
@@ -88,12 +88,12 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
     handleOpenToggle(false);
   };
 
-  const selectedCode = selectedPoint?.name || (typeof value === 'string' ? value : null);
+  const selectedCode = selectedPoint?.name || (typeof value === "string" ? value : null);
   const selectedAddress = selectedPoint
-    ? `${selectedPoint.address?.line1 || ''}, ${selectedPoint.address?.line2 || ''}`
+    ? `${selectedPoint.address?.line1 || ""}, ${selectedPoint.address?.line2 || ""}`
     : null;
 
-  const isOutline = buttonVariant === 'outline';
+  const isOutline = buttonVariant === "outline";
 
   return (
     <div className={`inline-flex flex-col gap-3 min-w-[280px] ${className}`}>
@@ -105,26 +105,28 @@ export const InPostGeowidgetModal: React.FC<InPostGeowidgetModalProps> = ({
         onClick={() => handleOpenToggle(true)}
         className={`group w-full justify-between gap-4 text-left font-bold shadow-sm hover:shadow-md transition-all py-2.5 px-3.5 rounded-xl ${
           isOutline
-            ? 'bg-surface hover:bg-muted text-foreground border-2 border-border hover:border-primary'
-            : 'border-2 border-transparent'
+            ? "bg-surface hover:bg-muted text-foreground border-2 border-border hover:border-primary"
+            : "border-2 border-transparent"
         }`}
       >
         <span className="flex items-center gap-2.5 min-w-0">
           <span className="font-black text-[0.7rem] bg-amber-400 text-slate-950 px-2.5 py-1 rounded-md shadow-sm tracking-tight uppercase border border-amber-500/40 shrink-0 group-hover:scale-105 transition-transform">
             InPost
           </span>
-          <span className={`truncate font-bold text-sm ${isOutline ? 'text-foreground group-hover:text-primary' : ''}`}>
+          <span
+            className={`truncate font-bold text-sm ${isOutline ? "text-foreground group-hover:text-primary" : ""}`}
+          >
             {selectedCode ? `Paczkomat® ${selectedCode}` : triggerText}
           </span>
         </span>
         <span
           className={`text-xs font-black px-2.5 py-1 rounded-md shrink-0 shadow-sm uppercase tracking-wide transition-all ${
             isOutline
-              ? 'bg-primary text-primary-foreground group-hover:bg-primary-hover'
-              : 'bg-amber-400 text-slate-950'
+              ? "bg-primary text-primary-foreground group-hover:bg-primary-hover"
+              : "bg-amber-400 text-slate-950"
           }`}
         >
-          {selectedCode ? 'Zmień' : 'Wybierz'}
+          {selectedCode ? "Zmień" : "Wybierz"}
         </span>
       </Button>
 

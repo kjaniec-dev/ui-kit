@@ -110,7 +110,9 @@ export const SectionHeader = React.forwardRef<HTMLDivElement, SectionHeaderProps
         ref={ref}
         className={cn(
           "space-y-4",
-          isCentered ? "text-center items-center mx-auto max-w-3xl" : "md:flex md:items-end md:justify-between md:space-y-0",
+          isCentered
+            ? "text-center items-center mx-auto max-w-3xl"
+            : "md:flex md:items-end md:justify-between md:space-y-0",
           divider && "border-b border-border pb-6",
           className
         )}
@@ -120,17 +122,10 @@ export const SectionHeader = React.forwardRef<HTMLDivElement, SectionHeaderProps
           children
         ) : (
           <>
-            <div
-              className={cn(
-                "space-y-2",
-                isCentered && "flex flex-col items-center"
-              )}
-            >
+            <div className={cn("space-y-2", isCentered && "flex flex-col items-center")}>
               {kicker && <SectionHeaderKicker>{kicker}</SectionHeaderKicker>}
               {title && <SectionHeaderTitle as={headingLevel}>{title}</SectionHeaderTitle>}
-              {description && (
-                <SectionHeaderDescription>{description}</SectionHeaderDescription>
-              )}
+              {description && <SectionHeaderDescription>{description}</SectionHeaderDescription>}
             </div>
             {actions && (
               <SectionHeaderActions className={cn(isCentered && "justify-center mt-4")}>

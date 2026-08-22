@@ -10,7 +10,17 @@ export interface ErrorStateProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const ErrorState = React.forwardRef<HTMLDivElement, ErrorStateProps>(
-  ({ className, title = "Wystąpił błąd", message, onRetry, retryLabel = "Spróbuj ponownie", ...props }, ref) => (
+  (
+    {
+      className,
+      title = "Wystąpił błąd",
+      message,
+      onRetry,
+      retryLabel = "Spróbuj ponownie",
+      ...props
+    },
+    ref
+  ) => (
     <div
       ref={ref}
       className={cn(
@@ -20,14 +30,22 @@ export const ErrorState = React.forwardRef<HTMLDivElement, ErrorStateProps>(
       {...props}
     >
       <div className="flex h-12 w-12 items-center justify-center rounded-full bg-danger-surface border border-danger/30 text-danger mb-4">
-        <svg fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" className="h-6 w-6">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+        <svg
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2.5}
+          viewBox="0 0 24 24"
+          className="h-6 w-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+          />
         </svg>
       </div>
       <h3 className="text-base font-bold text-foreground mb-1">{title}</h3>
-      <p className="text-sm text-muted-foreground max-w-sm mb-6 leading-relaxed">
-        {message}
-      </p>
+      <p className="text-sm text-muted-foreground max-w-sm mb-6 leading-relaxed">{message}</p>
       {onRetry && (
         <Button size="sm" variant="danger" onClick={onRetry}>
           {retryLabel}

@@ -11,8 +11,7 @@ export interface RatingDistributionItem {
   percentage: number;
 }
 
-export interface RatingSummaryProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
+export interface RatingSummaryProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
   average: number;
   totalCount: number;
   distribution: RatingDistributionItem[];
@@ -23,21 +22,10 @@ export interface RatingSummaryProps
 
 export const RatingSummary = React.forwardRef<HTMLDivElement, RatingSummaryProps>(
   (
-    {
-      average,
-      totalCount,
-      distribution,
-      max = 5,
-      size = "md",
-      icon = "star",
-      className,
-      ...props
-    },
+    { average, totalCount, distribution, max = 5, size = "md", icon = "star", className, ...props },
     ref
   ) => {
-    const formattedAverage = Number.isInteger(average)
-      ? average.toString()
-      : average.toFixed(1);
+    const formattedAverage = Number.isInteger(average) ? average.toString() : average.toFixed(1);
 
     const formattedTotalCount = totalCount.toLocaleString();
 
@@ -66,9 +54,7 @@ export const RatingSummary = React.forwardRef<HTMLDivElement, RatingSummaryProps
               hoverPreview={false}
             />
           </div>
-          <div className="text-xs text-muted-foreground">
-            {formattedTotalCount} total ratings
-          </div>
+          <div className="text-xs text-muted-foreground">{formattedTotalCount} total ratings</div>
         </div>
 
         {/* Distribution Breakdown Progress Bars Section */}

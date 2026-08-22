@@ -11,7 +11,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 const baseField =
   "w-full font-sans text-sm text-foreground bg-surface border rounded-kj-md px-[0.85rem] " +
   "transition-[border-color,box-shadow] duration-150 placeholder:text-muted-foreground " +
-  "focus:outline-none focus:border-ring focus:ring-[3px] focus:ring-ring/30 " +
+  "hover:border-control-border-hover focus:outline-none focus:border-ring focus:ring-[3px] focus:ring-ring/30 " +
   "disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed";
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -23,9 +23,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         className={cn(
           baseField,
           "py-[calc(0.6rem*var(--kj-density,1))]",
-          error
-            ? "border-danger focus:border-danger focus:ring-danger/25"
-            : "border-input",
+          error ? "border-danger focus:border-danger focus:ring-danger/25" : "border-input",
           leadingIcon && "pl-[2.3rem]",
           className
         )}
@@ -68,7 +66,8 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 );
 Textarea.displayName = "Textarea";
 
-export interface TextFieldProps extends Omit<React.ComponentPropsWithoutRef<typeof Input>, "error"> {
+export interface TextFieldProps
+  extends Omit<React.ComponentPropsWithoutRef<typeof Input>, "error"> {
   label: string;
   hint?: string;
   error?: string;

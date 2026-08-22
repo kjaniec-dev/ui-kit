@@ -27,9 +27,15 @@ export const AllVariants: Story = {
       <Badge variant="neutral">Neutral</Badge>
       <Badge variant="primary">Primary</Badge>
       <Badge variant="secondary">Secondary</Badge>
-      <Badge variant="success" dot>Active</Badge>
-      <Badge variant="warning" dot>Pending</Badge>
-      <Badge variant="danger" dot>Error</Badge>
+      <Badge variant="success" dot>
+        Active
+      </Badge>
+      <Badge variant="warning" dot>
+        Pending
+      </Badge>
+      <Badge variant="danger" dot>
+        Error
+      </Badge>
       <Badge variant="info">Info</Badge>
       <Badge variant="solid">Solid</Badge>
     </div>

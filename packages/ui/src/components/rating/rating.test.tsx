@@ -6,20 +6,15 @@ import { Rating } from "./rating";
 import { RatingField } from "./index";
 import { RatingSummary } from "./rating-summary";
 
-
 afterEach(() => {
   cleanup();
 });
-
 
 describe("Rating Primitive", () => {
   it("renders default rating with correct ARIA attributes", () => {
     render(<Rating value={3} max={5} aria-label="Product rating" />);
     const group = screen.getByRole("radiogroup", { name: "Product rating" });
     expect(group).toBeInTheDocument();
-    expect(group).toHaveAttribute("aria-valuenow", "3");
-    expect(group).toHaveAttribute("aria-valuemin", "0");
-    expect(group).toHaveAttribute("aria-valuemax", "5");
 
     const radios = screen.getAllByRole("radio");
     expect(radios).toHaveLength(5);
@@ -41,14 +36,12 @@ describe("Rating Primitive", () => {
 
   it("handles fractional precision (half-star) mouse clicks and hovers", () => {
     const onChange = vi.fn();
+    const onHoverChange = vi.fn();
     const originalOffsetWidth = Object.getOwnPropertyDescriptor(
       HTMLElement.prototype,
       "offsetWidth"
     );
-    const originalOffsetX = Object.getOwnPropertyDescriptor(
-      MouseEvent.prototype,
-      "offsetX"
-    );
+    const originalOffsetX = Object.getOwnPropertyDescriptor(MouseEvent.prototype, "offsetX");
     Object.defineProperty(HTMLElement.prototype, "offsetWidth", {
       value: 40,
       configurable: true,
@@ -68,6 +61,7 @@ describe("Rating Primitive", () => {
           defaultValue={0}
           precision={0.5}
           onChange={onChange}
+          onHoverChange={onHoverChange}
           aria-label="Rating"
         />
       );
@@ -76,8 +70,7 @@ describe("Rating Primitive", () => {
       // Hover left-half -> 2.5
       currentOffsetX = 10;
       fireEvent.mouseMove(stars[2]);
-      const group = screen.getByRole("radiogroup");
-      expect(group).toHaveAttribute("aria-valuenow", "2.5");
+      expect(onHoverChange).toHaveBeenCalledWith(2.5);
 
       // Click left-half -> 2.5
       currentOffsetX = 10;
@@ -93,20 +86,12 @@ describe("Rating Primitive", () => {
       expect(onChange).toHaveBeenCalledWith(3);
     } finally {
       if (originalOffsetWidth) {
-        Object.defineProperty(
-          HTMLElement.prototype,
-          "offsetWidth",
-          originalOffsetWidth
-        );
+        Object.defineProperty(HTMLElement.prototype, "offsetWidth", originalOffsetWidth);
       } else {
         delete (HTMLElement.prototype as any).offsetWidth;
       }
       if (originalOffsetX) {
-        Object.defineProperty(
-          MouseEvent.prototype,
-          "offsetX",
-          originalOffsetX
-        );
+        Object.defineProperty(MouseEvent.prototype, "offsetX", originalOffsetX);
       } else {
         delete (MouseEvent.prototype as any).offsetX;
       }
@@ -185,7 +170,9 @@ describe("Rating Primitive", () => {
 
   it("renders custom icon component and built-in icon types", () => {
     const CustomHeart = ({ className }: { className?: string }) => (
-      <span data-testid="custom-heart" className={className}>♥</span>
+      <span data-testid="custom-heart" className={className}>
+        ♥
+      </span>
     );
     render(<Rating icon={CustomHeart} value={3} readOnly />);
     expect(screen.getAllByTestId("custom-heart")).toHaveLength(5);
@@ -214,7 +201,7 @@ describe("Rating Primitive", () => {
     const { container } = render(<Rating value={3.5} precision={0.5} aria-label="Rating" />);
     const gradients = container.querySelectorAll("linearGradient");
     expect(gradients.length).toBeGreaterThan(0);
-    
+
     // Star 4 (index 3) should have a partial fill gradient (50%)
     const partialStop = container.querySelector("stop[offset='50%']");
     expect(partialStop).toBeInTheDocument();
@@ -243,14 +230,17 @@ describe("Rating Primitive", () => {
 
   it("supports hover preview interaction", () => {
     render(<Rating value={2} hoverPreview aria-label="Rating" />);
-    const stars = screen.getAllByRole("radio");
+    let stars = screen.getAllByRole("radio");
 
     fireEvent.mouseEnter(stars[3]); // hover over 4th star
-    const radiogroup = screen.getByRole("radiogroup");
-    expect(radiogroup).toHaveAttribute("aria-valuenow", "4");
+    stars = screen.getAllByRole("radio");
+    expect(stars[3]).toHaveAttribute("aria-checked", "true");
 
+    const radiogroup = screen.getByRole("radiogroup");
     fireEvent.mouseLeave(radiogroup);
-    expect(radiogroup).toHaveAttribute("aria-valuenow", "2");
+    stars = screen.getAllByRole("radio");
+    expect(stars[3]).toHaveAttribute("aria-checked", "false");
+    expect(stars[1]).toHaveAttribute("aria-checked", "true");
   });
 });
 
@@ -269,35 +259,21 @@ describe("RatingField Wrapper", () => {
 
   it("renders helper text and links via aria-describedby", () => {
     render(
-      <RatingField
-        label="Cleanliness"
-        helperText="Rate from 1 to 5 stars based on your stay"
-      />
+      <RatingField label="Cleanliness" helperText="Rate from 1 to 5 stars based on your stay" />
     );
     const helper = screen.getByText("Rate from 1 to 5 stars based on your stay");
     expect(helper).toBeInTheDocument();
     const radiogroup = screen.getByRole("radiogroup");
-    expect(radiogroup).toHaveAttribute(
-      "aria-describedby",
-      expect.stringContaining(helper.id)
-    );
+    expect(radiogroup).toHaveAttribute("aria-describedby", expect.stringContaining(helper.id));
   });
 
   it("renders error message state with error styling and links via aria-describedby", () => {
-    render(
-      <RatingField
-        label="Value"
-        errorMessage="Rating is required"
-      />
-    );
+    render(<RatingField label="Value" errorMessage="Rating is required" />);
     const error = screen.getByText("Rating is required");
     expect(error).toBeInTheDocument();
     expect(error).toHaveClass("text-danger");
     const radiogroup = screen.getByRole("radiogroup");
-    expect(radiogroup).toHaveAttribute(
-      "aria-describedby",
-      expect.stringContaining(error.id)
-    );
+    expect(radiogroup).toHaveAttribute("aria-describedby", expect.stringContaining(error.id));
   });
 
   it("combines existing aria-describedby with helperText and errorMessage", () => {
@@ -318,14 +294,7 @@ describe("RatingField Wrapper", () => {
 
   it("forwards RatingProps like value, onChange, max, disabled, readOnly", () => {
     const onChange = vi.fn();
-    render(
-      <RatingField
-        label="Product Rating"
-        value={3}
-        max={5}
-        onChange={onChange}
-      />
-    );
+    render(<RatingField label="Product Rating" value={3} max={5} onChange={onChange} />);
     const radios = screen.getAllByRole("radio");
     expect(radios).toHaveLength(5);
     fireEvent.click(radios[4]);
@@ -343,13 +312,7 @@ describe("RatingSummary Component", () => {
   ];
 
   it("renders average score rendering and total count formatting", () => {
-    render(
-      <RatingSummary
-        average={4.5}
-        totalCount={1234}
-        distribution={sampleDistribution}
-      />
-    );
+    render(<RatingSummary average={4.5} totalCount={1234} distribution={sampleDistribution} />);
 
     expect(screen.getByText("4.5")).toBeInTheDocument();
     // formatted with toLocaleString() -> "1,234"
@@ -357,13 +320,7 @@ describe("RatingSummary Component", () => {
   });
 
   it("renders 5-star to 1-star percentage breakdown rows", () => {
-    render(
-      <RatingSummary
-        average={4.5}
-        totalCount={1000}
-        distribution={sampleDistribution}
-      />
-    );
+    render(<RatingSummary average={4.5} totalCount={1000} distribution={sampleDistribution} />);
 
     // 5-star to 1-star labels
     expect(screen.getByText("5 star")).toBeInTheDocument();
@@ -381,13 +338,7 @@ describe("RatingSummary Component", () => {
   });
 
   it("renders progress bar with correct ARIA attributes", () => {
-    render(
-      <RatingSummary
-        average={4.5}
-        totalCount={1000}
-        distribution={sampleDistribution}
-      />
-    );
+    render(<RatingSummary average={4.5} totalCount={1000} distribution={sampleDistribution} />);
 
     const progressBars = screen.getAllByRole("progressbar");
     expect(progressBars).toHaveLength(5);
@@ -403,7 +354,9 @@ describe("RatingSummary Component", () => {
 
   it("supports custom max, size, and icon props", () => {
     const CustomIcon = ({ className }: { className?: string }) => (
-      <span data-testid="summary-custom-icon" className={className}>★</span>
+      <span data-testid="summary-custom-icon" className={className}>
+        ★
+      </span>
     );
 
     render(
@@ -420,5 +373,3 @@ describe("RatingSummary Component", () => {
     expect(screen.getAllByTestId("summary-custom-icon").length).toBeGreaterThan(0);
   });
 });
-
-

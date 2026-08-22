@@ -100,7 +100,9 @@ export const BlogCard = React.forwardRef<HTMLElement, BlogCardProps>(
               </Avatar>
               <div className="flex flex-col text-xs">
                 <span className="font-semibold text-foreground">{author.name}</span>
-                {author.role && <span className="text-[0.7rem] text-muted-foreground">{author.role}</span>}
+                {author.role && (
+                  <span className="text-[0.7rem] text-muted-foreground">{author.role}</span>
+                )}
               </div>
             </div>
           )}

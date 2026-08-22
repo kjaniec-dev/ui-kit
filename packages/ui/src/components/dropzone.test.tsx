@@ -36,7 +36,9 @@ describe("Dropzone", () => {
     const onFiles = vi.fn();
     render(<Dropzone onFiles={onFiles} />);
     const file = makeFile();
-    fireEvent.drop(screen.getByRole("button"), { dataTransfer: { files: [file], types: ["Files"] } });
+    fireEvent.drop(screen.getByRole("button"), {
+      dataTransfer: { files: [file], types: ["Files"] },
+    });
     expect(onFiles).toHaveBeenCalledWith([file]);
   });
 
@@ -55,14 +57,18 @@ describe("Dropzone", () => {
     const input = container.querySelector('input[type="file"]') as HTMLInputElement;
     const clickSpy = vi.spyOn(input, "click").mockImplementation(() => {});
     fireEvent.click(screen.getByRole("button"));
-    fireEvent.drop(screen.getByRole("button"), { dataTransfer: { files: [makeFile()], types: ["Files"] } });
+    fireEvent.drop(screen.getByRole("button"), {
+      dataTransfer: { files: [makeFile()], types: ["Files"] },
+    });
     expect(clickSpy).not.toHaveBeenCalled();
     expect(onFiles).not.toHaveBeenCalled();
   });
 
   it("forwards accept/multiple to the input and its ref to the button", () => {
     const ref = React.createRef<HTMLButtonElement>();
-    const { container } = render(<Dropzone ref={ref} onFiles={() => {}} accept=".pdf" multiple={false} />);
+    const { container } = render(
+      <Dropzone ref={ref} onFiles={() => {}} accept=".pdf" multiple={false} />
+    );
     const input = container.querySelector('input[type="file"]') as HTMLInputElement;
     expect(input).toHaveAttribute("accept", ".pdf");
     expect(input).not.toHaveAttribute("multiple");

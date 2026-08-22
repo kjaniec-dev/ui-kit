@@ -55,7 +55,10 @@ export const StaticNoAnimation = {
 
 export const CardMockup = {
   render: () => (
-    <div style={{ maxWidth: 360 }} className="p-5 border border-border rounded-kj-xl space-y-4 bg-surface">
+    <div
+      style={{ maxWidth: 360 }}
+      className="p-5 border border-border rounded-kj-xl space-y-4 bg-surface"
+    >
       <div className="flex items-center gap-3">
         <Skeleton variant="circular" width={40} height={40} />
         <div className="space-y-1.5 flex-1">

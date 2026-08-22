@@ -28,9 +28,7 @@ describe("CodeBlock", () => {
     render(<CodeBlock code="copy me" />);
     fireEvent.click(screen.getByRole("button", { name: "Copy" }));
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith("copy me");
-    await waitFor(() =>
-      expect(screen.getByRole("button", { name: "Copied" })).toBeInTheDocument()
-    );
+    await waitFor(() => expect(screen.getByRole("button", { name: "Copied" })).toBeInTheDocument());
   });
 
   it("hides the copy button when copyable is false", () => {

@@ -3,9 +3,13 @@
 @import "@kjaniec-dev/ui/ui.css";
 @source "../../packages/ui/src";
 
-
-* { box-sizing: border-box }
-html, body { margin: 0 }
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+}
 body {
   font-family: var(--kj-font-sans);
   background: var(--kj-background);

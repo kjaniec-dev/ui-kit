@@ -20,17 +20,39 @@ export const Default = {
         <div className="p-6 flex flex-col gap-6 h-full bg-subtle">
           <div className="font-bold text-lg tracking-tight text-primary">KJ Product Kit</div>
           <nav className="flex flex-col gap-2">
-            <a href="#" className="text-sm font-medium text-foreground hover:text-primary transition-colors">Dashboard</a>
-            <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Projects</a>
-            <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Invoices</a>
-            <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Settings</a>
+            <a
+              href="#"
+              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+            >
+              Dashboard
+            </a>
+            <a
+              href="#"
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+            >
+              Projects
+            </a>
+            <a
+              href="#"
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+            >
+              Invoices
+            </a>
+            <a
+              href="#"
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+            >
+              Settings
+            </a>
           </nav>
         </div>
       }
       topbar={
         <div className="w-full flex items-center justify-between">
           <span className="text-sm font-medium text-muted-foreground">Workspace / Personal</span>
-          <Button size="sm" variant="ghost">Profile</Button>
+          <Button size="sm" variant="ghost">
+            Profile
+          </Button>
         </div>
       }
     >

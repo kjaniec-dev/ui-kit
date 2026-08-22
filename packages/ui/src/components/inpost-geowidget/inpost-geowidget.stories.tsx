@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
-import { InPostGeowidget } from './inpost-geowidget';
-import { InPostGeowidgetModal } from './inpost-geowidget-modal';
-import type { InPostPoint } from './types';
+import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
+import { InPostGeowidget } from "./inpost-geowidget";
+import { InPostGeowidgetModal } from "./inpost-geowidget-modal";
+import type { InPostPoint } from "./types";
 
 const meta: Meta = {
-  title: 'Components/InPostGeowidget',
+  title: "Components/InPostGeowidget",
   parameters: {
-    layout: 'padded',
+    layout: "padded",
   },
 };
 
@@ -26,10 +26,7 @@ export const InlineMap: StoryObj = {
           </div>
         )}
         <div className="border rounded-lg overflow-hidden h-[550px]">
-          <InPostGeowidget
-            sandbox={true}
-            onPointSelect={(point) => setSelectedPoint(point)}
-          />
+          <InPostGeowidget sandbox={true} onPointSelect={(point) => setSelectedPoint(point)} />
         </div>
       </div>
     );
@@ -46,11 +43,7 @@ export const ModalPicker: StoryObj = {
         <p className="text-sm text-slate-600 dark:text-slate-400">
           Wybierz metodę dostawy i punkt odbioru Paczkomat®.
         </p>
-        <InPostGeowidgetModal
-          sandbox={true}
-          value={point}
-          onSelect={(p) => setPoint(p)}
-        />
+        <InPostGeowidgetModal sandbox={true} value={point} onSelect={(p) => setPoint(p)} />
       </div>
     );
   },

@@ -5,13 +5,7 @@ import { cn } from "../lib/cn";
 import { FormField } from "./form-field";
 
 export type ProgressRingSize = "sm" | "md" | "lg" | "xl";
-export type ProgressRingTone =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "warning"
-  | "danger"
-  | "info";
+export type ProgressRingTone = "primary" | "secondary" | "success" | "warning" | "danger" | "info";
 
 export interface ProgressRingProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Current progress value. Defaults to 0. */
@@ -179,7 +173,13 @@ export interface ProgressRingFieldProps extends ProgressRingProps {
 export const ProgressRingField = React.forwardRef<HTMLDivElement, ProgressRingFieldProps>(
   ({ label, hint, error, required, fieldClassName, ...ringProps }, ref) => {
     return (
-      <FormField label={label} hint={hint} error={error} required={required} className={fieldClassName}>
+      <FormField
+        label={label}
+        hint={hint}
+        error={error}
+        required={required}
+        className={fieldClassName}
+      >
         <ProgressRing ref={ref} aria-label={ringProps["aria-label"] ?? label} {...ringProps} />
       </FormField>
     );

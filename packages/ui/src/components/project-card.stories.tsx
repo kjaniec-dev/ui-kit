@@ -13,7 +13,8 @@ type Story = StoryObj<typeof ProjectCard>;
 export const Active: Story = {
   args: {
     title: "kj-product-kit",
-    description: "Full-stack React & Next.js starter kit with Tailwind CSS tokens and MCP integration.",
+    description:
+      "Full-stack React & Next.js starter kit with Tailwind CSS tokens and MCP integration.",
     status: { label: "Active", variant: "success" },
     techStack: ["React", "TypeScript", "Tailwind", "Vitest"],
     metrics: [

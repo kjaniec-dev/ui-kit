@@ -2,20 +2,17 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib/cn";
 
-const alertVariants = cva(
-  "flex gap-3 items-start p-[0.9rem_1.1rem] rounded-kj-md border text-sm",
-  {
-    variants: {
-      variant: {
-        info: "bg-info-surface border-info/30",
-        success: "bg-success-surface border-success/30",
-        warning: "bg-warning-surface border-warning/30",
-        danger: "bg-danger-surface border-danger/30",
-      },
+const alertVariants = cva("flex gap-3 items-start p-[0.9rem_1.1rem] rounded-kj-md border text-sm", {
+  variants: {
+    variant: {
+      info: "bg-info-surface border-info/30",
+      success: "bg-success-surface border-success/30",
+      warning: "bg-warning-surface border-warning/30",
+      danger: "bg-danger-surface border-danger/30",
     },
-    defaultVariants: { variant: "info" },
-  }
-);
+  },
+  defaultVariants: { variant: "info" },
+});
 
 const iconColor = {
   info: "text-info",
@@ -36,7 +33,12 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   ({ className, variant = "info", icon, title, children, ...props }, ref) => (
     <div ref={ref} role="alert" className={cn(alertVariants({ variant }), className)} {...props}>
       {icon && (
-        <span className={cn("shrink-0 mt-0.5 [&_svg]:h-[1.15rem] [&_svg]:w-[1.15rem]", iconColor[variant ?? "info"])}>
+        <span
+          className={cn(
+            "shrink-0 mt-0.5 [&_svg]:h-[1.15rem] [&_svg]:w-[1.15rem]",
+            iconColor[variant ?? "info"]
+          )}
+        >
           {icon}
         </span>
       )}

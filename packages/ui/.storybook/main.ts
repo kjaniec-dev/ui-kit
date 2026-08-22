@@ -19,7 +19,7 @@ const config: StorybookConfig = {
     config.plugins = config.plugins ?? [];
     config.plugins.push(tailwindcss());
     return config;
-  }
+  },
 };
 
 export default config;

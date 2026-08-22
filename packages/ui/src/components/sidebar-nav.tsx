@@ -33,24 +33,27 @@ export function SidebarNav({ className, groups, currentHref, ...props }: Sidebar
           )}
           <div className="space-y-0.5">
             {group.items.map((item) => {
-              const isActive = item.active || (item.href && currentHref && currentHref === item.href);
+              const isActive =
+                item.active || (item.href && currentHref && currentHref === item.href);
               const content = (
                 <>
                   <span className="flex items-center gap-2.5 min-w-0">
                     {item.icon && (
-                      <span className={cn(
-                        "[&_svg]:h-[1.1rem] [&_svg]:w-[1.1rem] shrink-0",
-                        isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
-                      )}>
+                      <span
+                        className={cn(
+                          "[&_svg]:h-[1.1rem] [&_svg]:w-[1.1rem] shrink-0",
+                          isActive
+                            ? "text-primary"
+                            : "text-muted-foreground group-hover:text-foreground"
+                        )}
+                      >
                         {item.icon}
                       </span>
                     )}
                     <span className="truncate">{item.label}</span>
                   </span>
                   {item.badge && (
-                    <span className="shrink-0 flex items-center justify-center">
-                      {item.badge}
-                    </span>
+                    <span className="shrink-0 flex items-center justify-center">{item.badge}</span>
                   )}
                 </>
               );
@@ -71,12 +74,7 @@ export function SidebarNav({ className, groups, currentHref, ...props }: Sidebar
               }
 
               return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={item.onClick}
-                  className={itemClass}
-                >
+                <button key={item.id} type="button" onClick={item.onClick} className={itemClass}>
                   {content}
                 </button>
               );

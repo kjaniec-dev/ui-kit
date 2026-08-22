@@ -143,7 +143,7 @@
         "variant": "info"
       }
     },
-    "usageSnippet": "<Alert variant=\"info\" icon={InfoIcon} title=\"Information\">A short informational message for the user.</Alert>"
+    "usageSnippet": "<Alert variant=\"info\" icon={InfoIcon} title=\"Information\">\n  A short informational message for the user.\n</Alert>"
   },
   {
     "name": "Spinner",
@@ -275,7 +275,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<ProgressRing value={75} size=\"sm\" showValue />\n        <p style={{ marginTop: 8, fontSize: 12 }}>Small (sm)</p>\n      </div>\n      <div style={{ textAlign: \"center\" }}>\n        <ProgressRing value={75} size=\"md\" showValue />\n        <p style={{ marginTop: 8, fontSize: 12 }}>Medium (md)</p>\n      </div>\n      <div style={{ textAlign: \"center\" }}>\n        <ProgressRing value={75} size=\"lg\" showValue />\n        <p style={{ marginTop: 8, fontSize: 12 }}>Large (lg)</p>\n      </div>\n      <div style={{ textAlign: \"center\" }}>\n        <ProgressRing value={75} size=\"xl\" showValue />\n        <p style={{ marginTop: 8, fontSize: 12 }}>Extra Large (xl)</p>\n      </div>\n    </div>\n  ),\n};\n\nexport const Tones: Story = {\n  render: () => (\n    <div style={{ display: \"flex\", gap: 20, alignItems: \"center\", flexWrap: \"wrap\" }}>\n      <ProgressRing value={60} tone=\"primary\" showValue />\n      <ProgressRing value={60} tone=\"secondary\" showValue />\n      <ProgressRing value={60} tone=\"success\" showValue />\n      <ProgressRing value={60} tone=\"warning\" showValue />\n      <ProgressRing value={60} tone=\"danger\" showValue />\n      <ProgressRing value={60} tone=\"info\" showValue />\n    </div>\n  ),\n};\n\nexport const CustomFormatting: Story = {\n  render: () => (\n    <div style={{ display: \"flex\", gap: 24, alignItems: \"center\", flexWrap: \"wrap\" }}>\n      <ProgressRing\n        value={3}\n        max={5}\n        size=\"lg\"\n        tone=\"success\"\n        formatValue={(val) => (\n          <span style={{ fontSize: 14, fontWeight: \"bold\" }}>{val} / 5</span>\n        )}\n      />\n      <ProgressRing\n        value={80}\n        size=\"lg\"\n        tone=\"info\"\n        formatValue={(val) => (\n          <div style={{ display: \"flex\", flexDirection: \"column\", alignItems: \"center\" }}>\n            <span style={{ fontSize: 16, fontWeight: \"bold\" }}>{val}GB</span>\n            <span style={{ fontSize: 10, opacity: 0.7 }}>of 100GB</span>\n          </div>\n        )}\n      />\n      <ProgressRing value={100} size=\"lg\" tone=\"success\">\n        <span style={{ fontSize: 20 }}>✓</span>\n      </ProgressRing>"
+    "usageSnippet": "<ProgressRing value={75} size=\"sm\" showValue />\n        <p style={{ marginTop: 8, fontSize: 12 }}>Small (sm)</p>\n      </div>\n      <div style={{ textAlign: \"center\" }}>\n        <ProgressRing value={75} size=\"md\" showValue />\n        <p style={{ marginTop: 8, fontSize: 12 }}>Medium (md)</p>\n      </div>\n      <div style={{ textAlign: \"center\" }}>\n        <ProgressRing value={75} size=\"lg\" showValue />\n        <p style={{ marginTop: 8, fontSize: 12 }}>Large (lg)</p>\n      </div>\n      <div style={{ textAlign: \"center\" }}>\n        <ProgressRing value={75} size=\"xl\" showValue />\n        <p style={{ marginTop: 8, fontSize: 12 }}>Extra Large (xl)</p>\n      </div>\n    </div>\n  ),\n};\n\nexport const Tones: Story = {\n  render: () => (\n    <div style={{ display: \"flex\", gap: 20, alignItems: \"center\", flexWrap: \"wrap\" }}>\n      <ProgressRing value={60} tone=\"primary\" showValue />\n      <ProgressRing value={60} tone=\"secondary\" showValue />\n      <ProgressRing value={60} tone=\"success\" showValue />\n      <ProgressRing value={60} tone=\"warning\" showValue />\n      <ProgressRing value={60} tone=\"danger\" showValue />\n      <ProgressRing value={60} tone=\"info\" showValue />\n    </div>\n  ),\n};\n\nexport const CustomFormatting: Story = {\n  render: () => (\n    <div style={{ display: \"flex\", gap: 24, alignItems: \"center\", flexWrap: \"wrap\" }}>\n      <ProgressRing\n        value={3}\n        max={5}\n        size=\"lg\"\n        tone=\"success\"\n        formatValue={(val) => <span style={{ fontSize: 14, fontWeight: \"bold\" }}>{val} / 5</span>}\n      />\n      <ProgressRing\n        value={80}\n        size=\"lg\"\n        tone=\"info\"\n        formatValue={(val) => (\n          <div style={{ display: \"flex\", flexDirection: \"column\", alignItems: \"center\" }}>\n            <span style={{ fontSize: 16, fontWeight: \"bold\" }}>{val}GB</span>\n            <span style={{ fontSize: 10, opacity: 0.7 }}>of 100GB</span>\n          </div>\n        )}\n      />\n      <ProgressRing value={100} size=\"lg\" tone=\"success\">\n        <span style={{ fontSize: 20 }}>✓</span>\n      </ProgressRing>"
   },
   {
     "name": "ProgressRingField",
@@ -669,7 +669,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<ToggleGroup options={options} value={value} onChange={setValue} aria-label=\"Text formatting\" />"
+    "usageSnippet": "<ToggleGroup\n  options={options}\n  value={value}\n  onChange={setValue}\n  aria-label=\"Text formatting\"\n/>"
   },
   {
     "name": "Card",
@@ -699,7 +699,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Card>\n  <CardHeader>\n    <Badge variant=\"primary\" className=\"self-start\">Pro</Badge>\n    <CardTitle>Team Workspace</CardTitle>\n    <CardDescription>Unlimited projects, roles and activity history for your whole team.</CardDescription>\n  </CardHeader>\n  <CardFooter>\n    <Button size=\"sm\">Choose plan</Button>\n    <Button size=\"sm\" variant=\"ghost\">Details</Button>\n  </CardFooter>\n</Card>"
+    "usageSnippet": "<Card>\n  <CardHeader>\n    <Badge variant=\"primary\" className=\"self-start\">\n      Pro\n    </Badge>\n    <CardTitle>Team Workspace</CardTitle>\n    <CardDescription>\n      Unlimited projects, roles and activity history for your whole team.\n    </CardDescription>\n  </CardHeader>\n  <CardFooter>\n    <Button size=\"sm\">Choose plan</Button>\n    <Button size=\"sm\" variant=\"ghost\">\n      Details\n    </Button>\n  </CardFooter>\n</Card>"
   },
   {
     "name": "CardHeader",
@@ -707,7 +707,7 @@
     "description": "React component CardHeader.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<CardHeader>\n  <Badge variant=\"primary\" className=\"self-start\">Pro</Badge>\n  <CardTitle>Team Workspace</CardTitle>\n  <CardDescription>Unlimited projects, roles and activity history for your whole team.</CardDescription>\n</CardHeader>"
+    "usageSnippet": "<CardHeader>\n  <Badge variant=\"primary\" className=\"self-start\">\n    Pro\n  </Badge>\n  <CardTitle>Team Workspace</CardTitle>\n  <CardDescription>\n    Unlimited projects, roles and activity history for your whole team.\n  </CardDescription>\n</CardHeader>"
   },
   {
     "name": "CardTitle",
@@ -723,7 +723,7 @@
     "description": "React component CardDescription.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<CardDescription>Unlimited projects, roles and activity history for your whole team.</CardDescription>"
+    "usageSnippet": "<CardDescription>\n  Unlimited projects, roles and activity history for your whole team.\n</CardDescription>"
   },
   {
     "name": "CardContent",
@@ -739,7 +739,7 @@
     "description": "React component CardFooter.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<CardFooter>\n  <Button size=\"sm\">Choose plan</Button>\n  <Button size=\"sm\" variant=\"ghost\">Details</Button>\n</CardFooter>"
+    "usageSnippet": "<CardFooter>\n  <Button size=\"sm\">Choose plan</Button>\n  <Button size=\"sm\" variant=\"ghost\">\n    Details\n  </Button>\n</CardFooter>"
   },
   {
     "name": "Stat",
@@ -909,7 +909,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Tabs defaultValue=\"overview\">\n  <TabsList>\n    <TabsTrigger value=\"overview\">Overview</TabsTrigger>\n    <TabsTrigger value=\"activity\">Activity</TabsTrigger>\n    <TabsTrigger value=\"settings\">Settings</TabsTrigger>\n  </TabsList>\n  <TabsContent value=\"overview\">A dashboard with key metrics and quick actions.</TabsContent>\n  <TabsContent value=\"activity\">An event timeline: sign-ins, edits and comments.</TabsContent>\n  <TabsContent value=\"settings\">Workspace preferences, permissions and integrations.</TabsContent>\n</Tabs>"
+    "usageSnippet": "<Tabs defaultValue=\"overview\">\n  <TabsList>\n    <TabsTrigger value=\"overview\">Overview</TabsTrigger>\n    <TabsTrigger value=\"activity\">Activity</TabsTrigger>\n    <TabsTrigger value=\"settings\">Settings</TabsTrigger>\n  </TabsList>\n  <TabsContent value=\"overview\">A dashboard with key metrics and quick actions.</TabsContent>\n  <TabsContent value=\"activity\">An event timeline: sign-ins, edits and comments.</TabsContent>\n  <TabsContent value=\"settings\">\n    Workspace preferences, permissions and integrations.\n  </TabsContent>\n</Tabs>"
   },
   {
     "name": "TabsList",
@@ -972,7 +972,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Accordion type=\"single\" defaultValue={[\"a\"]}>\n  <AccordionItem value=\"a\"><AccordionTrigger>How does billing work?</AccordionTrigger><AccordionContent>Monthly or annually — the annual plan includes two months free.</AccordionContent></AccordionItem>\n  <AccordionItem value=\"b\"><AccordionTrigger>Can I change my plan later?</AccordionTrigger><AccordionContent>Yes, at any time. The difference is prorated.</AccordionContent></AccordionItem>\n  <AccordionItem value=\"c\"><AccordionTrigger>What payment methods are supported?</AccordionTrigger><AccordionContent>Visa, Mastercard and Apple Pay.</AccordionContent></AccordionItem>\n</Accordion>"
+    "usageSnippet": "<Accordion type=\"single\" defaultValue={[\"a\"]}>\n  <AccordionItem value=\"a\">\n    <AccordionTrigger>How does billing work?</AccordionTrigger>\n    <AccordionContent>\n      Monthly or annually — the annual plan includes two months free.\n    </AccordionContent>\n  </AccordionItem>\n  <AccordionItem value=\"b\">\n    <AccordionTrigger>Can I change my plan later?</AccordionTrigger>\n    <AccordionContent>Yes, at any time. The difference is prorated.</AccordionContent>\n  </AccordionItem>\n  <AccordionItem value=\"c\">\n    <AccordionTrigger>What payment methods are supported?</AccordionTrigger>\n    <AccordionContent>Visa, Mastercard and Apple Pay.</AccordionContent>\n  </AccordionItem>\n</Accordion>"
   },
   {
     "name": "AccordionItem",
@@ -988,7 +988,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<AccordionItem value=\"a\"><AccordionTrigger>How does billing work?</AccordionTrigger><AccordionContent>Monthly or annually — the annual plan includes two months free.</AccordionContent></AccordionItem>"
+    "usageSnippet": "<AccordionItem value=\"a\">\n  <AccordionTrigger>How does billing work?</AccordionTrigger>\n  <AccordionContent>\n    Monthly or annually — the annual plan includes two months free.\n  </AccordionContent>\n</AccordionItem>"
   },
   {
     "name": "AccordionTrigger",
@@ -1004,7 +1004,7 @@
     "description": "React component AccordionContent.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<AccordionContent>Monthly or annually — the annual plan includes two months free.</AccordionContent>"
+    "usageSnippet": "<AccordionContent>\n  Monthly or annually — the annual plan includes two months free.\n</AccordionContent>"
   },
   {
     "name": "DropdownMenu",
@@ -1205,7 +1205,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Table>\n  <TableHeader>\n    <TableRow>\n      <TableHead>User</TableHead>\n      <TableHead>Role</TableHead>\n      <TableHead>Status</TableHead>\n      <TableHead numeric>Projects</TableHead>\n    </TableRow>\n  </TableHeader>\n  <TableBody>\n    <TableRow>\n      <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"primary\">AK</Avatar>Anna Kowalski</div></TableCell>\n      <TableCell>Administrator</TableCell>\n      <TableCell><Badge variant=\"success\" dot>Active</Badge></TableCell>\n      <TableCell numeric>24</TableCell>\n    </TableRow>\n    <TableRow>\n      <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\">MR</Avatar>Michael Rutkowski</div></TableCell>\n      <TableCell>Editor</TableCell>\n      <TableCell><Badge variant=\"warning\" dot>Invited</Badge></TableCell>\n      <TableCell numeric>12</TableCell>\n    </TableRow>\n    <TableRow>\n      <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"info\">JN</Avatar>Julia Nowak</div></TableCell>\n      <TableCell>Viewer</TableCell>\n      <TableCell><Badge>Inactive</Badge></TableCell>\n      <TableCell numeric>3</TableCell>\n    </TableRow>\n  </TableBody>\n</Table>"
+    "usageSnippet": "<Table>\n  <TableHeader>\n    <TableRow>\n      <TableHead>User</TableHead>\n      <TableHead>Role</TableHead>\n      <TableHead>Status</TableHead>\n      <TableHead numeric>Projects</TableHead>\n    </TableRow>\n  </TableHeader>\n  <TableBody>\n    <TableRow>\n      <TableCell>\n        <div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}>\n          <Avatar size=\"sm\" tone=\"primary\">\n            AK\n          </Avatar>\n          Anna Kowalski\n        </div>\n      </TableCell>\n      <TableCell>Administrator</TableCell>\n      <TableCell>\n        <Badge variant=\"success\" dot>\n          Active\n        </Badge>\n      </TableCell>\n      <TableCell numeric>24</TableCell>\n    </TableRow>\n    <TableRow>\n      <TableCell>\n        <div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}>\n          <Avatar size=\"sm\">MR</Avatar>Michael Rutkowski\n        </div>\n      </TableCell>\n      <TableCell>Editor</TableCell>\n      <TableCell>\n        <Badge variant=\"warning\" dot>\n          Invited\n        </Badge>\n      </TableCell>\n      <TableCell numeric>12</TableCell>\n    </TableRow>\n    <TableRow>\n      <TableCell>\n        <div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}>\n          <Avatar size=\"sm\" tone=\"info\">\n            JN\n          </Avatar>\n          Julia Nowak\n        </div>\n      </TableCell>\n      <TableCell>Viewer</TableCell>\n      <TableCell>\n        <Badge>Inactive</Badge>\n      </TableCell>\n      <TableCell numeric>3</TableCell>\n    </TableRow>\n  </TableBody>\n</Table>"
   },
   {
     "name": "TableWrap",
@@ -1213,7 +1213,7 @@
     "description": "Rounded, bordered wrapper around a <Table>.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<TableWrap>\n  <Table>\n    <TableHeader>\n      <TableRow>\n        <TableHead>User</TableHead>\n        <TableHead>Role</TableHead>\n        <TableHead>Status</TableHead>\n        <TableHead numeric>Projects</TableHead>\n      </TableRow>\n    </TableHeader>\n    <TableBody>\n      <TableRow>\n        <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"primary\">AK</Avatar>Anna Kowalski</div></TableCell>\n        <TableCell>Administrator</TableCell>\n        <TableCell><Badge variant=\"success\" dot>Active</Badge></TableCell>\n        <TableCell numeric>24</TableCell>\n      </TableRow>\n      <TableRow>\n        <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\">MR</Avatar>Michael Rutkowski</div></TableCell>\n        <TableCell>Editor</TableCell>\n        <TableCell><Badge variant=\"warning\" dot>Invited</Badge></TableCell>\n        <TableCell numeric>12</TableCell>\n      </TableRow>\n      <TableRow>\n        <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"info\">JN</Avatar>Julia Nowak</div></TableCell>\n        <TableCell>Viewer</TableCell>\n        <TableCell><Badge>Inactive</Badge></TableCell>\n        <TableCell numeric>3</TableCell>\n      </TableRow>\n    </TableBody>\n  </Table>\n</TableWrap>"
+    "usageSnippet": "<TableWrap>\n  <Table>\n    <TableHeader>\n      <TableRow>\n        <TableHead>User</TableHead>\n        <TableHead>Role</TableHead>\n        <TableHead>Status</TableHead>\n        <TableHead numeric>Projects</TableHead>\n      </TableRow>\n    </TableHeader>\n    <TableBody>\n      <TableRow>\n        <TableCell>\n          <div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}>\n            <Avatar size=\"sm\" tone=\"primary\">\n              AK\n            </Avatar>\n            Anna Kowalski\n          </div>\n        </TableCell>\n        <TableCell>Administrator</TableCell>\n        <TableCell>\n          <Badge variant=\"success\" dot>\n            Active\n          </Badge>\n        </TableCell>\n        <TableCell numeric>24</TableCell>\n      </TableRow>\n      <TableRow>\n        <TableCell>\n          <div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}>\n            <Avatar size=\"sm\">MR</Avatar>Michael Rutkowski\n          </div>\n        </TableCell>\n        <TableCell>Editor</TableCell>\n        <TableCell>\n          <Badge variant=\"warning\" dot>\n            Invited\n          </Badge>\n        </TableCell>\n        <TableCell numeric>12</TableCell>\n      </TableRow>\n      <TableRow>\n        <TableCell>\n          <div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}>\n            <Avatar size=\"sm\" tone=\"info\">\n              JN\n            </Avatar>\n            Julia Nowak\n          </div>\n        </TableCell>\n        <TableCell>Viewer</TableCell>\n        <TableCell>\n          <Badge>Inactive</Badge>\n        </TableCell>\n        <TableCell numeric>3</TableCell>\n      </TableRow>\n    </TableBody>\n  </Table>\n</TableWrap>"
   },
   {
     "name": "TableHeader",
@@ -1229,7 +1229,7 @@
     "description": "React component TableBody.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<TableBody>\n  <TableRow>\n    <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"primary\">AK</Avatar>Anna Kowalski</div></TableCell>\n    <TableCell>Administrator</TableCell>\n    <TableCell><Badge variant=\"success\" dot>Active</Badge></TableCell>\n    <TableCell numeric>24</TableCell>\n  </TableRow>\n  <TableRow>\n    <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\">MR</Avatar>Michael Rutkowski</div></TableCell>\n    <TableCell>Editor</TableCell>\n    <TableCell><Badge variant=\"warning\" dot>Invited</Badge></TableCell>\n    <TableCell numeric>12</TableCell>\n  </TableRow>\n  <TableRow>\n    <TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"info\">JN</Avatar>Julia Nowak</div></TableCell>\n    <TableCell>Viewer</TableCell>\n    <TableCell><Badge>Inactive</Badge></TableCell>\n    <TableCell numeric>3</TableCell>\n  </TableRow>\n</TableBody>"
+    "usageSnippet": "<TableBody>\n  <TableRow>\n    <TableCell>\n      <div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}>\n        <Avatar size=\"sm\" tone=\"primary\">\n          AK\n        </Avatar>\n        Anna Kowalski\n      </div>\n    </TableCell>\n    <TableCell>Administrator</TableCell>\n    <TableCell>\n      <Badge variant=\"success\" dot>\n        Active\n      </Badge>\n    </TableCell>\n    <TableCell numeric>24</TableCell>\n  </TableRow>\n  <TableRow>\n    <TableCell>\n      <div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}>\n        <Avatar size=\"sm\">MR</Avatar>Michael Rutkowski\n      </div>\n    </TableCell>\n    <TableCell>Editor</TableCell>\n    <TableCell>\n      <Badge variant=\"warning\" dot>\n        Invited\n      </Badge>\n    </TableCell>\n    <TableCell numeric>12</TableCell>\n  </TableRow>\n  <TableRow>\n    <TableCell>\n      <div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}>\n        <Avatar size=\"sm\" tone=\"info\">\n          JN\n        </Avatar>\n        Julia Nowak\n      </div>\n    </TableCell>\n    <TableCell>Viewer</TableCell>\n    <TableCell>\n      <Badge>Inactive</Badge>\n    </TableCell>\n    <TableCell numeric>3</TableCell>\n  </TableRow>\n</TableBody>"
   },
   {
     "name": "TableRow",
@@ -1261,7 +1261,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<TableCell><div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}><Avatar size=\"sm\" tone=\"primary\">AK</Avatar>Anna Kowalski</div></TableCell>"
+    "usageSnippet": "<TableCell>\n  <div style={{ display: \"flex\", alignItems: \"center\", gap: 10 }}>\n    <Avatar size=\"sm\" tone=\"primary\">\n      AK\n    </Avatar>\n    Anna Kowalski\n  </div>\n</TableCell>"
   },
   {
     "name": "Tooltip",
@@ -1342,7 +1342,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Modal open={open} onClose={() => setOpen(false)}>\n  <ModalTitle>Delete project “Q3 Launch”?</ModalTitle>\n  <ModalDescription>This action cannot be undone. All files and activity history will be permanently deleted.</ModalDescription>\n  <ModalActions>\n    <Button variant=\"ghost\" onClick={() => setOpen(false)}>Cancel</Button>\n    <Button variant=\"danger\" onClick={() => setOpen(false)}>Delete project</Button>\n  </ModalActions>\n</Modal>"
+    "usageSnippet": "<Modal open={open} onClose={() => setOpen(false)}>\n  <ModalTitle>Delete project “Q3 Launch”?</ModalTitle>\n  <ModalDescription>\n    This action cannot be undone. All files and activity history will be permanently\n    deleted.\n  </ModalDescription>\n  <ModalActions>\n    <Button variant=\"ghost\" onClick={() => setOpen(false)}>\n      Cancel\n    </Button>\n    <Button variant=\"danger\" onClick={() => setOpen(false)}>\n      Delete project\n    </Button>\n  </ModalActions>\n</Modal>"
   },
   {
     "name": "ModalTitle",
@@ -1358,7 +1358,7 @@
     "description": "React component ModalDescription.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<ModalDescription>This action cannot be undone. All files and activity history will be permanently deleted.</ModalDescription>"
+    "usageSnippet": "<ModalDescription>\n  This action cannot be undone. All files and activity history will be permanently\n  deleted.\n</ModalDescription>"
   },
   {
     "name": "ModalActions",
@@ -1366,7 +1366,7 @@
     "description": "React component ModalActions.",
     "props": [],
     "cva": null,
-    "usageSnippet": "<ModalActions>\n  <Button variant=\"ghost\" onClick={() => setOpen(false)}>Cancel</Button>\n  <Button variant=\"danger\" onClick={() => setOpen(false)}>Delete project</Button>\n</ModalActions>"
+    "usageSnippet": "<ModalActions>\n  <Button variant=\"ghost\" onClick={() => setOpen(false)}>\n    Cancel\n  </Button>\n  <Button variant=\"danger\" onClick={() => setOpen(false)}>\n    Delete project\n  </Button>\n</ModalActions>"
   },
   {
     "name": "ToastProvider",
@@ -1854,7 +1854,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<DashboardShell\n  sidebar={\n    <div className=\"p-6 flex flex-col gap-6 h-full bg-subtle\">\n      <div className=\"font-bold text-lg tracking-tight text-primary\">KJ Product Kit</div>\n      <nav className=\"flex flex-col gap-2\">\n        <a href=\"#\" className=\"text-sm font-medium text-foreground hover:text-primary transition-colors\">Dashboard</a>\n        <a href=\"#\" className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\">Projects</a>\n        <a href=\"#\" className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\">Invoices</a>\n        <a href=\"#\" className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\">Settings</a>\n      </nav>\n    </div>\n  }\n  topbar={\n    <div className=\"w-full flex items-center justify-between\">\n      <span className=\"text-sm font-medium text-muted-foreground\">Workspace / Personal</span>\n      <Button size=\"sm\" variant=\"ghost\">Profile</Button>\n    </div>\n  }\n>\n  <PageHeader\n    eyebrow=\"B2B SaaS\"\n    title=\"Dashboard Shell\"\n    description=\"The shell structure renders a responsive frame container with a sticky sidebar, topbar, and main canvas.\"\n    actions={<Button size=\"sm\">New Project</Button>}\n  />\n  <div className=\"border border-dashed border-border rounded-kj-lg h-96 grid place-items-center bg-surface\">\n    <span className=\"text-sm text-muted-foreground\">Main Content Canvas Area</span>\n  </div>\n</DashboardShell>"
+    "usageSnippet": "<DashboardShell\n  sidebar={\n    <div className=\"p-6 flex flex-col gap-6 h-full bg-subtle\">\n      <div className=\"font-bold text-lg tracking-tight text-primary\">KJ Product Kit</div>\n      <nav className=\"flex flex-col gap-2\">\n        <a\n          href=\"#\"\n          className=\"text-sm font-medium text-foreground hover:text-primary transition-colors\"\n        >\n          Dashboard\n        </a>\n        <a\n          href=\"#\"\n          className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\"\n        >\n          Projects\n        </a>\n        <a\n          href=\"#\"\n          className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\"\n        >\n          Invoices\n        </a>\n        <a\n          href=\"#\"\n          className=\"text-sm font-medium text-muted-foreground hover:text-primary transition-colors\"\n        >\n          Settings\n        </a>\n      </nav>\n    </div>\n  }\n  topbar={\n    <div className=\"w-full flex items-center justify-between\">\n      <span className=\"text-sm font-medium text-muted-foreground\">Workspace / Personal</span>\n      <Button size=\"sm\" variant=\"ghost\">\n        Profile\n      </Button>\n    </div>\n  }\n>\n  <PageHeader\n    eyebrow=\"B2B SaaS\"\n    title=\"Dashboard Shell\"\n    description=\"The shell structure renders a responsive frame container with a sticky sidebar, topbar, and main canvas.\"\n    actions={<Button size=\"sm\">New Project</Button>}\n  />\n  <div className=\"border border-dashed border-border rounded-kj-lg h-96 grid place-items-center bg-surface\">\n    <span className=\"text-sm text-muted-foreground\">Main Content Canvas Area</span>\n  </div>\n</DashboardShell>"
   },
   {
     "name": "SettingsLayout",
@@ -1891,7 +1891,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<SettingsLayout\n  title=\"Profile Settings\"\n  description=\"Customize how your profile appears to other members.\"\n  sidebar={\n    <div className=\"flex flex-row lg:flex-col gap-1 w-full\">\n      <Button variant=\"ghost\" size=\"sm\" className=\"justify-start bg-primary/10 text-primary\">General</Button>\n      <Button variant=\"ghost\" size=\"sm\" className=\"justify-start text-muted-foreground\">Team</Button>\n      <Button variant=\"ghost\" size=\"sm\" className=\"justify-start text-muted-foreground\">Billing</Button>\n    </div>\n  }\n>\n  <Card className=\"p-6 space-y-4\">\n    <div className=\"grid grid-cols-1 sm:grid-cols-2 gap-4\">\n      <TextField label=\"First Name\" defaultValue=\"John\" />\n      <TextField label=\"Last Name\" defaultValue=\"Doe\" />\n    </div>\n    <TextField label=\"Email Address\" defaultValue=\"john.doe@gmail.com\" />\n    <div className=\"flex justify-end pt-2\">\n      <Button size=\"sm\">Save profile</Button>\n    </div>\n  </Card>\n</SettingsLayout>"
+    "usageSnippet": "<SettingsLayout\n  title=\"Profile Settings\"\n  description=\"Customize how your profile appears to other members.\"\n  sidebar={\n    <div className=\"flex flex-row lg:flex-col gap-1 w-full\">\n      <Button variant=\"ghost\" size=\"sm\" className=\"justify-start bg-primary/10 text-primary\">\n        General\n      </Button>\n      <Button variant=\"ghost\" size=\"sm\" className=\"justify-start text-muted-foreground\">\n        Team\n      </Button>\n      <Button variant=\"ghost\" size=\"sm\" className=\"justify-start text-muted-foreground\">\n        Billing\n      </Button>\n    </div>\n  }\n>\n  <Card className=\"p-6 space-y-4\">\n    <div className=\"grid grid-cols-1 sm:grid-cols-2 gap-4\">\n      <TextField label=\"First Name\" defaultValue=\"John\" />\n      <TextField label=\"Last Name\" defaultValue=\"Doe\" />\n    </div>\n    <TextField label=\"Email Address\" defaultValue=\"john.doe@gmail.com\" />\n    <div className=\"flex justify-end pt-2\">\n      <Button size=\"sm\">Save profile</Button>\n    </div>\n  </Card>\n</SettingsLayout>"
   },
   {
     "name": "DetailPageLayout",
@@ -1956,7 +1956,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<DetailPageLayout\n  title=\"Transaction #TRN-9022\"\n  description=\"Captured via Stripe checkout flow.\"\n  backLabel=\"Back to payments\"\n  onBackClick={() => alert(\"Back\")}\n  actions={\n    <>\n      <Button variant=\"outline\" size=\"sm\">Refund</Button>\n      <Button size=\"sm\">Receipt</Button>\n    </>\n  }\n  aside={\n    <div className=\"space-y-4 text-sm\">\n      <h4 className=\"font-bold\">Payment Details</h4>\n      <div className=\"flex justify-between\">\n        <span className=\"text-muted-foreground\">Status</span>\n        <Badge variant=\"success\">Paid</Badge>\n      </div>\n      <div className=\"flex justify-between\">\n        <span className=\"text-muted-foreground\">Amount</span>\n        <span className=\"font-bold font-mono\">$1,450.00</span>\n      </div>\n    </div>\n  }\n>\n  <Card className=\"p-6\">\n    <h3 className=\"text-base font-bold mb-3\">Billing Address</h3>\n    <p className=\"text-sm text-muted-foreground leading-relaxed\">\n      John Doe<br />\n      ul. Marszałkowska 10/24<br />\n      00-001 Warszawa, Poland\n    </p>\n  </Card>\n</DetailPageLayout>"
+    "usageSnippet": "<DetailPageLayout\n  title=\"Transaction #TRN-9022\"\n  description=\"Captured via Stripe checkout flow.\"\n  backLabel=\"Back to payments\"\n  onBackClick={() => alert(\"Back\")}\n  actions={\n    <>\n      <Button variant=\"outline\" size=\"sm\">\n        Refund\n      </Button>\n      <Button size=\"sm\">Receipt</Button>\n    </>\n  }\n  aside={\n    <div className=\"space-y-4 text-sm\">\n      <h4 className=\"font-bold\">Payment Details</h4>\n      <div className=\"flex justify-between\">\n        <span className=\"text-muted-foreground\">Status</span>\n        <Badge variant=\"success\">Paid</Badge>\n      </div>\n      <div className=\"flex justify-between\">\n        <span className=\"text-muted-foreground\">Amount</span>\n        <span className=\"font-bold font-mono\">$1,450.00</span>\n      </div>\n    </div>\n  }\n>\n  <Card className=\"p-6\">\n    <h3 className=\"text-base font-bold mb-3\">Billing Address</h3>\n    <p className=\"text-sm text-muted-foreground leading-relaxed\">\n      John Doe\n      <br />\n      ul. Marszałkowska 10/24\n      <br />\n      00-001 Warszawa, Poland\n    </p>\n  </Card>\n</DetailPageLayout>"
   },
   {
     "name": "TableToolbar",
@@ -2130,7 +2130,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Drawer\n  open={open}\n  onClose={() => setOpen(false)}\n  title=\"Edit Configuration\"\n  description=\"Manage property options and backup intervals.\"\n>\n  <div className=\"space-y-6\">\n    <TextField label=\"Connection String\" defaultValue=\"postgresql://db.kjaniec.dev:5432\" />\n    <CheckboxField label=\"Enable auto-backups daily\" defaultChecked />\n    <div className=\"flex gap-2 justify-end pt-4 border-t border-border\">\n      <Button variant=\"outline\" size=\"sm\" onClick={() => setOpen(false)}>Cancel</Button>\n      <Button size=\"sm\" onClick={() => setOpen(false)}>Save Changes</Button>\n    </div>\n  </div>\n</Drawer>"
+    "usageSnippet": "<Drawer\n  open={open}\n  onClose={() => setOpen(false)}\n  title=\"Edit Configuration\"\n  description=\"Manage property options and backup intervals.\"\n>\n  <div className=\"space-y-6\">\n    <TextField label=\"Connection String\" defaultValue=\"postgresql://db.kjaniec.dev:5432\" />\n    <CheckboxField label=\"Enable auto-backups daily\" defaultChecked />\n    <div className=\"flex gap-2 justify-end pt-4 border-t border-border\">\n      <Button variant=\"outline\" size=\"sm\" onClick={() => setOpen(false)}>\n        Cancel\n      </Button>\n      <Button size=\"sm\" onClick={() => setOpen(false)}>\n        Save Changes\n      </Button>\n    </div>\n  </div>\n</Drawer>"
   },
   {
     "name": "CommandPalette",
@@ -2569,7 +2569,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<Combobox options={frameworks} value={value} onChange={setValue} placeholder=\"Select a framework…\" />"
+    "usageSnippet": "<Combobox\n  options={frameworks}\n  value={value}\n  onChange={setValue}\n  placeholder=\"Select a framework…\"\n/>"
   },
   {
     "name": "ComboboxField",
@@ -2793,7 +2793,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<DatePickerField label=\"Due date\" required hint=\"Weekdays only.\" value={value} onChange={setValue} disabledDates={(d) => d.getDay() === 0 || d.getDay() === 6} />"
+    "usageSnippet": "<DatePickerField\n  label=\"Due date\"\n  required\n  hint=\"Weekdays only.\"\n  value={value}\n  onChange={setValue}\n  disabledDates={(d) => d.getDay() === 0 || d.getDay() === 6}\n/>"
   },
   {
     "name": "RangeCalendar",
@@ -3202,7 +3202,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<FileUpload value={items} onChange={setItems} accept=\"image/*,.pdf\" maxSize={5 * 1024 * 1024} />"
+    "usageSnippet": "<FileUpload\n  value={items}\n  onChange={setItems}\n  accept=\"image/*,.pdf\"\n  maxSize={5 * 1024 * 1024}\n/>"
   },
   {
     "name": "FileUploadField",
@@ -3582,7 +3582,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<AppShell\n  banner={<div>🚀 Announcement: KJ Product Kit v1.0 released!</div>}\n  header={\n    <div className=\"w-full flex items-center justify-between\">\n      <div className=\"font-bold text-xl tracking-tight\">KJ Product Kit</div>\n      <div className=\"hidden md:flex items-center gap-6 text-sm text-muted-foreground font-medium\">\n        <a href=\"#\" className=\"hover:text-foreground\">Features</a>\n        <a href=\"#\" className=\"hover:text-foreground\">Docs</a>\n        <a href=\"#\" className=\"hover:text-foreground\">Pricing</a>\n      </div>\n      <Button size=\"sm\">Get Started</Button>\n    </div>\n  }\n  mobileNav={\n    <div className=\"flex flex-col gap-4 text-sm font-medium\">\n      <a href=\"#\" className=\"hover:text-foreground\">Features</a>\n      <a href=\"#\" className=\"hover:text-foreground\">Docs</a>\n      <a href=\"#\" className=\"hover:text-foreground\">Pricing</a>\n    </div>\n  }\n  footer={\n    <div className=\"flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground\">\n      <div>© 2026 KJ Product Kit. All rights reserved.</div>\n      <div className=\"flex gap-6\">\n        <a href=\"#\" className=\"hover:text-foreground\">Privacy</a>\n        <a href=\"#\" className=\"hover:text-foreground\">Terms</a>\n        <a href=\"#\" className=\"hover:text-foreground\">GitHub</a>\n      </div>\n    </div>\n  }\n>\n  <div className=\"py-12 space-y-6\">\n    <h1 className=\"text-4xl font-extrabold tracking-tight\">Build faster with KJ UI</h1>\n    <p className=\"text-lg text-muted-foreground max-w-2xl\">\n      A modern, accessible design system tailored for developer tools, SaaS applications, and developer portfolios.\n    </p>\n  </div>\n</AppShell>"
+    "usageSnippet": "<AppShell\n  banner={<div>🚀 Announcement: KJ Product Kit v1.0 released!</div>}\n  header={\n    <div className=\"w-full flex items-center justify-between\">\n      <div className=\"font-bold text-xl tracking-tight\">KJ Product Kit</div>\n      <div className=\"hidden md:flex items-center gap-6 text-sm text-muted-foreground font-medium\">\n        <a href=\"#\" className=\"hover:text-foreground\">\n          Features\n        </a>\n        <a href=\"#\" className=\"hover:text-foreground\">\n          Docs\n        </a>\n        <a href=\"#\" className=\"hover:text-foreground\">\n          Pricing\n        </a>\n      </div>\n      <Button size=\"sm\">Get Started</Button>\n    </div>\n  }\n  mobileNav={\n    <div className=\"flex flex-col gap-4 text-sm font-medium\">\n      <a href=\"#\" className=\"hover:text-foreground\">\n        Features\n      </a>\n      <a href=\"#\" className=\"hover:text-foreground\">\n        Docs\n      </a>\n      <a href=\"#\" className=\"hover:text-foreground\">\n        Pricing\n      </a>\n    </div>\n  }\n  footer={\n    <div className=\"flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground\">\n      <div>© 2026 KJ Product Kit. All rights reserved.</div>\n      <div className=\"flex gap-6\">\n        <a href=\"#\" className=\"hover:text-foreground\">\n          Privacy\n        </a>\n        <a href=\"#\" className=\"hover:text-foreground\">\n          Terms\n        </a>\n        <a href=\"#\" className=\"hover:text-foreground\">\n          GitHub\n        </a>\n      </div>\n    </div>\n  }\n>\n  <div className=\"py-12 space-y-6\">\n    <h1 className=\"text-4xl font-extrabold tracking-tight\">Build faster with KJ UI</h1>\n    <p className=\"text-lg text-muted-foreground max-w-2xl\">\n      A modern, accessible design system tailored for developer tools, SaaS applications, and\n      developer portfolios.\n    </p>\n  </div>\n</AppShell>"
   },
   {
     "name": "AppShellBanner",
@@ -4434,14 +4434,14 @@
         "name": "triggerText",
         "type": "string",
         "optional": true,
-        "defaultValue": "'Wybierz Paczkomat®'",
+        "defaultValue": "\"Wybierz Paczkomat®\"",
         "description": "Trigger button label. Default 'Wybierz Paczkomat®'."
       },
       {
         "name": "modalTitle",
         "type": "string",
         "optional": true,
-        "defaultValue": "'Wybierz punkt odbioru InPost'",
+        "defaultValue": "\"Wybierz punkt odbioru InPost\"",
         "description": "Modal header title. Default 'Wybierz punkt odbioru InPost'."
       },
       {
@@ -4476,21 +4476,21 @@
         "name": "className",
         "type": "string",
         "optional": true,
-        "defaultValue": "''",
+        "defaultValue": "\"\"",
         "description": "Outer container CSS class name."
       },
       {
         "name": "buttonVariant",
-        "type": "'primary' | 'secondary' | 'outline' | 'ghost' | 'danger'",
+        "type": "\"primary\" | \"secondary\" | \"outline\" | \"ghost\" | \"danger\"",
         "optional": true,
-        "defaultValue": "'outline'",
+        "defaultValue": "\"outline\"",
         "description": "Trigger button style variant ('primary', 'secondary', 'outline', 'ghost', 'danger'). Default 'outline'."
       },
       {
         "name": "buttonSize",
-        "type": "'sm' | 'md' | 'lg'",
+        "type": "\"sm\" | \"md\" | \"lg\"",
         "optional": true,
-        "defaultValue": "'md'",
+        "defaultValue": "\"md\"",
         "description": "Trigger button size ('sm', 'md', 'lg'). Default 'md'."
       },
       {
@@ -4537,7 +4537,7 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<InPostGeowidget\n  sandbox={true}\n  onPointSelect={(point) => setSelectedPoint(point)}\n/>"
+    "usageSnippet": "<InPostGeowidget sandbox={true} onPointSelect={(point) => setSelectedPoint(point)} />"
   },
   {
     "name": "InPostGeowidgetModal",
@@ -4562,14 +4562,14 @@
         "name": "triggerText",
         "type": "string",
         "optional": true,
-        "defaultValue": "'Wybierz Paczkomat®'",
+        "defaultValue": "\"Wybierz Paczkomat®\"",
         "description": "Trigger button label. Default 'Wybierz Paczkomat®'."
       },
       {
         "name": "modalTitle",
         "type": "string",
         "optional": true,
-        "defaultValue": "'Wybierz punkt odbioru InPost'",
+        "defaultValue": "\"Wybierz punkt odbioru InPost\"",
         "description": "Modal header title. Default 'Wybierz punkt odbioru InPost'."
       },
       {
@@ -4604,21 +4604,21 @@
         "name": "className",
         "type": "string",
         "optional": true,
-        "defaultValue": "''",
+        "defaultValue": "\"\"",
         "description": "Outer container CSS class name."
       },
       {
         "name": "buttonVariant",
-        "type": "'primary' | 'secondary' | 'outline' | 'ghost' | 'danger'",
+        "type": "\"primary\" | \"secondary\" | \"outline\" | \"ghost\" | \"danger\"",
         "optional": true,
-        "defaultValue": "'outline'",
+        "defaultValue": "\"outline\"",
         "description": "Trigger button style variant ('primary', 'secondary', 'outline', 'ghost', 'danger'). Default 'outline'."
       },
       {
         "name": "buttonSize",
-        "type": "'sm' | 'md' | 'lg'",
+        "type": "\"sm\" | \"md\" | \"lg\"",
         "optional": true,
-        "defaultValue": "'md'",
+        "defaultValue": "\"md\"",
         "description": "Trigger button size ('sm', 'md', 'lg'). Default 'md'."
       },
       {
@@ -4665,6 +4665,6 @@
       }
     ],
     "cva": null,
-    "usageSnippet": "<InPostGeowidgetModal\n  sandbox={true}\n  value={point}\n  onSelect={(p) => setPoint(p)}\n/>"
+    "usageSnippet": "<InPostGeowidgetModal sandbox={true} value={point} onSelect={(p) => setPoint(p)} />"
   }
 ]

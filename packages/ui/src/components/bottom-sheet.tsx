@@ -128,7 +128,9 @@ export function BottomSheet({
         className={cn(
           "fixed inset-0 z-[100] grid items-end sm:place-items-center p-0 sm:p-6 backdrop-blur-[3px] transition-all duration-200",
           "bg-[color-mix(in_oklch,#09090b_55%,transparent)]",
-          open ? "opacity-100 pointer-events-auto visible" : "opacity-0 pointer-events-none invisible"
+          open
+            ? "opacity-100 pointer-events-auto visible"
+            : "opacity-0 pointer-events-none invisible"
         )}
       >
         {/* Panel wrapper */}
@@ -165,7 +167,16 @@ export function BottomSheet({
               aria-label="Close"
               className="absolute top-4 right-4 p-1.5 rounded-kj-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer z-10"
             >
-              <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width={16}
+                height={16}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M18 6 6 18M6 6l12 12" />
               </svg>
             </button>
@@ -179,17 +190,42 @@ export function BottomSheet({
 }
 
 export function BottomSheetHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("p-6 flex flex-col gap-1.5 border-b border-border", className)} {...props} />;
+  return (
+    <div className={cn("p-6 flex flex-col gap-1.5 border-b border-border", className)} {...props} />
+  );
 }
 
-export function BottomSheetTitle({ className, id, children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+export function BottomSheetTitle({
+  className,
+  id,
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLHeadingElement>) {
   const ctx = React.useContext(BottomSheetContext);
-  return <h2 id={id ?? ctx?.titleId} className={cn("m-0 text-[1.15rem] font-bold tracking-[-0.01em]", className)} {...props}>{children}</h2>;
+  return (
+    <h2
+      id={id ?? ctx?.titleId}
+      className={cn("m-0 text-[1.15rem] font-bold tracking-[-0.01em]", className)}
+      {...props}
+    >
+      {children}
+    </h2>
+  );
 }
 
-export function BottomSheetDescription({ className, id, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export function BottomSheetDescription({
+  className,
+  id,
+  ...props
+}: React.HTMLAttributes<HTMLParagraphElement>) {
   const ctx = React.useContext(BottomSheetContext);
-  return <p id={id ?? ctx?.descId} className={cn("m-0 text-[0.9rem] text-muted-foreground", className)} {...props} />;
+  return (
+    <p
+      id={id ?? ctx?.descId}
+      className={cn("m-0 text-[0.9rem] text-muted-foreground", className)}
+      {...props}
+    />
+  );
 }
 
 export function BottomSheetContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
@@ -197,5 +233,10 @@ export function BottomSheetContent({ className, ...props }: React.HTMLAttributes
 }
 
 export function BottomSheetFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("p-6 border-t border-border flex gap-2.5 justify-end mt-auto", className)} {...props} />;
+  return (
+    <div
+      className={cn("p-6 border-t border-border flex gap-2.5 justify-end mt-auto", className)}
+      {...props}
+    />
+  );
 }

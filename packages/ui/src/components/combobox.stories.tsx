@@ -26,7 +26,12 @@ export const Single: Story = {
     const [value, setValue] = React.useState("");
     return (
       <div style={{ maxWidth: 320 }}>
-        <Combobox options={frameworks} value={value} onChange={setValue} placeholder="Select a framework…" />
+        <Combobox
+          options={frameworks}
+          value={value}
+          onChange={setValue}
+          placeholder="Select a framework…"
+        />
       </div>
     );
   },
@@ -38,7 +43,13 @@ export const Multiple: Story = {
     const [value, setValue] = React.useState<string[]>(["next", "astro"]);
     return (
       <div style={{ maxWidth: 380 }}>
-        <Combobox options={frameworks} multiple value={value} onChange={setValue} placeholder="Select frameworks…" />
+        <Combobox
+          options={frameworks}
+          multiple
+          value={value}
+          onChange={setValue}
+          placeholder="Select frameworks…"
+        />
       </div>
     );
   },

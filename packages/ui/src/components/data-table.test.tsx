@@ -50,10 +50,7 @@ describe("DataTable", () => {
 
     it("renders TableWrap with horizontal scroll container enabled", () => {
       const { container } = render(
-        <DataTable
-          columns={[{ header: "Col 1", accessor: () => "Val 1" }]}
-          data={[{ id: 1 }]}
-        />
+        <DataTable columns={[{ header: "Col 1", accessor: () => "Val 1" }]} data={[{ id: 1 }]} />
       );
       const tableWrap = container.querySelector(".overflow-x-auto");
       expect(tableWrap).toBeInTheDocument();

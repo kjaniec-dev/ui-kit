@@ -58,11 +58,10 @@ let instance: Promise<HighlighterCore> | undefined;
  */
 export function getHighlighter(): Promise<HighlighterCore> {
   instance ??= (async () => {
-    const [{ createHighlighterCore }, { createJavaScriptRegexEngine }] =
-      await Promise.all([
-        import("shiki/core"),
-        import("shiki/engine/javascript"),
-      ]);
+    const [{ createHighlighterCore }, { createJavaScriptRegexEngine }] = await Promise.all([
+      import("shiki/core"),
+      import("shiki/engine/javascript"),
+    ]);
     return createHighlighterCore({
       themes: [kjTheme],
       langs: [import("@shikijs/langs/tsx")],

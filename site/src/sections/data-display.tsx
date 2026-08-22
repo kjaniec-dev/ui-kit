@@ -75,7 +75,11 @@ const projectColumns = [
         danger: "danger" as const,
         info: "info" as const,
       }[row.status];
-      return <Badge variant={badgeVariant} dot>{row.status}</Badge>;
+      return (
+        <Badge variant={badgeVariant} dot>
+          {row.status}
+        </Badge>
+      );
     },
     align: "left" as const,
   },
@@ -98,7 +102,9 @@ const sampleProjects: ProjectRow[] = [
 function DataTableDemo() {
   const { toast } = useToast();
   const [tablePage, setTablePage] = React.useState(1);
-  const [tableState, setTableState] = React.useState<"default" | "loading" | "empty" | "error">("default");
+  const [tableState, setTableState] = React.useState<"default" | "loading" | "empty" | "error">(
+    "default"
+  );
   const [selectedRows, setSelectedRows] = React.useState<Set<React.Key>>(new Set());
   const [searchQuery, setSearchQuery] = React.useState("");
   const [sortBy, setSortBy] = React.useState<string | undefined>("name");
@@ -110,8 +116,7 @@ function DataTableDemo() {
       const cleanSearch = searchQuery.toLowerCase();
       result = sampleProjects.filter(
         (p) =>
-          p.name.toLowerCase().includes(cleanSearch) ||
-          p.owner.toLowerCase().includes(cleanSearch)
+          p.name.toLowerCase().includes(cleanSearch) || p.owner.toLowerCase().includes(cleanSearch)
       );
     }
 
@@ -182,7 +187,11 @@ function DataTableDemo() {
         columns={projectColumns}
         data={tableState === "empty" ? [] : paginatedProjects}
         loading={tableState === "loading"}
-        error={tableState === "error" ? "Could not retrieve project records. Please try again." : undefined}
+        error={
+          tableState === "error"
+            ? "Could not retrieve project records. Please try again."
+            : undefined
+        }
         emptyTitle="No projects found"
         emptyDescription="Get started by creating a new SaaS project."
         emptyAction={<Button size="sm">Create Project</Button>}
@@ -209,7 +218,10 @@ function DataTableDemo() {
                     variant="danger"
                     size="sm"
                     onClick={() => {
-                      toast({ message: `Deleted ${selectedRows.size} selected projects`, tone: "danger" });
+                      toast({
+                        message: `Deleted ${selectedRows.size} selected projects`,
+                        tone: "danger",
+                      });
                       setSelectedRows(new Set());
                     }}
                   >
@@ -269,7 +281,9 @@ export function DataDisplaySections() {
                 <Badge variant="primary">Pro</Badge>
               </div>
               <CardTitle>Team Workspace</CardTitle>
-              <CardDescription>Unlimited projects, roles and activity history for your whole team.</CardDescription>
+              <CardDescription>
+                Unlimited projects, roles and activity history for your whole team.
+              </CardDescription>
             </CardHeader>
             <CardFooter>
               <Button size="sm">Choose plan</Button>
@@ -303,13 +317,19 @@ export function DataDisplaySections() {
             </CardContent>
           </Card>
         </Grid>
-        <div className="grid gap-5 mt-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))" }}>
+        <div
+          className="grid gap-5 mt-5"
+          style={{ gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))" }}
+        >
           <Stat label="MRR" value="$128.4k" delta="12.3% MoM" trend="up" />
           <Stat label="Active users" value="8,942" delta="4.1% MoM" trend="up" />
           <Stat label="Churn" value="2.8%" delta="0.6% MoM" trend="down" />
         </div>
         <Sub className="mt-5">Metric Cards (v0.7.0)</Sub>
-        <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
+        <div
+          className="grid gap-5"
+          style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}
+        >
           <MetricCard
             title="Active Subscriptions"
             value="1,429"
@@ -336,7 +356,10 @@ export function DataDisplaySections() {
           />
         </div>
         <Sub className="mt-5">Card Suite (v0.8.0)</Sub>
-        <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))" }}>
+        <div
+          className="grid gap-5"
+          style={{ gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))" }}
+        >
           <ProjectCard
             title="UI Kit Development"
             description="Design system and reusable component library for React applications."
@@ -439,7 +462,9 @@ export function DataDisplaySections() {
             </TableBody>
           </Table>
         </TableWrap>
-        <Sub className="mt-5">DataTable (v0.7.0 with built-in selection, custom toolbar and pagination)</Sub>
+        <Sub className="mt-5">
+          DataTable (v0.7.0 with built-in selection, custom toolbar and pagination)
+        </Sub>
         <DataTableDemo />
       </Sec>
 
@@ -452,7 +477,9 @@ export function DataDisplaySections() {
         <Accordion type="single" defaultValue={["a"]} className="mb-5">
           <AccordionItem value="a">
             <AccordionTrigger>How does billing work?</AccordionTrigger>
-            <AccordionContent>Billed monthly or annually. The annual plan includes two months free.</AccordionContent>
+            <AccordionContent>
+              Billed monthly or annually. The annual plan includes two months free.
+            </AccordionContent>
           </AccordionItem>
           <AccordionItem value="b">
             <AccordionTrigger>Can I change my plan later?</AccordionTrigger>
@@ -505,7 +532,11 @@ export function DataDisplaySections() {
 
             <TimelineItem>
               <TimelineSeparator>
-                <TimelineDot size="lg" variant="success" className="font-bold text-xs flex items-center justify-center">
+                <TimelineDot
+                  size="lg"
+                  variant="success"
+                  className="font-bold text-xs flex items-center justify-center"
+                >
                   ✓
                 </TimelineDot>
                 <TimelineConnector />
@@ -555,42 +586,48 @@ export function DataDisplaySections() {
 const galleryImages: GalleryImage[] = [
   {
     src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&auto=format&fit=crop&q=80",
-    thumbnailSrc: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&auto=format&fit=crop&q=80",
+    thumbnailSrc:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&auto=format&fit=crop&q=80",
     alt: "Yosemite National Park Valley",
     title: "Yosemite Valley",
     caption: "Beautiful view of El Capitan and Half Dome at sunset",
   },
   {
     src: "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?w=1200&auto=format&fit=crop&q=80",
-    thumbnailSrc: "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?w=400&auto=format&fit=crop&q=80",
+    thumbnailSrc:
+      "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?w=400&auto=format&fit=crop&q=80",
     alt: "Pine tree forest during daytime",
     title: "Misty Forest",
     caption: "Morning fog drifting through a dense pine forest",
   },
   {
     src: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&auto=format&fit=crop&q=80",
-    thumbnailSrc: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&auto=format&fit=crop&q=80",
+    thumbnailSrc:
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&auto=format&fit=crop&q=80",
     alt: "Foggy mountain peak",
     title: "Mountain Heights",
     caption: "Dramatic cloud layers covering distant alpine peaks",
   },
   {
     src: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=1200&auto=format&fit=crop&q=80",
-    thumbnailSrc: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=400&auto=format&fit=crop&q=80",
+    thumbnailSrc:
+      "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=400&auto=format&fit=crop&q=80",
     alt: "Mountain landscape with lake",
     title: "Emerald Lake",
     caption: "Crystal clear water reflecting mountain shadows",
   },
   {
     src: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=1200&auto=format&fit=crop&q=80",
-    thumbnailSrc: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=400&auto=format&fit=crop&q=80",
+    thumbnailSrc:
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=400&auto=format&fit=crop&q=80",
     alt: "Green grass field under blue sky",
     title: "Rolling Hills",
     caption: "Vast green meadow extending towards the horizon",
   },
   {
     src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&auto=format&fit=crop&q=80",
-    thumbnailSrc: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&auto=format&fit=crop&q=80",
+    thumbnailSrc:
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&auto=format&fit=crop&q=80",
     alt: "Sunlight filtering through trees",
     title: "Golden Hour Forest",
     caption: "Warm sunbeams illuminating woodland pathway",

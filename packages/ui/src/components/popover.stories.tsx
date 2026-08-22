@@ -32,7 +32,9 @@ export const Playground: Story = {
 
 export const SidesAndAlignments: Story = {
   render: () => (
-    <div style={{ padding: 140, display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap" }}>
+    <div
+      style={{ padding: 140, display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap" }}
+    >
       {(["top", "bottom", "left", "right"] as const).map((side) => (
         <Popover key={side}>
           <PopoverTrigger asChild>

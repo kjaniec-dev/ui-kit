@@ -57,7 +57,10 @@ function ColorPickerDemo() {
         onChange={setColor}
       />
       <div className="p-3 rounded-kj-md border border-border flex items-center gap-3">
-        <span className="w-6 h-6 rounded-full border border-border shrink-0" style={{ backgroundColor: color }} />
+        <span
+          className="w-6 h-6 rounded-full border border-border shrink-0"
+          style={{ backgroundColor: color }}
+        />
         <span className="text-xs font-mono text-muted-foreground uppercase">Active: {color}</span>
       </div>
     </div>
@@ -93,7 +96,9 @@ export function FormsSections() {
         items.map((it) => {
           if (it.status === "success" || it.status === "error") return it;
           const next = (it.progress ?? 0) + 12;
-          return next >= 100 ? { ...it, status: "success", progress: 100 } : { ...it, status: "uploading", progress: next };
+          return next >= 100
+            ? { ...it, status: "success", progress: 100 }
+            : { ...it, status: "uploading", progress: next };
         })
       );
     }, 400);
@@ -138,7 +143,10 @@ export function FormsSections() {
         ]}
       >
         <Box>
-          <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
+          <div
+            className="grid gap-5"
+            style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}
+          >
             <Field>
               <Label htmlFor="full-name" required>
                 Full name
@@ -159,7 +167,11 @@ export function FormsSections() {
                 onChange={(e) => setEmail(e.target.value)}
               />
               <Hint error={email.length > 0 && !emailOk}>
-                {!email ? "We'll use it to sign you in." : emailOk ? "Looks good ✓" : "Enter a valid email address."}
+                {!email
+                  ? "We'll use it to sign you in."
+                  : emailOk
+                    ? "Looks good ✓"
+                    : "Enter a valid email address."}
               </Hint>
             </Field>
             <Field>
@@ -191,7 +203,10 @@ export function FormsSections() {
         </Box>
         <Box>
           <Sub>FormField (Unified wrapper)</Sub>
-          <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
+          <div
+            className="grid gap-5"
+            style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}
+          >
             <FormField
               label="Email address"
               required
@@ -216,7 +231,10 @@ export function FormsSections() {
         </Box>
         <Box>
           <Sub>Convenient Field Components (v0.7.0)</Sub>
-          <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
+          <div
+            className="grid gap-5"
+            style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}
+          >
             <TextField
               label="E-mail"
               required
@@ -242,7 +260,10 @@ export function FormsSections() {
         </Box>
         <Box>
           <Sub>Combobox (searchable select)</Sub>
-          <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
+          <div
+            className="grid gap-5"
+            style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}
+          >
             <ComboboxField
               label="Primary framework"
               hint="Type to filter the list."
@@ -264,7 +285,10 @@ export function FormsSections() {
         </Box>
         <Box>
           <Sub>DatePicker / Calendar</Sub>
-          <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
+          <div
+            className="grid gap-5"
+            style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}
+          >
             <DatePickerField
               label="Meeting date"
               hint="Weekends are disabled."
@@ -280,7 +304,10 @@ export function FormsSections() {
         </Box>
         <Box>
           <Sub>DateRangePicker / RangeCalendar</Sub>
-          <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))" }}>
+          <div
+            className="grid gap-5"
+            style={{ gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))" }}
+          >
             <DateRangePickerField
               label="Booking dates"
               hint="Weekends are disabled."
@@ -296,7 +323,10 @@ export function FormsSections() {
         </Box>
         <Box>
           <Sub>FileUpload / Dropzone</Sub>
-          <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))" }}>
+          <div
+            className="grid gap-5"
+            style={{ gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))" }}
+          >
             <FileUploadField
               label="Attachments"
               hint="PDF or images, up to 5 MB each. Uploads are simulated."
@@ -318,7 +348,15 @@ export function FormsSections() {
         id="selection"
         title="Selection controls"
         desc="Checkboxes, radios, switches, a slider, a segmented control and a multi-select toggle group."
-        components={["Checkbox", "CheckboxField", "Radio", "Switch", "Slider", "Segmented", "ToggleGroup"]}
+        components={[
+          "Checkbox",
+          "CheckboxField",
+          "Radio",
+          "Switch",
+          "Slider",
+          "Segmented",
+          "ToggleGroup",
+        ]}
       >
         <Grid>
           <Box className="mb-0">
@@ -395,22 +433,42 @@ export function FormsSections() {
           <div className="flex flex-wrap items-center gap-6">
             <div className="flex flex-col gap-1.5">
               <span className="text-xs text-muted-foreground font-medium">Hearts (Red)</span>
-              <Rating icon="heart" color="#ef4444" value={heartRating} onChange={setHeartRating} showValue />
+              <Rating
+                icon="heart"
+                color="#ef4444"
+                value={heartRating}
+                onChange={setHeartRating}
+                showValue
+              />
             </div>
             <div className="flex flex-col gap-1.5">
               <span className="text-xs text-muted-foreground font-medium">Flames (Orange)</span>
-              <Rating icon="flame" color="#f97316" value={flameRating} onChange={setFlameRating} showValue />
+              <Rating
+                icon="flame"
+                color="#f97316"
+                value={flameRating}
+                onChange={setFlameRating}
+                showValue
+              />
             </div>
             <div className="flex flex-col gap-1.5">
               <span className="text-xs text-muted-foreground font-medium">Shields (Blue)</span>
-              <Rating icon="shield" color="#3b82f6" value={shieldRating} onChange={setShieldRating} showValue />
+              <Rating
+                icon="shield"
+                color="#3b82f6"
+                value={shieldRating}
+                onChange={setShieldRating}
+                showValue
+              />
             </div>
           </div>
           <div className="h-px bg-border my-5" />
           <Sub>States (Read-only &amp; Disabled)</Sub>
           <div className="flex flex-wrap items-center gap-6">
             <div className="flex flex-col gap-1.5">
-              <span className="text-xs text-muted-foreground font-medium font-mono">readOnly (4.8 / 5)</span>
+              <span className="text-xs text-muted-foreground font-medium font-mono">
+                readOnly (4.8 / 5)
+              </span>
               <Rating readOnly value={4.8} showValue showCount count={128} />
             </div>
             <div className="flex flex-col gap-1.5">
@@ -433,7 +491,9 @@ export function FormsSections() {
             />
             <RatingField
               label="Service Quality"
-              errorMessage={serviceRating === 0 ? "Rating is required before submitting feedback." : undefined}
+              errorMessage={
+                serviceRating === 0 ? "Rating is required before submitting feedback." : undefined
+              }
               value={serviceRating}
               onChange={setServiceRating}
               required
@@ -493,7 +553,8 @@ export function InPostCheckout() {
         <Box>
           <Sub>InPost Geowidget Modal Picker</Sub>
           <p className="text-sm text-muted-foreground mb-4">
-            Kliknij przycisk poniżej, aby otworzyć interaktywny modal z mapą punktów odbioru Paczkomat®.
+            Kliknij przycisk poniżej, aby otworzyć interaktywny modal z mapą punktów odbioru
+            Paczkomat®.
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <InPostGeowidgetModal

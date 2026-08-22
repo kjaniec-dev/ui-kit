@@ -111,7 +111,9 @@ export const MobileOnly: Story = {
   },
   render: (args) => (
     <div className="flex flex-col gap-2 items-center">
-      <p className="text-sm text-gray-500">This FAB is visible only on screens smaller than 768px (viewport &lt; md).</p>
+      <p className="text-sm text-gray-500">
+        This FAB is visible only on screens smaller than 768px (viewport &lt; md).
+      </p>
       <Fab {...args} mobileOnly />
     </div>
   ),

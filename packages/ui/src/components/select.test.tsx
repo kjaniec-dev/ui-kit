@@ -43,9 +43,7 @@ describe("Select", () => {
   });
 
   it("sets aria-invalid only when error is true", () => {
-    const { rerender } = render(
-      <Select aria-label="fruit">{options}</Select>
-    );
+    const { rerender } = render(<Select aria-label="fruit">{options}</Select>);
     expect(screen.getByRole("combobox", { name: "fruit" })).not.toHaveAttribute("aria-invalid");
     rerender(
       <Select aria-label="fruit" error>
@@ -77,9 +75,7 @@ describe("Select", () => {
 
 describe("SelectField", () => {
   it("associates the label with the select", () => {
-    render(
-      <SelectField label="Fruit">{options}</SelectField>
-    );
+    render(<SelectField label="Fruit">{options}</SelectField>);
     // getByLabelText resolves the label -> select association
     const select = screen.getByLabelText("Fruit");
     expect(select).toBeInstanceOf(HTMLSelectElement);
@@ -93,9 +89,7 @@ describe("SelectField", () => {
     );
     const select = screen.getByLabelText("Fruit");
     expect(screen.getByText("Pick one")).toBeInTheDocument();
-    expect(select.getAttribute("aria-describedby")).toContain(
-      screen.getByText("Pick one").id
-    );
+    expect(select.getAttribute("aria-describedby")).toContain(screen.getByText("Pick one").id);
   });
 
   it("shows the error, hides the hint, and marks the select invalid", () => {
@@ -108,9 +102,7 @@ describe("SelectField", () => {
     expect(screen.getByText("Required")).toBeInTheDocument();
     expect(screen.queryByText("Pick one")).not.toBeInTheDocument();
     expect(select).toHaveAttribute("aria-invalid", "true");
-    expect(select.getAttribute("aria-describedby")).toContain(
-      screen.getByText("Required").id
-    );
+    expect(select.getAttribute("aria-describedby")).toContain(screen.getByText("Required").id);
   });
 
   it("marks the field required", () => {

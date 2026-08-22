@@ -68,7 +68,10 @@ describe("DateRangePicker", () => {
     expect(screen.queryAllByRole("grid")).toHaveLength(0);
     expect(screen.getByRole("button", { name: "Pick a date range…" })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Pick a date range…" }));
-    expect(screen.getByRole("gridcell", { name: fullDateFormat.format(day1) })).toHaveAttribute("aria-selected", "false");
+    expect(screen.getByRole("gridcell", { name: fullDateFormat.format(day1) })).toHaveAttribute(
+      "aria-selected",
+      "false"
+    );
   });
 
   it("does not open when disabled", () => {
@@ -144,7 +147,9 @@ describe("DateRangePickerField", () => {
     render(<DateRangePickerField label="Booking dates" hint="Choose your stay" />);
     const trigger = screen.getByLabelText("Booking dates");
     expect(screen.getByText("Choose your stay")).toBeInTheDocument();
-    expect(trigger.getAttribute("aria-describedby")).toContain(screen.getByText("Choose your stay").id);
+    expect(trigger.getAttribute("aria-describedby")).toContain(
+      screen.getByText("Choose your stay").id
+    );
   });
 
   it("shows the error, hides the hint, and marks the trigger invalid", () => {

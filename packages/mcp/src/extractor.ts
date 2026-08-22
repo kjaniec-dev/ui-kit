@@ -80,11 +80,11 @@ function getJSDoc(node: ts.Node, sourceFile: ts.SourceFile): string {
       if (typeof first.comment === "string") {
         return first.comment;
       } else if (Array.isArray(first.comment)) {
-        return first.comment.map(c => c.text).join("");
+        return first.comment.map((c) => c.text).join("");
       }
     }
   }
-  
+
   const sourceText = sourceFile.text;
   const ranges = ts.getLeadingCommentRanges(sourceText, node.pos);
   if (ranges && ranges.length > 0) {
@@ -93,7 +93,7 @@ function getJSDoc(node: ts.Node, sourceFile: ts.SourceFile): string {
       .replace(/^\/\*\*?/, "")
       .replace(/\*\/$/, "")
       .split("\n")
-      .map(line => line.replace(/^\s*\*?/, "").trim())
+      .map((line) => line.replace(/^\s*\*?/, "").trim())
       .filter(Boolean)
       .join(" ");
   }
@@ -107,7 +107,7 @@ function parseCvaCall(node: ts.CallExpression): CvaInfo | null {
 
   const result: CvaInfo = {
     variants: {},
-    defaultVariants: {}
+    defaultVariants: {},
   };
 
   for (const prop of config.properties) {
@@ -144,10 +144,16 @@ function parseCvaCall(node: ts.CallExpression): CvaInfo | null {
   return result;
 }
 
-export function isComponentExport(node: ts.ExportDeclaration, element: ts.ExportSpecifier): boolean {
+export function isComponentExport(
+  node: ts.ExportDeclaration,
+  element: ts.ExportSpecifier
+): boolean {
   if (node.isTypeOnly || element.isTypeOnly) return false;
   const name = element.name.getText();
-  return /^[A-Z]/.test(name) && !/(Props|Variants|Options|Tone|Option|Align|Size|Variant|Style)$/.test(name);
+  return (
+    /^[A-Z]/.test(name) &&
+    !/(Props|Variants|Options|Tone|Option|Align|Size|Variant|Style)$/.test(name)
+  );
 }
 
 export function parseComponents(): ComponentInfo[] {
@@ -178,7 +184,7 @@ export function parseComponents(): ComponentInfo[] {
           if (isComponentExport(node, element)) {
             exports.push({
               name: exportName,
-              fileRelativePath: relPath
+              fileRelativePath: relPath,
             });
           }
         }
@@ -220,7 +226,10 @@ export function parseComponents(): ComponentInfo[] {
     if (indents.length === 0) return snippet;
     const indent = Math.min(...indents);
     if (indent === 0) return snippet;
-    return [lines[0], ...lines.slice(1).map((l) => (l.trim().length > 0 ? l.slice(indent) : ""))].join("\n");
+    return [
+      lines[0],
+      ...lines.slice(1).map((l) => (l.trim().length > 0 ? l.slice(indent) : "")),
+    ].join("\n");
   }
 
   function findUsageSnippet(compName: string): string {
@@ -231,7 +240,7 @@ export function parseComponents(): ComponentInfo[] {
 
     for (const storyFile of Object.keys(storyContents)) {
       const content = storyContents[storyFile];
-      
+
       // Try double tag first
       const doubleMatches = content.match(doubleTagRegex);
       if (doubleMatches && doubleMatches.length > 0) {
@@ -316,7 +325,7 @@ export function parseComponents(): ComponentInfo[] {
     const sourceFile = ts.createSourceFile(filePath, code, ts.ScriptTarget.Latest, true);
 
     const compNames = exportsByFile[filePath];
-    
+
     // Find all interface declarations, type alias declarations, cva calls, and parameter destructuring in this file
     const fileInterfaces: Record<string, PropInfo[]> = {};
     let fileCva: CvaInfo | null = null;
@@ -352,7 +361,7 @@ export function parseComponents(): ComponentInfo[] {
               type: member.type ? member.type.getText() : "any",
               optional: member.questionToken !== undefined,
               defaultValue: null,
-              description: getJSDoc(member, sourceFile)
+              description: getJSDoc(member, sourceFile),
             });
           }
         }
@@ -370,7 +379,7 @@ export function parseComponents(): ComponentInfo[] {
               type: member.type ? member.type.getText() : "any",
               optional: member.questionToken !== undefined,
               defaultValue: null,
-              description: getJSDoc(member, sourceFile)
+              description: getJSDoc(member, sourceFile),
             });
           }
         }
@@ -392,12 +401,19 @@ export function parseComponents(): ComponentInfo[] {
       if (ts.isFunctionDeclaration(node) && node.name && compNames.includes(node.name.getText())) {
         renderFn = node;
         targetCompName = node.name.getText();
-      } else if (ts.isVariableDeclaration(node) && node.name && compNames.includes(node.name.getText())) {
+      } else if (
+        ts.isVariableDeclaration(node) &&
+        node.name &&
+        compNames.includes(node.name.getText())
+      ) {
         targetCompName = node.name.getText();
         if (node.initializer) {
           if (ts.isArrowFunction(node.initializer) || ts.isFunctionExpression(node.initializer)) {
             renderFn = node.initializer;
-          } else if (ts.isCallExpression(node.initializer) && node.initializer.expression.getText().includes("forwardRef")) {
+          } else if (
+            ts.isCallExpression(node.initializer) &&
+            node.initializer.expression.getText().includes("forwardRef")
+          ) {
             const inner = node.initializer.arguments[0];
             if (inner && (ts.isArrowFunction(inner) || ts.isFunctionExpression(inner))) {
               renderFn = inner;
@@ -435,7 +451,7 @@ export function parseComponents(): ComponentInfo[] {
 
       // If no custom props interface is found, try other matching interfaces
       if (componentProps.length === 0) {
-        const fallbackInterface = Object.keys(fileInterfaces).find(k => k.includes(compName));
+        const fallbackInterface = Object.keys(fileInterfaces).find((k) => k.includes(compName));
         if (fallbackInterface) {
           componentProps = fileInterfaces[fallbackInterface];
         }
@@ -453,8 +469,10 @@ export function parseComponents(): ComponentInfo[] {
       const finalCva = fileCva as any;
       if (finalCva) {
         for (const variantGroup of Object.keys(finalCva.variants)) {
-          const existingProp = componentProps.find(p => p.name === variantGroup);
-          const typeStr = (finalCva.variants[variantGroup] as string[]).map((v: string) => `"${v}"`).join(" | ");
+          const existingProp = componentProps.find((p) => p.name === variantGroup);
+          const typeStr = (finalCva.variants[variantGroup] as string[])
+            .map((v: string) => `"${v}"`)
+            .join(" | ");
           const defaultVal = finalCva.defaultVariants[variantGroup] || null;
 
           if (existingProp) {
@@ -468,7 +486,7 @@ export function parseComponents(): ComponentInfo[] {
               type: typeStr,
               optional: true,
               defaultValue: defaultVal ? `"${defaultVal}"` : null,
-              description: `Style variant of the component: ${variantGroup}.`
+              description: `Style variant of the component: ${variantGroup}.`,
             });
           }
         }
@@ -484,7 +502,7 @@ export function parseComponents(): ComponentInfo[] {
         description,
         props: componentProps,
         cva: finalCva,
-        usageSnippet
+        usageSnippet,
       };
     }
   }
@@ -557,7 +575,7 @@ export function parseTokens(): ParsedToken[] {
   function getTailwindUtility(kjVarName: string): string {
     const twVar = tailwindThemeMappings[kjVarName];
     if (!twVar) return "";
-    
+
     // Map tailwind variables to utility prefixes:
     // e.g. --color-primary -> bg-primary, text-primary, border-primary
     // e.g. --radius-kj-sm -> rounded-kj-sm
@@ -587,7 +605,7 @@ export function parseTokens(): ParsedToken[] {
   // Recurse W3C Design Tokens JSON
   function recurseTokens(obj: any, pathArray: string[]) {
     if (!obj || typeof obj !== "object") return;
-    
+
     if (obj["$type"] && obj["$value"] !== undefined) {
       const tokenName = pathArray.join(".");
       let category = pathArray[0];
@@ -620,7 +638,7 @@ export function parseTokens(): ParsedToken[] {
         category,
         light,
         dark,
-        tailwind
+        tailwind,
       });
       return;
     }
@@ -638,7 +656,7 @@ export function parseTokens(): ParsedToken[] {
 
 export function generate() {
   console.error("Starting generation step...");
-  
+
   // Parse components and tokens
   const components = parseComponents();
   const tokens = parseTokens();
@@ -649,10 +667,9 @@ export function generate() {
     JSON.stringify(components, null, 2)
   );
 
-  fs.writeFileSync(
-    path.join(dataOutputDir, "tokens.json"),
-    JSON.stringify(tokens, null, 2)
-  );
+  fs.writeFileSync(path.join(dataOutputDir, "tokens.json"), JSON.stringify(tokens, null, 2));
 
-  console.error("Successfully generated components.json and tokens.json inside packages/mcp/data/.");
+  console.error(
+    "Successfully generated components.json and tokens.json inside packages/mcp/data/."
+  );
 }

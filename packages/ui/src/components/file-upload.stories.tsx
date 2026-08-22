@@ -17,7 +17,12 @@ export const Default: Story = {
     const [items, setItems] = React.useState<UploadItem[]>([]);
     return (
       <div style={{ maxWidth: 420 }}>
-        <FileUpload value={items} onChange={setItems} accept="image/*,.pdf" maxSize={5 * 1024 * 1024} />
+        <FileUpload
+          value={items}
+          onChange={setItems}
+          accept="image/*,.pdf"
+          maxSize={5 * 1024 * 1024}
+        />
       </div>
     );
   },
@@ -28,9 +33,23 @@ export const WithProgressStates: Story = {
     <div style={{ maxWidth: 420 }}>
       <FileUpload
         value={[
-          { id: "1", file: new File(["x"], "invoice.pdf", { type: "application/pdf" }), status: "uploading", progress: 62 },
-          { id: "2", file: new File(["x"], "receipt.png", { type: "image/png" }), status: "success" },
-          { id: "3", file: new File(["x"], "broken.png", { type: "image/png" }), status: "error", error: "Server rejected" },
+          {
+            id: "1",
+            file: new File(["x"], "invoice.pdf", { type: "application/pdf" }),
+            status: "uploading",
+            progress: 62,
+          },
+          {
+            id: "2",
+            file: new File(["x"], "receipt.png", { type: "image/png" }),
+            status: "success",
+          },
+          {
+            id: "3",
+            file: new File(["x"], "broken.png", { type: "image/png" }),
+            status: "error",
+            error: "Server rejected",
+          },
         ]}
         onChange={() => {}}
       />

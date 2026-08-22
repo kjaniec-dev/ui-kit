@@ -3,28 +3,49 @@
    Import once at your app root:  import "@kjaniec-dev/ui/ui.css"; */
 
 @keyframes kjpop {
-  from { opacity: 0; transform: translateY(-4px); }
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
 }
 @keyframes kjtoastin {
-  from { opacity: 0; transform: translateX(20px); }
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
 }
 @keyframes kjtoastout {
-  to { opacity: 0; transform: translateX(20px); }
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
 }
 @keyframes kjshimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 /* Range slider thumb (matches <Slider />) */
 .kj-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 18px; height: 18px; border-radius: 9999px;
-  background: var(--kj-primary); border: 3px solid var(--kj-surface);
-  box-shadow: var(--kj-shadow-sm); cursor: pointer;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--kj-primary);
+  border: 3px solid var(--kj-surface);
+  box-shadow: var(--kj-shadow-sm);
+  cursor: pointer;
 }
 .kj-slider::-moz-range-thumb {
-  width: 18px; height: 18px; border-radius: 9999px;
-  background: var(--kj-primary); border: 3px solid var(--kj-surface);
-  box-shadow: var(--kj-shadow-sm); cursor: pointer;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--kj-primary);
+  border: 3px solid var(--kj-surface);
+  box-shadow: var(--kj-shadow-sm);
+  cursor: pointer;
 }

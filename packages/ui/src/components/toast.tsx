@@ -29,13 +29,51 @@ export function useToast() {
 
 const icons: Record<ToastTone, React.ReactNode> = {
   default: (
-    <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-primary"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg>
+    <svg
+      width={18}
+      height={18}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="text-primary"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 16v-4M12 8h.01" />
+    </svg>
   ),
   success: (
-    <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-success"><path d="M20 6 9 17l-5-5" /></svg>
+    <svg
+      width={18}
+      height={18}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="text-success"
+    >
+      <path d="M20 6 9 17l-5-5" />
+    </svg>
   ),
   danger: (
-    <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-danger"><circle cx="12" cy="12" r="10" /><path d="m15 9-6 6M9 9l6 6" /></svg>
+    <svg
+      width={18}
+      height={18}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="text-danger"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="m15 9-6 6M9 9l6 6" />
+    </svg>
   ),
 };
 
@@ -76,7 +114,9 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
               "flex items-center gap-2.5 min-w-[280px] px-4 py-3 cursor-pointer",
               "bg-surface border border-border border-l-[3px] rounded-kj-md shadow-kj-lg text-[0.85rem] font-medium",
               toneBorder[t.tone],
-              t.leaving ? "animate-[kjtoastout_.25s_ease_forwards]" : "animate-[kjtoastin_.25s_ease]"
+              t.leaving
+                ? "animate-[kjtoastout_.25s_ease_forwards]"
+                : "animate-[kjtoastin_.25s_ease]"
             )}
           >
             <span className="grid place-items-center">{icons[t.tone]}</span>

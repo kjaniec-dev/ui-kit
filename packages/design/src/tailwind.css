@@ -16,6 +16,8 @@
   --color-muted-foreground: var(--kj-muted-foreground);
   --color-border: var(--kj-border);
   --color-input: var(--kj-input);
+  --color-control-border: var(--kj-control-border);
+  --color-control-border-hover: var(--kj-control-border-hover);
   --color-ring: var(--kj-ring);
   --color-success: var(--kj-success);
   --color-success-surface: var(--kj-success-surface);
@@ -35,6 +37,9 @@
   --color-chart1: var(--kj-chart1);
   --color-chart2: var(--kj-chart2);
   --color-chart3: var(--kj-chart3);
+  --color-chart4: var(--kj-chart4);
+  --color-chart5: var(--kj-chart5);
+  --color-chart6: var(--kj-chart6);
   --color-primary-50: var(--kj-primary-50);
   --color-primary-100: var(--kj-primary-100);
   --color-primary-200: var(--kj-primary-200);

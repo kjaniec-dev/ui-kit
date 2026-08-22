@@ -24,11 +24,8 @@ export const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
     }>;
     const clonedChild = React.cloneElement(child, {
       id: child.props.id ?? id,
-      "aria-describedby": cn(
-        hint && hintId,
-        error && errorId,
-        child.props["aria-describedby"]
-      ) || undefined,
+      "aria-describedby":
+        cn(hint && hintId, error && errorId, child.props["aria-describedby"]) || undefined,
       "aria-invalid": error ? "true" : undefined,
       required: child.props.required ?? required,
     });

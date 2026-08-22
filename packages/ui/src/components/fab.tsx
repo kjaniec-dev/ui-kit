@@ -17,7 +17,8 @@ const fabVariants = cva(
       variant: {
         primary: "bg-primary text-primary-foreground hover:bg-primary-hover",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary-hover",
-        outline: "bg-transparent text-foreground border-border hover:bg-muted hover:border-muted-foreground",
+        outline:
+          "bg-transparent text-foreground border-border hover:bg-muted hover:border-muted-foreground",
         danger: "bg-danger text-white hover:brightness-95",
       },
       size: {
@@ -41,19 +42,22 @@ export interface FabProps
     VariantProps<typeof fabVariants> {
   /** Icon rendered inside the button. */
   icon: React.ReactNode;
-  
+
   /** Text label for accessibility (aria-label). */
   label: string;
-  
+
   /** If true, the FAB will only be visible on mobile screens (< 768px). */
   mobileOnly?: boolean;
-  
+
   /** Shows a spinner and disables interaction. */
   loading?: boolean;
 }
 
 export const Fab = React.forwardRef<HTMLButtonElement, FabProps>(
-  ({ className, variant, size, position, mobileOnly, icon, label, loading, disabled, ...props }, ref) => {
+  (
+    { className, variant, size, position, mobileOnly, icon, label, loading, disabled, ...props },
+    ref
+  ) => {
     return (
       <button
         ref={ref}

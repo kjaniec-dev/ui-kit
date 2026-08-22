@@ -20,7 +20,12 @@ export interface CommandPaletteProps {
   placeholder?: string;
 }
 
-export function CommandPalette({ open, onClose, items, placeholder = "Type a command or search..." }: CommandPaletteProps) {
+export function CommandPalette({
+  open,
+  onClose,
+  items,
+  placeholder = "Type a command or search...",
+}: CommandPaletteProps) {
   const [search, setSearch] = React.useState("");
   const [activeIndex, setActiveIndex] = React.useState(0);
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -69,10 +74,14 @@ export function CommandPalette({ open, onClose, items, placeholder = "Type a com
 
       if (e.key === "ArrowDown") {
         e.preventDefault();
-        setActiveIndex((prev) => (filteredItems.length === 0 ? 0 : (prev + 1) % filteredItems.length));
+        setActiveIndex((prev) =>
+          filteredItems.length === 0 ? 0 : (prev + 1) % filteredItems.length
+        );
       } else if (e.key === "ArrowUp") {
         e.preventDefault();
-        setActiveIndex((prev) => (filteredItems.length === 0 ? 0 : (prev - 1 + filteredItems.length) % filteredItems.length));
+        setActiveIndex((prev) =>
+          filteredItems.length === 0 ? 0 : (prev - 1 + filteredItems.length) % filteredItems.length
+        );
       } else if (e.key === "Enter") {
         e.preventDefault();
         if (filteredItems[activeIndex]) {
@@ -123,8 +132,18 @@ export function CommandPalette({ open, onClose, items, placeholder = "Type a com
       >
         {/* Search Input */}
         <div className="p-4 border-b border-border flex items-center gap-2">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-5 w-5 text-muted-foreground shrink-0 ml-1">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            className="h-5 w-5 text-muted-foreground shrink-0 ml-1"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+            />
           </svg>
           <input
             type="text"
@@ -156,7 +175,12 @@ export function CommandPalette({ open, onClose, items, placeholder = "Type a com
               className="space-y-4"
             >
               {Object.entries(groups).map(([cat, itemsInCat]) => (
-                <div key={cat} role="group" aria-labelledby={`cmd-cat-${cat}`} className="space-y-1">
+                <div
+                  key={cat}
+                  role="group"
+                  aria-labelledby={`cmd-cat-${cat}`}
+                  className="space-y-1"
+                >
                   <div
                     id={`cmd-cat-${cat}`}
                     className="px-3 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-muted-foreground"
@@ -178,16 +202,31 @@ export function CommandPalette({ open, onClose, items, placeholder = "Type a com
                         }}
                         className={cn(
                           "flex items-center justify-between gap-3 px-3 py-2.5 rounded-kj-md cursor-pointer select-none transition-colors",
-                          isActive ? "bg-primary/10 text-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                          isActive
+                            ? "bg-primary/10 text-foreground"
+                            : "text-muted-foreground hover:bg-muted hover:text-foreground"
                         )}
                       >
                         <div className="flex items-center gap-3 min-w-0">
-                          {item.icon && <span className="text-muted-foreground [&_svg]:h-[1.1rem] [&_svg]:w-[1.1rem]">{item.icon}</span>}
+                          {item.icon && (
+                            <span className="text-muted-foreground [&_svg]:h-[1.1rem] [&_svg]:w-[1.1rem]">
+                              {item.icon}
+                            </span>
+                          )}
                           <div className="min-w-0 flex flex-col">
-                            <span className={cn("text-[0.85rem] font-semibold", isActive ? "text-primary" : "text-foreground")}>
+                            <span
+                              className={cn(
+                                "text-[0.85rem] font-semibold",
+                                isActive ? "text-primary" : "text-foreground"
+                              )}
+                            >
                               {item.title}
                             </span>
-                            {item.subtitle && <span className="text-[0.75rem] text-muted-foreground truncate">{item.subtitle}</span>}
+                            {item.subtitle && (
+                              <span className="text-[0.75rem] text-muted-foreground truncate">
+                                {item.subtitle}
+                              </span>
+                            )}
                           </div>
                         </div>
                         {item.shortcut && (
@@ -214,8 +253,13 @@ export function CommandPalette({ open, onClose, items, placeholder = "Type a com
         {/* Footer info */}
         <div className="px-4 py-2.5 border-t border-border bg-subtle flex items-center justify-between text-[11px] text-muted-foreground font-medium">
           <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1"><kbd className="font-mono text-[9px] px-1 border rounded bg-surface">↑↓</kbd> Navigate</span>
-            <span className="flex items-center gap-1"><kbd className="font-mono text-[9px] px-1 border rounded bg-surface">Enter</kbd> Select</span>
+            <span className="flex items-center gap-1">
+              <kbd className="font-mono text-[9px] px-1 border rounded bg-surface">↑↓</kbd> Navigate
+            </span>
+            <span className="flex items-center gap-1">
+              <kbd className="font-mono text-[9px] px-1 border rounded bg-surface">Enter</kbd>{" "}
+              Select
+            </span>
           </div>
           <div>
             <kbd className="font-mono text-[9px] px-1 border rounded bg-surface">Esc</kbd> Close

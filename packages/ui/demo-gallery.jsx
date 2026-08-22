@@ -1,298 +1,690 @@
 /* Demo gallery — rendered with the REAL @kjaniec-dev/ui components.
    Assembled into a standalone HTML so anyone can open & run it. */
 
-function Ico(p){ return <svg viewBox="0 0 24 24" width={p.s||18} height={p.s||18} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{p.children}</svg>; }
-const IcoPlus    = <Ico><path d="M5 12h14M12 5v14"/></Ico>;
-const IcoSearch  = <Ico><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></Ico>;
-const IcoGear    = <Ico><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></Ico>;
-const IcoInfo    = <Ico><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></Ico>;
-const IcoCheck   = <Ico><path d="M20 6 9 17l-5-5"/></Ico>;
-const IcoWarn    = <Ico><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></Ico>;
-const IcoX       = <Ico><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></Ico>;
-const IcoChev    = <Ico s={16}><polyline points="6 9 12 15 18 9"/></Ico>;
-const IcoEdit    = <Ico s={16}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4Z"/></Ico>;
-const IcoCopy    = <Ico s={16}><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></Ico>;
-const IcoTrash   = <Ico s={16}><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></Ico>;
-const IcoSun     = <Ico><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></Ico>;
-const IcoMoon    = <Ico><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></Ico>;
-
-function Sec(p){
-  return <section id={p.id} className="mb-14 scroll-mt-24">
-    <div className="mb-5">
-      <h2 className="m-0 text-2xl font-bold tracking-[-0.02em]">{p.title}</h2>
-      {p.desc && <p className="mt-1 text-sm text-muted-foreground max-w-[60ch]">{p.desc}</p>}
-    </div>
-    {p.children}
-  </section>;
+function Ico(p) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={p.s || 18}
+      height={p.s || 18}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      {p.children}
+    </svg>
+  );
 }
-function Box(p){ return <div className={cn("bg-card border border-border rounded-kj-xl p-7 shadow-kj-xs mb-5", p.className)}>{p.children}</div>; }
-function Sub(p){ return <p className="text-[0.72rem] uppercase tracking-[0.08em] font-semibold text-muted-foreground mb-3.5 mt-0">{p.children}</p>; }
-function Grid(p){ return <div className="grid gap-5" style={{gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))"}}>{p.children}</div>; }
+const IcoPlus = (
+  <Ico>
+    <path d="M5 12h14M12 5v14" />
+  </Ico>
+);
+const IcoSearch = (
+  <Ico>
+    <circle cx="11" cy="11" r="8" />
+    <path d="m21 21-4.3-4.3" />
+  </Ico>
+);
+const IcoGear = (
+  <Ico>
+    <circle cx="12" cy="12" r="3" />
+    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" />
+  </Ico>
+);
+const IcoInfo = (
+  <Ico>
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 16v-4M12 8h.01" />
+  </Ico>
+);
+const IcoCheck = (
+  <Ico>
+    <path d="M20 6 9 17l-5-5" />
+  </Ico>
+);
+const IcoWarn = (
+  <Ico>
+    <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" />
+    <path d="M12 9v4M12 17h.01" />
+  </Ico>
+);
+const IcoX = (
+  <Ico>
+    <circle cx="12" cy="12" r="10" />
+    <path d="m15 9-6 6M9 9l6 6" />
+  </Ico>
+);
+const IcoChev = (
+  <Ico s={16}>
+    <polyline points="6 9 12 15 18 9" />
+  </Ico>
+);
+const IcoEdit = (
+  <Ico s={16}>
+    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+    <path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4Z" />
+  </Ico>
+);
+const IcoCopy = (
+  <Ico s={16}>
+    <rect x="9" y="9" width="13" height="13" rx="2" />
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+  </Ico>
+);
+const IcoTrash = (
+  <Ico s={16}>
+    <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+  </Ico>
+);
+const IcoSun = (
+  <Ico>
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+  </Ico>
+);
+const IcoMoon = (
+  <Ico>
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+  </Ico>
+);
 
-const NAV = [["buttons","Buttons"],["badges","Badges"],["feedback","Feedback"],["forms","Forms"],["selection","Selection"],["cards","Cards"],["navigation","Navigation"],["data","Table"],["overlays","Overlays"]];
+function Sec(p) {
+  return (
+    <section id={p.id} className="mb-14 scroll-mt-24">
+      <div className="mb-5">
+        <h2 className="m-0 text-2xl font-bold tracking-[-0.02em]">{p.title}</h2>
+        {p.desc && <p className="mt-1 text-sm text-muted-foreground max-w-[60ch]">{p.desc}</p>}
+      </div>
+      {p.children}
+    </section>
+  );
+}
+function Box(p) {
+  return (
+    <div
+      className={cn(
+        "bg-card border border-border rounded-kj-xl p-7 shadow-kj-xs mb-5",
+        p.className
+      )}
+    >
+      {p.children}
+    </div>
+  );
+}
+function Sub(p) {
+  return (
+    <p className="text-[0.72rem] uppercase tracking-[0.08em] font-semibold text-muted-foreground mb-3.5 mt-0">
+      {p.children}
+    </p>
+  );
+}
+function Grid(p) {
+  return (
+    <div
+      className="grid gap-5"
+      style={{ gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))" }}
+    >
+      {p.children}
+    </div>
+  );
+}
 
-function Gallery(){
+const NAV = [
+  ["buttons", "Buttons"],
+  ["badges", "Badges"],
+  ["feedback", "Feedback"],
+  ["forms", "Forms"],
+  ["selection", "Selection"],
+  ["cards", "Cards"],
+  ["navigation", "Navigation"],
+  ["data", "Table"],
+  ["overlays", "Overlays"],
+];
+
+function Gallery() {
   const { toast } = useToast();
-  const [dark,setDark] = React.useState(false);
-  const [tab,setTab] = React.useState("overview");
-  const [seg,setSeg] = React.useState("day");
-  const [page,setPage] = React.useState(1);
-  const [open,setOpen] = React.useState(false);
-  const [email,setEmail] = React.useState("");
-  const [loading,setLoading] = React.useState(false);
-  const [prog,setProg] = React.useState(42);
+  const [dark, setDark] = React.useState(false);
+  const [tab, setTab] = React.useState("overview");
+  const [seg, setSeg] = React.useState("day");
+  const [page, setPage] = React.useState(1);
+  const [open, setOpen] = React.useState(false);
+  const [email, setEmail] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [prog, setProg] = React.useState(42);
   const emailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
 
-  React.useEffect(()=>{ document.documentElement.classList.toggle("dark", dark); }, [dark]);
-  React.useEffect(()=>{ const t=setInterval(()=>setProg(p=>p>=94?22:p+18),1400); return ()=>clearInterval(t); }, []);
+  React.useEffect(() => {
+    document.documentElement.classList.toggle("dark", dark);
+  }, [dark]);
+  React.useEffect(() => {
+    const t = setInterval(() => setProg((p) => (p >= 94 ? 22 : p + 18)), 1400);
+    return () => clearInterval(t);
+  }, []);
 
-  return <div className="grid min-h-screen" style={{gridTemplateColumns:"260px 1fr"}}>
-    {/* sidebar */}
-    <aside className="sticky top-0 self-start h-screen overflow-y-auto bg-surface border-r border-border p-6 max-[820px]:hidden">
-      <div className="flex items-center gap-2.5 px-2 pb-5">
-        <div className="grid place-items-center h-9 w-9 rounded-kj-md bg-primary text-primary-foreground font-bold font-mono shadow-kj-glow">KJ</div>
-        <div><div className="font-bold text-sm leading-tight">@kjaniec-dev/ui</div><div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.1.0</div></div>
-      </div>
-      <div className="text-[0.68rem] uppercase tracking-[0.09em] font-semibold text-muted-foreground px-3 pt-3 pb-1.5">Components</div>
-      <nav className="flex flex-col gap-0.5">
-        {NAV.map(([id,label])=>(
-          <a key={id} href={"#"+id} className="flex items-center gap-2.5 px-3 py-2 rounded-kj-sm text-muted-foreground hover:bg-muted hover:text-foreground text-sm font-medium no-underline transition-colors">
-            <span className="w-1.5 h-1.5 rounded-full bg-border"/>{label}
-          </a>
-        ))}
-      </nav>
-    </aside>
-
-    <div className="min-w-0">
-      {/* topbar */}
-      <header className="sticky top-0 z-30 flex items-center justify-between gap-4 px-8 max-[820px]:px-5 py-4 border-b border-border" style={{background:"color-mix(in oklch, var(--kj-background) 82%, transparent)", backdropFilter:"blur(12px)"}}>
-        <div className="text-[0.95rem] font-semibold">Component demo <span className="text-muted-foreground font-normal">· interactive</span></div>
-        <div className="flex items-center gap-2.5">
-          <Badge variant="primary" dot>24 components</Badge>
-          <Button variant="outline" size="icon" aria-label="Theme" onClick={()=>setDark(d=>!d)}>{dark?IcoSun:IcoMoon}</Button>
+  return (
+    <div className="grid min-h-screen" style={{ gridTemplateColumns: "260px 1fr" }}>
+      {/* sidebar */}
+      <aside className="sticky top-0 self-start h-screen overflow-y-auto bg-surface border-r border-border p-6 max-[820px]:hidden">
+        <div className="flex items-center gap-2.5 px-2 pb-5">
+          <div className="grid place-items-center h-9 w-9 rounded-kj-md bg-primary text-primary-foreground font-bold font-mono shadow-kj-glow">
+            KJ
+          </div>
+          <div>
+            <div className="font-bold text-sm leading-tight">@kjaniec-dev/ui</div>
+            <div className="text-[0.7rem] text-muted-foreground font-mono">React · v0.1.0</div>
+          </div>
         </div>
-      </header>
+        <div className="text-[0.68rem] uppercase tracking-[0.09em] font-semibold text-muted-foreground px-3 pt-3 pb-1.5">
+          Components
+        </div>
+        <nav className="flex flex-col gap-0.5">
+          {NAV.map(([id, label]) => (
+            <a
+              key={id}
+              href={"#" + id}
+              className="flex items-center gap-2.5 px-3 py-2 rounded-kj-sm text-muted-foreground hover:bg-muted hover:text-foreground text-sm font-medium no-underline transition-colors"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-border" />
+              {label}
+            </a>
+          ))}
+        </nav>
+      </aside>
 
-      <main className="px-8 max-[820px]:px-5 py-10 max-w-[1040px]">
+      <div className="min-w-0">
+        {/* topbar */}
+        <header
+          className="sticky top-0 z-30 flex items-center justify-between gap-4 px-8 max-[820px]:px-5 py-4 border-b border-border"
+          style={{
+            background: "color-mix(in oklch, var(--kj-background) 82%, transparent)",
+            backdropFilter: "blur(12px)",
+          }}
+        >
+          <div className="text-[0.95rem] font-semibold">
+            Component demo <span className="text-muted-foreground font-normal">· interactive</span>
+          </div>
+          <div className="flex items-center gap-2.5">
+            <Badge variant="primary" dot>
+              24 components
+            </Badge>
+            <Button
+              variant="outline"
+              size="icon"
+              aria-label="Theme"
+              onClick={() => setDark((d) => !d)}
+            >
+              {dark ? IcoSun : IcoMoon}
+            </Button>
+          </div>
+        </header>
 
-        <Sec id="buttons" title="Buttons" desc="Five variants, three sizes, a loading state and icon buttons.">
-          <Box>
-            <Sub>Variants</Sub>
-            <div className="flex flex-wrap gap-3 items-center">
-              <Button>Primary</Button>
-              <Button variant="secondary">Secondary</Button>
-              <Button variant="outline">Outline</Button>
-              <Button variant="ghost">Ghost</Button>
-              <Button variant="danger">Danger</Button>
-            </div>
-            <div className="h-px bg-border my-5"/>
-            <Sub>Sizes, icon and states</Sub>
-            <div className="flex flex-wrap gap-3 items-center">
-              <Button size="sm">Small</Button>
-              <Button>Medium</Button>
-              <Button size="lg">Large</Button>
-              <Button leadingIcon={IcoPlus}>New project</Button>
-              <Button variant="outline" size="icon" aria-label="Settings">{IcoGear}</Button>
-              <Button variant="secondary" loading={loading} onClick={()=>{setLoading(true);setTimeout(()=>setLoading(false),1600);}}>Save</Button>
-              <Button disabled>Disabled</Button>
-            </div>
-          </Box>
-        </Sec>
-
-        <Sec id="badges" title="Badges" desc="Status labels in soft and solid variants.">
-          <Box>
-            <div className="flex flex-wrap gap-3 items-center">
-              <Badge>Neutral</Badge>
-              <Badge variant="primary">Primary</Badge>
-              <Badge variant="success" dot>Active</Badge>
-              <Badge variant="warning" dot>Pending</Badge>
-              <Badge variant="danger" dot>Error</Badge>
-              <Badge variant="info">Info</Badge>
-              <Badge variant="solid">Solid</Badge>
-            </div>
-          </Box>
-        </Sec>
-
-        <Sec id="feedback" title="Feedback & progress" desc="Inline alerts, toasts and progress indicators.">
-          <Box>
-            <Sub>Alerts</Sub>
-            <div className="flex flex-col gap-4">
-              <Alert variant="info" icon={IcoInfo} title="New version available">Version 0.2.0 adds navigation components and charts.</Alert>
-              <Alert variant="success" icon={IcoCheck} title="Deployment complete">All tests passed and the build is live in production.</Alert>
-              <Alert variant="warning" icon={IcoWarn} title="Approaching your limit">You have used 86% of your file storage this month.</Alert>
-              <Alert variant="danger" icon={IcoX} title="Payment declined">Update your payment method to avoid an interruption.</Alert>
-            </div>
-          </Box>
-          <Grid>
-            <Box className="mb-0">
-              <Sub>Toasts</Sub>
-              <div className="flex flex-wrap gap-3">
-                <Button variant="outline" size="sm" onClick={()=>toast({message:"Changes saved."})}>Info</Button>
-                <Button variant="outline" size="sm" onClick={()=>toast({message:"Profile updated.",tone:"success"})}>Success</Button>
-                <Button variant="outline" size="sm" onClick={()=>toast({message:"Could not delete.",tone:"danger"})}>Error</Button>
+        <main className="px-8 max-[820px]:px-5 py-10 max-w-[1040px]">
+          <Sec
+            id="buttons"
+            title="Buttons"
+            desc="Five variants, three sizes, a loading state and icon buttons."
+          >
+            <Box>
+              <Sub>Variants</Sub>
+              <div className="flex flex-wrap gap-3 items-center">
+                <Button>Primary</Button>
+                <Button variant="secondary">Secondary</Button>
+                <Button variant="outline">Outline</Button>
+                <Button variant="ghost">Ghost</Button>
+                <Button variant="danger">Danger</Button>
+              </div>
+              <div className="h-px bg-border my-5" />
+              <Sub>Sizes, icon and states</Sub>
+              <div className="flex flex-wrap gap-3 items-center">
+                <Button size="sm">Small</Button>
+                <Button>Medium</Button>
+                <Button size="lg">Large</Button>
+                <Button leadingIcon={IcoPlus}>New project</Button>
+                <Button variant="outline" size="icon" aria-label="Settings">
+                  {IcoGear}
+                </Button>
+                <Button
+                  variant="secondary"
+                  loading={loading}
+                  onClick={() => {
+                    setLoading(true);
+                    setTimeout(() => setLoading(false), 1600);
+                  }}
+                >
+                  Save
+                </Button>
+                <Button disabled>Disabled</Button>
               </div>
             </Box>
-            <Box className="mb-0">
-              <Sub>Progress & spinner</Sub>
+          </Sec>
+
+          <Sec id="badges" title="Badges" desc="Status labels in soft and solid variants.">
+            <Box>
+              <div className="flex flex-wrap gap-3 items-center">
+                <Badge>Neutral</Badge>
+                <Badge variant="primary">Primary</Badge>
+                <Badge variant="success" dot>
+                  Active
+                </Badge>
+                <Badge variant="warning" dot>
+                  Pending
+                </Badge>
+                <Badge variant="danger" dot>
+                  Error
+                </Badge>
+                <Badge variant="info">Info</Badge>
+                <Badge variant="solid">Solid</Badge>
+              </div>
+            </Box>
+          </Sec>
+
+          <Sec
+            id="feedback"
+            title="Feedback & progress"
+            desc="Inline alerts, toasts and progress indicators."
+          >
+            <Box>
+              <Sub>Alerts</Sub>
               <div className="flex flex-col gap-4">
-                <Progress value={prog}/>
-                <Progress value={68} tone="secondary"/>
-                <div className="flex items-center gap-3"><Spinner/><span className="text-sm text-muted-foreground">Loading data…</span></div>
+                <Alert variant="info" icon={IcoInfo} title="New version available">
+                  Version 0.2.0 adds navigation components and charts.
+                </Alert>
+                <Alert variant="success" icon={IcoCheck} title="Deployment complete">
+                  All tests passed and the build is live in production.
+                </Alert>
+                <Alert variant="warning" icon={IcoWarn} title="Approaching your limit">
+                  You have used 86% of your file storage this month.
+                </Alert>
+                <Alert variant="danger" icon={IcoX} title="Payment declined">
+                  Update your payment method to avoid an interruption.
+                </Alert>
               </div>
             </Box>
-          </Grid>
-        </Sec>
-
-        <Sec id="forms" title="Forms" desc="Fields with labels, leading icons, selects, textareas and live validation.">
-          <Box>
-            <div className="grid gap-5" style={{gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))"}}>
-              <Field><Label required>Full name</Label><Input placeholder="Jane Doe"/><Hint>This is how your team will see you.</Hint></Field>
-              <Field>
-                <Label required>E-mail</Label>
-                <Input type="email" placeholder="jane@company.com" value={email} error={email.length>0 && !emailOk} onChange={e=>setEmail(e.target.value)}/>
-                <Hint error={email.length>0 && !emailOk}>{!email ? "We'll use it to sign you in." : emailOk ? "Looks good ✓" : "Enter a valid email address."}</Hint>
-              </Field>
-              <Field><Label>Search</Label><Input leadingIcon={IcoSearch} placeholder="Search projects…"/></Field>
-              <Field><Label>Role</Label><Select><option>Administrator</option><option>Editor</option><option>View only</option></Select></Field>
-              <Field style={{gridColumn:"1/-1"}}><Label>Project description</Label><Textarea placeholder="What is this project about?"/></Field>
-              <Field><Label>Disabled field</Label><Input value="workspace-id-8842" disabled readOnly/></Field>
-              <Field><Label>Field with error</Label><Input value="not-ok" error readOnly/><Hint error>Only lowercase letters and hyphens are allowed.</Hint></Field>
-            </div>
-          </Box>
-        </Sec>
-
-        <Sec id="selection" title="Selection controls" desc="Checkboxes, radios, switches, a slider and a segmented control.">
-          <Grid>
-            <Box className="mb-0">
-              <Sub>Checkbox & radio</Sub>
-              <div className="flex flex-col gap-3">
-                <Checkbox defaultChecked label="Email notifications"/>
-                <Checkbox label="Weekly report"/>
-                <div className="h-px bg-border my-1"/>
-                <Radio name="plan" defaultChecked label="Monthly plan"/>
-                <Radio name="plan" label="Annual plan"/>
-              </div>
-            </Box>
-            <Box className="mb-0">
-              <Sub>Switches, slider, segments</Sub>
-              <div className="flex flex-col gap-4">
-                <Switch defaultChecked label="Dark mode for new users"/>
-                <Switch label="Automatic backups"/>
-                <Field><Label>Volume</Label><Slider min={0} max={100} defaultValue={65}/></Field>
-                <Segmented value={seg} onChange={setSeg} options={[{value:"day",label:"Day"},{value:"week",label:"Week"},{value:"month",label:"Month"}]}/>
-              </div>
-            </Box>
-          </Grid>
-        </Sec>
-
-        <Sec id="cards" title="Cards & stats" desc="Cards with content and footer, with an image, and metric cards.">
-          <Grid>
-            <Card>
-              <CardHeader>
-                <div><Badge variant="primary">Pro</Badge></div>
-                <CardTitle>Team Workspace</CardTitle>
-                <CardDescription>Unlimited projects, roles and activity history for your whole team.</CardDescription>
-              </CardHeader>
-              <CardFooter><Button size="sm">Choose plan</Button><Button size="sm" variant="ghost">Details</Button></CardFooter>
-            </Card>
-            <Card elevated>
-              <div className="h-[140px] grid place-items-center text-muted-foreground font-mono text-[0.72rem] tracking-wide" style={{background:"var(--kj-muted)"}}>cover image · 16:9</div>
-              <CardContent className="pt-[1.35rem]">
-                <CardTitle>Q3 Quarterly Report</CardTitle>
-                <CardDescription>A summary of results and key product metrics.</CardDescription>
-                <div className="flex items-center gap-3 mt-4">
-                  <AvatarGroup><Avatar size="sm">AK</Avatar><Avatar size="sm" tone="primary">MR</Avatar><Avatar size="sm" tone="info">JN</Avatar></AvatarGroup>
-                  <span className="text-sm text-muted-foreground">+5 contributors</span>
+            <Grid>
+              <Box className="mb-0">
+                <Sub>Toasts</Sub>
+                <div className="flex flex-wrap gap-3">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => toast({ message: "Changes saved." })}
+                  >
+                    Info
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => toast({ message: "Profile updated.", tone: "success" })}
+                  >
+                    Success
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => toast({ message: "Could not delete.", tone: "danger" })}
+                  >
+                    Error
+                  </Button>
                 </div>
-              </CardContent>
-            </Card>
-          </Grid>
-          <div className="grid gap-5 mt-1" style={{gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))"}}>
-            <Stat label="MRR" value="$128.4k" delta="12.3% MoM" trend="up"/>
-            <Stat label="Active users" value="8,942" delta="4.1% MoM" trend="up"/>
-            <Stat label="Churn" value="2.8%" delta="0.6% MoM" trend="down"/>
-          </div>
-        </Sec>
+              </Box>
+              <Box className="mb-0">
+                <Sub>Progress & spinner</Sub>
+                <div className="flex flex-col gap-4">
+                  <Progress value={prog} />
+                  <Progress value={68} tone="secondary" />
+                  <div className="flex items-center gap-3">
+                    <Spinner />
+                    <span className="text-sm text-muted-foreground">Loading data…</span>
+                  </div>
+                </div>
+              </Box>
+            </Grid>
+          </Sec>
 
-        <Sec id="navigation" title="Navigation" desc="Tabs, dropdown menus, accordion, breadcrumbs and pagination.">
-          <Grid>
-            <Box className="mb-0">
-              <Sub>Tabs</Sub>
-              <Tabs value={tab} onValueChange={setTab}>
-                <TabsList><TabsTrigger value="overview">Overview</TabsTrigger><TabsTrigger value="activity">Activity</TabsTrigger><TabsTrigger value="settings">Settings</TabsTrigger></TabsList>
-                <TabsContent value="overview">A dashboard with key metrics and quick actions.</TabsContent>
-                <TabsContent value="activity">An event timeline: sign-ins, edits and team comments.</TabsContent>
-                <TabsContent value="settings">Workspace preferences, permissions and integrations.</TabsContent>
-              </Tabs>
+          <Sec
+            id="forms"
+            title="Forms"
+            desc="Fields with labels, leading icons, selects, textareas and live validation."
+          >
+            <Box>
+              <div
+                className="grid gap-5"
+                style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}
+              >
+                <Field>
+                  <Label required>Full name</Label>
+                  <Input placeholder="Jane Doe" />
+                  <Hint>This is how your team will see you.</Hint>
+                </Field>
+                <Field>
+                  <Label required>E-mail</Label>
+                  <Input
+                    type="email"
+                    placeholder="jane@company.com"
+                    value={email}
+                    error={email.length > 0 && !emailOk}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <Hint error={email.length > 0 && !emailOk}>
+                    {!email
+                      ? "We'll use it to sign you in."
+                      : emailOk
+                        ? "Looks good ✓"
+                        : "Enter a valid email address."}
+                  </Hint>
+                </Field>
+                <Field>
+                  <Label>Search</Label>
+                  <Input leadingIcon={IcoSearch} placeholder="Search projects…" />
+                </Field>
+                <Field>
+                  <Label>Role</Label>
+                  <Select>
+                    <option>Administrator</option>
+                    <option>Editor</option>
+                    <option>View only</option>
+                  </Select>
+                </Field>
+                <Field style={{ gridColumn: "1/-1" }}>
+                  <Label>Project description</Label>
+                  <Textarea placeholder="What is this project about?" />
+                </Field>
+                <Field>
+                  <Label>Disabled field</Label>
+                  <Input value="workspace-id-8842" disabled readOnly />
+                </Field>
+                <Field>
+                  <Label>Field with error</Label>
+                  <Input value="not-ok" error readOnly />
+                  <Hint error>Only lowercase letters and hyphens are allowed.</Hint>
+                </Field>
+              </div>
             </Box>
-            <Box className="mb-0">
-              <Sub>Dropdown menu</Sub>
-              <DropdownMenu>
-                <DropdownMenuTrigger className={cn(buttonVariants({variant:"outline"}))}>Actions {IcoChev}</DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem icon={IcoEdit}>Edit</DropdownMenuItem>
-                  <DropdownMenuItem icon={IcoCopy}>Duplicate</DropdownMenuItem>
-                  <DropdownMenuSeparator/>
-                  <DropdownMenuItem danger icon={IcoTrash}>Delete</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </Box>
-          </Grid>
-          <Sub>Accordion</Sub>
-          <Accordion type="single" defaultValue={["a"]} className="mb-5">
-            <AccordionItem value="a"><AccordionTrigger>How does billing work?</AccordionTrigger><AccordionContent>Billed monthly or annually. The annual plan includes two months free.</AccordionContent></AccordionItem>
-            <AccordionItem value="b"><AccordionTrigger>Can I change my plan later?</AccordionTrigger><AccordionContent>Yes, at any time. The difference is prorated.</AccordionContent></AccordionItem>
-            <AccordionItem value="c"><AccordionTrigger>What payment methods are supported?</AccordionTrigger><AccordionContent>Visa, Mastercard and Apple Pay.</AccordionContent></AccordionItem>
-          </Accordion>
-          <div className="flex items-center justify-between flex-wrap gap-3">
-            <Breadcrumb>
-              <BreadcrumbItem href="#">Workspace</BreadcrumbItem><BreadcrumbSeparator/>
-              <BreadcrumbItem href="#">Projects</BreadcrumbItem><BreadcrumbSeparator/>
-              <BreadcrumbItem current>Q3 Launch</BreadcrumbItem>
-            </Breadcrumb>
-            <Pagination page={page} pageCount={9} onPageChange={setPage}/>
-          </div>
-        </Sec>
+          </Sec>
 
-        <Sec id="data" title="Table & data" desc="A table with statuses, avatars and aligned numbers.">
-          <TableWrap>
-            <Table>
-              <TableHeader><TableRow><TableHead>User</TableHead><TableHead>Role</TableHead><TableHead>Status</TableHead><TableHead numeric>Projects</TableHead></TableRow></TableHeader>
-              <TableBody>
-                <TableRow><TableCell><div className="flex items-center gap-2.5"><Avatar size="sm" tone="primary">AK</Avatar>Anna Kowalski</div></TableCell><TableCell>Administrator</TableCell><TableCell><Badge variant="success" dot>Active</Badge></TableCell><TableCell numeric>24</TableCell></TableRow>
-                <TableRow><TableCell><div className="flex items-center gap-2.5"><Avatar size="sm">MR</Avatar>Michael Rutkowski</div></TableCell><TableCell>Editor</TableCell><TableCell><Badge variant="warning" dot>Invited</Badge></TableCell><TableCell numeric>12</TableCell></TableRow>
-                <TableRow><TableCell><div className="flex items-center gap-2.5"><Avatar size="sm" tone="info">JN</Avatar>Julia Nowak</div></TableCell><TableCell>Viewer</TableCell><TableCell><Badge>Inactive</Badge></TableCell><TableCell numeric>3</TableCell></TableRow>
-              </TableBody>
-            </Table>
-          </TableWrap>
-        </Sec>
+          <Sec
+            id="selection"
+            title="Selection controls"
+            desc="Checkboxes, radios, switches, a slider and a segmented control."
+          >
+            <Grid>
+              <Box className="mb-0">
+                <Sub>Checkbox & radio</Sub>
+                <div className="flex flex-col gap-3">
+                  <Checkbox defaultChecked label="Email notifications" />
+                  <Checkbox label="Weekly report" />
+                  <div className="h-px bg-border my-1" />
+                  <Radio name="plan" defaultChecked label="Monthly plan" />
+                  <Radio name="plan" label="Annual plan" />
+                </div>
+              </Box>
+              <Box className="mb-0">
+                <Sub>Switches, slider, segments</Sub>
+                <div className="flex flex-col gap-4">
+                  <Switch defaultChecked label="Dark mode for new users" />
+                  <Switch label="Automatic backups" />
+                  <Field>
+                    <Label>Volume</Label>
+                    <Slider min={0} max={100} defaultValue={65} />
+                  </Field>
+                  <Segmented
+                    value={seg}
+                    onChange={setSeg}
+                    options={[
+                      { value: "day", label: "Day" },
+                      { value: "week", label: "Week" },
+                      { value: "month", label: "Month" },
+                    ]}
+                  />
+                </div>
+              </Box>
+            </Grid>
+          </Sec>
 
-        <Sec id="overlays" title="Overlays" desc="Modal and tooltips.">
-          <Box>
-            <div className="flex flex-wrap gap-3 items-center">
-              <Button onClick={()=>setOpen(true)}>Open modal</Button>
-              <Tooltip content="Contextual tooltip"><Button variant="outline">Hover — top</Button></Tooltip>
+          <Sec
+            id="cards"
+            title="Cards & stats"
+            desc="Cards with content and footer, with an image, and metric cards."
+          >
+            <Grid>
+              <Card>
+                <CardHeader>
+                  <div>
+                    <Badge variant="primary">Pro</Badge>
+                  </div>
+                  <CardTitle>Team Workspace</CardTitle>
+                  <CardDescription>
+                    Unlimited projects, roles and activity history for your whole team.
+                  </CardDescription>
+                </CardHeader>
+                <CardFooter>
+                  <Button size="sm">Choose plan</Button>
+                  <Button size="sm" variant="ghost">
+                    Details
+                  </Button>
+                </CardFooter>
+              </Card>
+              <Card elevated>
+                <div
+                  className="h-[140px] grid place-items-center text-muted-foreground font-mono text-[0.72rem] tracking-wide"
+                  style={{ background: "var(--kj-muted)" }}
+                >
+                  cover image · 16:9
+                </div>
+                <CardContent className="pt-[1.35rem]">
+                  <CardTitle>Q3 Quarterly Report</CardTitle>
+                  <CardDescription>A summary of results and key product metrics.</CardDescription>
+                  <div className="flex items-center gap-3 mt-4">
+                    <AvatarGroup>
+                      <Avatar size="sm">AK</Avatar>
+                      <Avatar size="sm" tone="primary">
+                        MR
+                      </Avatar>
+                      <Avatar size="sm" tone="info">
+                        JN
+                      </Avatar>
+                    </AvatarGroup>
+                    <span className="text-sm text-muted-foreground">+5 contributors</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </Grid>
+            <div
+              className="grid gap-5 mt-1"
+              style={{ gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))" }}
+            >
+              <Stat label="MRR" value="$128.4k" delta="12.3% MoM" trend="up" />
+              <Stat label="Active users" value="8,942" delta="4.1% MoM" trend="up" />
+              <Stat label="Churn" value="2.8%" delta="0.6% MoM" trend="down" />
             </div>
-          </Box>
-        </Sec>
+          </Sec>
 
-        <footer className="text-[0.8rem] text-muted-foreground pt-8 mt-4 border-t border-border">
-          Real components from <span className="font-mono">@kjaniec-dev/ui</span>, styled with tokens from <span className="font-mono">@kjaniec-dev/design</span>. The same code ships in the repo.
-        </footer>
-      </main>
+          <Sec
+            id="navigation"
+            title="Navigation"
+            desc="Tabs, dropdown menus, accordion, breadcrumbs and pagination."
+          >
+            <Grid>
+              <Box className="mb-0">
+                <Sub>Tabs</Sub>
+                <Tabs value={tab} onValueChange={setTab}>
+                  <TabsList>
+                    <TabsTrigger value="overview">Overview</TabsTrigger>
+                    <TabsTrigger value="activity">Activity</TabsTrigger>
+                    <TabsTrigger value="settings">Settings</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="overview">
+                    A dashboard with key metrics and quick actions.
+                  </TabsContent>
+                  <TabsContent value="activity">
+                    An event timeline: sign-ins, edits and team comments.
+                  </TabsContent>
+                  <TabsContent value="settings">
+                    Workspace preferences, permissions and integrations.
+                  </TabsContent>
+                </Tabs>
+              </Box>
+              <Box className="mb-0">
+                <Sub>Dropdown menu</Sub>
+                <DropdownMenu>
+                  <DropdownMenuTrigger className={cn(buttonVariants({ variant: "outline" }))}>
+                    Actions {IcoChev}
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem icon={IcoEdit}>Edit</DropdownMenuItem>
+                    <DropdownMenuItem icon={IcoCopy}>Duplicate</DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem danger icon={IcoTrash}>
+                      Delete
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </Box>
+            </Grid>
+            <Sub>Accordion</Sub>
+            <Accordion type="single" defaultValue={["a"]} className="mb-5">
+              <AccordionItem value="a">
+                <AccordionTrigger>How does billing work?</AccordionTrigger>
+                <AccordionContent>
+                  Billed monthly or annually. The annual plan includes two months free.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="b">
+                <AccordionTrigger>Can I change my plan later?</AccordionTrigger>
+                <AccordionContent>Yes, at any time. The difference is prorated.</AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="c">
+                <AccordionTrigger>What payment methods are supported?</AccordionTrigger>
+                <AccordionContent>Visa, Mastercard and Apple Pay.</AccordionContent>
+              </AccordionItem>
+            </Accordion>
+            <div className="flex items-center justify-between flex-wrap gap-3">
+              <Breadcrumb>
+                <BreadcrumbItem href="#">Workspace</BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem href="#">Projects</BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem current>Q3 Launch</BreadcrumbItem>
+              </Breadcrumb>
+              <Pagination page={page} pageCount={9} onPageChange={setPage} />
+            </div>
+          </Sec>
+
+          <Sec
+            id="data"
+            title="Table & data"
+            desc="A table with statuses, avatars and aligned numbers."
+          >
+            <TableWrap>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>User</TableHead>
+                    <TableHead>Role</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead numeric>Projects</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>
+                      <div className="flex items-center gap-2.5">
+                        <Avatar size="sm" tone="primary">
+                          AK
+                        </Avatar>
+                        Anna Kowalski
+                      </div>
+                    </TableCell>
+                    <TableCell>Administrator</TableCell>
+                    <TableCell>
+                      <Badge variant="success" dot>
+                        Active
+                      </Badge>
+                    </TableCell>
+                    <TableCell numeric>24</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <div className="flex items-center gap-2.5">
+                        <Avatar size="sm">MR</Avatar>Michael Rutkowski
+                      </div>
+                    </TableCell>
+                    <TableCell>Editor</TableCell>
+                    <TableCell>
+                      <Badge variant="warning" dot>
+                        Invited
+                      </Badge>
+                    </TableCell>
+                    <TableCell numeric>12</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <div className="flex items-center gap-2.5">
+                        <Avatar size="sm" tone="info">
+                          JN
+                        </Avatar>
+                        Julia Nowak
+                      </div>
+                    </TableCell>
+                    <TableCell>Viewer</TableCell>
+                    <TableCell>
+                      <Badge>Inactive</Badge>
+                    </TableCell>
+                    <TableCell numeric>3</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableWrap>
+          </Sec>
+
+          <Sec id="overlays" title="Overlays" desc="Modal and tooltips.">
+            <Box>
+              <div className="flex flex-wrap gap-3 items-center">
+                <Button onClick={() => setOpen(true)}>Open modal</Button>
+                <Tooltip content="Contextual tooltip">
+                  <Button variant="outline">Hover — top</Button>
+                </Tooltip>
+              </div>
+            </Box>
+          </Sec>
+
+          <footer className="text-[0.8rem] text-muted-foreground pt-8 mt-4 border-t border-border">
+            Real components from <span className="font-mono">@kjaniec-dev/ui</span>, styled with
+            tokens from <span className="font-mono">@kjaniec-dev/design</span>. The same code ships
+            in the repo.
+          </footer>
+        </main>
+      </div>
+
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <ModalTitle>Delete project “Q3 Launch”?</ModalTitle>
+        <ModalDescription>
+          This action cannot be undone. All files and activity history will be permanently deleted.
+        </ModalDescription>
+        <ModalActions>
+          <Button variant="ghost" onClick={() => setOpen(false)}>
+            Cancel
+          </Button>
+          <Button
+            variant="danger"
+            onClick={() => {
+              setOpen(false);
+              toast({ message: "Project deleted.", tone: "danger" });
+            }}
+          >
+            Delete project
+          </Button>
+        </ModalActions>
+      </Modal>
     </div>
-
-    <Modal open={open} onClose={()=>setOpen(false)}>
-      <ModalTitle>Delete project “Q3 Launch”?</ModalTitle>
-      <ModalDescription>This action cannot be undone. All files and activity history will be permanently deleted.</ModalDescription>
-      <ModalActions>
-        <Button variant="ghost" onClick={()=>setOpen(false)}>Cancel</Button>
-        <Button variant="danger" onClick={()=>{setOpen(false);toast({message:"Project deleted.",tone:"danger"});}}>Delete project</Button>
-      </ModalActions>
-    </Modal>
-  </div>;
+  );
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <ToastProvider><Gallery/></ToastProvider>
+  <ToastProvider>
+    <Gallery />
+  </ToastProvider>
 );

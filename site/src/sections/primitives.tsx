@@ -164,7 +164,12 @@ export interface BoxProps {
 
 export function Box(p: BoxProps) {
   return (
-    <div className={cn("bg-card border border-border rounded-kj-xl p-7 shadow-kj-xs mb-5", p.className)}>
+    <div
+      className={cn(
+        "bg-card border border-border rounded-kj-xl p-7 shadow-kj-xs mb-5",
+        p.className
+      )}
+    >
       {p.children}
     </div>
   );
@@ -177,7 +182,12 @@ export interface SubProps {
 
 export function Sub(p: SubProps) {
   return (
-    <p className={cn("text-[0.72rem] uppercase tracking-[0.08em] font-semibold text-muted-foreground mb-3.5 mt-0", p.className)}>
+    <p
+      className={cn(
+        "text-[0.72rem] uppercase tracking-[0.08em] font-semibold text-muted-foreground mb-3.5 mt-0",
+        p.className
+      )}
+    >
       {p.children}
     </p>
   );
@@ -189,7 +199,10 @@ export interface GridProps {
 
 export function Grid(p: GridProps) {
   return (
-    <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))" }}>
+    <div
+      className="grid gap-5"
+      style={{ gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))" }}
+    >
       {p.children}
     </div>
   );
@@ -202,7 +215,12 @@ export interface CodeProps {
 
 export function Code(p: CodeProps) {
   return (
-    <code className={cn("font-mono text-xs bg-muted px-1.5 py-0.5 rounded border border-border", p.className)}>
+    <code
+      className={cn(
+        "font-mono text-xs bg-muted px-1.5 py-0.5 rounded border border-border",
+        p.className
+      )}
+    >
       {p.children}
     </code>
   );
@@ -220,7 +238,12 @@ export function PrimitivesSections() {
 
   return (
     <>
-      <Sec id="buttons" title="Buttons" desc="Five variants, three sizes, a loading state and icon buttons." components={["Button"]}>
+      <Sec
+        id="buttons"
+        title="Buttons"
+        desc="Five variants, three sizes, a loading state and icon buttons."
+        components={["Button"]}
+      >
         <Box>
           <Sub>Variants</Sub>
           <div className="flex flex-wrap gap-3 items-center">
@@ -257,15 +280,39 @@ export function PrimitivesSections() {
           <Sub>Floating Action Buttons (FAB)</Sub>
           <div className="flex flex-wrap gap-4 items-center">
             <Fab variant="primary" size="sm" position="none" icon={IcoPlus} label="Primary Small" />
-            <Fab variant="secondary" size="md" position="none" icon={IcoGear} label="Secondary Medium" />
-            <Fab variant="outline" size="lg" position="none" icon={IcoSearch} label="Outline Large" />
+            <Fab
+              variant="secondary"
+              size="md"
+              position="none"
+              icon={IcoGear}
+              label="Secondary Medium"
+            />
+            <Fab
+              variant="outline"
+              size="lg"
+              position="none"
+              icon={IcoSearch}
+              label="Outline Large"
+            />
             <Fab variant="danger" size="md" position="none" icon={IcoTrash} label="Danger Medium" />
-            <Fab variant="primary" size="md" position="none" loading icon={IcoPlus} label="Loading Medium" />
+            <Fab
+              variant="primary"
+              size="md"
+              position="none"
+              loading
+              icon={IcoPlus}
+              label="Loading Medium"
+            />
           </div>
         </Box>
       </Sec>
 
-      <Sec id="badges" title="Badges" desc="Status labels in soft and solid variants." components={["Badge"]}>
+      <Sec
+        id="badges"
+        title="Badges"
+        desc="Status labels in soft and solid variants."
+        components={["Badge"]}
+      >
         <Box>
           <div className="flex flex-wrap gap-3 items-center">
             <Badge>Neutral</Badge>
@@ -285,7 +332,20 @@ export function PrimitivesSections() {
         </Box>
       </Sec>
 
-      <Sec id="feedback" title="Feedback & progress" desc="Inline alerts, toasts and progress indicators." components={["Alert", "ToastProvider", "Progress", "ProgressRing", "ProgressRingField", "Spinner", "Skeleton"]}>
+      <Sec
+        id="feedback"
+        title="Feedback & progress"
+        desc="Inline alerts, toasts and progress indicators."
+        components={[
+          "Alert",
+          "ToastProvider",
+          "Progress",
+          "ProgressRing",
+          "ProgressRingField",
+          "Spinner",
+          "Skeleton",
+        ]}
+      >
         <Box>
           <Sub>Alerts</Sub>
           <div className="flex flex-col gap-4">
@@ -307,13 +367,25 @@ export function PrimitivesSections() {
           <Box className="mb-0">
             <Sub>Toasts</Sub>
             <div className="flex flex-wrap gap-3">
-              <Button variant="outline" size="sm" onClick={() => toast({ message: "Changes saved." })}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => toast({ message: "Changes saved." })}
+              >
                 Info
               </Button>
-              <Button variant="outline" size="sm" onClick={() => toast({ message: "Profile updated.", tone: "success" })}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => toast({ message: "Profile updated.", tone: "success" })}
+              >
                 Success
               </Button>
-              <Button variant="outline" size="sm" onClick={() => toast({ message: "Could not delete.", tone: "danger" })}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => toast({ message: "Could not delete.", tone: "danger" })}
+              >
                 Error
               </Button>
             </div>
@@ -351,7 +423,10 @@ export function PrimitivesSections() {
         </Box>
         <Box className="mt-5">
           <Sub>ErrorState & Skeletons</Sub>
-          <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))" }}>
+          <div
+            className="grid gap-6"
+            style={{ gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))" }}
+          >
             <ErrorState
               title="Database Sync Failed"
               message="We could not sync the latest database tables because of an authentication error."
@@ -377,23 +452,39 @@ export function PrimitivesSections() {
         </Box>
       </Sec>
 
-      <Sec id="avatars-stats" title="Avatars & Stats" desc="User avatars, avatar groups, and statistics counters." components={["Avatar", "AvatarGroup", "Stat"]}>
+      <Sec
+        id="avatars-stats"
+        title="Avatars & Stats"
+        desc="User avatars, avatar groups, and statistics counters."
+        components={["Avatar", "AvatarGroup", "Stat"]}
+      >
         <Box>
           <Sub>Avatars</Sub>
           <div className="flex items-center gap-4">
             <Avatar size="sm">AK</Avatar>
-            <Avatar size="md" tone="primary">MR</Avatar>
-            <Avatar size="lg" tone="info">JN</Avatar>
+            <Avatar size="md" tone="primary">
+              MR
+            </Avatar>
+            <Avatar size="lg" tone="info">
+              JN
+            </Avatar>
             <AvatarGroup className="ml-4">
               <Avatar size="sm">AK</Avatar>
-              <Avatar size="sm" tone="primary">MR</Avatar>
-              <Avatar size="sm" tone="info">JN</Avatar>
+              <Avatar size="sm" tone="primary">
+                MR
+              </Avatar>
+              <Avatar size="sm" tone="info">
+                JN
+              </Avatar>
             </AvatarGroup>
           </div>
         </Box>
         <Box>
           <Sub>Stats</Sub>
-          <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))" }}>
+          <div
+            className="grid gap-5"
+            style={{ gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))" }}
+          >
             <Stat label="MRR" value="$128.4k" delta="12.3% MoM" trend="up" />
             <Stat label="Active users" value="8,942" delta="4.1% MoM" trend="up" />
             <Stat label="Churn" value="2.8%" delta="0.6% MoM" trend="down" />
@@ -482,7 +573,11 @@ export function PrimitivesSections() {
 
             <TimelineItem>
               <TimelineSeparator>
-                <TimelineDot size="lg" variant="success" className="font-bold text-xs flex items-center justify-center">
+                <TimelineDot
+                  size="lg"
+                  variant="success"
+                  className="font-bold text-xs flex items-center justify-center"
+                >
                   ✓
                 </TimelineDot>
                 <TimelineConnector />

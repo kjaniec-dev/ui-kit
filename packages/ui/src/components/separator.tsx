@@ -8,7 +8,11 @@ export interface SeparatorProps {
 }
 
 /** Thin layout divider. Decorative by default; pass decorative={false} for a semantic role="separator". */
-export function Separator({ orientation = "horizontal", decorative = true, className }: SeparatorProps) {
+export function Separator({
+  orientation = "horizontal",
+  decorative = true,
+  className,
+}: SeparatorProps) {
   const semanticProps = decorative
     ? { role: "none" as const, "aria-hidden": true as const }
     : { role: "separator" as const, "aria-orientation": orientation };

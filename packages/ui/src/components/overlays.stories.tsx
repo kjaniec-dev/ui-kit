@@ -18,10 +18,17 @@ export const ModalStory: Story = {
         <Button onClick={() => setOpen(true)}>Open modal</Button>
         <Modal open={open} onClose={() => setOpen(false)}>
           <ModalTitle>Delete project “Q3 Launch”?</ModalTitle>
-          <ModalDescription>This action cannot be undone. All files and activity history will be permanently deleted.</ModalDescription>
+          <ModalDescription>
+            This action cannot be undone. All files and activity history will be permanently
+            deleted.
+          </ModalDescription>
           <ModalActions>
-            <Button variant="ghost" onClick={() => setOpen(false)}>Cancel</Button>
-            <Button variant="danger" onClick={() => setOpen(false)}>Delete project</Button>
+            <Button variant="ghost" onClick={() => setOpen(false)}>
+              Cancel
+            </Button>
+            <Button variant="danger" onClick={() => setOpen(false)}>
+              Delete project
+            </Button>
           </ModalActions>
         </Modal>
       </>
@@ -42,9 +49,23 @@ function ToastDemo() {
   const { toast } = useToast();
   return (
     <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-      <Button variant="outline" size="sm" onClick={() => toast({ message: "Changes saved." })}>Info</Button>
-      <Button variant="outline" size="sm" onClick={() => toast({ message: "Profile updated.", tone: "success" })}>Success</Button>
-      <Button variant="outline" size="sm" onClick={() => toast({ message: "Could not delete.", tone: "danger" })}>Error</Button>
+      <Button variant="outline" size="sm" onClick={() => toast({ message: "Changes saved." })}>
+        Info
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => toast({ message: "Profile updated.", tone: "success" })}
+      >
+        Success
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => toast({ message: "Could not delete.", tone: "danger" })}
+      >
+        Error
+      </Button>
     </div>
   );
 }

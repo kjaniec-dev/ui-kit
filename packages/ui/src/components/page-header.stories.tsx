@@ -39,7 +39,9 @@ export const WithActions: Story = {
       actions={
         <>
           <Button size="sm">View all</Button>
-          <Button size="sm" variant="ghost">GitHub</Button>
+          <Button size="sm" variant="ghost">
+            GitHub
+          </Button>
         </>
       }
     />
