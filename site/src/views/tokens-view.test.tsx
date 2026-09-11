@@ -124,4 +124,30 @@ describe("TokensView", () => {
     // Clicking should not throw
     expect(() => fireEvent.click(swatch)).not.toThrow();
   });
+
+  it("copies token value via the single interactive button target on semantic token card", async () => {
+    render(<TokensView />);
+    const copyButtons = screen.getAllByRole("button", { name: /^Copy$/i });
+    expect(copyButtons.length).toBeGreaterThan(0);
+
+    // Click first semantic token copy button (Surface)
+    fireEvent.click(copyButtons[0]);
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith("--kj-surface");
+    await waitFor(() => {
+      expect(screen.getAllByText(/Copied!/i).length).toBeGreaterThan(0);
+    });
+  });
+
+  it("copies radius token class via the copy button target", async () => {
+    render(<TokensView />);
+    const copyClassButtons = screen.getAllByRole("button", { name: /Copy Class/i });
+    expect(copyClassButtons.length).toBeGreaterThan(0);
+
+    // Click first radius token copy button
+    fireEvent.click(copyClassButtons[0]);
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith("rounded-kj-sm");
+    await waitFor(() => {
+      expect(screen.getAllByText(/Copied!/i).length).toBeGreaterThan(0);
+    });
+  });
 });

@@ -101,6 +101,7 @@ export function SiteHeader({
             <button
               key={tab.id}
               type="button"
+              aria-current={active ? "page" : undefined}
               onClick={() => onSelectTab(tab.id)}
               className={cn(
                 "flex items-center gap-1.5 px-3 py-1.5 rounded-kj-sm text-sm font-medium transition-colors cursor-pointer border-0",
@@ -111,7 +112,7 @@ export function SiteHeader({
             >
               <span>{tab.label}</span>
               {tab.badge && (
-                <span className="text-[0.62rem] uppercase font-bold tracking-wider px-1 py-0.2 rounded bg-primary text-primary-foreground">
+                <span className="text-[0.62rem] uppercase font-bold tracking-wider px-1 py-[1px] rounded bg-primary text-primary-foreground">
                   {tab.badge}
                 </span>
               )}
