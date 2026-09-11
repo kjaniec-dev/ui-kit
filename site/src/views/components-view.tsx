@@ -217,7 +217,7 @@ function CategorySidebar({
                   return (
                     <a
                       key={item.id}
-                      href={`#${item.id}`}
+                      href={`#components/${item.id}`}
                       onClick={() => onSelect(item.id)}
                       className={cn(
                         "flex items-center gap-2.5 px-3 py-1.5 rounded-kj-sm text-sm font-medium no-underline transition-colors",
@@ -374,7 +374,9 @@ export function ComponentsView({
             </div>
 
             <div className="mb-10 pb-6 border-b border-border">
-              <h1 className="text-3xl font-bold tracking-tight text-foreground m-0">KJ UI Kit</h1>
+              <h1 className="text-3xl font-bold tracking-tight text-foreground m-0">
+                KJ Product Kit
+              </h1>
               <p className="mt-2 text-sm text-muted-foreground max-w-[65ch]">
                 Design system &amp; component gallery for personal SaaS apps, dashboards, and
                 developer tooling.

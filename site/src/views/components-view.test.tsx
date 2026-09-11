@@ -15,10 +15,27 @@ describe("ComponentsView", () => {
 
   it("renders categorized sidebar and components", () => {
     render(<ComponentsView />);
+    expect(screen.getByRole("heading", { level: 1, name: "KJ Product Kit" })).toBeInTheDocument();
     expect(screen.getByText("Foundations")).toBeInTheDocument();
     expect(screen.getByText("Inputs & Forms")).toBeInTheDocument();
     expect(screen.getByText("Data Display")).toBeInTheDocument();
     expect(screen.getByText("Overlays")).toBeInTheDocument();
+  });
+
+  it("sets link hrefs with #components/<id> prefix", () => {
+    render(<ComponentsView />);
+    expect(screen.getByRole("link", { name: /Buttons/i })).toHaveAttribute(
+      "href",
+      "#components/buttons"
+    );
+    expect(screen.getByRole("link", { name: /Cards/i })).toHaveAttribute(
+      "href",
+      "#components/cards"
+    );
+    expect(screen.getByRole("link", { name: /Rating/i })).toHaveAttribute(
+      "href",
+      "#components/rating"
+    );
   });
 
   it("renders all 7 categories in the sidebar", () => {
