@@ -29,7 +29,8 @@ export function useHashRoute(): HashRoute {
 
   React.useEffect(() => {
     const onHashChange = () => {
-      setRoute(parseHash(window.location.hash));
+      const next = parseHash(window.location.hash);
+      setRoute((prev) => (prev.tab === next.tab && prev.subRoute === next.subRoute ? prev : next));
     };
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
@@ -38,7 +39,8 @@ export function useHashRoute(): HashRoute {
   const navigate = React.useCallback((tab: TabKey, subRoute?: string) => {
     const newHash = subRoute ? `#${tab}/${subRoute}` : `#${tab}`;
     window.location.hash = newHash;
-    setRoute(parseHash(newHash));
+    const next = parseHash(newHash);
+    setRoute((prev) => (prev.tab === next.tab && prev.subRoute === next.subRoute ? prev : next));
   }, []);
 
   return { tab: route.tab, subRoute: route.subRoute, navigate };

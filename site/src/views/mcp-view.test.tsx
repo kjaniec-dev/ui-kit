@@ -65,6 +65,32 @@ describe("McpView", () => {
 
     await waitFor(() => {
       expect(navigator.clipboard.writeText).toHaveBeenCalled();
+      expect(screen.getByText("Copied Config!")).toBeInTheDocument();
+    });
+  });
+
+  it("differentiates copied state between configuration button and CLI command button", async () => {
+    render(<McpView />);
+
+    // Switch to Antigravity tab which displays both config and CLI command buttons
+    fireEvent.click(screen.getByRole("tab", { name: /Antigravity/i }));
+
+    const configBtn = screen.getByRole("button", { name: "Copy Configuration" });
+    const commandBtn = screen.getByRole("button", { name: "Copy Command" });
+
+    expect(configBtn).toBeInTheDocument();
+    expect(commandBtn).toBeInTheDocument();
+
+    // Click "Copy Command"
+    fireEvent.click(commandBtn);
+
+    await waitFor(() => {
+      expect(navigator.clipboard.writeText).toHaveBeenCalledWith("npx -y @kjaniec-dev/ui-mcp");
+      // Command button shows "Copied!"
+      expect(screen.getByRole("button", { name: "Copied!" })).toBeInTheDocument();
+      // Configuration button must NOT change to "Copied Config!"
+      expect(screen.getByRole("button", { name: "Copy Configuration" })).toBeInTheDocument();
+      expect(screen.queryByText("Copied Config!")).not.toBeInTheDocument();
     });
   });
 

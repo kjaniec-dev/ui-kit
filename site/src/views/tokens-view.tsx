@@ -588,10 +588,9 @@ function TokensContent() {
               <Card
                 key={token.name}
                 className={cn(
-                  "flex flex-col p-4 gap-3.5 transition-all duration-150 border-border hover:border-primary/50 cursor-pointer",
+                  "flex flex-col p-4 gap-3.5 transition-all duration-150 border-border",
                   isCopied && "border-primary ring-2 ring-primary/20"
                 )}
-                onClick={() => handleCopy(token.cssVar, token.name)}
               >
                 <div className="flex items-start justify-between gap-2">
                   <div>
@@ -653,10 +652,7 @@ function TokensContent() {
                     variant="ghost"
                     size="sm"
                     className="h-7 px-2 text-xs gap-1"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleCopy(token.cssVar, token.name);
-                    }}
+                    onClick={() => handleCopy(token.cssVar, token.name)}
                   >
                     {isCopied ? (
                       <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
@@ -695,10 +691,9 @@ function TokensContent() {
               <Card
                 key={token.name}
                 className={cn(
-                  "p-4 flex flex-col items-center text-center gap-3 border-border hover:border-primary/50 transition-all cursor-pointer",
+                  "p-4 flex flex-col items-center text-center gap-3 border-border transition-all",
                   isCopied && "border-primary ring-2 ring-primary/20"
                 )}
-                onClick={() => handleCopy(token.name, token.name)}
               >
                 {/* Visual Curvature Box */}
                 <div
@@ -727,10 +722,7 @@ function TokensContent() {
                   variant="outline"
                   size="sm"
                   className="w-full mt-auto h-7 text-xs gap-1"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleCopy(token.name, token.name);
-                  }}
+                  onClick={() => handleCopy(token.name, token.name)}
                 >
                   {isCopied ? (
                     <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
@@ -769,10 +761,9 @@ function TokensContent() {
               <Card
                 key={token.name}
                 className={cn(
-                  "p-4 flex flex-col items-center text-center gap-3 border-border hover:border-primary/50 transition-all cursor-pointer",
+                  "p-4 flex flex-col items-center text-center gap-3 border-border transition-all",
                   isCopied && "border-primary ring-2 ring-primary/20"
                 )}
-                onClick={() => handleCopy(token.name, token.name)}
               >
                 {/* Visual Shadow Box */}
                 <div className="py-2">
@@ -802,10 +793,7 @@ function TokensContent() {
                   variant="outline"
                   size="sm"
                   className="w-full mt-auto h-7 text-xs gap-1"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleCopy(token.name, token.name);
-                  }}
+                  onClick={() => handleCopy(token.name, token.name)}
                 >
                   {isCopied ? (
                     <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">

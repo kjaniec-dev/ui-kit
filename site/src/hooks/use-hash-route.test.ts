@@ -57,4 +57,19 @@ describe("useHashRoute", () => {
 
     expect(result.current.tab).toBe("tokens");
   });
+
+  it("preserves route state when hashchange produces equivalent route", () => {
+    window.location.hash = "#tokens";
+    const { result } = renderHook(() => useHashRoute());
+    expect(result.current.tab).toBe("tokens");
+
+    act(() => {
+      // Trigger hashchange with equivalent route
+      window.location.hash = "#/tokens";
+      window.dispatchEvent(new HashChangeEvent("hashchange"));
+    });
+
+    expect(result.current.tab).toBe("tokens");
+    expect(result.current.subRoute).toBe("");
+  });
 });

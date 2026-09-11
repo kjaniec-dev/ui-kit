@@ -38,6 +38,22 @@ describe("SiteHeader", () => {
     expect(screen.getByText("AI")).toBeInTheDocument();
   });
 
+  it("sets aria-current='page' on active tab button and omits it on inactive tabs", () => {
+    render(
+      <SiteHeader
+        activeTab="components"
+        onSelectTab={vi.fn()}
+        dark={false}
+        onToggleDark={vi.fn()}
+      />
+    );
+    const activeBtn = screen.getByRole("button", { name: /^Components/i });
+    expect(activeBtn).toHaveAttribute("aria-current", "page");
+
+    const inactiveBtn = screen.getByRole("button", { name: /^Overview/i });
+    expect(inactiveBtn).not.toHaveAttribute("aria-current");
+  });
+
   it("calls onSelectTab with 'overview' when brand title is clicked", () => {
     const onSelect = vi.fn();
     render(

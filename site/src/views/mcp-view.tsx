@@ -205,9 +205,11 @@ function CheckIcon({ className }: { className?: string }) {
   );
 }
 
+type CopiedTarget = "config" | "command" | null;
+
 function McpContent() {
   const [activeClient, setActiveClient] = React.useState<ClientType>("cursor");
-  const [copied, setCopied] = React.useState(false);
+  const [copiedTarget, setCopiedTarget] = React.useState<CopiedTarget>(null);
   const copyTimer = React.useRef<number | undefined>(undefined);
   const { toast } = useToast();
 
@@ -221,21 +223,24 @@ function McpContent() {
     };
   }, []);
 
-  const handleCopyConfig = React.useCallback(
-    (textToCopy: string, label: string) => {
+  const handleCopy = React.useCallback(
+    (textToCopy: string, target: "config" | "command", label: string) => {
       if (typeof navigator !== "undefined" && navigator.clipboard) {
         navigator.clipboard
           .writeText(textToCopy)
           .then(() => {
-            setCopied(true);
+            setCopiedTarget(target);
             toast({
-              message: `Copied ${label} configuration to clipboard`,
+              message:
+                target === "config"
+                  ? `Copied ${label} configuration to clipboard`
+                  : `Copied ${label} to clipboard`,
               tone: "success",
             });
             if (copyTimer.current) {
               window.clearTimeout(copyTimer.current);
             }
-            copyTimer.current = window.setTimeout(() => setCopied(false), 2000);
+            copyTimer.current = window.setTimeout(() => setCopiedTarget(null), 2000);
           })
           .catch(() => {
             /* clipboard failed */
@@ -348,7 +353,7 @@ function McpContent() {
                   aria-controls={`panel-${key}`}
                   onClick={() => {
                     setActiveClient(key);
-                    setCopied(false);
+                    setCopiedTarget(null);
                   }}
                   className={cn(
                     "px-4 py-2 text-sm font-medium rounded-t-kj-md transition-colors cursor-pointer border-b-2 flex items-center gap-2 -mb-[1px]",
@@ -392,10 +397,10 @@ function McpContent() {
                 <Button
                   variant="primary"
                   size="sm"
-                  onClick={() => handleCopyConfig(currentConfig.snippet, currentConfig.name)}
+                  onClick={() => handleCopy(currentConfig.snippet, "config", currentConfig.name)}
                   className="cursor-pointer flex items-center gap-1.5"
                 >
-                  {copied ? (
+                  {copiedTarget === "config" ? (
                     <>
                       <CheckIcon className="w-4 h-4 text-primary-foreground" />
                       <span>Copied Config!</span>
@@ -420,10 +425,12 @@ function McpContent() {
                   <span>$ {currentConfig.extraCommand}</span>
                   <button
                     type="button"
-                    onClick={() => handleCopyConfig(currentConfig.extraCommand!, "CLI command")}
+                    onClick={() =>
+                      handleCopy(currentConfig.extraCommand!, "command", "CLI command")
+                    }
                     className="text-[0.72rem] font-sans font-medium text-primary hover:underline cursor-pointer bg-transparent border-0 p-0"
                   >
-                    Copy Command
+                    {copiedTarget === "command" ? "Copied!" : "Copy Command"}
                   </button>
                 </div>
               </div>
