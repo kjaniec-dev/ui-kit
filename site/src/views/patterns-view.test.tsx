@@ -203,4 +203,29 @@ describe("PatternsView", () => {
     fireEvent.keyDown(window, { key: "k", metaKey: true });
     expect(screen.getByRole("dialog", { name: /Command Palette/i })).toBeInTheDocument();
   });
+
+  it("prevents navigation away from patterns view when clicking breadcrumb links", async () => {
+    render(<PatternsView initialPattern="tenant" />);
+    const propLink = screen.getByRole("link", { name: /^Properties$/i });
+    expect(propLink).toHaveAttribute("href", "#patterns");
+
+    const event = new MouseEvent("click", { bubbles: true, cancelable: true });
+    propLink.dispatchEvent(event);
+    expect(event.defaultPrevented).toBe(true);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Navigating to Properties directory/i)).toBeInTheDocument();
+    });
+
+    const towerLink = screen.getByRole("link", { name: /^Horizon Tower$/i });
+    expect(towerLink).toHaveAttribute("href", "#patterns");
+
+    const event2 = new MouseEvent("click", { bubbles: true, cancelable: true });
+    towerLink.dispatchEvent(event2);
+    expect(event2.defaultPrevented).toBe(true);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Viewing Horizon Tower property portfolio/i)).toBeInTheDocument();
+    });
+  });
 });

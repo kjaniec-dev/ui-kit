@@ -644,9 +644,28 @@ function TenantPattern() {
       >
         {/* Breadcrumb Navigation */}
         <Breadcrumb className="mb-2">
-          <BreadcrumbItem href="#properties">Properties</BreadcrumbItem>
+          <BreadcrumbItem
+            href="#patterns"
+            onClick={(e) => {
+              e.preventDefault();
+              toast({ message: "Navigating to Properties directory (demo)", tone: "default" });
+            }}
+          >
+            Properties
+          </BreadcrumbItem>
           <BreadcrumbSeparator />
-          <BreadcrumbItem href="#horizon-tower">Horizon Tower</BreadcrumbItem>
+          <BreadcrumbItem
+            href="#patterns"
+            onClick={(e) => {
+              e.preventDefault();
+              toast({
+                message: "Viewing Horizon Tower property portfolio (demo)",
+                tone: "default",
+              });
+            }}
+          >
+            Horizon Tower
+          </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem current>Suite 402</BreadcrumbItem>
         </Breadcrumb>
