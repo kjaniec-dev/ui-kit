@@ -44,12 +44,12 @@ Plan rozwoju i optymalizacji biblioteki komponentów oraz serwisu dokumentacyjne
 ## 🏃 Sprint 3: Component Props & API Explorer w Showcase (Dokumentacja)
 **Cel:** Interaktywna dokumentacja API każdego komponentu bezpośrednio w serwisie showcase przy wykorzystaniu metadanych wygenerowanych przez MCP (`components.json`).
 
-- [ ] **3.1. Utworzenie komponentu `PropsTable`:**
+- [x] **3.1. Utworzenie komponentu `PropsTable`:**
   - Nowy komponent `site/src/components/props-table.tsx` renderujący tabelę parametrów: nazwa propsa, typ TypeScript, czy wymagany, wartość domyślna oraz opis JSDoc.
-- [ ] **3.2. Integracja metadanych w `ExampleTabs` / sekcjach:**
+- [x] **3.2. Integracja metadanych w `ExampleTabs` / sekcjach:**
   - Dodanie nowej zakładki "API / Props" obok podglądu kodu w `ExampleTabs`.
   - Powiązanie komponentów sekcji z danymi z `packages/mcp/data/components.json`.
-- [ ] **3.3. Testy jednostkowe i weryfikacja:**
+- [x] **3.3. Testy jednostkowe i weryfikacja:**
   - Dodanie testów `props-table.test.tsx` oraz weryfikacja poprawnego renderowania tabeli propsów.
 
 ---
