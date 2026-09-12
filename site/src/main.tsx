@@ -1,6 +1,8 @@
 import { CommandPalette, type CommandPaletteItem, cn, ToastProvider } from "@kjaniec-dev/ui";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
+import { ScrollToTop } from "./components/scroll-to-top";
+import { ShortcutsDialog } from "./components/shortcuts-dialog";
 import { SiteHeader } from "./components/site-header";
 import { type TabKey, useHashRoute } from "./hooks/use-hash-route";
 import "./index.css";
@@ -39,6 +41,7 @@ export function App(): React.JSX.Element {
   const [dark, setDark] = React.useState<boolean>(getInitialTheme);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [searchOpen, setSearchOpen] = React.useState(false);
+  const [shortcutsOpen, setShortcutsOpen] = React.useState(false);
   const { tab, subRoute, navigate } = useHashRoute();
   const version = typeof __APP_VERSION__ !== "undefined" ? __APP_VERSION__ : "0.9.3";
 
@@ -76,14 +79,79 @@ export function App(): React.JSX.Element {
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Cmd/Ctrl + K for global command palette
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         setSearchOpen((open) => !open);
+        return;
+      }
+
+      // Ignore single-key shortcuts when typing in inputs, textareas, contenteditable
+      const target = e.target instanceof HTMLElement ? e.target : null;
+      if (
+        target &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.isContentEditable ||
+          target.getAttribute("role") === "combobox" ||
+          target.getAttribute("role") === "searchbox")
+      ) {
+        return;
+      }
+
+      // Ignore if modifiers (meta, ctrl, alt) are held
+      if (e.metaKey || e.ctrlKey || e.altKey) {
+        return;
+      }
+
+      // '?' opens shortcuts dialog
+      if (e.key === "?") {
+        e.preventDefault();
+        setShortcutsOpen((open) => !open);
+        return;
+      }
+
+      // '/' quick focus component filter or open search
+      if (e.key === "/") {
+        e.preventDefault();
+        if (tab === "components") {
+          const compInput = document.getElementById("component-search-input");
+          if (compInput) {
+            compInput.focus();
+            return;
+          }
+        }
+        setSearchOpen(true);
+        return;
+      }
+
+      // 't' or 'T' toggles color theme
+      if (e.key.toLowerCase() === "t") {
+        e.preventDefault();
+        handleToggleDark();
+        return;
+      }
+
+      // '1'-'5' quick tab navigation
+      if (e.key >= "1" && e.key <= "5") {
+        e.preventDefault();
+        const tabMap: Record<string, TabKey> = {
+          "1": "overview",
+          "2": "components",
+          "3": "patterns",
+          "4": "tokens",
+          "5": "mcp",
+        };
+        const nextTab = tabMap[e.key];
+        if (nextTab) {
+          navigate(nextTab);
+        }
       }
     };
+
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [tab, navigate, handleToggleDark]);
 
   const commandPaletteItems = React.useMemo<CommandPaletteItem[]>(() => {
     return [
@@ -246,9 +314,24 @@ export function App(): React.JSX.Element {
       {
         id: "action-toggle-theme",
         title: dark ? "Switch to Light Mode" : "Switch to Dark Mode",
-        subtitle: "Toggle color scheme preference",
+        subtitle: "Toggle color scheme preference (Shortcut: T)",
         category: "Actions",
         action: handleToggleDark,
+      },
+      {
+        id: "action-shortcuts",
+        title: "Keyboard Shortcuts",
+        subtitle: "View all keyboard navigation shortcuts (Shortcut: ?)",
+        category: "Actions",
+        action: () => setShortcutsOpen(true),
+      },
+      {
+        id: "action-storybook",
+        title: "Open Storybook (Chromatic)",
+        subtitle: "Interactive component stories and controls (155+ stories)",
+        category: "Actions",
+        action: () =>
+          window.open("https://6a1aa334e443b4184c139a6c-ybeikhkasj.chromatic.com/", "_blank"),
       },
       {
         id: "action-github",
@@ -283,6 +366,7 @@ export function App(): React.JSX.Element {
             mobileMenuOpen={mobileMenuOpen}
             onToggleMobileMenu={() => setMobileMenuOpen((open) => !open)}
             onOpenSearch={() => setSearchOpen(true)}
+            onOpenShortcuts={() => setShortcutsOpen(true)}
           />
 
           {mobileMenuOpen && (
@@ -317,6 +401,31 @@ export function App(): React.JSX.Element {
                   </button>
                 );
               })}
+              <div className="pt-2 mt-1 border-t border-border flex flex-col gap-1">
+                <a
+                  href="https://6a1aa334e443b4184c139a6c-ybeikhkasj.chromatic.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-between px-3 py-2 rounded-kj-sm text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/70 no-underline transition-colors"
+                >
+                  <span className="flex items-center gap-2">
+                    <span className="text-[#FF4785]">●</span>
+                    <span>Storybook (Chromatic)</span>
+                  </span>
+                  <span className="text-xs text-muted-foreground">↗</span>
+                </a>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setShortcutsOpen(true);
+                  }}
+                  className="flex items-center justify-between px-3 py-2 rounded-kj-sm text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/70 border-0 bg-transparent cursor-pointer text-left transition-colors"
+                >
+                  <span>Keyboard Shortcuts</span>
+                  <span className="text-xs font-mono text-muted-foreground">?</span>
+                </button>
+              </div>
             </nav>
           )}
         </div>
@@ -331,7 +440,7 @@ export function App(): React.JSX.Element {
 
         <footer className="border-t border-border py-8 px-6 text-xs text-muted-foreground bg-surface/50">
           <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
               <span className="font-semibold text-foreground">KJ Product Kit</span>
               <span>·</span>
               <a
@@ -342,6 +451,23 @@ export function App(): React.JSX.Element {
               >
                 v{version}
               </a>
+              <span>·</span>
+              <a
+                href="https://6a1aa334e443b4184c139a6c-ybeikhkasj.chromatic.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-muted-foreground hover:text-foreground underline underline-offset-2 transition-colors"
+              >
+                Storybook ↗
+              </a>
+              <span>·</span>
+              <button
+                type="button"
+                onClick={() => setShortcutsOpen(true)}
+                className="text-muted-foreground hover:text-foreground underline underline-offset-2 transition-colors bg-transparent border-0 p-0 cursor-pointer text-xs"
+              >
+                Shortcuts (?)
+              </button>
             </div>
             <p className="m-0 text-center sm:text-right">
               Open source under the{" "}
@@ -372,6 +498,9 @@ export function App(): React.JSX.Element {
           items={commandPaletteItems}
           placeholder="Search components, patterns, tokens, or actions..."
         />
+
+        <ScrollToTop />
+        <ShortcutsDialog open={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
       </div>
     </ToastProvider>
   );
