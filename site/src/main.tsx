@@ -233,7 +233,7 @@ export function App(): React.JSX.Element {
         title: "Data Display",
         subtitle: "DataTable, MetricCard, PricingCard, InPost GeoWidget",
         category: "Components",
-        action: () => navigate("components", "data-display"),
+        action: () => navigate("components", "data"),
       },
       {
         id: "comp-navigation",

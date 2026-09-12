@@ -54,12 +54,14 @@ describe("ComponentsView", () => {
     }
   });
 
-  it("renders all 15 component items across categories in sidebar", () => {
+  it("renders all 20 component items across categories in sidebar", () => {
     render(<ComponentsView />);
     const items = [
       "Buttons",
       "Badges",
+      "Avatars & Stats",
       "Primitives",
+      "Feedback",
       "Forms",
       "Selection",
       "Rating",
@@ -67,9 +69,12 @@ describe("ComponentsView", () => {
       "InPost GeoWidget",
       "Table & DataTable",
       "Cards",
-      "Feedback",
+      "Accordion",
+      "Timeline & CodeBlock",
+      "Image Gallery",
       "Navigation",
       "Overlays & Dialogs",
+      "Popover & Tooltip",
       "InboxPopover",
       "Layouts",
     ];
@@ -85,17 +90,22 @@ describe("ComponentsView", () => {
     const expectedIds = [
       "buttons",
       "badges",
+      "avatars-stats",
       "primitives",
+      "feedback",
       "forms",
       "selection",
       "rating",
       "color-picker",
       "inpost-geowidget",
-      "cards",
       "data",
-      "feedback",
+      "cards",
+      "accordion",
+      "timeline-code",
+      "gallery",
       "navigation",
       "overlays",
+      "popover",
       "inbox-popover",
       "layouts",
     ];
@@ -206,7 +216,7 @@ describe("ComponentsView", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("exports COMPONENT_CATEGORIES with all 7 categories and 15 items in sequential order", () => {
+  it("exports COMPONENT_CATEGORIES with all 7 categories and 20 items in sequential order", () => {
     expect(COMPONENT_CATEGORIES).toHaveLength(7);
     expect(COMPONENT_CATEGORIES.map((c) => c.name)).toEqual([
       "Foundations",
@@ -218,7 +228,7 @@ describe("ComponentsView", () => {
       "Layouts",
     ]);
     const totalItems = COMPONENT_CATEGORIES.reduce((acc, cat) => acc + cat.items.length, 0);
-    expect(totalItems).toBe(15);
+    expect(totalItems).toBe(20);
   });
 
   it("renders DOM sections in the exact sequential order of the sidebar categories", () => {

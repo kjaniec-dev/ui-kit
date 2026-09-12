@@ -6,6 +6,7 @@ import {
   Card,
   DashboardShell,
   DetailPageLayout,
+  PageHeader,
   SectionHeader,
   Select,
   SettingsLayout,
@@ -61,6 +62,7 @@ export function LayoutsSections() {
         "DashboardShell",
         "SettingsLayout",
         "DetailPageLayout",
+        "PageHeader",
         "SectionHeader",
         "TableToolbar",
         "SidebarNav",
@@ -340,6 +342,25 @@ export function LayoutsSections() {
             title="Simple, transparent pricing"
             description="No hidden fees. Free forever for open-source projects."
             align="center"
+          />
+        </div>
+      </Box>
+
+      <Box className="mt-6">
+        <Sub>Page header</Sub>
+        <div className="p-6 bg-canvas rounded-kj-md border border-border">
+          <PageHeader
+            eyebrow="Documentation"
+            title="Design System & UI Kit"
+            description="Production-ready React 19 components with OKLCH design tokens and Tailwind CSS v4."
+            actions={
+              <>
+                <Button variant="outline" size="sm">
+                  View Components
+                </Button>
+                <Button size="sm">Get Started</Button>
+              </>
+            }
           />
         </div>
       </Box>

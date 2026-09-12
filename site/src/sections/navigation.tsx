@@ -1,8 +1,4 @@
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
   BottomNavigation,
   Breadcrumb,
   BreadcrumbItem,
@@ -192,11 +188,10 @@ export function NavigationSections() {
     <Sec
       id="navigation"
       title="Navigation"
-      desc="Tabs, dropdown menus, accordion, breadcrumbs, pagination and step wizard."
+      desc="Tabs, dropdown menus, breadcrumbs, pagination and step wizard."
       components={[
         "Tabs",
         "DropdownMenu",
-        "Accordion",
         "Breadcrumb",
         "Pagination",
         "BottomNavigation",
@@ -241,24 +236,7 @@ export function NavigationSections() {
           </DropdownMenu>
         </Box>
       </Grid>
-      <Sub className="mt-5">Accordion</Sub>
-      <Accordion type="single" defaultValue={["a"]} className="mb-5">
-        <AccordionItem value="a">
-          <AccordionTrigger>How does billing work?</AccordionTrigger>
-          <AccordionContent>
-            Billed monthly or annually. The annual plan includes two months free.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="b">
-          <AccordionTrigger>Can I change my plan later?</AccordionTrigger>
-          <AccordionContent>Yes, at any time. The difference is prorated.</AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="c">
-          <AccordionTrigger>What payment methods are supported?</AccordionTrigger>
-          <AccordionContent>Visa, Mastercard and Apple Pay.</AccordionContent>
-        </AccordionItem>
-      </Accordion>
-      <div className="flex items-center justify-between flex-wrap gap-3">
+      <div className="flex items-center justify-between flex-wrap gap-3 mt-6">
         <Breadcrumb>
           <BreadcrumbItem href="#">Workspace</BreadcrumbItem>
           <BreadcrumbSeparator />
