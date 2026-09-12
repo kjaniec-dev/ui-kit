@@ -121,11 +121,11 @@ export function SiteHeader({
           <div>
             <div className="font-bold text-sm leading-tight text-foreground flex items-center gap-1.5 whitespace-nowrap">
               <span>KJ Product Kit</span>
-              <span className="hidden sm:inline-block text-[0.68rem] px-1.5 py-0.5 rounded-kj-sm bg-muted text-muted-foreground font-mono font-medium">
+              <span className="hidden lg:inline-block text-[0.68rem] px-1.5 py-0.5 rounded-kj-sm bg-muted text-muted-foreground font-mono font-medium">
                 v{version}
               </span>
             </div>
-            <div className="text-[0.68rem] text-muted-foreground hidden lg:block whitespace-nowrap">
+            <div className="text-[0.68rem] text-muted-foreground hidden xl:block whitespace-nowrap">
               React 19 · Tailwind 4 Design System
             </div>
           </div>
@@ -164,7 +164,7 @@ export function SiteHeader({
           <button
             type="button"
             onClick={onOpenSearch}
-            className="flex items-center justify-between gap-2 w-36 sm:w-52 md:w-60 lg:w-72 px-2.5 sm:px-3 py-1.5 rounded-kj-sm text-xs text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted border border-border transition-colors cursor-pointer shadow-xs"
+            className="flex items-center justify-between gap-2 w-36 sm:w-44 md:w-48 lg:w-56 xl:w-64 px-2.5 sm:px-3 py-1.5 rounded-kj-sm text-xs text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted border border-border transition-colors cursor-pointer shadow-xs"
             aria-label="Search documentation"
             title="Search documentation (⌘K)"
           >
