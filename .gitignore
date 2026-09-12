@@ -9,4 +9,5 @@ storybook-static
 .superpowers/
 .playwright-mcp/
 .serena/
+.claude/
 
