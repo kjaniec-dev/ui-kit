@@ -156,10 +156,10 @@ function OverviewContent({ onNavigate }: OverviewViewProps) {
         {/* Quick actions CTAs */}
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3">
           <Button size="lg" variant="primary" onClick={() => onNavigate("components")}>
-            Explore Components &rarr;
+            Explore Components →
           </Button>
           <Button size="lg" variant="outline" onClick={() => onNavigate("patterns")}>
-            View Patterns &rarr;
+            View Patterns →
           </Button>
           <a
             href="https://github.com/kjaniec-dev/ui-kit"
@@ -171,7 +171,7 @@ function OverviewContent({ onNavigate }: OverviewViewProps) {
             )}
           >
             <span>GitHub</span>
-            <span className="text-sm font-sans">&nearr;</span>
+            <span className="text-sm font-sans">↗</span>
           </a>
         </div>
 
@@ -231,7 +231,7 @@ function OverviewContent({ onNavigate }: OverviewViewProps) {
                 onClick={() => onNavigate("tokens")}
               >
                 <span>Explore Tokens</span>
-                <span>&rarr;</span>
+                <span>→</span>
               </Button>
             </div>
           </Card>
@@ -271,7 +271,7 @@ function OverviewContent({ onNavigate }: OverviewViewProps) {
                 onClick={() => onNavigate("patterns")}
               >
                 <span>Explore Patterns</span>
-                <span>&rarr;</span>
+                <span>→</span>
               </Button>
             </div>
           </Card>
@@ -308,7 +308,7 @@ function OverviewContent({ onNavigate }: OverviewViewProps) {
                 onClick={() => onNavigate("mcp")}
               >
                 <span>Explore MCP</span>
-                <span>&rarr;</span>
+                <span>→</span>
               </Button>
             </div>
           </Card>

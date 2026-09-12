@@ -1,48 +1,48 @@
-import * as React from "react";
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-  Stat,
-  MetricCard,
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
   Avatar,
   AvatarGroup,
   Badge,
+  BlogCard,
   Button,
-  TableWrap,
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableHead,
-  TableCell,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  CodeBlock,
   DataTable,
-  TableToolbar,
+  type GalleryImage,
+  ImageGallery,
+  MetricCard,
   Pagination,
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
+  PricingCard,
+  ProjectCard,
+  Stat,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableToolbar,
+  TableWrap,
   Timeline,
+  TimelineConnector,
+  TimelineContent,
+  TimelineDot,
   TimelineItem,
   TimelineSeparator,
-  TimelineConnector,
-  TimelineDot,
-  TimelineContent,
-  TimelineTitle,
   TimelineTime,
-  CodeBlock,
-  ProjectCard,
-  BlogCard,
-  PricingCard,
-  ImageGallery,
-  type GalleryImage,
+  TimelineTitle,
   useToast,
 } from "@kjaniec-dev/ui";
-import { Sec, Box, Sub, Grid, IcoPlus, IcoWarn, IcoGear } from "./primitives";
+import * as React from "react";
+import { Box, Grid, IcoGear, IcoPlus, IcoWarn, Sec, Sub } from "./primitives";
 
 interface ProjectRow {
   name: string;
@@ -256,6 +256,79 @@ export function DataDisplaySections() {
   return (
     <>
       <Sec
+        id="data"
+        title="Table & data"
+        desc="Tables with statuses, avatars, aligned numbers, and interactive DataTables."
+        components={["DataTable", "Table", "TableToolbar", "EmptyState", "ErrorState"]}
+      >
+        <TableWrap>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>User</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead numeric>Projects</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  <div className="flex items-center gap-2.5">
+                    <Avatar size="sm" tone="primary">
+                      AK
+                    </Avatar>
+                    Anna Kowalski
+                  </div>
+                </TableCell>
+                <TableCell>Administrator</TableCell>
+                <TableCell>
+                  <Badge variant="success" dot>
+                    Active
+                  </Badge>
+                </TableCell>
+                <TableCell numeric>24</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <div className="flex items-center gap-2.5">
+                    <Avatar size="sm">MR</Avatar>
+                    Michael Rutkowski
+                  </div>
+                </TableCell>
+                <TableCell>Editor</TableCell>
+                <TableCell>
+                  <Badge variant="warning" dot>
+                    Invited
+                  </Badge>
+                </TableCell>
+                <TableCell numeric>12</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <div className="flex items-center gap-2.5">
+                    <Avatar size="sm" tone="info">
+                      JN
+                    </Avatar>
+                    Julia Nowak
+                  </div>
+                </TableCell>
+                <TableCell>Viewer</TableCell>
+                <TableCell>
+                  <Badge>Inactive</Badge>
+                </TableCell>
+                <TableCell numeric>3</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableWrap>
+        <Sub className="mt-5">
+          DataTable (v0.7.0 with built-in selection, custom toolbar and pagination)
+        </Sub>
+        <DataTableDemo />
+      </Sec>
+
+      <Sec
         id="cards"
         title="Cards & stats"
         desc="Cards with content and footer, cover images, metrics, and domain-specific card suites."
@@ -393,79 +466,6 @@ export function DataDisplaySections() {
             ]}
           />
         </div>
-      </Sec>
-
-      <Sec
-        id="data"
-        title="Table & data"
-        desc="Tables with statuses, avatars, aligned numbers, and interactive DataTables."
-        components={["DataTable", "Table", "TableToolbar", "EmptyState", "ErrorState"]}
-      >
-        <TableWrap>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>User</TableHead>
-                <TableHead>Role</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead numeric>Projects</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell>
-                  <div className="flex items-center gap-2.5">
-                    <Avatar size="sm" tone="primary">
-                      AK
-                    </Avatar>
-                    Anna Kowalski
-                  </div>
-                </TableCell>
-                <TableCell>Administrator</TableCell>
-                <TableCell>
-                  <Badge variant="success" dot>
-                    Active
-                  </Badge>
-                </TableCell>
-                <TableCell numeric>24</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  <div className="flex items-center gap-2.5">
-                    <Avatar size="sm">MR</Avatar>
-                    Michael Rutkowski
-                  </div>
-                </TableCell>
-                <TableCell>Editor</TableCell>
-                <TableCell>
-                  <Badge variant="warning" dot>
-                    Invited
-                  </Badge>
-                </TableCell>
-                <TableCell numeric>12</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  <div className="flex items-center gap-2.5">
-                    <Avatar size="sm" tone="info">
-                      JN
-                    </Avatar>
-                    Julia Nowak
-                  </div>
-                </TableCell>
-                <TableCell>Viewer</TableCell>
-                <TableCell>
-                  <Badge>Inactive</Badge>
-                </TableCell>
-                <TableCell numeric>3</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableWrap>
-        <Sub className="mt-5">
-          DataTable (v0.7.0 with built-in selection, custom toolbar and pagination)
-        </Sub>
-        <DataTableDemo />
       </Sec>
 
       <Sec

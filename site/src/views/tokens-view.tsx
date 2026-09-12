@@ -418,7 +418,7 @@ function TokensContent() {
       <header className="flex flex-col gap-4 border-b border-border pb-8">
         <div className="flex flex-wrap items-center gap-2">
           <Badge variant="primary" dot>
-            KJ Product Kit &middot; Tokens
+            KJ Product Kit · Tokens
           </Badge>
           <Badge variant="neutral">OKLCH Palette</Badge>
           <Badge variant="neutral">Tailwind 4 @theme</Badge>
