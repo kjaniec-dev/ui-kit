@@ -1,10 +1,66 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>@kjaniec-dev/ui — component demo</title>
-  <meta name="description" content="Interaktywna galeria demonstracyjna prezentująca nowoczesne, wysokiej jakości komponenty React z biblioteki @kjaniec-dev/ui." />
+  <title>KJ Product Kit — React Design System for B2B Products</title>
+  <meta name="description" content="Open-source React 19 and Tailwind CSS 4 design system with 50+ components, B2B product patterns, design tokens and MCP integration for AI coding agents." />
+
+  <link rel="canonical" href="https://ui.kjaniec.dev/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#d97706" />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "KJ Product Kit",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "description": "Open-source React 19 and Tailwind CSS 4 design system with 50+ components, B2B product patterns, design tokens and MCP integration for AI coding agents.",
+    "url": "https://ui.kjaniec.dev/",
+    "author": {
+      "@type": "Person",
+      "name": "Krzysztof Janiec",
+      "url": "https://kjaniec.dev"
+    },
+    "license": "https://github.com/kjaniec-dev/ui-kit/blob/main/LICENSE"
+  }
+  </script>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ui.kjaniec.dev/" />
+  <meta property="og:title" content="KJ Product Kit — React Design System for B2B Products" />
+  <meta property="og:description" content="Open-source React 19 and Tailwind CSS 4 design system with 50+ components, B2B product patterns, design tokens and MCP integration for AI coding agents." />
+  <meta property="og:image" content="https://ui.kjaniec.dev/og-image.png" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="900" />
+  <meta property="og:site_name" content="KJ Product Kit" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://ui.kjaniec.dev/" />
+  <meta name="twitter:title" content="KJ Product Kit — React Design System for B2B Products" />
+  <meta name="twitter:description" content="Open-source React 19 and Tailwind CSS 4 design system with 50+ components, B2B product patterns, design tokens and MCP integration for AI coding agents." />
+  <meta name="twitter:image" content="https://ui.kjaniec.dev/og-image.png" />
+
+  <!-- Early theme check to prevent flash -->
+  <script>
+    (function() {
+      try {
+        var theme = localStorage.getItem('kj-ui-theme');
+        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>

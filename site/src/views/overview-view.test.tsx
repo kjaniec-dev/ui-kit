@@ -33,7 +33,7 @@ describe("OverviewView", () => {
     ).toBeInTheDocument();
 
     const expectedBadges = [
-      "50+ Components",
+      "50+ Components & 140+ Variants",
       "React 19",
       "Tailwind 4",
       "OKLCH Palette",

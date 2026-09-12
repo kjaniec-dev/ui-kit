@@ -1,0 +1,16 @@
+{
+  "name": "KJ Product Kit",
+  "short_name": "KJ Kit",
+  "description": "React 19 & Tailwind 4 Design System with 50+ Components, B2B Patterns, Tokens, and MCP Server",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#d97706",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -128,4 +128,22 @@ describe("SiteHeader", () => {
     );
     expect(screen.queryByRole("button", { name: /menu/i })).not.toBeInTheDocument();
   });
+
+  it("renders search button when onOpenSearch is provided and triggers callback on click", () => {
+    const onOpenSearch = vi.fn();
+    render(
+      <SiteHeader
+        activeTab="overview"
+        onSelectTab={vi.fn()}
+        dark={false}
+        onToggleDark={vi.fn()}
+        onOpenSearch={onOpenSearch}
+      />
+    );
+
+    const searchBtn = screen.getByRole("button", { name: /Search documentation/i });
+    expect(searchBtn).toBeInTheDocument();
+    fireEvent.click(searchBtn);
+    expect(onOpenSearch).toHaveBeenCalledTimes(1);
+  });
 });

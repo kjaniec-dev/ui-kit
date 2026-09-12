@@ -366,16 +366,19 @@ export function ComponentsView({
         <div className="min-w-0">
           <main className="px-8 max-[820px]:px-5 py-8 max-w-[1040px]">
             {/* Mobile navigation toggle */}
-            <div className="hidden max-[820px]:flex items-center justify-between gap-3 p-3.5 mb-6 rounded-kj-md border border-border bg-surface">
-              <div className="flex items-center gap-2 text-xs">
-                <span className="text-muted-foreground">Section:</span>
-                <span className="font-semibold text-foreground capitalize">{activeSection}</span>
+            <div className="hidden max-[820px]:flex sticky top-[57px] z-20 items-center justify-between gap-3 p-3 mb-6 rounded-kj-md border border-border bg-surface/95 backdrop-blur-md shadow-kj-sm">
+              <div className="flex items-center gap-2 text-xs min-w-0">
+                <span className="text-muted-foreground shrink-0">Section:</span>
+                <span className="font-semibold text-foreground capitalize truncate">
+                  {activeSection}
+                </span>
               </div>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setSidebarOpen(true)}
                 aria-label="Open component navigation"
+                className="shrink-0"
               >
                 <svg
                   width={16}
@@ -420,6 +423,34 @@ export function ComponentsView({
               ships in the repo.
             </footer>
           </main>
+        </div>
+
+        {/* Mobile floating button to quickly open component drawer from anywhere */}
+        <div className="hidden max-[820px]:block fixed bottom-5 right-5 z-20">
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => setSidebarOpen(true)}
+            aria-label="Browse components floating shortcut"
+            className="shadow-kj-lg flex items-center gap-1.5 rounded-full px-3.5 py-2 cursor-pointer bg-primary text-primary-foreground hover:bg-primary-hover"
+          >
+            <svg
+              width={16}
+              height={16}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="4" y1="6" x2="20" y2="6" />
+              <line x1="4" y1="12" x2="20" y2="12" />
+              <line x1="4" y1="18" x2="20" y2="18" />
+            </svg>
+            <span className="text-xs font-semibold">Components</span>
+          </Button>
         </div>
 
         {/* Mobile drawer */}

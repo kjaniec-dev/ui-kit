@@ -1,4 +1,4 @@
-import { cn, ToastProvider } from "@kjaniec-dev/ui";
+import { CommandPalette, type CommandPaletteItem, cn, ToastProvider } from "@kjaniec-dev/ui";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { SiteHeader } from "./components/site-header";
@@ -18,9 +18,27 @@ const TABS: { id: TabKey; label: string; badge?: string }[] = [
   { id: "mcp", label: "MCP", badge: "AI" },
 ];
 
+export const THEME_STORAGE_KEY = "kj-ui-theme";
+
+export function getInitialTheme(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const saved = localStorage.getItem(THEME_STORAGE_KEY);
+    if (saved === "dark") return true;
+    if (saved === "light") return false;
+  } catch {
+    // Storage access might fail in restricted environments
+  }
+  if (typeof window.matchMedia === "function") {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  return false;
+}
+
 export function App(): React.JSX.Element {
-  const [dark, setDark] = React.useState(false);
+  const [dark, setDark] = React.useState<boolean>(getInitialTheme);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [searchOpen, setSearchOpen] = React.useState(false);
   const { tab, subRoute, navigate } = useHashRoute();
   const version = typeof __APP_VERSION__ !== "undefined" ? __APP_VERSION__ : "0.9.3";
 
@@ -28,56 +46,280 @@ export function App(): React.JSX.Element {
     document.documentElement.classList.toggle("dark", dark);
   }, [dark]);
 
+  React.useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") return;
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handler = (e: MediaQueryListEvent) => {
+      try {
+        if (!localStorage.getItem(THEME_STORAGE_KEY)) {
+          setDark(e.matches);
+        }
+      } catch {
+        setDark(e.matches);
+      }
+    };
+    mediaQuery.addEventListener?.("change", handler);
+    return () => mediaQuery.removeEventListener?.("change", handler);
+  }, []);
+
+  const handleToggleDark = React.useCallback(() => {
+    setDark((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem(THEME_STORAGE_KEY, next ? "dark" : "light");
+      } catch {
+        // Storage access might fail in restricted environments
+      }
+      return next;
+    });
+  }, []);
+
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setSearchOpen((open) => !open);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  const commandPaletteItems = React.useMemo<CommandPaletteItem[]>(() => {
+    return [
+      // Navigation
+      {
+        id: "nav-overview",
+        title: "Overview",
+        subtitle: "Homepage, key pillars, quickstart & interactive demo",
+        category: "Navigation",
+        action: () => navigate("overview"),
+      },
+      {
+        id: "nav-components",
+        title: "Components Catalog",
+        subtitle: "Explore all 50+ components and 140+ variants",
+        category: "Navigation",
+        action: () => navigate("components"),
+      },
+      {
+        id: "nav-patterns",
+        title: "B2B Patterns",
+        subtitle: "Production flows for invoices, tenants, and dev console",
+        category: "Navigation",
+        action: () => navigate("patterns"),
+      },
+      {
+        id: "nav-tokens",
+        title: "Design Tokens",
+        subtitle: "OKLCH color scales, radiuses, shadows and typography",
+        category: "Navigation",
+        action: () => navigate("tokens"),
+      },
+      {
+        id: "nav-mcp",
+        title: "Model Context Protocol (MCP)",
+        subtitle: "AI coding agent setup, client configs & tool reference",
+        category: "Navigation",
+        action: () => navigate("mcp"),
+      },
+
+      // Components
+      {
+        id: "comp-buttons",
+        title: "Buttons & FAB",
+        subtitle: "Primary, outline, ghost, icon, floating action buttons",
+        category: "Components",
+        action: () => navigate("components", "buttons"),
+      },
+      {
+        id: "comp-badges",
+        title: "Badges",
+        subtitle: "Status indicators, dot badges, pill variants",
+        category: "Components",
+        action: () => navigate("components", "badges"),
+      },
+      {
+        id: "comp-primitives",
+        title: "Primitives",
+        subtitle: "Avatar, Kbd, Separator, CodeBlock, Stat, Spinner, Timeline",
+        category: "Components",
+        action: () => navigate("components", "primitives"),
+      },
+      {
+        id: "comp-feedback",
+        title: "Feedback & Status",
+        subtitle: "Alert, Toast, ProgressRing, Skeleton, EmptyState, ErrorState",
+        category: "Components",
+        action: () => navigate("components", "feedback"),
+      },
+      {
+        id: "comp-forms",
+        title: "Inputs & Forms",
+        subtitle: "Input, Textarea, Select, Switch, DatePicker, FileUpload",
+        category: "Components",
+        action: () => navigate("components", "forms"),
+      },
+      {
+        id: "comp-data-display",
+        title: "Data Display",
+        subtitle: "DataTable, MetricCard, PricingCard, InPost GeoWidget",
+        category: "Components",
+        action: () => navigate("components", "data-display"),
+      },
+      {
+        id: "comp-navigation",
+        title: "Navigation Components",
+        subtitle: "Tabs, Breadcrumbs, Stepper, Pagination, Segmented",
+        category: "Components",
+        action: () => navigate("components", "navigation"),
+      },
+      {
+        id: "comp-overlays",
+        title: "Overlays & Popups",
+        subtitle: "Modal, Drawer, Tooltip, Popover, CommandPalette",
+        category: "Components",
+        action: () => navigate("components", "overlays"),
+      },
+      {
+        id: "comp-layouts",
+        title: "Layout Shells",
+        subtitle: "DashboardShell, DetailPageLayout, SettingsLayout",
+        category: "Components",
+        action: () => navigate("components", "layouts"),
+      },
+
+      // Patterns
+      {
+        id: "pattern-invoice",
+        title: "Invoice & Accounting Dashboard",
+        subtitle: "Bulk actions, settlement metrics, and financial table filters",
+        category: "Patterns",
+        action: () => navigate("patterns", "invoice-accounting"),
+      },
+      {
+        id: "pattern-tenant",
+        title: "Tenant & Property Manager",
+        subtitle: "Occupancy stats, slide-over drawer, and confirm dialogs",
+        category: "Patterns",
+        action: () => navigate("patterns", "tenant-property"),
+      },
+      {
+        id: "pattern-dev-console",
+        title: "Project & Dev Console",
+        subtitle: "Command palette, service health toggles, and detail view",
+        category: "Patterns",
+        action: () => navigate("patterns", "project-dev-console"),
+      },
+
+      // MCP Tools
+      {
+        id: "mcp-list-components",
+        title: "MCP: list_components",
+        subtitle: "Lists all 50+ components and 140+ variants",
+        category: "MCP Server",
+        action: () => navigate("mcp"),
+      },
+      {
+        id: "mcp-get-component",
+        title: "MCP: get_component",
+        subtitle: "Detailed props, JSDoc definitions, and story snippets",
+        category: "MCP Server",
+        action: () => navigate("mcp"),
+      },
+      {
+        id: "mcp-get-tokens",
+        title: "MCP: get_tokens",
+        subtitle: "CSS variables and Tailwind utility maps for OKLCH tokens",
+        category: "MCP Server",
+        action: () => navigate("mcp"),
+      },
+      {
+        id: "mcp-search-components",
+        title: "MCP: search_components",
+        subtitle: "Fuzzy search for use cases and components",
+        category: "MCP Server",
+        action: () => navigate("mcp"),
+      },
+
+      // Actions
+      {
+        id: "action-toggle-theme",
+        title: dark ? "Switch to Light Mode" : "Switch to Dark Mode",
+        subtitle: "Toggle color scheme preference",
+        category: "Actions",
+        action: handleToggleDark,
+      },
+      {
+        id: "action-github",
+        title: "View on GitHub",
+        subtitle: "Repository kjaniec-dev/ui-kit",
+        category: "Actions",
+        action: () => window.open("https://github.com/kjaniec-dev/ui-kit", "_blank"),
+      },
+      {
+        id: "action-portfolio",
+        title: "Built by Krzysztof Janiec",
+        subtitle: "Visit kjaniec.dev",
+        category: "Actions",
+        action: () => window.open("https://kjaniec.dev", "_blank"),
+      },
+    ];
+  }, [navigate, dark, handleToggleDark]);
+
   return (
     <ToastProvider>
       <div className="min-h-screen flex flex-col bg-background text-foreground">
-        <SiteHeader
-          activeTab={tab}
-          onSelectTab={(newTab) => {
-            navigate(newTab);
-            setMobileMenuOpen(false);
-          }}
-          dark={dark}
-          onToggleDark={() => setDark((d) => !d)}
-          showMobileMenuButton={true}
-          mobileMenuOpen={mobileMenuOpen}
-          onToggleMobileMenu={() => setMobileMenuOpen((open) => !open)}
-        />
+        <div className="sticky top-0 z-30">
+          <SiteHeader
+            activeTab={tab}
+            onSelectTab={(newTab) => {
+              navigate(newTab);
+              setMobileMenuOpen(false);
+            }}
+            dark={dark}
+            onToggleDark={handleToggleDark}
+            showMobileMenuButton={true}
+            mobileMenuOpen={mobileMenuOpen}
+            onToggleMobileMenu={() => setMobileMenuOpen((open) => !open)}
+            onOpenSearch={() => setSearchOpen(true)}
+          />
 
-        {mobileMenuOpen && (
-          <nav
-            aria-label="Mobile navigation"
-            data-testid="mobile-nav-menu"
-            className="min-[821px]:hidden border-b border-border bg-surface px-4 py-3 flex flex-col gap-1 shadow-kj-md"
-          >
-            {TABS.map((item) => {
-              const active = tab === item.id;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => {
-                    navigate(item.id);
-                    setMobileMenuOpen(false);
-                  }}
-                  className={cn(
-                    "flex items-center justify-between px-3 py-2 rounded-kj-sm text-sm font-medium transition-colors cursor-pointer border-0 text-left",
-                    active
-                      ? "bg-primary/10 text-primary font-semibold"
-                      : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted/70"
-                  )}
-                >
-                  <span>{item.label}</span>
-                  {item.badge && (
-                    <span className="text-[0.62rem] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-primary text-primary-foreground font-mono">
-                      {item.badge}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </nav>
-        )}
+          {mobileMenuOpen && (
+            <nav
+              aria-label="Mobile navigation"
+              data-testid="mobile-nav-menu"
+              className="min-[821px]:hidden border-b border-border bg-surface/95 backdrop-blur-md px-4 py-3 flex flex-col gap-1 shadow-kj-md max-h-[calc(100vh-4rem)] overflow-y-auto"
+            >
+              {TABS.map((item) => {
+                const active = tab === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => {
+                      navigate(item.id);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={cn(
+                      "flex items-center justify-between px-3 py-2 rounded-kj-sm text-sm font-medium transition-colors cursor-pointer border-0 text-left",
+                      active
+                        ? "bg-primary/10 text-primary font-semibold"
+                        : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted/70"
+                    )}
+                  >
+                    <span>{item.label}</span>
+                    {item.badge && (
+                      <span className="text-[0.62rem] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-primary text-primary-foreground font-mono">
+                        {item.badge}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </nav>
+          )}
+        </div>
 
         <div className="flex-1">
           {tab === "overview" && <OverviewView onNavigate={navigate} />}
@@ -102,10 +344,34 @@ export function App(): React.JSX.Element {
               </a>
             </div>
             <p className="m-0 text-center sm:text-right">
-              © {new Date().getFullYear()} KJ Product Kit. All rights reserved.
+              Open source under the{" "}
+              <a
+                href="https://github.com/kjaniec-dev/ui-kit/blob/main/LICENSE"
+                target="_blank"
+                rel="noreferrer"
+                className="text-muted-foreground hover:text-foreground underline underline-offset-2 transition-colors"
+              >
+                MIT License
+              </a>{" "}
+              · Built by{" "}
+              <a
+                href="https://kjaniec.dev"
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-foreground hover:underline underline-offset-2 transition-colors"
+              >
+                Krzysztof Janiec
+              </a>
             </p>
           </div>
         </footer>
+
+        <CommandPalette
+          open={searchOpen}
+          onClose={() => setSearchOpen(false)}
+          items={commandPaletteItems}
+          placeholder="Search components, patterns, tokens, or actions..."
+        />
       </div>
     </ToastProvider>
   );

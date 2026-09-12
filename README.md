@@ -1,8 +1,8 @@
 # KJ Product Kit
 
-Design tokens and React component library for building consistent KJ apps.
+React 19 & Tailwind CSS 4 design system for B2B SaaS, dashboards, and developer tooling. Engineered with 50+ components, 140+ variants, production business patterns, OKLCH design tokens, and an AI-native Model Context Protocol (MCP) server.
 
-**[⚡ Live Demo Component Gallery](https://ui.kjaniec.dev)**
+**[⚡ Live Documentation & Interactive Demo](https://ui.kjaniec.dev)** · **[📦 npm: @kjaniec-dev/ui](https://www.npmjs.com/package/@kjaniec-dev/ui)** · **[🤖 MCP Server: @kjaniec-dev/ui-mcp](https://www.npmjs.com/package/@kjaniec-dev/ui-mcp)**
 
 ---
 
@@ -41,25 +41,30 @@ AI agents can interact with the system by requesting information dynamically:
 
 ## Packages
 
-| Package | Description |
-|---|---|
-| [`@kjaniec-dev/design`](./packages/design) | Design tokens, CSS variables, Tailwind v4 theme |
-| [`@kjaniec-dev/ui`](./packages/ui) | React component library built on the token system |
+| Package | Description | Version |
+|---|---|---|
+| [`@kjaniec-dev/design`](./packages/design) | Design tokens, OKLCH scales, CSS custom properties, Tailwind v4 `@theme` | `0.9.1` |
+| [`@kjaniec-dev/ui`](./packages/ui) | React 19 component library (50+ components, 140+ variants) | `0.9.3` |
+| [`@kjaniec-dev/ui-mcp`](./packages/mcp) | AI-native Model Context Protocol server for Cursor, Claude & coding agents | `0.9.1` |
 
 ## Repo structure
 
 ```
 packages/
-  design/       ← design tokens and build script
+  design/       ← Design tokens, OKLCH scales, and build script
     theme.css       CSS custom properties (--kj-*)
     tailwind.css    Tailwind v4 @theme bridge
     tokens.json     Raw token values
-  ui/           ← React components
-    src/components/ All components + Storybook stories
+  ui/           ← React 19 UI component library
+    src/components/ All 50+ components + Storybook stories
     src/index.ts    Barrel export
     tsup.config.ts  Builds ESM + CJS + .d.ts into dist/
-site/           ← Interactive component gallery (Vite React app)
-docs/           ← Design guidelines
+  mcp/          ← Model Context Protocol server
+    src/index.ts    Stdio MCP tools & resources for AI agents
+    data/           Extracted component & token schemas
+site/           ← Documentation & interactive showcase (Vite React app)
+  src/views/        Overview, Components, Patterns, Tokens, MCP
+docs/           ← Design guidelines & specifications
 ```
 
 ## Local development
@@ -153,3 +158,7 @@ npm install -g netlify-cli
 netlify login
 netlify deploy --prod     # reads netlify.toml, runs build and deploys site/dist
 ```
+
+## License & Author
+
+Open source under the [MIT License](https://github.com/kjaniec-dev/ui-kit/blob/main/LICENSE) · Built by [Krzysztof Janiec](https://kjaniec.dev).

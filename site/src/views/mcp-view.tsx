@@ -98,7 +98,7 @@ const MCP_TOOLS: ToolReference[] = [
     name: "list_components",
     parameters: "None",
     returnType: "Array<{ name, description, variants }>",
-    summary: "Lists all 140+ components and variants",
+    summary: "Lists all 50+ components and 140+ variants",
     description:
       "Provides component names, descriptions, and variant groups for all available UI components in the design system.",
     exampleCall: "list_components()",
@@ -272,8 +272,8 @@ function McpContent() {
             <code className="text-xs font-mono font-semibold px-1.5 py-0.5 rounded bg-muted text-primary">
               @kjaniec-dev/ui-mcp
             </code>
-            , agents access real React prop schemas, CVA variants, and OKLCH design tokens for
-            zero-hallucination, design-token-aware UI generation.
+            , agents access real React prop schemas, CVA variants, and OKLCH design tokens to ground
+            AI-generated UI in the actual component API with design-token-aware UI generation.
           </p>
         </div>
 
@@ -284,11 +284,11 @@ function McpContent() {
               Agentic Context
             </span>
             <span className="text-sm font-medium text-foreground">
-              Direct Knowledge of 140+ Components
+              Direct Knowledge of 50+ Components &amp; 140+ Variants
             </span>
             <p className="text-xs text-muted-foreground m-0 leading-relaxed">
-              Provides real imports, TypeScript signatures, and storybook usage snippets without
-              hallucinations.
+              Provides real imports, TypeScript signatures, and storybook usage snippets to ground
+              AI coding agents and reduce component hallucinations.
             </p>
           </Card>
 
@@ -459,8 +459,8 @@ function McpContent() {
           </div>
           <p className="text-sm text-muted-foreground m-0 max-w-[80ch]">
             The <code className="font-mono text-xs font-semibold">@kjaniec-dev/ui-mcp</code> server
-            exposes 4 core tools and resources providing real-time introspection into 140+
-            components and variants across the KJ Product Kit library.
+            exposes 4 core tools and resources providing real-time introspection into 50+ components
+            and 140+ variants across the KJ Product Kit library.
           </p>
         </div>
 
@@ -537,7 +537,7 @@ function McpContent() {
         {/* Dialogue Stream Card */}
         <Card className="border-border bg-surface shadow-kj-sm overflow-hidden flex flex-col divide-y divide-border">
           {/* Step 1: User Prompt */}
-          <div className="p-6 flex flex-col gap-3 bg-muted/10">
+          <div className="p-6 max-[820px]:p-4 flex flex-col gap-3 bg-muted/10">
             <div className="flex items-center gap-2.5">
               <div className="w-7 h-7 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs font-mono">
                 U
@@ -545,14 +545,14 @@ function McpContent() {
               <span className="font-semibold text-sm text-foreground">User Prompt</span>
               <Badge variant="neutral">Requirement</Badge>
             </div>
-            <div className="pl-9 text-sm text-foreground leading-relaxed bg-surface p-3.5 rounded-kj-md border border-border">
+            <div className="pl-9 max-[820px]:pl-0 text-sm text-foreground leading-relaxed bg-surface p-3.5 rounded-kj-md border border-border">
               “Build a responsive monthly recurring revenue stat card displaying an upward trend
               badge and a quick action button using KJ Product Kit.”
             </div>
           </div>
 
           {/* Step 2: Agent Thinking & MCP Tool Call */}
-          <div className="p-6 flex flex-col gap-4 bg-muted/30">
+          <div className="p-6 max-[820px]:p-4 flex flex-col gap-4 bg-muted/30">
             <div className="flex items-center gap-2.5">
               <div className="w-7 h-7 rounded-full bg-secondary/20 text-secondary-600 dark:text-secondary-400 flex items-center justify-center font-bold text-xs font-mono">
                 AI
@@ -563,12 +563,12 @@ function McpContent() {
               <Badge variant="primary">Tool Execution</Badge>
             </div>
 
-            <div className="pl-9 flex flex-col gap-3">
+            <div className="pl-9 max-[820px]:pl-0 flex flex-col gap-3 min-w-0">
               <p className="text-xs text-muted-foreground m-0">
                 Agent searches for available stat cards and retrieves the exact prop schema:
               </p>
 
-              <div className="rounded-kj-md border border-border bg-surface p-3 font-mono text-xs flex flex-col gap-2">
+              <div className="rounded-kj-md border border-border bg-surface p-3 font-mono text-xs flex flex-col gap-2 overflow-x-auto min-w-0">
                 <div className="flex items-center justify-between text-muted-foreground border-b border-border/60 pb-1">
                   <span>
                     Call: <strong className="text-primary">get_component</strong>
@@ -578,12 +578,12 @@ function McpContent() {
                 <pre className="text-foreground m-0">{`{\n  "name": "MetricCard"\n}`}</pre>
               </div>
 
-              <div className="rounded-kj-md border border-border bg-surface/80 p-3 font-mono text-xs flex flex-col gap-1.5">
+              <div className="rounded-kj-md border border-border bg-surface/80 p-3 font-mono text-xs flex flex-col gap-1.5 overflow-x-auto min-w-0">
                 <div className="flex items-center justify-between text-muted-foreground border-b border-border/60 pb-1">
                   <span>Server Response: props schema</span>
                   <span className="text-success font-semibold">• 200 OK</span>
                 </div>
-                <div className="text-muted-foreground text-[0.7rem] leading-relaxed">
+                <div className="text-muted-foreground text-[0.7rem] leading-relaxed break-words">
                   Props: <code className="text-foreground">title: string</code>,{" "}
                   <code className="text-foreground">value: string</code>,{" "}
                   <code className="text-foreground">
@@ -599,16 +599,16 @@ function McpContent() {
           </div>
 
           {/* Step 3: Generated Compliant JSX */}
-          <div className="p-6 flex flex-col gap-4 bg-muted/10">
+          <div className="p-6 max-[820px]:p-4 flex flex-col gap-4 bg-muted/10">
             <div className="flex items-center gap-2.5">
               <div className="w-7 h-7 rounded-full bg-success/20 text-success flex items-center justify-center font-bold text-xs font-mono">
                 ✓
               </div>
               <span className="font-semibold text-sm text-foreground">Generated Compliant JSX</span>
-              <Badge variant="success">Zero Hallucinations</Badge>
+              <Badge variant="success">API Grounded</Badge>
             </div>
 
-            <div className="pl-9 flex flex-col gap-4">
+            <div className="pl-9 max-[820px]:pl-0 flex flex-col gap-4 min-w-0">
               <p className="text-xs text-muted-foreground m-0">
                 The agent generates type-safe, token-compliant code ready to drop into the project:
               </p>
@@ -620,14 +620,14 @@ function McpContent() {
               />
 
               {/* Live Preview Render */}
-              <div className="mt-2 flex flex-col gap-2">
+              <div className="mt-2 flex flex-col gap-2 min-w-0">
                 <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   Live Preview Output
                 </span>
-                <div className="p-6 rounded-kj-md border border-border bg-background flex items-center justify-center">
-                  <div className="w-full max-w-sm">
-                    <Card className="p-6 flex flex-col gap-4 shadow-kj-sm bg-surface">
-                      <div className="flex items-center justify-between">
+                <div className="p-6 max-[820px]:p-2.5 rounded-kj-md border border-border bg-background flex items-center justify-center overflow-x-auto min-w-0">
+                  <div className="w-full max-w-sm min-w-0">
+                    <Card className="p-5 max-[820px]:p-3.5 flex flex-col gap-4 shadow-kj-sm bg-surface overflow-hidden">
+                      <div className="flex items-center justify-between gap-2 flex-wrap">
                         <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                           Financial Summary
                         </span>
@@ -642,13 +642,22 @@ function McpContent() {
                         trend="+14.2%"
                         trendDirection="up"
                         description="vs. last month ($42,240)"
+                        className="p-4 max-[820px]:p-3 overflow-hidden"
                       />
 
-                      <div className="flex items-center justify-end gap-2 pt-2 border-t border-border">
-                        <Button variant="outline" size="sm">
+                      <div className="flex flex-wrap items-center justify-end gap-2 pt-2 border-t border-border">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="max-[400px]:w-full max-[400px]:text-center"
+                        >
                           Download CSV
                         </Button>
-                        <Button variant="primary" size="sm">
+                        <Button
+                          variant="primary"
+                          size="sm"
+                          className="max-[400px]:w-full max-[400px]:text-center"
+                        >
                           View Analytics
                         </Button>
                       </div>
