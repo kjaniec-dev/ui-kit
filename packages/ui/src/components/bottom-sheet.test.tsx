@@ -26,8 +26,8 @@ describe("BottomSheet", () => {
       </BottomSheet>
     );
 
-    const backdrop = screen.getByRole("presentation");
     const dialog = screen.getByRole("dialog");
+    const backdrop = dialog.parentElement!;
 
     // Open states
     expect(backdrop).toHaveClass("opacity-100");
@@ -109,7 +109,7 @@ describe("BottomSheet", () => {
       </BottomSheet>
     );
 
-    const backdrop = screen.getByRole("presentation");
+    const backdrop = screen.getByRole("dialog").parentElement!;
     backdrop.click();
     expect(handleClose).toHaveBeenCalledTimes(1);
   });

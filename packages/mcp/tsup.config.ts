@@ -16,7 +16,7 @@ export default defineConfig({
     try {
       generate();
       console.log("TSX extraction and data generation completed successfully.");
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error("Data generation failed during build:", e);
       process.exit(1);
     }
