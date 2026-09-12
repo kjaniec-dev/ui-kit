@@ -70,13 +70,13 @@ export function SiteHeader({
 
   return (
     <header
-      className="sticky top-0 z-30 flex items-center justify-between gap-2 min-[1157px]:gap-4 px-4 min-[1157px]:px-6 py-2.5 min-[1157px]:py-3 border-b border-border transition-colors"
+      className="sticky top-0 z-30 flex items-center justify-between gap-2 lg:gap-4 px-4 sm:px-6 py-2.5 sm:py-3 border-b border-border transition-colors"
       style={{
         background: "color-mix(in oklch, var(--kj-background) 85%, transparent)",
         backdropFilter: "blur(12px)",
       }}
     >
-      <div className="flex items-center gap-3 min-[1157px]:gap-4">
+      <div className="flex items-center gap-3 sm:gap-4">
         {showMobileMenuButton && onToggleMobileMenu && (
           <button
             type="button"
@@ -121,18 +121,18 @@ export function SiteHeader({
           <div>
             <div className="font-bold text-sm leading-tight text-foreground flex items-center gap-1.5 whitespace-nowrap">
               <span>KJ Product Kit</span>
-              <span className="hidden min-[1157px]:inline-block text-[0.68rem] px-1.5 py-0.5 rounded-kj-sm bg-muted text-muted-foreground font-mono font-medium">
+              <span className="hidden xl:inline-block text-[0.68rem] px-1.5 py-0.5 rounded-kj-sm bg-muted text-muted-foreground font-mono font-medium">
                 v{version}
               </span>
             </div>
-            <div className="text-[0.68rem] text-muted-foreground hidden min-[1157px]:block whitespace-nowrap">
+            <div className="text-[0.68rem] text-muted-foreground hidden xl:block whitespace-nowrap">
               React 19 · Tailwind 4 Design System
             </div>
           </div>
         </button>
       </div>
 
-      <nav className="flex items-center gap-0.5 min-[1157px]:gap-1 max-[820px]:hidden">
+      <nav className="flex items-center gap-1 max-[820px]:hidden">
         {TABS.map((tab) => {
           const active = activeTab === tab.id;
           return (
@@ -142,7 +142,7 @@ export function SiteHeader({
               aria-current={active ? "page" : undefined}
               onClick={() => onSelectTab(tab.id)}
               className={cn(
-                "flex items-center gap-1 min-[1157px]:gap-1.5 px-2 min-[1157px]:px-3 py-1.5 rounded-kj-sm text-xs min-[1157px]:text-sm font-medium transition-colors cursor-pointer border-0 whitespace-nowrap",
+                "flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-kj-sm text-xs xl:text-sm font-medium transition-colors cursor-pointer border-0 whitespace-nowrap",
                 active
                   ? "bg-primary/10 text-primary font-semibold"
                   : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted/70"
@@ -150,7 +150,7 @@ export function SiteHeader({
             >
               <span>{tab.label}</span>
               {tab.badge && (
-                <span className="text-[0.58rem] min-[1157px]:text-[0.62rem] uppercase font-bold tracking-wider px-1 py-[1px] rounded bg-primary text-primary-foreground">
+                <span className="text-[0.62rem] uppercase font-bold tracking-wider px-1 py-[1px] rounded bg-primary text-primary-foreground">
                   {tab.badge}
                 </span>
               )}
@@ -159,31 +159,37 @@ export function SiteHeader({
         })}
       </nav>
 
-      <div className="flex items-center gap-1.5 min-[1157px]:gap-2 shrink-0">
+      <div className="flex items-center gap-2 shrink-0">
         {onOpenSearch && (
           <button
             type="button"
             onClick={onOpenSearch}
-            className="flex items-center gap-1.5 min-[1157px]:gap-2 px-2 min-[1157px]:px-2.5 py-1.5 rounded-kj-sm text-xs text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted border border-border transition-colors cursor-pointer"
+            className="flex items-center justify-between gap-2 w-32 sm:w-44 md:w-56 lg:w-64 xl:w-72 px-2.5 sm:px-3 py-1.5 rounded-kj-sm text-xs text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted border border-border transition-colors cursor-pointer shadow-xs"
             aria-label="Search documentation"
             title="Search documentation (⌘K)"
           >
-            <svg
-              width={14}
-              height={14}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-            <span className="hidden min-[1157px]:inline font-sans">Search...</span>
-            <kbd className="hidden sm:inline-block font-mono text-[10px] px-1 py-0.5 rounded bg-surface border border-border text-muted-foreground shadow-xs leading-none">
+            <span className="flex items-center gap-2 min-w-0 truncate">
+              <svg
+                width={14}
+                height={14}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                className="shrink-0"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <span className="truncate font-sans">
+                <span className="hidden sm:inline">Search documentation...</span>
+                <span className="sm:hidden">Search...</span>
+              </span>
+            </span>
+            <kbd className="hidden sm:inline-flex items-center font-mono text-[10px] px-1.5 py-0.5 rounded bg-surface border border-border text-muted-foreground shadow-xs leading-none shrink-0 select-none">
               ⌘K
             </kbd>
           </button>
@@ -194,10 +200,10 @@ export function SiteHeader({
           rel="noreferrer"
           aria-label="Storybook on Chromatic"
           title="Storybook on Chromatic"
-          className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground px-2 min-[1157px]:px-2.5 py-1.5 rounded-kj-sm hover:bg-muted transition-colors no-underline"
+          className="hidden xl:flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground px-2.5 py-1.5 rounded-kj-sm hover:bg-muted transition-colors no-underline"
         >
           <StorybookIcon size={15} className="text-[#FF4785]" />
-          <span className="hidden min-[1157px]:inline">Storybook</span>
+          <span>Storybook</span>
         </a>
         <a
           href="https://github.com/kjaniec-dev/ui-kit"
@@ -205,10 +211,10 @@ export function SiteHeader({
           rel="noreferrer"
           aria-label="GitHub repository"
           title="GitHub repository"
-          className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground px-2 min-[1157px]:px-2.5 py-1.5 rounded-kj-sm hover:bg-muted transition-colors no-underline"
+          className="hidden xl:flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground px-2.5 py-1.5 rounded-kj-sm hover:bg-muted transition-colors no-underline"
         >
           <GitHubIcon size={16} />
-          <span className="hidden min-[1157px]:inline">GitHub</span>
+          <span>GitHub</span>
         </a>
         {onOpenShortcuts && (
           <button
@@ -216,7 +222,7 @@ export function SiteHeader({
             onClick={onOpenShortcuts}
             aria-label="View keyboard shortcuts (?)"
             title="Keyboard shortcuts (?)"
-            className="hidden sm:flex items-center justify-center h-8 w-8 rounded-kj-sm text-xs font-mono font-semibold text-muted-foreground hover:text-foreground hover:bg-muted border border-border transition-colors cursor-pointer"
+            className="hidden xl:flex items-center justify-center h-8 w-8 rounded-kj-sm text-xs font-mono font-semibold text-muted-foreground hover:text-foreground hover:bg-muted border border-border transition-colors cursor-pointer"
           >
             ?
           </button>
