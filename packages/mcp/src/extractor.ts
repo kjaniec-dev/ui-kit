@@ -466,7 +466,7 @@ export function parseComponents(): ComponentInfo[] {
       }
 
       // If this file has CVA variants, add them as props if not already defined
-      const finalCva = fileCva;
+      const finalCva = fileCva as CvaInfo | null;
       if (finalCva) {
         for (const variantGroup of Object.keys(finalCva.variants)) {
           const existingProp = componentProps.find((p) => p.name === variantGroup);
