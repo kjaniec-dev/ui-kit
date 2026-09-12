@@ -189,4 +189,52 @@ describe("App Root Integration", () => {
     fireEvent.keyDown(document, { key: "Escape" });
     expect(screen.queryByRole("dialog", { name: /Command palette/i })).not.toBeInTheDocument();
   });
+
+  it("opens ShortcutsDialog via '?' shortcut and closes via 'Got it'", () => {
+    render(<App />);
+
+    expect(screen.queryByText("Keyboard Shortcuts")).not.toBeInTheDocument();
+
+    fireEvent.keyDown(window, { key: "?" });
+    expect(screen.getByText("Keyboard Shortcuts")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: /Got it/i }));
+    expect(screen.queryByText("Keyboard Shortcuts")).not.toBeInTheDocument();
+  });
+
+  it("toggles dark mode via 't' keyboard shortcut", () => {
+    render(<App />);
+
+    expect(document.documentElement.classList.contains("dark")).toBe(false);
+
+    fireEvent.keyDown(window, { key: "t" });
+    expect(document.documentElement.classList.contains("dark")).toBe(true);
+
+    fireEvent.keyDown(window, { key: "t" });
+    expect(document.documentElement.classList.contains("dark")).toBe(false);
+  });
+
+  it("switches tabs via numeric keys 1 through 5", () => {
+    render(<App />);
+
+    // Press '2' -> components
+    fireEvent.keyDown(window, { key: "2" });
+    expect(window.location.hash).toBe("#components");
+
+    // Press '3' -> patterns
+    fireEvent.keyDown(window, { key: "3" });
+    expect(window.location.hash).toBe("#patterns");
+
+    // Press '4' -> tokens
+    fireEvent.keyDown(window, { key: "4" });
+    expect(window.location.hash).toBe("#tokens");
+
+    // Press '5' -> mcp
+    fireEvent.keyDown(window, { key: "5" });
+    expect(window.location.hash).toBe("#mcp");
+
+    // Press '1' -> overview
+    fireEvent.keyDown(window, { key: "1" });
+    expect(window.location.hash).toBe("#overview");
+  });
 });

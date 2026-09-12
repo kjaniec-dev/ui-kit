@@ -2,7 +2,7 @@
 
 React 19 & Tailwind CSS 4 design system for B2B SaaS, dashboards, and developer tooling. Engineered with 50+ components, 140+ variants, production business patterns, OKLCH design tokens, and an AI-native Model Context Protocol (MCP) server.
 
-**[⚡ Live Documentation & Interactive Demo](https://ui.kjaniec.dev)** · **[📦 npm: @kjaniec-dev/ui](https://www.npmjs.com/package/@kjaniec-dev/ui)** · **[🤖 MCP Server: @kjaniec-dev/ui-mcp](https://www.npmjs.com/package/@kjaniec-dev/ui-mcp)**
+**[⚡ Live Documentation & Interactive Demo](https://ui.kjaniec.dev)** · **[🎨 Storybook](https://6a1aa334e443b4184c139a6c-ybeikhkasj.chromatic.com/)** · **[📦 npm: @kjaniec-dev/ui](https://www.npmjs.com/package/@kjaniec-dev/ui)** · **[🤖 MCP Server: @kjaniec-dev/ui-mcp](https://www.npmjs.com/package/@kjaniec-dev/ui-mcp)**
 
 ---
 
@@ -43,9 +43,9 @@ AI agents can interact with the system by requesting information dynamically:
 
 | Package | Description | Version |
 |---|---|---|
-| [`@kjaniec-dev/design`](./packages/design) | Design tokens, OKLCH scales, CSS custom properties, Tailwind v4 `@theme` | `0.9.1` |
+| [`@kjaniec-dev/design`](./packages/design) | Design tokens, OKLCH scales, CSS custom properties, Tailwind v4 `@theme` | `0.9.3` |
 | [`@kjaniec-dev/ui`](./packages/ui) | React 19 component library (50+ components, 140+ variants) | `0.9.3` |
-| [`@kjaniec-dev/ui-mcp`](./packages/mcp) | AI-native Model Context Protocol server for Cursor, Claude & coding agents | `0.9.1` |
+| [`@kjaniec-dev/ui-mcp`](./packages/mcp) | AI-native Model Context Protocol server for Cursor, Claude & coding agents | `0.9.3` |
 
 ## Repo structure
 

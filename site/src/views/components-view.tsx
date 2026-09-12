@@ -194,8 +194,9 @@ function CategorySidebar({
       </div>
 
       <Input
+        id="component-search-input"
         aria-label="Filter components"
-        placeholder="Filter components..."
+        placeholder="Filter components... (/)"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         leadingIcon={IcoSearch}

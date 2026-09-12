@@ -10,6 +10,7 @@ export interface SiteHeaderProps {
   onToggleMobileMenu?: () => void;
   showMobileMenuButton?: boolean;
   onOpenSearch?: () => void;
+  onOpenShortcuts?: () => void;
 }
 
 const TABS: { id: TabKey; label: string; badge?: string }[] = [
@@ -19,6 +20,21 @@ const TABS: { id: TabKey; label: string; badge?: string }[] = [
   { id: "tokens", label: "Tokens" },
   { id: "mcp", label: "MCP", badge: "AI" },
 ];
+
+export function StorybookIcon({ size = 16, className }: { size?: number; className?: string }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      className={className}
+    >
+      <path d="M17.132 1.487c-.642-.234-1.343.08-1.579.721l-.274.746c-.237.643.078 1.344.72 1.58.643.237 1.344-.078 1.58-.72l.275-.747c.236-.642-.08-1.343-.722-1.58zm3.364 2.879a1.218 1.218 0 00-1.579-.722l-.746.275a1.217 1.217 0 00-.721 1.579c.236.642.937.957 1.579.721l.746-.274a1.219 1.219 0 00.721-1.579zm-7.604 1.233c.007-.03.014-.06.022-.09l-7.798-.002a2.316 2.316 0 00-2.313 2.315v13.568a2.316 2.316 0 002.313 2.316h13.978c1.277 0 2.313-1.037 2.313-2.316V10.74l-.001-.013-1.319-5.128zm-5.074 13.91H5.437V7.896h2.381v11.609zm3.174-8.814h2.158c.951 0 1.547.452 1.547 1.246 0 .559-.313.963-.832 1.155.679.167 1.071.644 1.071 1.339 0 .977-.82 1.535-2.039 1.535h-1.905v-5.275zm1.537 1.405h-.357v.939h.375c.395 0 .638-.179.638-.475 0-.309-.234-.464-.656-.464zm.083 1.944h-.44v1.072h.44c.488 0 .762-.191.762-.536 0-.358-.274-.536-.762-.536z" />
+    </svg>
+  );
+}
 
 export function GitHubIcon({ size = 16, className }: { size?: number; className?: string }) {
   return (
@@ -48,6 +64,7 @@ export function SiteHeader({
   onToggleMobileMenu,
   showMobileMenuButton = false,
   onOpenSearch,
+  onOpenShortcuts,
 }: SiteHeaderProps) {
   const version = typeof __APP_VERSION__ !== "undefined" ? __APP_VERSION__ : "0.9.3";
 
@@ -171,6 +188,16 @@ export function SiteHeader({
           </button>
         )}
         <a
+          href="https://6a1aa334e443b4184c139a6c-ybeikhkasj.chromatic.com/"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Storybook on Chromatic"
+          className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground px-2.5 py-1.5 rounded-kj-sm hover:bg-muted transition-colors no-underline"
+        >
+          <StorybookIcon size={15} className="text-[#FF4785]" />
+          <span className="hidden lg:inline">Storybook</span>
+        </a>
+        <a
           href="https://github.com/kjaniec-dev/ui-kit"
           target="_blank"
           rel="noreferrer"
@@ -179,6 +206,17 @@ export function SiteHeader({
           <GitHubIcon size={16} />
           <span>GitHub</span>
         </a>
+        {onOpenShortcuts && (
+          <button
+            type="button"
+            onClick={onOpenShortcuts}
+            aria-label="View keyboard shortcuts (?)"
+            title="Keyboard shortcuts (?)"
+            className="hidden sm:flex items-center justify-center h-8 w-8 rounded-kj-sm text-xs font-mono font-semibold text-muted-foreground hover:text-foreground hover:bg-muted border border-border transition-colors cursor-pointer"
+          >
+            ?
+          </button>
+        )}
         <Button variant="outline" size="icon" aria-label="Toggle theme" onClick={onToggleDark}>
           {dark ? (
             <svg

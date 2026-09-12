@@ -38,7 +38,7 @@ try {
 
 const server = new McpServer({
   name: "kj-product-kit-ui-mcp",
-  version: "0.9.1",
+  version: "0.9.3",
 });
 
 // Helper function to generate reference markdown for a component

@@ -146,4 +146,35 @@ describe("SiteHeader", () => {
     fireEvent.click(searchBtn);
     expect(onOpenSearch).toHaveBeenCalledTimes(1);
   });
+
+  it("renders Storybook link pointing to Chromatic", () => {
+    render(
+      <SiteHeader activeTab="overview" onSelectTab={vi.fn()} dark={false} onToggleDark={vi.fn()} />
+    );
+    const storybookLink = screen.getByRole("link", { name: /Storybook on Chromatic/i });
+    expect(storybookLink).toBeInTheDocument();
+    expect(storybookLink).toHaveAttribute(
+      "href",
+      "https://6a1aa334e443b4184c139a6c-ybeikhkasj.chromatic.com/"
+    );
+    expect(storybookLink).toHaveAttribute("target", "_blank");
+  });
+
+  it("renders shortcuts button when onOpenShortcuts is provided and triggers callback", () => {
+    const onOpenShortcuts = vi.fn();
+    render(
+      <SiteHeader
+        activeTab="overview"
+        onSelectTab={vi.fn()}
+        dark={false}
+        onToggleDark={vi.fn()}
+        onOpenShortcuts={onOpenShortcuts}
+      />
+    );
+
+    const shortcutsBtn = screen.getByRole("button", { name: /View keyboard shortcuts/i });
+    expect(shortcutsBtn).toBeInTheDocument();
+    fireEvent.click(shortcutsBtn);
+    expect(onOpenShortcuts).toHaveBeenCalledTimes(1);
+  });
 });

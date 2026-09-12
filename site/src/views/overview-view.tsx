@@ -10,7 +10,7 @@ import {
   useToast,
 } from "@kjaniec-dev/ui";
 import * as React from "react";
-import { GitHubIcon } from "../components/site-header";
+import { GitHubIcon, StorybookIcon } from "../components/site-header";
 import type { TabKey } from "../hooks/use-hash-route";
 
 export interface OverviewViewProps {
@@ -141,6 +141,20 @@ function OverviewContent({ onNavigate }: OverviewViewProps) {
           <Badge variant="neutral">Tailwind 4</Badge>
           <Badge variant="neutral">OKLCH Palette</Badge>
           <Badge variant="secondary">MCP Native</Badge>
+          <a
+            href="https://6a1aa334e443b4184c139a6c-ybeikhkasj.chromatic.com/"
+            target="_blank"
+            rel="noreferrer"
+            className="no-underline inline-flex"
+            aria-label="Storybook on Chromatic"
+          >
+            <Badge
+              variant="neutral"
+              className="hover:border-primary/50 transition-colors cursor-pointer"
+            >
+              <span className="text-[#FF4785] mr-1">●</span> Storybook 155+ Stories ↗
+            </Badge>
+          </a>
           <Badge variant="neutral">TypeScript</Badge>
         </div>
 
@@ -162,6 +176,18 @@ function OverviewContent({ onNavigate }: OverviewViewProps) {
           <Button size="lg" variant="outline" onClick={() => onNavigate("patterns")}>
             View Patterns →
           </Button>
+          <a
+            href="https://6a1aa334e443b4184c139a6c-ybeikhkasj.chromatic.com/"
+            target="_blank"
+            rel="noreferrer"
+            className={cn(
+              buttonVariants({ variant: "outline", size: "lg" }),
+              "no-underline inline-flex items-center gap-2"
+            )}
+          >
+            <StorybookIcon size={18} className="text-[#FF4785]" />
+            <span>Storybook ↗</span>
+          </a>
           <a
             href="https://github.com/kjaniec-dev/ui-kit"
             target="_blank"
