@@ -155,7 +155,7 @@ export {
   type SidebarNavGroup,
   type SidebarNavProps,
 } from "./components/sidebar-nav";
-export { Fab, type FabProps } from "./components/fab";
+export { Fab, fabVariants, type FabProps } from "./components/fab";
 export {
   BottomSheet,
   BottomSheetHeader,
