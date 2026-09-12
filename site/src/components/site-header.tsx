@@ -88,7 +88,7 @@ export function SiteHeader({
               </span>
             </div>
             <div className="text-[0.68rem] text-muted-foreground hidden sm:block">
-              React 19 &middot; Tailwind 4 Design System
+              React 19 · Tailwind 4 Design System
             </div>
           </div>
         </button>
@@ -129,7 +129,7 @@ export function SiteHeader({
           className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground px-2.5 py-1.5 rounded-kj-sm hover:bg-muted transition-colors no-underline"
         >
           <span>GitHub</span>
-          <span className="text-[0.7rem]">&nearr;</span>
+          <span className="text-[0.7rem]">↗</span>
         </a>
         <Button variant="outline" size="icon" aria-label="Toggle theme" onClick={onToggleDark}>
           {dark ? (

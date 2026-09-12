@@ -2,6 +2,7 @@ import { Button, cn, Input, ToastProvider } from "@kjaniec-dev/ui";
 import * as React from "react";
 import {
   DataDisplaySections,
+  FeedbackSections,
   FormsSections,
   IcoSearch,
   LayoutsSections,
@@ -203,7 +204,7 @@ function CategorySidebar({
       <nav className="flex flex-col gap-4 mt-1" aria-label="Component categories">
         {categories.length === 0 ? (
           <div className="py-6 text-center text-xs text-muted-foreground">
-            No components found for &ldquo;{searchQuery}&rdquo;
+            No components found for “{searchQuery}”
           </div>
         ) : (
           categories.map((cat) => (
@@ -386,6 +387,7 @@ export function ComponentsView({
             <PrimitivesSections />
             <FormsSections />
             <DataDisplaySections />
+            <FeedbackSections />
             <NavigationSections />
             <OverlaysSections />
             <LayoutsSections />

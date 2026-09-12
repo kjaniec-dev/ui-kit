@@ -1,5 +1,5 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@kjaniec-dev/ui";
 import * as React from "react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@kjaniec-dev/ui";
 import componentsData from "../../packages/mcp/data/components.json";
 import { exampleOverrides } from "./example-overrides";
 import { HighlightedCode } from "./highlighted-code";

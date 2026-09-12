@@ -1,25 +1,25 @@
-import * as React from "react";
 import {
   AppShell,
+  Avatar,
+  Badge,
+  Button,
+  Card,
   DashboardShell,
-  SettingsLayout,
   DetailPageLayout,
   SectionHeader,
-  TableToolbar,
+  Select,
+  SettingsLayout,
   SidebarNav,
+  TableToolbar,
   Tabs,
+  TabsContent,
   TabsList,
   TabsTrigger,
-  TabsContent,
-  Card,
-  Button,
-  Badge,
-  Avatar,
   TextField,
-  Select,
   useToast,
 } from "@kjaniec-dev/ui";
-import { Sec, Box, Sub, IcoInfo, IcoSearch, IcoPlus, IcoGear } from "./primitives";
+import * as React from "react";
+import { Box, IcoGear, IcoInfo, IcoPlus, IcoSearch, Sec, Sub } from "./primitives";
 
 export function LayoutsSections() {
   const { toast } = useToast();

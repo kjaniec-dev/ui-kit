@@ -256,7 +256,7 @@ function McpContent() {
       <header className="flex flex-col gap-4 border-b border-border pb-8">
         <div className="flex flex-wrap items-center gap-2">
           <Badge variant="primary" dot>
-            KJ Product Kit &middot; MCP
+            KJ Product Kit · MCP
           </Badge>
           <Badge variant="neutral">@kjaniec-dev/ui-mcp</Badge>
           <Badge variant="neutral">Model Context Protocol</Badge>
@@ -546,8 +546,8 @@ function McpContent() {
               <Badge variant="neutral">Requirement</Badge>
             </div>
             <div className="pl-9 text-sm text-foreground leading-relaxed bg-surface p-3.5 rounded-kj-md border border-border">
-              &ldquo;Build a responsive monthly recurring revenue stat card displaying an upward
-              trend badge and a quick action button using KJ Product Kit.&rdquo;
+              “Build a responsive monthly recurring revenue stat card displaying an upward trend
+              badge and a quick action button using KJ Product Kit.”
             </div>
           </div>
 
@@ -581,7 +581,7 @@ function McpContent() {
               <div className="rounded-kj-md border border-border bg-surface/80 p-3 font-mono text-xs flex flex-col gap-1.5">
                 <div className="flex items-center justify-between text-muted-foreground border-b border-border/60 pb-1">
                   <span>Server Response: props schema</span>
-                  <span className="text-success font-semibold">&bull; 200 OK</span>
+                  <span className="text-success font-semibold">• 200 OK</span>
                 </div>
                 <div className="text-muted-foreground text-[0.7rem] leading-relaxed">
                   Props: <code className="text-foreground">title: string</code>,{" "}

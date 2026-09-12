@@ -91,7 +91,7 @@ export function App(): React.JSX.Element {
           <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <span className="font-semibold text-foreground">KJ Product Kit</span>
-              <span>&middot;</span>
+              <span>·</span>
               <a
                 href="https://github.com/kjaniec-dev/ui-kit"
                 target="_blank"
@@ -102,7 +102,7 @@ export function App(): React.JSX.Element {
               </a>
             </div>
             <p className="m-0 text-center sm:text-right">
-              &copy; {new Date().getFullYear()} KJ Product Kit. All rights reserved.
+              © {new Date().getFullYear()} KJ Product Kit. All rights reserved.
             </p>
           </div>
         </footer>

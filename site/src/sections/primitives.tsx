@@ -1,35 +1,35 @@
-import * as React from "react";
 import {
-  Button,
-  Badge,
   Alert,
-  Spinner,
+  Avatar,
+  AvatarGroup,
+  Badge,
+  Button,
+  CodeBlock,
+  cn,
+  ErrorState,
+  Fab,
+  Kbd,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
   Progress,
   ProgressRing,
   ProgressRingField,
-  Avatar,
-  AvatarGroup,
-  Stat,
-  Kbd,
   Separator,
-  Fab,
-  useToast,
-  ErrorState,
   Skeleton,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
+  Spinner,
+  Stat,
   Timeline,
+  TimelineConnector,
+  TimelineContent,
+  TimelineDot,
   TimelineItem,
   TimelineSeparator,
-  TimelineConnector,
-  TimelineDot,
-  TimelineContent,
-  TimelineTitle,
   TimelineTime,
-  CodeBlock,
-  cn,
+  TimelineTitle,
+  useToast,
 } from "@kjaniec-dev/ui";
+import * as React from "react";
 import { ExampleTabs } from "../example-tabs";
 
 export interface IcoProps {
@@ -227,14 +227,7 @@ export function Code(p: CodeProps) {
 }
 
 export function PrimitivesSections() {
-  const { toast } = useToast();
   const [loading, setLoading] = React.useState(false);
-  const [prog, setProg] = React.useState(42);
-
-  React.useEffect(() => {
-    const t = setInterval(() => setProg((p) => (p >= 94 ? 22 : p + 18)), 1400);
-    return () => clearInterval(t);
-  }, []);
 
   return (
     <>
@@ -328,126 +321,6 @@ export function PrimitivesSections() {
             </Badge>
             <Badge variant="info">Info</Badge>
             <Badge variant="solid">Solid</Badge>
-          </div>
-        </Box>
-      </Sec>
-
-      <Sec
-        id="feedback"
-        title="Feedback & progress"
-        desc="Inline alerts, toasts and progress indicators."
-        components={[
-          "Alert",
-          "ToastProvider",
-          "Progress",
-          "ProgressRing",
-          "ProgressRingField",
-          "Spinner",
-          "Skeleton",
-        ]}
-      >
-        <Box>
-          <Sub>Alerts</Sub>
-          <div className="flex flex-col gap-4">
-            <Alert variant="info" icon={IcoInfo} title="New version available">
-              Version 0.4.0 adds navigation components and charts.
-            </Alert>
-            <Alert variant="success" icon={IcoCheck} title="Deployment complete">
-              All tests passed and the build is live in production.
-            </Alert>
-            <Alert variant="warning" icon={IcoWarn} title="Approaching your limit">
-              You have used 86% of your file storage this month.
-            </Alert>
-            <Alert variant="danger" icon={IcoX} title="Payment declined">
-              Update your payment method to avoid an interruption.
-            </Alert>
-          </div>
-        </Box>
-        <Grid>
-          <Box className="mb-0">
-            <Sub>Toasts</Sub>
-            <div className="flex flex-wrap gap-3">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => toast({ message: "Changes saved." })}
-              >
-                Info
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => toast({ message: "Profile updated.", tone: "success" })}
-              >
-                Success
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => toast({ message: "Could not delete.", tone: "danger" })}
-              >
-                Error
-              </Button>
-            </div>
-          </Box>
-          <Box className="mb-0">
-            <Sub>Progress & spinner</Sub>
-            <div className="flex flex-col gap-4">
-              <Progress value={prog} />
-              <Progress value={68} tone="secondary" />
-              <div className="flex items-center gap-3">
-                <Spinner />
-                <span className="text-sm text-muted-foreground">Loading data…</span>
-              </div>
-            </div>
-          </Box>
-        </Grid>
-        <Box className="mt-5">
-          <Sub>ProgressRing & ProgressRingField (v0.8.0)</Sub>
-          <div className="flex flex-wrap items-center gap-8">
-            <ProgressRing value={prog} showValue size="sm" />
-            <ProgressRing value={prog} showValue size="md" tone="primary" />
-            <ProgressRing value={prog} showValue size="lg" tone="success" />
-            <ProgressRing value={75} showValue size="xl" tone="info">
-              <span className="text-xs font-medium text-foreground">75 / 100</span>
-            </ProgressRing>
-            <ProgressRingField
-              label="Storage used"
-              hint="Updated 5m ago"
-              value={68}
-              showValue
-              size="md"
-              tone="warning"
-            />
-          </div>
-        </Box>
-        <Box className="mt-5">
-          <Sub>ErrorState & Skeletons</Sub>
-          <div
-            className="grid gap-6"
-            style={{ gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))" }}
-          >
-            <ErrorState
-              title="Database Sync Failed"
-              message="We could not sync the latest database tables because of an authentication error."
-              onRetry={() => alert("Retrying sync...")}
-              retryLabel="Retry Sync"
-              className="min-h-[220px] p-5"
-            />
-            <div className="p-5 border border-border rounded-kj-xl space-y-4 bg-surface flex flex-col justify-between">
-              <div className="flex items-center gap-3">
-                <Skeleton variant="circular" width={40} height={40} />
-                <div className="space-y-1.5 flex-1">
-                  <Skeleton variant="text" width="40%" height={10} />
-                  <Skeleton variant="text" width="25%" height={8} />
-                </div>
-              </div>
-              <div className="space-y-2 pt-2">
-                <Skeleton variant="text" width="100%" />
-                <Skeleton variant="text" width="90%" />
-              </div>
-              <Skeleton variant="rectangular" width="100%" height={60} />
-            </div>
           </div>
         </Box>
       </Sec>
@@ -605,5 +478,137 @@ export function PrimitivesSections() {
         </Box>
       </Sec>
     </>
+  );
+}
+
+export function FeedbackSections() {
+  const { toast } = useToast();
+  const [prog, setProg] = React.useState(42);
+
+  React.useEffect(() => {
+    const t = setInterval(() => setProg((p) => (p >= 94 ? 22 : p + 18)), 1400);
+    return () => clearInterval(t);
+  }, []);
+
+  return (
+    <Sec
+      id="feedback"
+      title="Feedback & progress"
+      desc="Inline alerts, toasts and progress indicators."
+      components={[
+        "Alert",
+        "ToastProvider",
+        "Progress",
+        "ProgressRing",
+        "ProgressRingField",
+        "Spinner",
+        "Skeleton",
+      ]}
+    >
+      <Box>
+        <Sub>Alerts</Sub>
+        <div className="flex flex-col gap-4">
+          <Alert variant="info" icon={IcoInfo} title="New version available">
+            Version 0.4.0 adds navigation components and charts.
+          </Alert>
+          <Alert variant="success" icon={IcoCheck} title="Deployment complete">
+            All tests passed and the build is live in production.
+          </Alert>
+          <Alert variant="warning" icon={IcoWarn} title="Approaching your limit">
+            You have used 86% of your file storage this month.
+          </Alert>
+          <Alert variant="danger" icon={IcoX} title="Payment declined">
+            Update your payment method to avoid an interruption.
+          </Alert>
+        </div>
+      </Box>
+      <Grid>
+        <Box className="mb-0">
+          <Sub>Toasts</Sub>
+          <div className="flex flex-wrap gap-3">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => toast({ message: "Changes saved." })}
+            >
+              Info
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => toast({ message: "Profile updated.", tone: "success" })}
+            >
+              Success
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => toast({ message: "Could not delete.", tone: "danger" })}
+            >
+              Error
+            </Button>
+          </div>
+        </Box>
+        <Box className="mb-0">
+          <Sub>Progress & spinner</Sub>
+          <div className="flex flex-col gap-4">
+            <Progress value={prog} />
+            <Progress value={68} tone="secondary" />
+            <div className="flex items-center gap-3">
+              <Spinner />
+              <span className="text-sm text-muted-foreground">Loading data…</span>
+            </div>
+          </div>
+        </Box>
+      </Grid>
+      <Box className="mt-5">
+        <Sub>ProgressRing & ProgressRingField (v0.8.0)</Sub>
+        <div className="flex flex-wrap items-center gap-8">
+          <ProgressRing value={prog} showValue size="sm" />
+          <ProgressRing value={prog} showValue size="md" tone="primary" />
+          <ProgressRing value={prog} showValue size="lg" tone="success" />
+          <ProgressRing value={75} showValue size="xl" tone="info">
+            <span className="text-xs font-medium text-foreground">75 / 100</span>
+          </ProgressRing>
+          <ProgressRingField
+            label="Storage used"
+            hint="Updated 5m ago"
+            value={68}
+            showValue
+            size="md"
+            tone="warning"
+          />
+        </div>
+      </Box>
+      <Box className="mt-5">
+        <Sub>ErrorState & Skeletons</Sub>
+        <div
+          className="grid gap-6"
+          style={{ gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))" }}
+        >
+          <ErrorState
+            title="Database Sync Failed"
+            message="We could not sync the latest database tables because of an authentication error."
+            onRetry={() => alert("Retrying sync...")}
+            retryLabel="Retry Sync"
+            className="min-h-[220px] p-5"
+          />
+          <div className="p-5 border border-border rounded-kj-xl space-y-4 bg-surface flex flex-col justify-between">
+            <div className="flex items-center gap-3">
+              <Skeleton variant="circular" width={40} height={40} />
+              <div className="space-y-1.5 flex-1">
+                <Skeleton variant="text" width="40%" height={10} />
+                <Skeleton variant="text" width="25%" height={8} />
+              </div>
+            </div>
+            <div className="space-y-2 pt-2">
+              <Skeleton variant="text" width="100%" />
+              <Skeleton variant="text" width="90%" />
+            </div>
+            <Skeleton variant="rectangular" width="100%" height={60} />
+          </div>
+        </div>
+      </Box>
+    </Sec>
   );
 }
