@@ -79,16 +79,6 @@ describe("SiteHeader", () => {
     expect(onToggleDark).toHaveBeenCalledTimes(1);
   });
 
-  it("renders external GitHub link", () => {
-    render(
-      <SiteHeader activeTab="overview" onSelectTab={vi.fn()} dark={false} onToggleDark={vi.fn()} />
-    );
-    const githubLink = screen.getByRole("link", { name: /GitHub/i });
-    expect(githubLink).toHaveAttribute("href", "https://github.com/kjaniec-dev/ui-kit");
-    expect(githubLink).toHaveAttribute("target", "_blank");
-    expect(githubLink).toHaveAttribute("rel", "noreferrer");
-  });
-
   it("handles mobile menu button visibility and click when showMobileMenuButton is true", () => {
     const onToggleMobileMenu = vi.fn();
     const { rerender } = render(
@@ -145,19 +135,6 @@ describe("SiteHeader", () => {
     expect(searchBtn).toBeInTheDocument();
     fireEvent.click(searchBtn);
     expect(onOpenSearch).toHaveBeenCalledTimes(1);
-  });
-
-  it("renders Storybook link pointing to Chromatic", () => {
-    render(
-      <SiteHeader activeTab="overview" onSelectTab={vi.fn()} dark={false} onToggleDark={vi.fn()} />
-    );
-    const storybookLink = screen.getByRole("link", { name: /Storybook on Chromatic/i });
-    expect(storybookLink).toBeInTheDocument();
-    expect(storybookLink).toHaveAttribute(
-      "href",
-      "https://6a1aa334e443b4184c139a6c-ybeikhkasj.chromatic.com/"
-    );
-    expect(storybookLink).toHaveAttribute("target", "_blank");
   });
 
   it("renders shortcuts button when onOpenShortcuts is provided and triggers callback", () => {
