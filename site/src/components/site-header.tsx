@@ -121,7 +121,7 @@ export function SiteHeader({
           <div>
             <div className="font-bold text-sm leading-tight text-foreground flex items-center gap-1.5">
               <span>KJ Product Kit</span>
-              <span className="text-[0.68rem] px-1.5 py-0.5 rounded-kj-sm bg-muted text-muted-foreground font-mono font-medium">
+              <span className="hidden sm:inline-block text-[0.68rem] px-1.5 py-0.5 rounded-kj-sm bg-muted text-muted-foreground font-mono font-medium">
                 v{version}
               </span>
             </div>
@@ -192,7 +192,7 @@ export function SiteHeader({
           target="_blank"
           rel="noreferrer"
           aria-label="Storybook on Chromatic"
-          className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground px-2.5 py-1.5 rounded-kj-sm hover:bg-muted transition-colors no-underline"
+          className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground px-2.5 py-1.5 rounded-kj-sm hover:bg-muted transition-colors no-underline"
         >
           <StorybookIcon size={15} className="text-[#FF4785]" />
           <span className="hidden lg:inline">Storybook</span>
@@ -201,10 +201,11 @@ export function SiteHeader({
           href="https://github.com/kjaniec-dev/ui-kit"
           target="_blank"
           rel="noreferrer"
+          aria-label="GitHub repository"
           className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground px-2.5 py-1.5 rounded-kj-sm hover:bg-muted transition-colors no-underline"
         >
           <GitHubIcon size={16} />
-          <span>GitHub</span>
+          <span className="hidden sm:inline">GitHub</span>
         </a>
         {onOpenShortcuts && (
           <button

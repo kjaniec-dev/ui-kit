@@ -150,6 +150,16 @@ describe("App Root Integration", () => {
     const mobileNav = screen.getByTestId("mobile-nav-menu");
     expect(mobileNav).toBeInTheDocument();
 
+    // Check external links in mobile nav
+    expect(within(mobileNav).getByRole("link", { name: /GitHub Repository/i })).toHaveAttribute(
+      "href",
+      "https://github.com/kjaniec-dev/ui-kit"
+    );
+    expect(within(mobileNav).getByRole("link", { name: /Storybook \(Chromatic\)/i })).toHaveAttribute(
+      "href",
+      "https://6a1aa334e443b4184c139a6c-ybeikhkasj.chromatic.com/"
+    );
+
     // Click Patterns inside mobile nav
     const patternsMobileBtn = within(mobileNav).getByRole("button", { name: /^Patterns$/i });
     fireEvent.click(patternsMobileBtn);
