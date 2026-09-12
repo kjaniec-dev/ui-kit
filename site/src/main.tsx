@@ -3,7 +3,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { ScrollToTop } from "./components/scroll-to-top";
 import { ShortcutsDialog } from "./components/shortcuts-dialog";
-import { SiteHeader } from "./components/site-header";
+import { GitHubIcon, SiteHeader, StorybookIcon } from "./components/site-header";
 import { type TabKey, useHashRoute } from "./hooks/use-hash-route";
 import "./index.css";
 import { ComponentsView } from "./views/components-view";
@@ -403,13 +403,25 @@ export function App(): React.JSX.Element {
               })}
               <div className="pt-2 mt-1 border-t border-border flex flex-col gap-1">
                 <a
+                  href="https://github.com/kjaniec-dev/ui-kit"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-between px-3 py-2 rounded-kj-sm text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/70 no-underline transition-colors"
+                >
+                  <span className="flex items-center gap-2">
+                    <GitHubIcon size={16} />
+                    <span>GitHub Repository</span>
+                  </span>
+                  <span className="text-xs text-muted-foreground">↗</span>
+                </a>
+                <a
                   href="https://6a1aa334e443b4184c139a6c-ybeikhkasj.chromatic.com/"
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center justify-between px-3 py-2 rounded-kj-sm text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/70 no-underline transition-colors"
                 >
                   <span className="flex items-center gap-2">
-                    <span className="text-[#FF4785]">●</span>
+                    <StorybookIcon size={15} className="text-[#FF4785]" />
                     <span>Storybook (Chromatic)</span>
                   </span>
                   <span className="text-xs text-muted-foreground">↗</span>
