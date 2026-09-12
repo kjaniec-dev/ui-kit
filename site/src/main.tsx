@@ -454,23 +454,26 @@ export function App(): React.JSX.Element {
           <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
               <span className="font-semibold text-foreground">KJ Product Kit</span>
+              <span className="font-mono text-muted-foreground">v{version}</span>
               <span>·</span>
               <a
                 href="https://github.com/kjaniec-dev/ui-kit"
                 target="_blank"
                 rel="noreferrer"
-                className="text-muted-foreground hover:text-foreground underline underline-offset-2 transition-colors"
+                className="text-muted-foreground hover:text-foreground underline underline-offset-2 transition-colors inline-flex items-center gap-1"
               >
-                v{version}
+                <GitHubIcon size={14} />
+                <span>GitHub ↗</span>
               </a>
               <span>·</span>
               <a
                 href="https://6a1aa334e443b4184c139a6c-ybeikhkasj.chromatic.com/"
                 target="_blank"
                 rel="noreferrer"
-                className="text-muted-foreground hover:text-foreground underline underline-offset-2 transition-colors"
+                className="text-muted-foreground hover:text-foreground underline underline-offset-2 transition-colors inline-flex items-center gap-1"
               >
-                Storybook ↗
+                <StorybookIcon size={13} className="text-[#FF4785]" />
+                <span>Storybook ↗</span>
               </a>
               <span>·</span>
               <button

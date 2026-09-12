@@ -121,11 +121,11 @@ export function SiteHeader({
           <div>
             <div className="font-bold text-sm leading-tight text-foreground flex items-center gap-1.5 whitespace-nowrap">
               <span>KJ Product Kit</span>
-              <span className="hidden xl:inline-block text-[0.68rem] px-1.5 py-0.5 rounded-kj-sm bg-muted text-muted-foreground font-mono font-medium">
+              <span className="hidden sm:inline-block text-[0.68rem] px-1.5 py-0.5 rounded-kj-sm bg-muted text-muted-foreground font-mono font-medium">
                 v{version}
               </span>
             </div>
-            <div className="text-[0.68rem] text-muted-foreground hidden xl:block whitespace-nowrap">
+            <div className="text-[0.68rem] text-muted-foreground hidden lg:block whitespace-nowrap">
               React 19 · Tailwind 4 Design System
             </div>
           </div>
@@ -164,7 +164,7 @@ export function SiteHeader({
           <button
             type="button"
             onClick={onOpenSearch}
-            className="flex items-center justify-between gap-2 w-32 sm:w-44 md:w-56 lg:w-64 xl:w-72 px-2.5 sm:px-3 py-1.5 rounded-kj-sm text-xs text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted border border-border transition-colors cursor-pointer shadow-xs"
+            className="flex items-center justify-between gap-2 w-36 sm:w-52 md:w-60 lg:w-72 px-2.5 sm:px-3 py-1.5 rounded-kj-sm text-xs text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted border border-border transition-colors cursor-pointer shadow-xs"
             aria-label="Search documentation"
             title="Search documentation (⌘K)"
           >
@@ -194,35 +194,13 @@ export function SiteHeader({
             </kbd>
           </button>
         )}
-        <a
-          href="https://6a1aa334e443b4184c139a6c-ybeikhkasj.chromatic.com/"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Storybook on Chromatic"
-          title="Storybook on Chromatic"
-          className="hidden xl:flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground px-2.5 py-1.5 rounded-kj-sm hover:bg-muted transition-colors no-underline"
-        >
-          <StorybookIcon size={15} className="text-[#FF4785]" />
-          <span>Storybook</span>
-        </a>
-        <a
-          href="https://github.com/kjaniec-dev/ui-kit"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="GitHub repository"
-          title="GitHub repository"
-          className="hidden xl:flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground px-2.5 py-1.5 rounded-kj-sm hover:bg-muted transition-colors no-underline"
-        >
-          <GitHubIcon size={16} />
-          <span>GitHub</span>
-        </a>
         {onOpenShortcuts && (
           <button
             type="button"
             onClick={onOpenShortcuts}
             aria-label="View keyboard shortcuts (?)"
             title="Keyboard shortcuts (?)"
-            className="hidden xl:flex items-center justify-center h-8 w-8 rounded-kj-sm text-xs font-mono font-semibold text-muted-foreground hover:text-foreground hover:bg-muted border border-border transition-colors cursor-pointer"
+            className="hidden sm:flex items-center justify-center h-8 w-8 rounded-kj-sm text-xs font-mono font-semibold text-muted-foreground hover:text-foreground hover:bg-muted border border-border transition-colors cursor-pointer"
           >
             ?
           </button>

@@ -44,7 +44,7 @@ describe("App Root Integration", () => {
       "href",
       "https://kjaniec.dev"
     );
-    expect(screen.getByRole("link", { name: /v0\.9\.3/i })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /GitHub ↗/i })).toHaveAttribute(
       "href",
       "https://github.com/kjaniec-dev/ui-kit"
     );
