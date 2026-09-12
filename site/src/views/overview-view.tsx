@@ -135,7 +135,7 @@ function OverviewContent({ onNavigate }: OverviewViewProps) {
         {/* Badges row */}
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
           <Badge variant="primary" dot>
-            50+ Components
+            50+ Components &amp; 140+ Variants
           </Badge>
           <Badge variant="neutral">React 19</Badge>
           <Badge variant="neutral">Tailwind 4</Badge>
@@ -298,7 +298,7 @@ function OverviewContent({ onNavigate }: OverviewViewProps) {
               <h3 className="text-lg font-bold text-foreground m-0">AI-Native MCP Server</h3>
               <p className="text-sm text-muted-foreground m-0 leading-relaxed">
                 Contextual component docs, props validation, and token schemas exposed to AI coding
-                agents to eliminate hallucinations.
+                agents to ground UI generation in actual component APIs and reduce hallucinations.
               </p>
             </div>
             <div>

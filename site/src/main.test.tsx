@@ -5,6 +5,7 @@ import { App } from "./main";
 
 describe("App Root Integration", () => {
   beforeEach(() => {
+    localStorage.clear();
     window.location.hash = "";
     document.documentElement.className = "";
     window.HTMLElement.prototype.scrollIntoView = vi.fn();
@@ -33,8 +34,16 @@ describe("App Root Integration", () => {
       )
     ).toBeInTheDocument();
 
-    // Common footer
-    expect(screen.getByText(/All rights reserved\./i)).toBeInTheDocument();
+    // Common footer with MIT license and portfolio link
+    expect(screen.getByText(/Open source under the/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /MIT License/i })).toHaveAttribute(
+      "href",
+      "https://github.com/kjaniec-dev/ui-kit/blob/main/LICENSE"
+    );
+    expect(screen.getByRole("link", { name: /Krzysztof Janiec/i })).toHaveAttribute(
+      "href",
+      "https://kjaniec.dev"
+    );
     expect(screen.getByRole("link", { name: /v0\.9\.3/i })).toHaveAttribute(
       "href",
       "https://github.com/kjaniec-dev/ui-kit"
@@ -90,16 +99,46 @@ describe("App Root Integration", () => {
     expect(screen.getByRole("heading", { name: /Design Tokens/i })).toBeInTheDocument();
   });
 
-  it("toggles dark mode on root element", () => {
+  it("toggles dark mode on root element and persists preference in localStorage", () => {
     render(<App />);
     expect(document.documentElement.classList.contains("dark")).toBe(false);
+    expect(localStorage.getItem("kj-ui-theme")).toBeNull();
 
     const themeToggle = screen.getByRole("button", { name: /Toggle theme/i });
     fireEvent.click(themeToggle);
     expect(document.documentElement.classList.contains("dark")).toBe(true);
+    expect(localStorage.getItem("kj-ui-theme")).toBe("dark");
 
     fireEvent.click(themeToggle);
     expect(document.documentElement.classList.contains("dark")).toBe(false);
+    expect(localStorage.getItem("kj-ui-theme")).toBe("light");
+  });
+
+  it("restores dark mode preference from localStorage on mount", () => {
+    localStorage.setItem("kj-ui-theme", "dark");
+    render(<App />);
+    expect(document.documentElement.classList.contains("dark")).toBe(true);
+  });
+
+  it("falls back to system prefers-color-scheme when localStorage is empty", () => {
+    const originalMatchMedia = window.matchMedia;
+    window.matchMedia = vi.fn().mockImplementation((query: string) => ({
+      matches: query.includes("prefers-color-scheme: dark"),
+      media: query,
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    }));
+
+    try {
+      render(<App />);
+      expect(document.documentElement.classList.contains("dark")).toBe(true);
+    } finally {
+      window.matchMedia = originalMatchMedia;
+    }
   });
 
   it("opens mobile navigation menu and navigates to selected tab", () => {
@@ -118,5 +157,36 @@ describe("App Root Integration", () => {
     expect(window.location.hash).toBe("#patterns");
     expect(screen.getByRole("heading", { name: /B2B Product Patterns/i })).toBeInTheDocument();
     expect(screen.queryByTestId("mobile-nav-menu")).not.toBeInTheDocument();
+  });
+
+  it("opens global CommandPalette via search button and navigates to selected item", () => {
+    render(<App />);
+
+    const searchButton = screen.getByRole("button", { name: /Search documentation/i });
+    fireEvent.click(searchButton);
+
+    const dialog = screen.getByRole("dialog", { name: /Command palette/i });
+    expect(dialog).toBeInTheDocument();
+
+    // Select "Buttons & FAB" option
+    const buttonOption = screen.getByText("Buttons & FAB");
+    fireEvent.click(buttonOption);
+
+    expect(window.location.hash).toBe("#components/buttons");
+    expect(screen.queryByRole("dialog", { name: /Command palette/i })).not.toBeInTheDocument();
+  });
+
+  it("opens and closes global CommandPalette via Cmd+K and Escape keyboard shortcuts", () => {
+    render(<App />);
+
+    expect(screen.queryByRole("dialog", { name: /Command palette/i })).not.toBeInTheDocument();
+
+    // Trigger Cmd+K
+    fireEvent.keyDown(window, { key: "k", metaKey: true });
+    expect(screen.getByRole("dialog", { name: /Command palette/i })).toBeInTheDocument();
+
+    // Press Escape to close
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(screen.queryByRole("dialog", { name: /Command palette/i })).not.toBeInTheDocument();
   });
 });

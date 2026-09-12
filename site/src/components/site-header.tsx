@@ -9,6 +9,7 @@ export interface SiteHeaderProps {
   mobileMenuOpen?: boolean;
   onToggleMobileMenu?: () => void;
   showMobileMenuButton?: boolean;
+  onOpenSearch?: () => void;
 }
 
 const TABS: { id: TabKey; label: string; badge?: string }[] = [
@@ -46,6 +47,7 @@ export function SiteHeader({
   mobileMenuOpen,
   onToggleMobileMenu,
   showMobileMenuButton = false,
+  onOpenSearch,
 }: SiteHeaderProps) {
   const version = typeof __APP_VERSION__ !== "undefined" ? __APP_VERSION__ : "0.9.3";
 
@@ -141,6 +143,33 @@ export function SiteHeader({
       </nav>
 
       <div className="flex items-center gap-2">
+        {onOpenSearch && (
+          <button
+            type="button"
+            onClick={onOpenSearch}
+            className="flex items-center gap-2 px-2.5 py-1.5 rounded-kj-sm text-xs text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted border border-border transition-colors cursor-pointer"
+            aria-label="Search documentation"
+          >
+            <svg
+              width={14}
+              height={14}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <span className="hidden sm:inline font-sans">Search...</span>
+            <kbd className="hidden sm:inline-block font-mono text-[10px] px-1 py-0.5 rounded bg-surface border border-border text-muted-foreground shadow-xs leading-none">
+              ⌘K
+            </kbd>
+          </button>
+        )}
         <a
           href="https://github.com/kjaniec-dev/ui-kit"
           target="_blank"
