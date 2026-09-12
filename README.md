@@ -9,10 +9,16 @@ React 19 & Tailwind CSS 4 design system for B2B SaaS, dashboards, and developer 
 ## 🎨 Gallery Preview
 
 <p align="center">
-  <img src="./after-desktop2.png" width="800" alt="KJ Product Kit Desktop Gallery" />
+  <img src="./docs/images/hero-overview.png" width="850" alt="KJ Product Kit Overview & Design System Hero" />
 </p>
 <p align="center">
-  <img src="./site-table-nav.png" width="800" alt="KJ Product Kit DataTable Navigation" />
+  <img src="./docs/images/patterns-view.png" width="850" alt="KJ Product Kit B2B Product Patterns - Invoice & Accounting Dashboard" />
+</p>
+<p align="center">
+  <img src="./docs/images/components-datatable.png" width="850" alt="KJ Product Kit Categorized Component Gallery & DataTable" />
+</p>
+<p align="center">
+  <img src="./docs/images/mcp-view.png" width="850" alt="KJ Product Kit AI-Native Model Context Protocol (MCP) Guide" />
 </p>
 
 ---

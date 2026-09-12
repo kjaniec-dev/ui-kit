@@ -10,4 +10,4 @@ storybook-static
 .playwright-mcp/
 .serena/
 .claude/
-
+.playwright-cli/
