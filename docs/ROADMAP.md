@@ -28,15 +28,15 @@ Plan rozwoju i optymalizacji biblioteki komponentów oraz serwisu dokumentacyjne
 ## 🏃 Sprint 2: Accessibility (a11y) & Biome Fixes (Jakość i standardy)
 **Cel:** Eliminacja ostrzeżeń dostępności (WCAG AA), poprawa obsługi czytników ekranowych i klawiatury w interaktywnych komponentach oraz redukcja ostrzeżeń Biome.
 
-- [ ] **2.1. Dostępność `Switch`:**
+- [x] **2.1. Dostępność `Switch`:**
   - Dodanie wymaganego atrybutu `aria-checked` dla elementu z `role="switch"` w `packages/ui/src/components/switch.tsx`.
-- [ ] **2.2. Dostępność `Toast`:**
+- [x] **2.2. Dostępność `Toast`:**
   - Zastąpienie klikalnego `div` semantycznym przyciskiem `<button type="button" aria-label="Dismiss toast">` lub obsługa zdarzeń klawiatury (`onKeyDown` Enter/Space).
-- [ ] **2.3. Dostępność `BottomSheet`:**
+- [x] **2.3. Dostępność `BottomSheet`:**
   - Poprawa dostępności tła overlay (backdrop) w `packages/ui/src/components/bottom-sheet.tsx`.
-- [ ] **2.4. Typowanie i eliminacja `noExplicitAny` w pakiecie MCP:**
+- [x] **2.4. Typowanie i eliminacja `noExplicitAny` w pakiecie MCP:**
   - Wprowadzenie dedykowanych typów TypeScript w `packages/mcp/src/extractor.ts` oraz `packages/mcp/src/index.ts`.
-- [ ] **2.5. Weryfikacja:**
+- [x] **2.5. Weryfikacja:**
   - Uruchomienie `npm run lint` oraz testów `packages/ui`.
 
 ---

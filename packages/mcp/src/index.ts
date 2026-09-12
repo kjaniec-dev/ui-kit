@@ -4,6 +4,7 @@ import { z } from "zod";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import type { ComponentInfo, ParsedToken, PropInfo } from "./extractor.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -13,8 +14,8 @@ const dataDir = path.join(__dirname, "../data");
 const componentsJsonPath = path.join(dataDir, "components.json");
 const tokensJsonPath = path.join(dataDir, "tokens.json");
 
-let components: any[] = [];
-let tokens: any[] = [];
+let components: ComponentInfo[] = [];
+let tokens: ParsedToken[] = [];
 
 try {
   if (fs.existsSync(componentsJsonPath)) {
@@ -42,7 +43,7 @@ const server = new McpServer({
 });
 
 // Helper function to generate reference markdown for a component
-function generateComponentMarkdown(c: any): string {
+function generateComponentMarkdown(c: ComponentInfo): string {
   let md = `# ${c.name}\n\n`;
   md += `${c.description}\n\n`;
 
@@ -161,7 +162,7 @@ server.tool(
       const nameMatch = c.name.toLowerCase().includes(q);
       const descMatch = c.description.toLowerCase().includes(q);
       const propMatch = c.props.some(
-        (p: any) =>
+        (p: PropInfo) =>
           p.name.toLowerCase().includes(q) ||
           (p.description && p.description.toLowerCase().includes(q))
       );

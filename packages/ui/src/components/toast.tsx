@@ -109,9 +109,8 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
           <div
             key={t.id}
             role="status"
-            onClick={() => remove(t.id)}
             className={cn(
-              "flex items-center gap-2.5 min-w-[280px] px-4 py-3 cursor-pointer",
+              "flex items-center justify-between gap-3 min-w-[280px] px-4 py-3",
               "bg-surface border border-border border-l-[3px] rounded-kj-md shadow-kj-lg text-[0.85rem] font-medium",
               toneBorder[t.tone],
               t.leaving
@@ -119,8 +118,31 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
                 : "animate-[kjtoastin_.25s_ease]"
             )}
           >
-            <span className="grid place-items-center">{icons[t.tone]}</span>
-            <span>{t.message}</span>
+            <div className="flex items-center gap-2.5">
+              <span className="grid place-items-center">{icons[t.tone]}</span>
+              <span>{t.message}</span>
+            </div>
+            <button
+              type="button"
+              aria-label="Dismiss notification"
+              onClick={() => remove(t.id)}
+              className="ml-auto text-muted-foreground hover:text-foreground p-1 -mr-1 rounded-kj-sm transition-colors cursor-pointer"
+            >
+              <svg
+                width={14}
+                height={14}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
           </div>
         ))}
       </div>

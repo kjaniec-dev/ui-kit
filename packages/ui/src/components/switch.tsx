@@ -8,9 +8,20 @@ export interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement>
 }
 
 export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
-  ({ className, label, id, ...props }, ref) => {
+  ({ className, label, id, checked, defaultChecked, onChange, ...props }, ref) => {
     const autoId = React.useId();
     const inputId = id ?? autoId;
+    const isControlled = checked !== undefined;
+    const [internalChecked, setInternalChecked] = React.useState(Boolean(defaultChecked));
+    const isChecked = isControlled ? Boolean(checked) : internalChecked;
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!isControlled) {
+        setInternalChecked(e.target.checked);
+      }
+      onChange?.(e);
+    };
+
     return (
       <label
         htmlFor={inputId}
@@ -24,6 +35,10 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
           id={inputId}
           type="checkbox"
           role="switch"
+          aria-checked={isChecked}
+          checked={isControlled ? checked : undefined}
+          defaultChecked={!isControlled ? defaultChecked : undefined}
+          onChange={handleChange}
           className="peer sr-only"
           {...props}
         />

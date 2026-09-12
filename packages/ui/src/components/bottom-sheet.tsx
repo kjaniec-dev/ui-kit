@@ -123,7 +123,6 @@ export function BottomSheet({
     <BottomSheetContext.Provider value={{ titleId, descId }}>
       {/* Backdrop overlay */}
       <div
-        role="presentation"
         onClick={(e) => e.target === e.currentTarget && onClose()}
         className={cn(
           "fixed inset-0 z-[100] grid items-end sm:place-items-center p-0 sm:p-6 backdrop-blur-[3px] transition-all duration-200",

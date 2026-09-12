@@ -50,7 +50,7 @@ if (!fs.existsSync(dataOutputDir)) {
   fs.mkdirSync(dataOutputDir, { recursive: true });
 }
 
-interface PropInfo {
+export interface PropInfo {
   name: string;
   type: string;
   optional: boolean;
@@ -58,12 +58,12 @@ interface PropInfo {
   description: string;
 }
 
-interface CvaInfo {
+export interface CvaInfo {
   variants: Record<string, string[]>;
   defaultVariants: Record<string, string>;
 }
 
-interface ComponentInfo {
+export interface ComponentInfo {
   name: string;
   importPath: string;
   description: string;
@@ -466,7 +466,7 @@ export function parseComponents(): ComponentInfo[] {
       }
 
       // If this file has CVA variants, add them as props if not already defined
-      const finalCva = fileCva as any;
+      const finalCva = fileCva;
       if (finalCva) {
         for (const variantGroup of Object.keys(finalCva.variants)) {
           const existingProp = componentProps.find((p) => p.name === variantGroup);
@@ -510,7 +510,7 @@ export function parseComponents(): ComponentInfo[] {
   return Object.values(componentsMap);
 }
 
-interface ParsedToken {
+export interface ParsedToken {
   name: string;
   category: string;
   light: string;
@@ -603,10 +603,11 @@ export function parseTokens(): ParsedToken[] {
   const parsedTokens: ParsedToken[] = [];
 
   // Recurse W3C Design Tokens JSON
-  function recurseTokens(obj: any, pathArray: string[]) {
+  function recurseTokens(obj: unknown, pathArray: string[]) {
     if (!obj || typeof obj !== "object") return;
+    const record = obj as Record<string, unknown>;
 
-    if (obj["$type"] && obj["$value"] !== undefined) {
+    if (record["$type"] && record["$value"] !== undefined) {
       const tokenName = pathArray.join(".");
       let category = pathArray[0];
       if (category === "color") {
@@ -629,7 +630,7 @@ export function parseTokens(): ParsedToken[] {
         varName += pathArray.join("-");
       }
 
-      const light = lightValues[varName] || obj["$value"];
+      const light = lightValues[varName] || String(record["$value"]);
       const dark = darkValues[varName] || light; // default to light value if no dark override
       const tailwind = getTailwindUtility(varName) || "";
 
@@ -643,9 +644,9 @@ export function parseTokens(): ParsedToken[] {
       return;
     }
 
-    for (const key of Object.keys(obj)) {
+    for (const key of Object.keys(record)) {
       if (key.startsWith("$")) continue;
-      recurseTokens(obj[key], [...pathArray, key]);
+      recurseTokens(record[key], [...pathArray, key]);
     }
   }
 
