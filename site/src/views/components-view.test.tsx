@@ -206,9 +206,37 @@ describe("ComponentsView", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("exports COMPONENT_CATEGORIES with all 7 categories and 15 items", () => {
+  it("exports COMPONENT_CATEGORIES with all 7 categories and 15 items in sequential order", () => {
     expect(COMPONENT_CATEGORIES).toHaveLength(7);
+    expect(COMPONENT_CATEGORIES.map((c) => c.name)).toEqual([
+      "Foundations",
+      "Feedback",
+      "Inputs & Forms",
+      "Data Display",
+      "Navigation",
+      "Overlays",
+      "Layouts",
+    ]);
     const totalItems = COMPONENT_CATEGORIES.reduce((acc, cat) => acc + cat.items.length, 0);
     expect(totalItems).toBe(15);
+  });
+
+  it("renders DOM sections in the exact sequential order of the sidebar categories", () => {
+    const { container } = render(<ComponentsView />);
+    const expectedIds = COMPONENT_CATEGORIES.flatMap((c) => c.items.map((i) => i.id));
+    const domElements = expectedIds
+      .map((id) => container.querySelector(`section#${id}`))
+      .filter(Boolean);
+
+    expect(domElements).toHaveLength(expectedIds.length);
+
+    // Verify each section appears after the previous one in document position
+    for (let i = 0; i < domElements.length - 1; i++) {
+      const current = domElements[i]!;
+      const next = domElements[i + 1]!;
+      const position = current.compareDocumentPosition(next);
+      // Node.DOCUMENT_POSITION_FOLLOWING is 4
+      expect(position & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    }
   });
 });

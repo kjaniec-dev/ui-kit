@@ -33,7 +33,11 @@ export function useHashRoute(): HashRoute {
       setRoute((prev) => (prev.tab === next.tab && prev.subRoute === next.subRoute ? prev : next));
     };
     window.addEventListener("hashchange", onHashChange);
-    return () => window.removeEventListener("hashchange", onHashChange);
+    window.addEventListener("popstate", onHashChange);
+    return () => {
+      window.removeEventListener("hashchange", onHashChange);
+      window.removeEventListener("popstate", onHashChange);
+    };
   }, []);
 
   const navigate = React.useCallback((tab: TabKey, subRoute?: string) => {

@@ -141,7 +141,12 @@ export interface SecProps {
 
 export function Sec(p: SecProps) {
   return (
-    <section id={p.id} className="mb-14 scroll-mt-24">
+    <section id={p.id} className="mb-14 scroll-mt-24 relative">
+      <span
+        id={`components/${p.id}`}
+        className="block absolute -top-24 h-0 w-0 pointer-events-none invisible"
+        aria-hidden="true"
+      />
       <div className="mb-5">
         <h2 className="m-0 text-2xl font-bold tracking-[-0.02em]">{p.title}</h2>
         {p.desc && <p className="mt-1 text-sm text-muted-foreground max-w-[60ch]">{p.desc}</p>}

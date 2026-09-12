@@ -45,6 +45,25 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     ],
   },
   {
+    name: "Feedback",
+    items: [
+      {
+        id: "feedback",
+        label: "Feedback",
+        keywords: [
+          "alert",
+          "progress",
+          "progressring",
+          "progressringfield",
+          "skeleton",
+          "emptystate",
+          "errorstate",
+          "toast",
+        ],
+      },
+    ],
+  },
+  {
     name: "Inputs & Forms",
     items: [
       {
@@ -95,25 +114,6 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
         id: "cards",
         label: "Cards",
         keywords: ["card", "metriccard", "pricingcard", "blogcard", "projectcard"],
-      },
-    ],
-  },
-  {
-    name: "Feedback",
-    items: [
-      {
-        id: "feedback",
-        label: "Feedback",
-        keywords: [
-          "alert",
-          "progress",
-          "progressring",
-          "progressringfield",
-          "skeleton",
-          "emptystate",
-          "errorstate",
-          "toast",
-        ],
       },
     ],
   },
@@ -219,7 +219,11 @@ function CategorySidebar({
                     <a
                       key={item.id}
                       href={`#components/${item.id}`}
-                      onClick={() => onSelect(item.id)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.history.pushState(null, "", `#components/${item.id}`);
+                        onSelect(item.id);
+                      }}
                       className={cn(
                         "flex items-center gap-2.5 px-3 py-1.5 rounded-kj-sm text-sm font-medium no-underline transition-colors",
                         active
@@ -269,15 +273,33 @@ export function ComponentsView({
   React.useEffect(() => {
     if (typeof IntersectionObserver === "undefined") return;
     const allIds = COMPONENT_CATEGORIES.flatMap((c) => c.items.map((i) => i.id));
+    const visibleEntries = new Map<string, IntersectionObserverEntry>();
     const obs = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+            visibleEntries.set(entry.target.id, entry);
+          } else {
+            visibleEntries.delete(entry.target.id);
+          }
+        }
+
+        if (visibleEntries.size > 0) {
+          let closestId = "";
+          let minDistance = Number.POSITIVE_INFINITY;
+          for (const [id, entry] of visibleEntries.entries()) {
+            const dist = Math.abs(entry.boundingClientRect.top - 120);
+            if (dist < minDistance) {
+              minDistance = dist;
+              closestId = id;
+            }
+          }
+          if (closestId) {
+            setActiveSection(closestId);
           }
         }
       },
-      { rootMargin: "-20% 0px -70% 0px" }
+      { rootMargin: "-10% 0px -60% 0px" }
     );
 
     for (const id of allIds) {
@@ -385,9 +407,9 @@ export function ComponentsView({
             </div>
 
             <PrimitivesSections />
+            <FeedbackSections />
             <FormsSections />
             <DataDisplaySections />
-            <FeedbackSections />
             <NavigationSections />
             <OverlaysSections />
             <LayoutsSections />
