@@ -10,6 +10,7 @@ import {
   useToast,
 } from "@kjaniec-dev/ui";
 import * as React from "react";
+import { GitHubIcon } from "../components/site-header";
 import type { TabKey } from "../hooks/use-hash-route";
 
 export interface OverviewViewProps {
@@ -167,11 +168,11 @@ function OverviewContent({ onNavigate }: OverviewViewProps) {
             rel="noreferrer"
             className={cn(
               buttonVariants({ variant: "ghost", size: "lg" }),
-              "no-underline inline-flex items-center gap-1.5"
+              "no-underline inline-flex items-center gap-2"
             )}
           >
+            <GitHubIcon size={18} />
             <span>GitHub</span>
-            <span className="text-sm font-sans">↗</span>
           </a>
         </div>
 
