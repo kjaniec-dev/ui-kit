@@ -209,20 +209,6 @@ export function OverlaysSections() {
       </Sec>
 
       <Sec
-        id="inbox-popover"
-        title="InboxPopover"
-        desc="Bell-triggered notification inbox with unread badge, mark-all-read, and per-item dismiss."
-        components={["InboxPopover", "InboxTrigger", "InboxContent", "NotificationItem"]}
-        code={codeInbox}
-      >
-        <Box>
-          <div className="flex justify-end">
-            <InboxDemo />
-          </div>
-        </Box>
-      </Sec>
-
-      <Sec
         id="popover"
         title="Popover"
         desc="Floating popover panels for contextual content, menus, and controls."
@@ -253,6 +239,20 @@ export function OverlaysSections() {
                 </p>
               </PopoverContent>
             </Popover>
+          </div>
+        </Box>
+      </Sec>
+
+      <Sec
+        id="inbox-popover"
+        title="InboxPopover"
+        desc="Bell-triggered notification inbox with unread badge, mark-all-read, and per-item dismiss."
+        components={["InboxPopover", "InboxTrigger", "InboxContent", "NotificationItem"]}
+        code={codeInbox}
+      >
+        <Box>
+          <div className="flex justify-end">
+            <InboxDemo />
           </div>
         </Box>
       </Sec>
