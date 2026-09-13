@@ -180,4 +180,66 @@ describe("LineChart & AreaChart", () => {
       expect(container.querySelector(".chart-tooltip")).not.toBeInTheDocument();
     }
   });
+
+  it("formats X-axis ticks with indexFormatter exactly once without double-formatting", () => {
+    let callCount = 0;
+    const customIndexFormatter = (val: unknown) => {
+      callCount++;
+      return `Date: ${val}`;
+    };
+    render(
+      <LineChart
+        data={sampleData}
+        index="date"
+        series={sampleSeries}
+        indexFormatter={customIndexFormatter}
+      />
+    );
+    expect(callCount).toBe(sampleData.length);
+    expect(screen.getByText("Date: Jan")).toBeInTheDocument();
+    expect(screen.queryByText("Date: Date: Jan")).not.toBeInTheDocument();
+  });
+
+  it("preserves original series color when previous series is toggled off", () => {
+    const uncoloredSeries = [
+      { key: "sales", label: "Sprzedaż" },
+      { key: "profit", label: "Zysk" },
+    ];
+    const { container } = render(
+      <LineChart data={sampleData} index="date" series={uncoloredSeries} />
+    );
+    const linesBefore = container.querySelectorAll("path.chart-line");
+    expect(linesBefore[0]).toHaveAttribute("stroke", "var(--kj-chart1, #a84f08)");
+    expect(linesBefore[1]).toHaveAttribute("stroke", "var(--kj-chart2, #0f746d)");
+
+    // Toggle off "sales" (series 0)
+    const salesBtn = screen.getByRole("button", { name: /Sprzedaż/i });
+    fireEvent.click(salesBtn);
+
+    // Remaining series (profit) should still have chart2, NOT change to chart1
+    const linesAfter = container.querySelectorAll("path.chart-line");
+    expect(linesAfter).toHaveLength(1);
+    expect(linesAfter[0]).toHaveAttribute("stroke", "var(--kj-chart2, #0f746d)");
+  });
+
+  it("renders active hover dot correctly with sparse missing data", () => {
+    const sparseData = [
+      { date: "Jan", sales: 100, profit: null },
+      { date: "Feb", sales: null, profit: 60 },
+      { date: "Mar", sales: 120, profit: 55 },
+    ];
+    const { container } = render(
+      <LineChart data={sparseData} index="date" series={sampleSeries} showTooltip />
+    );
+    const overlay = container.querySelector(".chart-interactive-overlay");
+    expect(overlay).toBeInTheDocument();
+
+    // Hover over Jan (clientX: 50 -> closest to index 0)
+    // Jan has sales: 100, profit: null -> only 1 active dot should be rendered (for sales)
+    if (overlay) {
+      fireEvent.mouseMove(overlay, { clientX: 50, clientY: 50 });
+      const activeDots = container.querySelectorAll("circle.chart-active-dot");
+      expect(activeDots).toHaveLength(1);
+    }
+  });
 });

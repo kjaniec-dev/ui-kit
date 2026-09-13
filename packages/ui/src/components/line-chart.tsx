@@ -248,7 +248,7 @@ export const LineChart = React.forwardRef<HTMLDivElement, LineChartProps>(
     const xStep = data.length > maxXTicks ? Math.ceil(data.length / maxXTicks) : 1;
     const xTicks = data
       .map((row, idx) => ({
-        value: indexFormatter ? indexFormatter(row[index]) : String(row[index] ?? ""),
+        value: (row[index] as string | number) ?? "",
         x: getX(idx),
         idx,
       }))
@@ -317,14 +317,16 @@ export const LineChart = React.forwardRef<HTMLDivElement, LineChartProps>(
 
     const tooltipItems: ChartTooltipItem[] =
       activeRow !== null
-        ? activeSeriesList.map((s, idx) => {
+        ? activeSeriesList.map((s, sIdx) => {
+            const origIdx = series.findIndex((orig) => orig.key === s.key);
+            const seriesColorIndex = origIdx >= 0 ? origIdx : sIdx;
             const raw = activeRow[s.key];
             const num = typeof raw === "number" ? raw : Number(raw) || 0;
             return {
               key: s.key,
               label: s.label,
               value: num,
-              color: s.color ?? `chart${(idx % 6) + 1}`,
+              color: s.color ?? `chart${(seriesColorIndex % 6) + 1}`,
               formattedValue: valueFormatter ? valueFormatter(num) : undefined,
             };
           })
@@ -385,7 +387,9 @@ export const LineChart = React.forwardRef<HTMLDivElement, LineChartProps>(
 
         {/* Series Paths: Area Fills and Lines */}
         {activeSeriesList.map((s, sIdx) => {
-          const sColor = getChartColor(s.color, sIdx);
+          const origIdx = series.findIndex((orig) => orig.key === s.key);
+          const seriesColorIndex = origIdx >= 0 ? origIdx : sIdx;
+          const sColor = getChartColor(s.color, seriesColorIndex);
           const points: Point[] = [];
 
           for (let i = 0; i < data.length; i++) {
@@ -443,17 +447,21 @@ export const LineChart = React.forwardRef<HTMLDivElement, LineChartProps>(
                 ))}
 
               {/* Hover active point highlight */}
-              {activeIndex !== null && points[activeIndex] && (
-                <circle
-                  cx={points[activeIndex].x}
-                  cy={points[activeIndex].y}
-                  r={4.5}
-                  fill={sColor}
-                  stroke="var(--kj-background, #ffffff)"
-                  strokeWidth={2}
-                  className="chart-active-dot pointer-events-none"
-                />
-              )}
+              {activeIndex !== null &&
+                activeRow &&
+                activeRow[s.key] !== undefined &&
+                activeRow[s.key] !== null &&
+                Number.isFinite(Number(activeRow[s.key])) && (
+                  <circle
+                    cx={getX(activeIndex)}
+                    cy={getY(Number(activeRow[s.key]))}
+                    r={4.5}
+                    fill={sColor}
+                    stroke="var(--kj-background, #ffffff)"
+                    strokeWidth={2}
+                    className="chart-active-dot pointer-events-none"
+                  />
+                )}
             </g>
           );
         })}
