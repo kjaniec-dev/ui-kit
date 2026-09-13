@@ -347,3 +347,57 @@ export {
   type InPostGeowidgetModalProps,
   type InPostPoint,
 } from "./components/inpost-geowidget";
+
+export {
+  ChartContainer,
+  ChartGrid,
+  ChartXAxis,
+  ChartYAxis,
+  ChartTooltip,
+  ChartLegend,
+  ChartA11yTable,
+  CHART_COLOR_VARS,
+  DEFAULT_CHART_COLORS,
+  getChartColor,
+  type ChartColor,
+  type ChartSeries,
+  type ChartMargin,
+  type ChartContainerProps,
+  type ChartGridProps,
+  type ChartXAxisProps,
+  type ChartXAxisTick,
+  type ChartYAxisProps,
+  type ChartYAxisTick,
+  type ChartTooltipProps,
+  type ChartTooltipItem,
+  type ChartLegendProps,
+  type ChartA11yTableProps,
+} from "./components/chart-primitives";
+
+export {
+  Sparkline,
+  type SparklineProps,
+  type SparklineVariant,
+  type SparklineCurve,
+} from "./components/sparkline";
+
+export {
+  LineChart,
+  AreaChart,
+  type LineChartProps,
+  type LineChartCurve,
+  type LineChartVariant,
+} from "./components/line-chart";
+
+export {
+  BarChart,
+  type BarChartProps,
+  type BarChartType,
+  type BarChartLayout,
+} from "./components/bar-chart";
+
+export {
+  DonutChart,
+  type DonutChartProps,
+  type DonutChartSize,
+} from "./components/donut-chart";

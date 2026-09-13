@@ -4666,5 +4666,1213 @@
     ],
     "cva": null,
     "usageSnippet": "<InPostGeowidgetModal sandbox={true} value={point} onSelect={(p) => setPoint(p)} />"
+  },
+  {
+    "name": "ChartContainer",
+    "importPath": "import { ChartContainer } from \"@kjaniec-dev/ui\";",
+    "description": "Responsive chart container managing SVG viewBox coordinate space and absolute HTML overlay slot.",
+    "props": [
+      {
+        "name": "width",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "height",
+        "type": "number | string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "viewBox",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "\"aria-label\"",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "overlay",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "svgClassName",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "svgRef",
+        "type": "React.Ref<SVGSVGElement>",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ChartContainer>\n  <!-- Content -->\n</ChartContainer>"
+  },
+  {
+    "name": "ChartGrid",
+    "importPath": "import { ChartGrid } from \"@kjaniec-dev/ui\";",
+    "description": "Background horizontal and vertical reference lines with custom tick intervals and dashing.",
+    "props": [
+      {
+        "name": "width",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "0",
+        "description": ""
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "0",
+        "description": ""
+      },
+      {
+        "name": "yTicks",
+        "type": "number[]",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "xTicks",
+        "type": "number[]",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "scaleY",
+        "type": "(value: number) => number",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "scaleX",
+        "type": "(value: number) => number",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "yDomain",
+        "type": "[number, number]",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "yRange",
+        "type": "[number, number]",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "xDomain",
+        "type": "[number, number]",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "xRange",
+        "type": "[number, number]",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "stroke",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"var(--kj-border-subtle, #e5e7eb)\"",
+        "description": ""
+      },
+      {
+        "name": "strokeDasharray",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"3 3\"",
+        "description": ""
+      },
+      {
+        "name": "strokeWidth",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "1",
+        "description": ""
+      },
+      {
+        "name": "strokeOpacity",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "1",
+        "description": ""
+      },
+      {
+        "name": "horizontal",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": ""
+      },
+      {
+        "name": "vertical",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ChartGrid>\n  <!-- Content -->\n</ChartGrid>"
+  },
+  {
+    "name": "ChartXAxis",
+    "importPath": "import { ChartXAxis } from \"@kjaniec-dev/ui\";",
+    "description": "SVG horizontal axis ticks rendering aligned category or timestamp labels.",
+    "props": [
+      {
+        "name": "ticks",
+        "type": "ChartXAxisTick[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "y",
+        "type": "number",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "formatter",
+        "type": "(value: unknown) => string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "valueFormatter",
+        "type": "(value: unknown) => string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "textAnchor",
+        "type": "\"start\" | \"middle\" | \"end\"",
+        "optional": true,
+        "defaultValue": "\"middle\"",
+        "description": ""
+      },
+      {
+        "name": "dy",
+        "type": "string | number",
+        "optional": true,
+        "defaultValue": "\"1.2em\"",
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "tickClassName",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ChartXAxis>\n  <!-- Content -->\n</ChartXAxis>"
+  },
+  {
+    "name": "ChartYAxis",
+    "importPath": "import { ChartYAxis } from \"@kjaniec-dev/ui\";",
+    "description": "SVG vertical axis ticks rendering numeric or value labels.",
+    "props": [
+      {
+        "name": "ticks",
+        "type": "ChartYAxisTick[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "x",
+        "type": "number",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "formatter",
+        "type": "(value: unknown) => string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "valueFormatter",
+        "type": "(value: unknown) => string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "textAnchor",
+        "type": "\"start\" | \"middle\" | \"end\"",
+        "optional": true,
+        "defaultValue": "\"end\"",
+        "description": ""
+      },
+      {
+        "name": "dx",
+        "type": "string | number",
+        "optional": true,
+        "defaultValue": "\"-0.5em\"",
+        "description": ""
+      },
+      {
+        "name": "dominantBaseline",
+        "type": "\"auto\" | \"middle\" | \"central\" | \"hanging\" | \"alphabetic\"",
+        "optional": true,
+        "defaultValue": "\"middle\"",
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "tickClassName",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ChartYAxis>\n  <!-- Content -->\n</ChartYAxis>"
+  },
+  {
+    "name": "ChartTooltip",
+    "importPath": "import { ChartTooltip } from \"@kjaniec-dev/ui\";",
+    "description": "Absolute-positioned HTML floating tooltip card with series indicators and crosshair line.",
+    "props": [
+      {
+        "name": "title",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "items",
+        "type": "ChartTooltipItem[]",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "x",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "y",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": ""
+      },
+      {
+        "name": "crosshairX",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "crosshairHeight",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "showCrosshair",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": ""
+      },
+      {
+        "name": "valueFormatter",
+        "type": "(value: number) => string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "content",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ChartTooltip>\n  <!-- Content -->\n</ChartTooltip>"
+  },
+  {
+    "name": "ChartLegend",
+    "importPath": "import { ChartLegend } from \"@kjaniec-dev/ui\";",
+    "description": "Series labels list with colored indicator dots and optional click/keyboard toggling.",
+    "props": [
+      {
+        "name": "series",
+        "type": "ChartSeries[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "activeSeries",
+        "type": "string[]",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "disabledSeries",
+        "type": "string[]",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "onToggle",
+        "type": "(key: string) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "orientation",
+        "type": "\"horizontal\" | \"vertical\"",
+        "optional": true,
+        "defaultValue": "\"horizontal\"",
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "itemClassName",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ChartLegend>\n  <!-- Content -->\n</ChartLegend>"
+  },
+  {
+    "name": "ChartA11yTable",
+    "importPath": "import { ChartA11yTable } from \"@kjaniec-dev/ui\";",
+    "description": "Screen reader accessible semantic table hidden with sr-only class complying with WCAG 2.1 AA.",
+    "props": [
+      {
+        "name": "caption",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "categories",
+        "type": "string[]",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "series",
+        "type": "ChartSeries[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "data",
+        "type": "Array<Record<string, unknown>> | number[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "indexKey",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "index",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "valueFormatter",
+        "type": "(value: unknown) => string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<ChartA11yTable>\n  <!-- Content -->\n</ChartA11yTable>"
+  },
+  {
+    "name": "CHART_COLOR_VARS",
+    "importPath": "import { CHART_COLOR_VARS } from \"@kjaniec-dev/ui\";",
+    "description": "Map of chart token keys to CSS custom properties with fallback hex values.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<CHART_COLOR_VARS>\n  <!-- Content -->\n</CHART_COLOR_VARS>"
+  },
+  {
+    "name": "DEFAULT_CHART_COLORS",
+    "importPath": "import { DEFAULT_CHART_COLORS } from \"@kjaniec-dev/ui\";",
+    "description": "Default color sequence cycling through chart1 to chart6.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<DEFAULT_CHART_COLORS>\n  <!-- Content -->\n</DEFAULT_CHART_COLORS>"
+  },
+  {
+    "name": "Sparkline",
+    "importPath": "import { Sparkline } from \"@kjaniec-dev/ui\";",
+    "description": "Compact, lightweight data visualization sparkline for KPI cards, metric widgets, and data tables.",
+    "props": [
+      {
+        "name": "data",
+        "type": "Array<number | Record<string, unknown>>",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Numerical values or objects containing data points to plot."
+      },
+      {
+        "name": "dataKey",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Key to extract numeric values when `data` contains objects."
+      },
+      {
+        "name": "variant",
+        "type": "SparklineVariant",
+        "optional": true,
+        "defaultValue": "\"line\"",
+        "description": "Visual presentation mode: continuous line, gradient area, or discrete bars. Defaults to \"line\"."
+      },
+      {
+        "name": "curve",
+        "type": "SparklineCurve",
+        "optional": true,
+        "defaultValue": "\"smooth\"",
+        "description": "Interpolation method between data points. Defaults to \"smooth\"."
+      },
+      {
+        "name": "color",
+        "type": "ChartColor",
+        "optional": true,
+        "defaultValue": "\"chart1\"",
+        "description": "Theme token identifier or raw CSS color string for line, fill, and bars. Defaults to \"chart1\"."
+      },
+      {
+        "name": "strokeWidth",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "2",
+        "description": "Line stroke width in pixels for line and area variants. Defaults to 2."
+      },
+      {
+        "name": "showEndDot",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": "Whether to highlight the final data point with an accent dot. Defaults to false."
+      },
+      {
+        "name": "showGradient",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Whether to apply a fading vertical gradient to area fills. Defaults to true."
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "36",
+        "description": "Overall component height in pixels. Defaults to 36."
+      },
+      {
+        "name": "width",
+        "type": "number | string",
+        "optional": true,
+        "defaultValue": "\"100%\"",
+        "description": "Component width in pixels or CSS units. Defaults to \"100%\"."
+      },
+      {
+        "name": "barRadius",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "2",
+        "description": "Corner radius in pixels for bar rectangles. Defaults to 2."
+      },
+      {
+        "name": "barPadding",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "2",
+        "description": "Spacing between discrete bars in pixels. Defaults to 2."
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Accessible label alias for assistive technologies."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<Sparkline data={sampleData} variant=\"line\" color=\"chart1\" showEndDot height={40} />"
+  },
+  {
+    "name": "LineChart",
+    "importPath": "import { LineChart } from \"@kjaniec-dev/ui\";",
+    "description": "Responsive multi-series LineChart with SVG rendering, background grid, nice-scale axes,\ninteractive HTML tooltip overlay with crosshair, toggleable legend, and WCAG AA accessible table.",
+    "props": [
+      {
+        "name": "data",
+        "type": "Array<Record<string, unknown>>",
+        "optional": false,
+        "defaultValue": null,
+        "description": "Array of tabular data records to plot."
+      },
+      {
+        "name": "index",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": "Key identifying category or timestamp in each data item (e.g. \"date\", \"month\")."
+      },
+      {
+        "name": "series",
+        "type": "ChartSeries[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": "Series configurations defining data keys, labels, and color assignments."
+      },
+      {
+        "name": "variant",
+        "type": "LineChartVariant",
+        "optional": true,
+        "defaultValue": "\"line\"",
+        "description": "Visual presentation mode: continuous line or filled area. Defaults to \"line\"."
+      },
+      {
+        "name": "curve",
+        "type": "LineChartCurve",
+        "optional": true,
+        "defaultValue": "\"linear\"",
+        "description": "Interpolation method between data points: linear polyline, smooth cubic curve, or step lines. Defaults to \"linear\"."
+      },
+      {
+        "name": "showGrid",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Whether to render background horizontal reference grid lines. Defaults to true."
+      },
+      {
+        "name": "showXAxis",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Whether to render horizontal X-axis tick labels. Defaults to true."
+      },
+      {
+        "name": "showYAxis",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Whether to render vertical Y-axis numeric ticks. Defaults to true."
+      },
+      {
+        "name": "showLegend",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Whether to render series legend. Defaults to true when series.length > 1."
+      },
+      {
+        "name": "showTooltip",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Whether to display interactive floating tooltip card on hover/touch. Defaults to true."
+      },
+      {
+        "name": "showDots",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": "Whether to render accent dots on data points. Defaults to false."
+      },
+      {
+        "name": "showGradient",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Whether to apply a subtle vertical gradient to area fills. Defaults to true."
+      },
+      {
+        "name": "showA11yTable",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Whether to render a semantic hidden table for screen readers. Defaults to true when caption is provided."
+      },
+      {
+        "name": "valueFormatter",
+        "type": "(value: number) => string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Value formatter for Y-axis labels and tooltip metrics."
+      },
+      {
+        "name": "indexFormatter",
+        "type": "(value: unknown) => string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Label formatter for X-axis ticks and tooltip header."
+      },
+      {
+        "name": "emptyMessage",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"Brak danych do wyświetlenia\"",
+        "description": "Text to render when `data` is empty. Defaults to \"Brak danych do wyświetlenia\"."
+      },
+      {
+        "name": "height",
+        "type": "number | string",
+        "optional": true,
+        "defaultValue": "280",
+        "description": "Height of the chart in pixels or CSS units. Defaults to 280."
+      },
+      {
+        "name": "width",
+        "type": "number | string",
+        "optional": true,
+        "defaultValue": "\"100%\"",
+        "description": "Width of the chart in pixels or CSS units. Defaults to \"100%\"."
+      },
+      {
+        "name": "margin",
+        "type": "ChartMargin",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Inner chart margins in pixels."
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Accessible label for screen readers."
+      },
+      {
+        "name": "caption",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Screen reader semantic table caption."
+      },
+      {
+        "name": "strokeWidth",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "2",
+        "description": "Stroke width in pixels for line paths. Defaults to 2."
+      },
+      {
+        "name": "activeSeries",
+        "type": "string[]",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Controlled list of active series keys."
+      },
+      {
+        "name": "onSeriesToggle",
+        "type": "(key: string) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Callback fired when user clicks a legend item to toggle series visibility."
+      },
+      {
+        "name": "yTicksCount",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "5",
+        "description": "Number of Y-axis ticks to target in nice scale calculation. Defaults to 5."
+      },
+      {
+        "name": "yDomain",
+        "type": "[number, number]",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Explicit [min, max] domain override for Y-axis."
+      },
+      {
+        "name": "autoScale",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": "Whether Y-axis auto-scales to data minimum rather than anchoring at zero. Defaults to false."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<LineChart\n  data={monthlyData}\n  index=\"month\"\n  series={standardSeries}\n  curve=\"smooth\"\n  height={240}\n/>"
+  },
+  {
+    "name": "AreaChart",
+    "importPath": "import { AreaChart } from \"@kjaniec-dev/ui\";",
+    "description": "Specialized variant of LineChart with subtle SVG vertical gradient fills beneath lines.",
+    "props": [],
+    "cva": null,
+    "usageSnippet": "<AreaChart\n  data={monthlyData}\n  index=\"month\"\n  series={[\n    { key: \"revenue\", label: \"Przychód\", color: \"chart1\" },\n    { key: \"profit\", label: \"Zysk\", color: \"chart2\" },\n  ]}\n  curve=\"smooth\"\n  valueFormatter={(val) => `${(val / 1000).toFixed(0)}k zł`}\n  height={320}\n/>"
+  },
+  {
+    "name": "BarChart",
+    "importPath": "import { BarChart } from \"@kjaniec-dev/ui\";",
+    "description": "Responsive multi-series BarChart supporting grouped and stacked modes,\nvertical and horizontal orientations, rounded corners, tooltips, legend toggling,\nand WCAG AA accessibility table.",
+    "props": [
+      {
+        "name": "data",
+        "type": "Array<Record<string, unknown>>",
+        "optional": false,
+        "defaultValue": null,
+        "description": "Array of tabular data records to plot."
+      },
+      {
+        "name": "index",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": "Key identifying category or timestamp in each data item (e.g. \"category\", \"month\")."
+      },
+      {
+        "name": "series",
+        "type": "ChartSeries[]",
+        "optional": false,
+        "defaultValue": null,
+        "description": "Series configurations defining data keys, labels, and color assignments."
+      },
+      {
+        "name": "type",
+        "type": "BarChartType",
+        "optional": true,
+        "defaultValue": "\"grouped\"",
+        "description": "Mode of bar presentation: grouped side-by-side or stacked. Defaults to \"grouped\"."
+      },
+      {
+        "name": "layout",
+        "type": "BarChartLayout",
+        "optional": true,
+        "defaultValue": "\"vertical\"",
+        "description": "Orientation of bars: vertical columns or horizontal bars. Defaults to \"vertical\"."
+      },
+      {
+        "name": "radius",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "4",
+        "description": "Corner radius in pixels for rounded bar edges. Defaults to 4."
+      },
+      {
+        "name": "showGrid",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Whether to render background reference grid lines. Defaults to true."
+      },
+      {
+        "name": "showXAxis",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Whether to render horizontal X-axis tick labels. Defaults to true."
+      },
+      {
+        "name": "showYAxis",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Whether to render vertical Y-axis numeric or category ticks. Defaults to true."
+      },
+      {
+        "name": "showLegend",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Whether to render series legend. Defaults to true when series.length > 1."
+      },
+      {
+        "name": "showTooltip",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Whether to display interactive floating tooltip card on bar hover/touch. Defaults to true."
+      },
+      {
+        "name": "showA11yTable",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Whether to render a semantic hidden table for screen readers. Defaults to true when caption is provided."
+      },
+      {
+        "name": "valueFormatter",
+        "type": "(value: number) => string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Value formatter for numeric axis labels and tooltip metrics."
+      },
+      {
+        "name": "indexFormatter",
+        "type": "(value: unknown) => string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Label formatter for category axis ticks and tooltip header."
+      },
+      {
+        "name": "emptyMessage",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"Brak danych do wyświetlenia\"",
+        "description": "Text to render when `data` is empty. Defaults to \"Brak danych do wyświetlenia\"."
+      },
+      {
+        "name": "height",
+        "type": "number | string",
+        "optional": true,
+        "defaultValue": "280",
+        "description": "Height of the chart in pixels or CSS units. Defaults to 280."
+      },
+      {
+        "name": "width",
+        "type": "number | string",
+        "optional": true,
+        "defaultValue": "\"100%\"",
+        "description": "Width of the chart in pixels or CSS units. Defaults to \"100%\"."
+      },
+      {
+        "name": "margin",
+        "type": "ChartMargin",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Inner chart margins in pixels."
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Accessible label for screen readers."
+      },
+      {
+        "name": "caption",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Screen reader semantic table caption."
+      },
+      {
+        "name": "activeSeries",
+        "type": "string[]",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Controlled list of active series keys."
+      },
+      {
+        "name": "onSeriesToggle",
+        "type": "(key: string) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Callback fired when user clicks a legend item to toggle series visibility."
+      },
+      {
+        "name": "yTicksCount",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "5",
+        "description": "Number of numeric ticks to target in nice scale calculation. Defaults to 5."
+      },
+      {
+        "name": "yDomain",
+        "type": "[number, number]",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Explicit [min, max] domain override for the numeric value axis."
+      },
+      {
+        "name": "autoScale",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "false",
+        "description": "Whether numeric axis auto-scales to data minimum rather than anchoring at zero. Defaults to false."
+      },
+      {
+        "name": "barMaxWidth",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Maximum bar thickness in pixels."
+      },
+      {
+        "name": "groupPadding",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "0.2",
+        "description": "Fractional padding between category groups (0 to 1). Defaults to 0.2."
+      },
+      {
+        "name": "barPadding",
+        "type": "number",
+        "optional": true,
+        "defaultValue": "2",
+        "description": "Pixel gap between bars within a grouped category. Defaults to 2."
+      },
+      {
+        "name": "barClassName",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Additional CSS class applied to each SVG bar rect."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<BarChart\n  data={[]}\n  index=\"month\"\n  series={standardSeries}\n  emptyMessage=\"Brak danych historycznych dla wybranego okresu\"\n  height={220}\n/>"
+  },
+  {
+    "name": "DonutChart",
+    "importPath": "import { DonutChart } from \"@kjaniec-dev/ui\";",
+    "description": "Responsive DonutChart component rendering SVG annular ring segments,\ncenter content slot, hover highlights, interactive legend toggling,\nfloating tooltip, and WCAG AA screen reader table.",
+    "props": [
+      {
+        "name": "data",
+        "type": "Array<Record<string, unknown>>",
+        "optional": false,
+        "defaultValue": null,
+        "description": "Array of data records to plot."
+      },
+      {
+        "name": "category",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": "Key identifying category label in each data item (e.g. \"source\", \"name\")."
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "optional": false,
+        "defaultValue": null,
+        "description": "Key identifying numeric value in each data item (e.g. \"visitors\", \"amount\")."
+      },
+      {
+        "name": "centerLabel",
+        "type": "React.ReactNode",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Custom label or metric element rendered in the center hole of the donut ring."
+      },
+      {
+        "name": "size",
+        "type": "DonutChartSize",
+        "optional": true,
+        "defaultValue": "\"md\"",
+        "description": "Chart diameter: predefined \"sm\" (160px), \"md\" (220px), \"lg\" (280px) or custom pixel number. Defaults to \"md\"."
+      },
+      {
+        "name": "innerRadius",
+        "type": "number",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Inner radius ratio (0 to 1, relative to outerRadius) or absolute pixel radius (> 1). Defaults to 0.65. Set to 0 for pie chart."
+      },
+      {
+        "name": "colors",
+        "type": "(ChartColor | string)[]",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Custom color palette or token sequence (e.g. [\"chart1\", \"chart2\"] or hex strings)."
+      },
+      {
+        "name": "showLegend",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Whether to render series legend. Defaults to true."
+      },
+      {
+        "name": "showTooltip",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": "true",
+        "description": "Whether to display interactive floating tooltip card on slice hover/touch. Defaults to true."
+      },
+      {
+        "name": "showA11yTable",
+        "type": "boolean",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Whether to render a semantic hidden table for screen readers. Defaults to true when caption is provided."
+      },
+      {
+        "name": "valueFormatter",
+        "type": "(value: number) => string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Value formatter for numeric tooltip metrics and accessible table values."
+      },
+      {
+        "name": "emptyMessage",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"Brak danych do wyświetlenia\"",
+        "description": "Text to render when `data` is empty. Defaults to \"Brak danych do wyświetlenia\"."
+      },
+      {
+        "name": "ariaLabel",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Accessible label for screen readers."
+      },
+      {
+        "name": "caption",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Screen reader semantic table caption."
+      },
+      {
+        "name": "valueLabel",
+        "type": "string",
+        "optional": true,
+        "defaultValue": "\"Wartość\"",
+        "description": "Column header label for numeric metric in screen reader table. Defaults to \"Wartość\"."
+      },
+      {
+        "name": "activeCategories",
+        "type": "string[]",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Controlled list of active category keys."
+      },
+      {
+        "name": "onCategoryToggle",
+        "type": "(category: string) => void",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Callback fired when user clicks a legend item to toggle category visibility."
+      },
+      {
+        "name": "sliceClassName",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": "Additional CSS class applied to each SVG path slice."
+      }
+    ],
+    "cva": null,
+    "usageSnippet": "<DonutChart\n  data={trafficSourcesData.slice(0, 3)}\n  category=\"source\"\n  value=\"visitors\"\n  size=\"sm\"\n  centerLabel={<span className=\"text-xs font-bold\">SM</span>}\n/>"
   }
 ]

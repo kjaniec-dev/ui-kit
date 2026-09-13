@@ -674,3 +674,8 @@ export function generate() {
     "Successfully generated components.json and tokens.json inside packages/mcp/data/."
   );
 }
+
+// Execute generate() if invoked directly via CLI (e.g. npx tsx packages/mcp/src/extractor.ts)
+if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
+  generate();
+}
