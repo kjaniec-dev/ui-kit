@@ -7,7 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.9.3] - 2026-08-21
+## [1.0.0] - 2026-09-13
+
+### Added
+- **Data Visualization Suite**:
+  - `Sparkline`: Ultra-compact trendline component with `line`, `area`, and `bar` modes, curve smoothing, and end dot.
+  - `LineChart` & `AreaChart`: Interactive multi-series line and area charts with Bézier curve interpolation, responsive SVG coordinate mapping, custom crosshairs, interactive HTML tooltips, and series toggling legends.
+  - `BarChart`: Grouped (`grouped`) and stacked (`stacked`) bar charts with horizontal/vertical orientation support, rounded bar caps, and hover interactions.
+  - `DonutChart`: Proportional donut / ring chart with central metric slot (`centerLabel`), interactive segment slices, and active legend sync.
+  - Accessible SVG Chart Primitives (`ChartContainer`, `ChartGrid`, `ChartXAxis`, `ChartYAxis`, `ChartTooltip`, `ChartLegend`, and `ChartA11yTable` for screen readers).
+  - Pure TypeScript math and geometry engine (`chart-math.ts`) for nice number ticks, linear scales, Catmull-Rom/Bézier path generation, and arc trigonometry.
+- **Component Test Suite**:
+  - 100% unit test coverage for all 66 components with 1,179 passing tests across the monorepo.
+  - Added full test suites for all 34 primitive form controls, badges, indicators, feedback disclosures, cards, navigation shells, and modal dialogs.
+- **Interactive Props Explorer**:
+  - `PropsTable` component integrated into the showcase documentation with full TypeScript prop types, defaults, required indicators, and JSDoc summaries.
+
+### Changed
+- Peer dependency on `@kjaniec-dev/design` upgraded to `>=1.0.0`.
+- Modernized mobile viewports with sticky action toolbars, drawer navigation, and responsive touch gestures.
+
+### Fixed
+- Accessibility (a11y) improvements:
+  - `Switch`: Added `aria-checked` and proper role attributes.
+  - `Toast`: Converted dismiss actions to semantic buttons with keyboard dismissal (`Enter`/`Space`).
+  - `BottomSheet`: Improved backdrop overlay focus trap and ARIA labels.
+- Cleaned up Biome lint diagnostics across all components and documentation views.
 
 ### Added
 - `Skeleton` shimmer animation mode (`animation="shimmer"`) with ping-pong alternate cycle (`kjshimmer`) and support for `pulse` and `none` modes.

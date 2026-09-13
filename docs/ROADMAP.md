@@ -144,6 +144,20 @@ Plan rozwoju i optymalizacji biblioteki komponentów oraz serwisu dokumentacyjne
 
 ---
 
-## 🔮 Przyszłe Sprinty (Droga do v1.0.0)
-- **Sprint 6: Finalny Release v1.0.0** (aktualizacja `CHANGELOG.md`, wersjonowanie, checklist npm).
+## 🏃 Sprint 6: Finalny Release v1.0.0 (Wersjonowanie, Changelog i Publikacja)
+**Cel:** Oficjalne wydanie wersji produkcyjnej `v1.0.0` dla całego ekosystemu KJ Product Kit (`@kjaniec-dev/ui`, `@kjaniec-dev/design`, `@kjaniec-dev/ui-mcp`, `@kjaniec-dev/site`).
+
+- [x] **6.1. Podbicie wersji semantycznej do `1.0.0`:**
+  - Podbicie wersji w manifestach: `package.json`, `packages/design/package.json`, `packages/ui/package.json`, `packages/mcp/package.json`, `site/package.json`.
+  - Aktualizacja tokenów `packages/design/tokens.json` oraz serwera MCP `packages/mcp/src/index.ts`.
+  - Aktualizacja wersji w serwisie dokumentacyjnym (`site/src/components/site-header.tsx`, `site/src/main.tsx`, `site/src/sections/layouts.tsx`, `site/src/views/patterns-view.tsx`).
+- [x] **6.2. Aktualizacja dzienników zmian (CHANGELOG.md):**
+  - Kompletny wpis `[1.0.0]` w `packages/ui/CHANGELOG.md` podsumowujący moduł Data Visualization, 100% pokrycia testami (1,179 testów), PropsTable oraz ulepszenia dostępności WCAG/Biome.
+  - Wpis `[1.0.0]` w `packages/design/CHANGELOG.md` uwzględniający tokeny wykresów `--kj-color-chart-1` do `chart-6`.
+- [x] **6.3. Aktualizacja dokumentacji głównej (README.md):**
+  - Aktualizacja tabeli pakietów do wersji `1.0.0` oraz aktualizacja liczników komponentów (70+ komponentów, 150+ wariantów).
+- [x] **6.4. Weryfikacja jakościowa i artefaktów npm:**
+  - Wszystkie 1,179 testów jednostkowych przechodzi bezbłędnie.
+  - Zero błędów kompilacji TypeScript (`typecheck`) i zerowa liczba błędów lintera Biome (`lint`).
+  - Weryfikacja pakietów do publikacji (`npm pack --dry-run`).
 

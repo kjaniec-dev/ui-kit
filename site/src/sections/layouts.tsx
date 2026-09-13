@@ -83,7 +83,7 @@ export function LayoutsSections() {
               banner={
                 <div className="flex flex-col sm:flex-row items-center justify-between text-xs px-4 py-2 bg-primary text-primary-foreground font-medium gap-2 text-center sm:text-left">
                   <span>
-                    🚀 kj-product-kit v0.9.3 is live! Explore new modular layout primitives.
+                    🚀 kj-product-kit v1.0.0 is live! Explore new modular layout primitives.
                   </span>
                   <Button
                     variant="outline"

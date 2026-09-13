@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.9.3] - 2026-08-21
+## [1.0.0] - 2026-09-13
+
+### Added
+- Data Visualization color tokens (`--kj-color-chart-1` through `--kj-color-chart-6`) supporting high-contrast multi-series visualizations across light and dark color schemes.
+- Refined OKLCH color palettes and dark mode theme bridges in Tailwind CSS v4.
 
 ### Added
 - Added `@custom-variant dark` in `tailwind.css` for robust class-based dark theme support in Tailwind CSS v4.
