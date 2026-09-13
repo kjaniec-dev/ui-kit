@@ -38,7 +38,7 @@ describe("ComponentsView", () => {
     );
   });
 
-  it("renders all 7 categories in the sidebar", () => {
+  it("renders all 8 categories in the sidebar", () => {
     render(<ComponentsView />);
     const categoryNames = [
       "Foundations",
@@ -48,13 +48,14 @@ describe("ComponentsView", () => {
       "Navigation",
       "Overlays",
       "Layouts",
+      "Data Visualization",
     ];
     for (const name of categoryNames) {
       expect(screen.getAllByText(name).length).toBeGreaterThan(0);
     }
   });
 
-  it("renders all 20 component items across categories in sidebar", () => {
+  it("renders all 21 component items across categories in sidebar", () => {
     render(<ComponentsView />);
     const items = [
       "Buttons",
@@ -77,6 +78,7 @@ describe("ComponentsView", () => {
       "Popover & Tooltip",
       "InboxPopover",
       "Layouts",
+      "Charts",
     ];
     for (const item of items) {
       // Multiple items may exist if in sidebar and in section headers, so getAllByText is safe
@@ -108,6 +110,7 @@ describe("ComponentsView", () => {
       "popover",
       "inbox-popover",
       "layouts",
+      "charts",
     ];
     for (const id of expectedIds) {
       const el = container.querySelector(`#${id}`);
@@ -216,8 +219,8 @@ describe("ComponentsView", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("exports COMPONENT_CATEGORIES with all 7 categories and 20 items in sequential order", () => {
-    expect(COMPONENT_CATEGORIES).toHaveLength(7);
+  it("exports COMPONENT_CATEGORIES with all 8 categories and 21 items in sequential order", () => {
+    expect(COMPONENT_CATEGORIES).toHaveLength(8);
     expect(COMPONENT_CATEGORIES.map((c) => c.name)).toEqual([
       "Foundations",
       "Feedback",
@@ -226,9 +229,19 @@ describe("ComponentsView", () => {
       "Navigation",
       "Overlays",
       "Layouts",
+      "Data Visualization",
     ]);
     const totalItems = COMPONENT_CATEGORIES.reduce((acc, cat) => acc + cat.items.length, 0);
-    expect(totalItems).toBe(20);
+    expect(totalItems).toBe(21);
+  });
+
+  it("renders Charts navigation link and section", () => {
+    const { container } = render(<ComponentsView />);
+    expect(screen.getByRole("link", { name: /Charts/i })).toHaveAttribute(
+      "href",
+      "#components/charts"
+    );
+    expect(container.querySelector("#charts")).not.toBeNull();
   });
 
   it("renders DOM sections in the exact sequential order of the sidebar categories", () => {
