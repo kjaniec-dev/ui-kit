@@ -114,11 +114,7 @@ export function DataTable<T>({
   return (
     <div className={cn("flex flex-col gap-4 w-full", className)}>
       {/* Toolbar Slot */}
-      {toolbar && (
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-          {toolbar}
-        </div>
-      )}
+      {toolbar && <div className="w-full min-w-0">{toolbar}</div>}
 
       <TableWrap
         className="relative overflow-x-auto overflow-y-hidden [scroll-behavior:smooth] [-webkit-overflow-scrolling:touch]"

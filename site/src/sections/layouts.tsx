@@ -372,16 +372,14 @@ export function LayoutsSections() {
             searchQuery={tableSearch}
             onSearchChange={setTableSearch}
             searchPlaceholder="Search items by name or ID..."
-            actions={
-              <>
-                <Select defaultValue="all" className="w-36 text-xs" aria-label="Filter by status">
-                  <option value="all">All Statuses</option>
-                  <option value="active">Active</option>
-                  <option value="archived">Archived</option>
-                </Select>
-                <Button leadingIcon={IcoPlus}>Add Item</Button>
-              </>
+            filters={
+              <Select defaultValue="all" className="w-36 text-xs" aria-label="Filter by status">
+                <option value="all">All Statuses</option>
+                <option value="active">Active</option>
+                <option value="archived">Archived</option>
+              </Select>
             }
+            actions={<Button leadingIcon={IcoPlus}>Add Item</Button>}
           />
         </div>
       </Box>
