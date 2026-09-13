@@ -67,4 +67,89 @@ toast({ message: "Profile updated.", tone: "success" });`,
 ];
 
 <CommandPalette open={open} onClose={() => setOpen(false)} items={items} />`,
+
+  Sparkline: `<Sparkline
+  data={[38, 45, 42, 58, 64, 61, 75, 84, 92, 108]}
+  variant="area"
+  color="chart1"
+  height={40}
+  showGradient
+  showEndDot
+/>`,
+
+  LineChart: `const monthlyData = [
+  { month: "Jan", revenue: 4200, expenses: 3100 },
+  { month: "Feb", revenue: 4800, expenses: 3300 },
+  { month: "Mar", revenue: 5600, expenses: 3900 },
+  { month: "Apr", revenue: 6400, expenses: 4200 },
+];
+
+<LineChart
+  data={monthlyData}
+  index="month"
+  series={[
+    { key: "revenue", label: "Revenue", color: "chart1" },
+    { key: "expenses", label: "Expenses", color: "chart2" },
+  ]}
+  curve="smooth"
+  height={280}
+  valueFormatter={(v) => \`$\${v.toLocaleString()}\`}
+/>`,
+
+  AreaChart: `const trafficData = [
+  { date: "May 1", organic: 8500, paid: 5200 },
+  { date: "May 15", organic: 11200, paid: 6900 },
+  { date: "May 31", organic: 15100, paid: 9100 },
+];
+
+<AreaChart
+  data={trafficData}
+  index="date"
+  series={[
+    { key: "organic", label: "Organic Search", color: "chart1" },
+    { key: "paid", label: "Paid Media", color: "chart2" },
+  ]}
+  curve="smooth"
+  height={300}
+  valueFormatter={(v) => \`\${(v / 1000).toFixed(1)}k\`}
+/>`,
+
+  BarChart: `const departmentSales = [
+  { department: "Sales", q1: 145000, q2: 172000 },
+  { department: "Marketing", q1: 88000, q2: 104000 },
+  { department: "Engineering", q1: 195000, q2: 210000 },
+];
+
+<BarChart
+  data={departmentSales}
+  index="department"
+  series={[
+    { key: "q1", label: "Q1", color: "chart1" },
+    { key: "q2", label: "Q2", color: "chart2" },
+  ]}
+  type="grouped"
+  height={300}
+  valueFormatter={(v) => \`$\${(v / 1000).toFixed(0)}k\`}
+/>`,
+
+  DonutChart: `const trafficSources = [
+  { source: "Organic Search", visitors: 45200 },
+  { source: "Direct Traffic", visitors: 28400 },
+  { source: "Referral", visitors: 16800 },
+  { source: "Social Media", visitors: 9600 },
+];
+
+<DonutChart
+  data={trafficSources}
+  category="source"
+  value="visitors"
+  size="md"
+  centerLabel={
+    <div className="text-center">
+      <div className="text-2xl font-bold">100k</div>
+      <div className="text-xs text-muted-foreground">Visits</div>
+    </div>
+  }
+  valueFormatter={(v) => \`\${v.toLocaleString()} visits\`}
+/>`,
 };

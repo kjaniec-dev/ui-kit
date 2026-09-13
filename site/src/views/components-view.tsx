@@ -1,6 +1,7 @@
 import { Button, cn, Input, ToastProvider } from "@kjaniec-dev/ui";
 import * as React from "react";
 import {
+  ChartsSection,
   DataDisplaySections,
   FeedbackSections,
   FormsSections,
@@ -36,12 +37,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
       {
         id: "primitives",
         label: "Primitives",
-        keywords: [
-          "kbd",
-          "separator",
-          "spinner",
-          "codeblock",
-        ],
+        keywords: ["kbd", "separator", "spinner", "codeblock"],
       },
     ],
   },
@@ -165,13 +161,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
       {
         id: "overlays",
         label: "Overlays & Dialogs",
-        keywords: [
-          "modal",
-          "drawer",
-          "bottomsheet",
-          "confirmdialog",
-          "overlays",
-        ],
+        keywords: ["modal", "drawer", "bottomsheet", "confirmdialog", "overlays"],
       },
       {
         id: "popover",
@@ -198,6 +188,25 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
           "appshell",
           "sectionheader",
           "pageheader",
+        ],
+      },
+    ],
+  },
+  {
+    name: "Data Visualization",
+    items: [
+      {
+        id: "charts",
+        label: "Charts",
+        keywords: [
+          "chart",
+          "sparkline",
+          "linechart",
+          "areachart",
+          "barchart",
+          "donutchart",
+          "wykres",
+          "data visualization",
         ],
       },
     ],
@@ -459,6 +468,7 @@ export function ComponentsView({
             <NavigationSections />
             <OverlaysSections />
             <LayoutsSections />
+            <ChartsSection />
 
             <footer className="text-[0.8rem] text-muted-foreground pt-8 mt-4 border-t border-border">
               Real components from <span className="font-mono">@kjaniec-dev/ui</span>, styled with
