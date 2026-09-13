@@ -4729,6 +4729,20 @@
         "description": ""
       },
       {
+        "name": "plotWrapperClassName",
+        "type": "string",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
+        "name": "plotWrapperStyle",
+        "type": "React.CSSProperties",
+        "optional": true,
+        "defaultValue": null,
+        "description": ""
+      },
+      {
         "name": "children",
         "type": "React.ReactNode",
         "optional": true,

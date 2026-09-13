@@ -81,86 +81,147 @@ export interface ChartContainerProps extends React.HTMLAttributes<HTMLDivElement
   overlay?: React.ReactNode;
   svgClassName?: string;
   svgRef?: React.Ref<SVGSVGElement>;
+  plotWrapperClassName?: string;
+  plotWrapperStyle?: React.CSSProperties;
   children?: React.ReactNode;
 }
 
-function isHtmlChild(child: React.ReactNode): boolean {
+const SVG_TAGS = new Set([
+  "path",
+  "rect",
+  "circle",
+  "ellipse",
+  "line",
+  "polyline",
+  "polygon",
+  "text",
+  "tspan",
+  "g",
+  "defs",
+  "linearGradient",
+  "radialGradient",
+  "stop",
+  "pattern",
+  "clipPath",
+  "mask",
+  "image",
+  "use",
+  "symbol",
+  "animate",
+  "animateTransform",
+  "foreignObject",
+]);
+
+function isSvgChild(child: React.ReactNode): boolean {
   if (!React.isValidElement(child)) return false;
   if (typeof child.type === "string") {
-    const svgTags = new Set([
-      "path",
-      "rect",
-      "circle",
-      "ellipse",
-      "line",
-      "polyline",
-      "polygon",
-      "text",
-      "tspan",
-      "g",
-      "defs",
-      "linearGradient",
-      "radialGradient",
-      "stop",
-      "pattern",
-      "clipPath",
-      "mask",
-      "image",
-      "use",
-      "symbol",
-      "animate",
-      "animateTransform",
-    ]);
-    return !svgTags.has(child.type);
+    return SVG_TAGS.has(child.type);
   }
-  const comp = child.type as { isHtml?: boolean; displayName?: string; name?: string };
-  if (comp.isHtml) return true;
+  const comp = child.type as { isSvg?: boolean; displayName?: string; name?: string };
+  if (comp.isSvg) return true;
   const name = comp.displayName || comp.name || "";
-  if (
-    name.includes("Tooltip") ||
-    name.includes("Legend") ||
-    name.includes("Table") ||
-    name.includes("A11y")
-  ) {
+  if (name.includes("Grid") || name.includes("Axis")) {
     return true;
   }
+  return false;
+}
+
+function isOverlayChild(child: React.ReactNode): boolean {
+  if (!React.isValidElement(child)) return false;
+  const comp = child.type as { displayName?: string; name?: string };
+  const name = comp?.displayName || comp?.name || "";
+  if (name.includes("Tooltip")) return true;
   const className = (child.props as { className?: string })?.className;
-  if (
-    typeof className === "string" &&
-    (className.includes("chart-tooltip") ||
-      className.includes("sr-only") ||
-      className.includes("chart-legend"))
-  ) {
-    return true;
+  if (typeof className === "string") {
+    if (
+      className.includes("chart-tooltip") ||
+      className.includes("chart-donut-center") ||
+      className.includes("chart-empty-message") ||
+      className.includes("absolute")
+    ) {
+      return true;
+    }
   }
   return false;
 }
 
 function partitionChildren(children: React.ReactNode): {
   svgChildren: React.ReactNode[];
-  htmlChildren: React.ReactNode[];
+  overlayChildren: React.ReactNode[];
+  flowChildren: React.ReactNode[];
 } {
   const svgChildren: React.ReactNode[] = [];
-  const htmlChildren: React.ReactNode[] = [];
+  const overlayChildren: React.ReactNode[] = [];
+  const flowChildren: React.ReactNode[] = [];
 
-  React.Children.forEach(children, (child) => {
+  const categorize = (child: React.ReactNode) => {
     if (child === null || child === undefined || typeof child === "boolean") {
       return;
     }
     if (React.isValidElement(child) && child.type === React.Fragment) {
       const inner = partitionChildren((child.props as { children?: React.ReactNode }).children);
       svgChildren.push(...inner.svgChildren);
-      htmlChildren.push(...inner.htmlChildren);
+      overlayChildren.push(...inner.overlayChildren);
+      flowChildren.push(...inner.flowChildren);
       return;
     }
-    if (isHtmlChild(child)) {
-      htmlChildren.push(child);
-    } else {
+    if (isSvgChild(child)) {
       svgChildren.push(child);
+      return;
     }
-  });
+    if (isOverlayChild(child)) {
+      overlayChildren.push(child);
+      return;
+    }
+    flowChildren.push(child);
+  };
 
-  return { svgChildren, htmlChildren };
+  React.Children.forEach(children, categorize);
+  return { svgChildren, overlayChildren, flowChildren };
+}
+
+/**
+ * Hook to measure responsive container width via ResizeObserver with fallback.
+ */
+export function useChartWidth(
+  containerRef: React.RefObject<HTMLElement | null>,
+  defaultWidth = 600
+): number {
+  const [width, setWidth] = React.useState<number>(defaultWidth);
+
+  React.useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const measure = () => {
+      const rect = el.getBoundingClientRect();
+      if (rect.width > 0) {
+        setWidth(Math.round(rect.width));
+      }
+    };
+
+    measure();
+
+    if (typeof ResizeObserver === "undefined") {
+      return;
+    }
+
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const w = entry.contentRect.width;
+        if (w > 0) {
+          setWidth(Math.round(w));
+        }
+      }
+    });
+
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+    };
+  }, [containerRef]);
+
+  return width;
 }
 
 /**
@@ -177,6 +238,8 @@ export const ChartContainer = React.forwardRef<HTMLDivElement, ChartContainerPro
       overlay,
       svgClassName,
       svgRef,
+      plotWrapperClassName,
+      plotWrapperStyle,
       children,
       className,
       style,
@@ -185,36 +248,51 @@ export const ChartContainer = React.forwardRef<HTMLDivElement, ChartContainerPro
     ref
   ) => {
     const label = ariaLabelProp || ariaLabel;
-    const { svgChildren, htmlChildren } = partitionChildren(children);
+    const { svgChildren, overlayChildren, flowChildren } = partitionChildren(children);
 
     const heightNum = typeof height === "number" ? height : undefined;
     const computedViewBox =
       viewBox ||
       (width !== undefined && heightNum !== undefined ? `0 0 ${width} ${heightNum}` : undefined);
 
+    const plotHeightStyle = typeof height === "number" ? `${height}px` : (height ?? undefined);
+
     return (
       <div
         ref={ref}
-        className={cn("chart-container relative w-full", className)}
-        style={{
-          height: typeof height === "number" ? `${height}px` : height,
-          ...style,
-        }}
+        className={cn("chart-container relative w-full flex flex-col", className)}
+        style={style}
         {...props}
       >
-        <svg
-          ref={svgRef}
-          role="img"
-          aria-label={label}
-          viewBox={computedViewBox}
-          width={width}
-          height={heightNum}
-          className={cn("chart-svg block w-full h-auto overflow-visible", svgClassName)}
+        <div
+          className={cn("chart-plot-wrapper relative w-full", plotWrapperClassName)}
+          style={{
+            height: plotHeightStyle,
+            width: typeof width === "number" ? `${width}px` : undefined,
+            ...plotWrapperStyle,
+          }}
         >
-          {svgChildren}
-        </svg>
-        {htmlChildren}
-        {overlay}
+          {svgChildren.length > 0 && (
+            <svg
+              ref={svgRef}
+              role="img"
+              aria-label={label}
+              viewBox={computedViewBox}
+              width={width}
+              height={heightNum}
+              className={cn(
+                "chart-svg block w-full overflow-visible",
+                height !== undefined ? "h-full" : "h-auto",
+                svgClassName
+              )}
+            >
+              {svgChildren}
+            </svg>
+          )}
+          {overlayChildren}
+          {overlay}
+        </div>
+        {flowChildren}
       </div>
     );
   }

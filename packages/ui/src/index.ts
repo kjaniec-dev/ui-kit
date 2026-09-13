@@ -359,6 +359,7 @@ export {
   CHART_COLOR_VARS,
   DEFAULT_CHART_COLORS,
   getChartColor,
+  useChartWidth,
   type ChartColor,
   type ChartSeries,
   type ChartMargin,
