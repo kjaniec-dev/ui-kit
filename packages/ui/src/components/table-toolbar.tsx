@@ -27,19 +27,19 @@ export const TableToolbar = React.forwardRef<HTMLDivElement, TableToolbarProps>(
       <div
         ref={ref}
         className={cn(
-          "flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 w-full pb-1",
+          "flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-between gap-3 w-full pb-1",
           className
         )}
         {...props}
       >
-        <div className="flex flex-1 flex-col sm:flex-row items-stretch sm:items-center gap-2 max-w-xl">
+        <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2 min-w-0 max-w-xl">
           {onSearchChange && (
             <Input
               type="search"
               placeholder={searchPlaceholder}
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="sm:w-64"
+              className="w-full sm:w-64 max-w-full"
               leadingIcon={
                 <svg
                   viewBox="0 0 24 24"
@@ -57,9 +57,13 @@ export const TableToolbar = React.forwardRef<HTMLDivElement, TableToolbarProps>(
               }
             />
           )}
-          {filters && <div className="flex items-center gap-2">{filters}</div>}
+          {filters && <div className="flex flex-wrap items-center gap-2 min-w-0">{filters}</div>}
         </div>
-        {actions && <div className="flex items-center gap-2 shrink-0 justify-end">{actions}</div>}
+        {actions && (
+          <div className="flex flex-wrap items-center gap-2 shrink-0 justify-end sm:ml-auto">
+            {actions}
+          </div>
+        )}
       </div>
     );
   }

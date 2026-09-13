@@ -14,6 +14,7 @@ describe("TableToolbar", () => {
         "flex",
         "flex-col",
         "sm:flex-row",
+        "flex-wrap",
         "items-stretch",
         "sm:items-center",
         "justify-between",
@@ -148,11 +149,11 @@ describe("TableToolbar", () => {
       expect(screen.getByRole("button", { name: "Active" })).toBeInTheDocument();
       expect(screen.getByRole("button", { name: "Archived" })).toBeInTheDocument();
 
-      // Parent container should have flex alignment
-      expect(filters.parentElement).toHaveClass("flex", "items-center", "gap-2");
+      // Parent container should have flex alignment and wrapping
+      expect(filters.parentElement).toHaveClass("flex", "flex-wrap", "items-center", "gap-2", "min-w-0");
     });
 
-    it("renders actions slot inside right-aligned container", () => {
+    it("renders actions slot inside right-aligned container with wrapping support", () => {
       render(
         <TableToolbar
           actions={
@@ -171,10 +172,36 @@ describe("TableToolbar", () => {
 
       expect(actions.parentElement).toHaveClass(
         "flex",
+        "flex-wrap",
         "items-center",
         "gap-2",
         "shrink-0",
-        "justify-end"
+        "justify-end",
+        "sm:ml-auto"
+      );
+    });
+
+    it("applies responsive min-w-0 and sm:flex-wrap to search/filters container", () => {
+      render(
+        <TableToolbar
+          onSearchChange={vi.fn()}
+          filters={<span>Filter</span>}
+          data-testid="toolbar"
+        />
+      );
+      const toolbar = screen.getByTestId("toolbar");
+      const searchFilterWrapper = toolbar.firstElementChild;
+      expect(searchFilterWrapper).toHaveClass(
+        "flex",
+        "flex-1",
+        "flex-col",
+        "sm:flex-row",
+        "sm:flex-wrap",
+        "items-stretch",
+        "sm:items-center",
+        "gap-2",
+        "min-w-0",
+        "max-w-xl"
       );
     });
 
