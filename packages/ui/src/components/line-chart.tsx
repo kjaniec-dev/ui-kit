@@ -25,6 +25,7 @@ import {
 } from "./chart-primitives";
 
 export type LineChartVariant = "line" | "area";
+export type LineChartCurve = CurveType;
 
 export interface LineChartProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
   /** Array of tabular data records to plot. */
@@ -36,7 +37,7 @@ export interface LineChartProps extends Omit<React.HTMLAttributes<HTMLDivElement
   /** Visual presentation mode: continuous line or filled area. Defaults to "line". */
   variant?: LineChartVariant;
   /** Interpolation method between data points: linear polyline, smooth cubic curve, or step lines. Defaults to "linear". */
-  curve?: CurveType;
+  curve?: LineChartCurve;
   /** Whether to render background horizontal reference grid lines. Defaults to true. */
   showGrid?: boolean;
   /** Whether to render horizontal X-axis tick labels. Defaults to true. */
