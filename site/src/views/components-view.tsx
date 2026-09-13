@@ -302,6 +302,21 @@ function CategorySidebar({
   );
 }
 
+const ComponentSections = React.memo(function ComponentSections() {
+  return (
+    <>
+      <PrimitivesSections />
+      <FeedbackSections />
+      <FormsSections />
+      <DataDisplaySections />
+      <NavigationSections />
+      <OverlaysSections />
+      <LayoutsSections />
+      <ChartsSection />
+    </>
+  );
+});
+
 export function ComponentsView({
   initialSection,
   onSelectSection,
@@ -461,14 +476,7 @@ export function ComponentsView({
               </p>
             </div>
 
-            <PrimitivesSections />
-            <FeedbackSections />
-            <FormsSections />
-            <DataDisplaySections />
-            <NavigationSections />
-            <OverlaysSections />
-            <LayoutsSections />
-            <ChartsSection />
+            <ComponentSections />
 
             <footer className="text-[0.8rem] text-muted-foreground pt-8 mt-4 border-t border-border">
               Real components from <span className="font-mono">@kjaniec-dev/ui</span>, styled with
