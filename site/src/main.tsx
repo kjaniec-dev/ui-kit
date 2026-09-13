@@ -43,7 +43,7 @@ export function App(): React.JSX.Element {
   const [searchOpen, setSearchOpen] = React.useState(false);
   const [shortcutsOpen, setShortcutsOpen] = React.useState(false);
   const { tab, subRoute, navigate } = useHashRoute();
-  const version = typeof __APP_VERSION__ !== "undefined" ? __APP_VERSION__ : "0.9.3";
+  const version = typeof __APP_VERSION__ !== "undefined" ? __APP_VERSION__ : "1.0.0";
 
   React.useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);

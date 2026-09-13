@@ -1014,7 +1014,7 @@ function ConsolePattern() {
         { label: "Edge Hit", value: "99.4%" },
         { label: "TTFB", value: "24ms" },
       ],
-      updatedAt: "v0.9.3 · 1d ago",
+      updatedAt: "v1.0.0 · 1d ago",
     },
   ];
 

@@ -66,7 +66,7 @@ export function SiteHeader({
   onOpenSearch,
   onOpenShortcuts,
 }: SiteHeaderProps) {
-  const version = typeof __APP_VERSION__ !== "undefined" ? __APP_VERSION__ : "0.9.3";
+  const version = typeof __APP_VERSION__ !== "undefined" ? __APP_VERSION__ : "1.0.0";
 
   return (
     <header

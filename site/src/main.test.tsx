@@ -25,7 +25,7 @@ describe("App Root Integration", () => {
 
     // Header brand
     expect(screen.getByRole("button", { name: /KJ Product Kit/i })).toBeInTheDocument();
-    expect(screen.getAllByText(/v0\.9\.3/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/v1\.0\.0/i).length).toBeGreaterThan(0);
 
     // Overview default view
     expect(

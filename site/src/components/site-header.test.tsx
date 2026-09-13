@@ -9,7 +9,7 @@ describe("SiteHeader", () => {
       <SiteHeader activeTab="overview" onSelectTab={vi.fn()} dark={false} onToggleDark={vi.fn()} />
     );
     expect(screen.getByText("KJ Product Kit")).toBeInTheDocument();
-    expect(screen.getByText(/v0\.9\.3/)).toBeInTheDocument();
+    expect(screen.getByText(/v1\.0\.0/)).toBeInTheDocument();
   });
 
   it("calls onSelectTab when tab is clicked", () => {
