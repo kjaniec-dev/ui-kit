@@ -107,6 +107,43 @@ Plan rozwoju i optymalizacji biblioteki komponentów oraz serwisu dokumentacyjne
 
 ---
 
+---
+
+## 🏃 Sprint 5: Komponenty Data Visualization (Wizualizacja Danych)
+**Cel:** Wprowadzenie do `@kjaniec-dev/ui` autorskiego, lekkiego i w 100% dostępnego zestawu komponentów wizualizacji danych w czystym SVG bez zewnętrznych zależności runtime, zintegrowanego z tokenami `chart1`–`chart6`.
+
+- [x] **5.1. Silnik matematyczny i geometria SVG (`chart-math.ts`):**
+  - Funkcje `getNiceScale`, `linearScale`, Catmull-Rom/Bézier `generateLinePath`, zamknięte poligony `generateAreaPath`, układ słupków `calculateBarLayout`, wyliczanie kątów i łuków `calculateDonutSegments`.
+  - 29/29 testów jednostkowych algorytmów bez zależności DOM w `chart-math.test.ts`.
+- [x] **5.2. Prymitywy bazowe i dostępność (`chart-primitives.tsx`):**
+  - `ChartContainer`, `ChartGrid`, `ChartXAxis`, `ChartYAxis`, `ChartTooltip`, `ChartLegend`, oraz semantyczna tabela fallbackowa `ChartA11yTable` (`sr-only` z WCAG AA).
+  - Integracja tokenów kolorów `CHART_COLOR_VARS` i `getChartColor`.
+  - 26 testów jednostkowych w `chart-primitives.test.tsx`.
+- [x] **5.3. Komponent `Sparkline`:**
+  - Warianty `line`, `area`, `bar`, wygładzanie krzywych, kropka końcowa `showEndDot`, gradienty.
+  - 15 testów w `sparkline.test.tsx` oraz historie Storybook w `sparkline.stories.tsx`.
+- [x] **5.4. Komponenty `LineChart` i `AreaChart`:**
+  - Wykresy wieloseryjne z osiami X/Y, celownikiem (crosshair), dymkiem podpowiedzi HTML, przełączaniem serii w legendzie i gradientami.
+  - 15 testów w `line-chart.test.tsx` oraz historie Storybook w `line-chart.stories.tsx`.
+- [x] **5.5. Komponent `BarChart`:**
+  - Tryby zgrupowane (`grouped`) i skumulowane (`stacked`), orientacja pionowa i pozioma, zaokrąglone rogi słupków, podświetlenia przy hover i a11y.
+  - 15 testów w `bar-chart.test.tsx` oraz historie Storybook w `bar-chart.stories.tsx`.
+- [x] **5.6. Komponent `DonutChart`:**
+  - Pierścieniowy wykres podziału procentowego, slot na etykietę/metrykę centralną (`centerLabel`), responsywny hover tooltip i legenda.
+  - 17 testów w `donut-chart.test.tsx` oraz historie Storybook w `donut-chart.stories.tsx`.
+- [x] **5.7. Eksporty w bibliotece i katalog MCP:**
+  - Re-eksport wszystkich komponentów i typów TypeScript w `packages/ui/src/index.ts`.
+  - Aktualizacja katalogu komponentów MCP w `packages/mcp/data/components.json`.
+- [x] **5.8. Prezentacja w serwisie dokumentacyjnym Showcase (`site/`):**
+  - Nowa kategoria `"Data Visualization"` i element `"Charts"` w `site/src/views/components-view.tsx`.
+  - Nowa sekcja `site/src/sections/charts.tsx` z interaktywnymi kontrolkami i kartami KPI.
+  - Zaktualizowane testy nawigacji w `site/src/views/components-view.test.tsx`.
+- [x] **5.9. Weryfikacja końcowa:**
+  - Ponad 1,179 testów jednostkowych w całym monorepo przechodzi w 100% na zielono.
+  - Zero błędów typowania TypeScript i zero błędów lintera Biome.
+
+---
+
 ## 🔮 Przyszłe Sprinty (Droga do v1.0.0)
-- **Sprint 5: Komponenty Data Visualization** (lekkie wrappery wykresów wykorzystujące paletę `chart1`–`chart6`).
 - **Sprint 6: Finalny Release v1.0.0** (aktualizacja `CHANGELOG.md`, wersjonowanie, checklist npm).
+
