@@ -22,6 +22,7 @@ import {
   ChartXAxis,
   ChartYAxis,
   getChartColor,
+  useChartWidth,
 } from "./chart-primitives";
 
 export type LineChartVariant = "line" | "area";
@@ -184,7 +185,12 @@ export const LineChart = React.forwardRef<HTMLDivElement, LineChartProps>(
     }
 
     // Geometry layout constants
-    const viewBoxWidth = typeof width === "number" && width > 0 ? width : 600;
+    const measuredWidth = useChartWidth(
+      containerRef,
+      typeof width === "number" && width > 0 ? width : 600
+    );
+    const viewBoxWidth =
+      typeof width === "number" && width > 0 ? width : measuredWidth > 0 ? measuredWidth : 600;
     const viewBoxHeight = typeof height === "number" && height > 0 ? height : 280;
 
     const margin: Required<ChartMargin> = {

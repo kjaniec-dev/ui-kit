@@ -1,5 +1,12 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+// @vitest-environment jsdom
+import * as React from "react";
+import "@testing-library/jest-dom/vitest";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
+
+afterEach(() => {
+  cleanup();
+});
 import {
   CHART_COLOR_VARS,
   ChartA11yTable,
@@ -10,6 +17,7 @@ import {
   ChartXAxis,
   ChartYAxis,
   getChartColor,
+  useChartWidth,
 } from "./chart-primitives";
 
 describe("Chart Primitives", () => {
@@ -70,6 +78,37 @@ describe("Chart Primitives", () => {
       const tooltip = container.querySelector(".chart-tooltip");
       expect(tooltip).toBeInTheDocument();
       expect(svg?.contains(tooltip)).toBe(false);
+    });
+
+    it("renders plot wrapper with specified height and places flow children below it", () => {
+      const { container } = render(
+        <ChartContainer height={300} aria-label="Height separation">
+          <rect width={50} height={50} />
+          <ChartLegend series={[{ key: "s1", label: "Series 1" }]} />
+        </ChartContainer>
+      );
+      const plotWrapper = container.querySelector(".chart-plot-wrapper");
+      expect(plotWrapper).toHaveStyle({ height: "300px" });
+
+      const svg = container.querySelector("svg");
+      expect(svg).toHaveClass("h-full");
+      expect(plotWrapper?.contains(svg)).toBe(true);
+
+      const legend = container.querySelector(".chart-legend");
+      expect(legend).toBeInTheDocument();
+      expect(plotWrapper?.contains(legend)).toBe(false);
+    });
+
+    it("provides fallback and responds to useChartWidth", () => {
+      const TestComponent = () => {
+        const ref = React.useRef<HTMLDivElement | null>(null);
+        const width = useChartWidth(ref, 640);
+        return <div ref={ref} data-testid="test-div" data-width={width} />;
+      };
+
+      render(<TestComponent />);
+      const el = screen.getByTestId("test-div");
+      expect(el).toHaveAttribute("data-width", "640");
     });
   });
 
